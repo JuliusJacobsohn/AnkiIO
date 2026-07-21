@@ -11,15 +11,15 @@ internal static class LegacyCollectionDatabase
 {
     private const char FieldSeparator = '\u001f';
 
-    public static async Task WriteAsync(string databasePath, AnkiDeck root, CancellationToken cancellationToken)
+    public static async Task WriteAsync(string databasePath, IReadOnlyList<AnkiDeck> roots, CancellationToken cancellationToken)
     {
         await using var connection = new SqliteConnection(new SqliteConnectionStringBuilder { DataSource = databasePath, Mode = SqliteOpenMode.ReadWriteCreate, Pooling = false }.ToString());
         await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
         await ExecuteAsync(connection, SchemaSql, cancellationToken).ConfigureAwait(false);
         await using var transaction = await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
 
-        var decks = root.Traverse().ToArray();
-        var names = BuildFullNames(root);
+        var decks = roots.SelectMany(root => root.Traverse()).ToArray();
+        var names = BuildFullNames(roots);
         var noteTypes = decks.SelectMany(deck => deck.Notes).Select(note => note.NoteType).GroupBy(type => type.Id).Select(group => group.First()).ToArray();
         var nowMilliseconds = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         var collection = connection.CreateCommand();
@@ -214,7 +214,7 @@ internal static class LegacyCollectionDatabase
         await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
     }
 
-    private static Dictionary<long, string> BuildFullNames(AnkiDeck root)
+    private static Dictionary<long, string> BuildFullNames(IEnumerable<AnkiDeck> roots)
     {
         var result = new Dictionary<long, string>();
         void Walk(AnkiDeck deck, string prefix)
@@ -227,7 +227,11 @@ internal static class LegacyCollectionDatabase
             }
         }
 
-        Walk(root, string.Empty);
+        foreach (var root in roots)
+        {
+            Walk(root, string.Empty);
+        }
+
         return result;
     }
 

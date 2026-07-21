@@ -37,6 +37,7 @@ public static class AnkiPackageReader
     /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="path"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException"><paramref name="path"/> is blank or has invalid path syntax.</exception>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="limits"/> contains a non-positive count or byte bound, or a non-finite or non-positive compression ratio.</exception>
     /// <exception cref="PathTooLongException"><paramref name="path"/> exceeds a platform path-length limit.</exception>
     /// <exception cref="FileNotFoundException">The package file does not exist.</exception>
     /// <exception cref="DirectoryNotFoundException">A path directory does not exist.</exception>
@@ -54,6 +55,8 @@ public static class AnkiPackageReader
     public static async Task<AnkiPackage> ReadAsync(string path, AnkiPackageLimits? limits = null, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(path);
+        limits ??= AnkiPackageLimits.Default;
+        limits.Validate();
         await using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 81920, FileOptions.Asynchronous | FileOptions.SequentialScan);
         return await ReadAsync(stream, limits, cancellationToken).ConfigureAwait(false);
     }
@@ -73,6 +76,7 @@ public static class AnkiPackageReader
     /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException"><paramref name="source"/> is not readable and seekable.</exception>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="limits"/> contains a non-positive count or byte bound, or a non-finite or non-positive compression ratio.</exception>
     /// <exception cref="ObjectDisposedException"><paramref name="source"/> has been disposed.</exception>
     /// <exception cref="AnkiPackageSecurityException">The archive violates a configured size, ratio, count, path, link, or media-map safety rule.</exception>
     /// <exception cref="NotSupportedException">The archive lacks supported legacy collection data or uses unsupported collection metadata.</exception>
@@ -88,12 +92,13 @@ public static class AnkiPackageReader
     public static async Task<AnkiPackage> ReadAsync(Stream source, AnkiPackageLimits? limits = null, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(source);
-        if (!source.CanSeek)
+        if (!source.CanRead || !source.CanSeek)
         {
-            throw new ArgumentException("Package input must be seekable so archive limits can be checked before extraction.", nameof(source));
+            throw new ArgumentException("Package input must be readable and seekable so archive limits can be checked before extraction.", nameof(source));
         }
 
         limits ??= AnkiPackageLimits.Default;
+        limits.Validate();
         var tempDirectory = Path.Combine(Path.GetTempPath(), "AnkiIO-read-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(tempDirectory);
         try
@@ -126,8 +131,16 @@ public static class AnkiPackageReader
                 var map = await JsonSerializer.DeserializeAsync<Dictionary<string, string>>(mapStream, cancellationToken: cancellationToken).ConfigureAwait(false) ?? [];
                 foreach (var pair in map.OrderBy(pair => pair.Key, StringComparer.Ordinal))
                 {
-                    AnkiMediaCollection.ValidateFileName(pair.Value);
-                    if (!pair.Key.All(char.IsAsciiDigit))
+                    try
+                    {
+                        AnkiMediaCollection.ValidateFileName(pair.Value);
+                    }
+                    catch (ArgumentException)
+                    {
+                        throw new AnkiPackageSecurityException($"Media map entry '{pair.Key}' contains an unsafe filename.");
+                    }
+
+                    if (pair.Key.Length == 0 || !pair.Key.All(char.IsAsciiDigit))
                     {
                         throw new AnkiPackageSecurityException($"Media entry key '{pair.Key}' is not numeric.");
                     }

@@ -5,9 +5,9 @@ namespace AnkiIO;
 /// The package owns no open file, archive, database, or stream resources and does not implement <see cref="IDisposable"/>.
 /// Its deck and media models remain mutable and are not safe for concurrent mutation. Media payloads are copied into the
 /// package-level <see cref="Media"/> collection; they are not automatically registered in a deck's
-/// <see cref="AnkiDeck.Media"/> collection. Consequently, callers that read and then write a deck must deliberately copy
-/// the required registrations to that deck before using <see cref="AnkiPackageWriter"/>. The current writer accepts one
-/// top-level hierarchy rather than an <see cref="AnkiPackage"/> and therefore cannot write multiple roots in one call.
+/// <see cref="AnkiDeck.Media"/> collection. Pass the complete package to
+/// <see cref="AnkiPackageWriter.WriteAsync(AnkiPackage, Stream, CancellationToken)"/> or its path overload to retain
+/// package-level media and every top-level hierarchy during a read-modify-write operation.
 /// </remarks>
 public sealed class AnkiPackage
 {
@@ -30,7 +30,8 @@ public sealed class AnkiPackage
     /// </value>
     /// <remarks>
     /// Media extraction is eager. This collection may therefore retain memory proportional to the total extracted media
-    /// size, and it is separate from every <see cref="AnkiDeck.Media"/> collection in <see cref="Decks"/>.
+    /// size, and it is separate from every <see cref="AnkiDeck.Media"/> collection in <see cref="Decks"/>. Package writer
+    /// overloads that accept this <see cref="AnkiPackage"/> include both this collection and media registered on its decks.
     /// </remarks>
     public AnkiMediaCollection Media { get; }
 
@@ -52,15 +53,20 @@ public sealed class AnkiPackage
 /// <summary>Configures defenses applied to untrusted package archives.</summary>
 /// <remarks>
 /// Instances are immutable after initialization and can be copied with a record <c>with</c> expression. Limit values are
-/// compared as supplied and are not normalized or validated by the constructor. Use finite, non-negative values; a
-/// negative bound generally rejects every corresponding archive value, while <see cref="double.NaN"/> can defeat the
-/// compression-ratio comparison. These limits reduce common archive-exhaustion risks but do not make malformed ZIP,
-/// JSON, or SQLite content valid.
+/// validated when assigned: every count and byte bound must be positive, and the compression-ratio bound must be finite
+/// and positive. These limits reduce common archive-exhaustion risks but do not make malformed ZIP, JSON, or SQLite
+/// content valid.
 /// </remarks>
 public sealed record AnkiPackageLimits
 {
+    private int maximumEntries = 10_000;
+    private long maximumEntryBytes = 256L * 1024 * 1024;
+    private long maximumTotalBytes = 2L * 1024 * 1024 * 1024;
+    private double maximumCompressionRatio = 200;
+    private long maximumCollectionBytes = 512L * 1024 * 1024;
+
     /// <summary>Initializes package limits with the documented safe defaults.</summary>
-    /// <remarks>Property values are not validated if callers replace them in an object initializer or <c>with</c> expression.</remarks>
+    /// <remarks>Customized values are validated by their property initializers and by record <c>with</c> expressions.</remarks>
     public AnkiPackageLimits()
     {
     }
@@ -71,23 +77,88 @@ public sealed record AnkiPackageLimits
 
     /// <summary>Gets the maximum archive entry count.</summary>
     /// <value>The inclusive entry-count bound. The default is 10,000.</value>
-    public int MaximumEntries { get; init; } = 10_000;
+    /// <exception cref="ArgumentOutOfRangeException">The assigned value is zero or negative.</exception>
+    public int MaximumEntries
+    {
+        get => maximumEntries;
+        init => maximumEntries = RequirePositive(value, nameof(MaximumEntries));
+    }
 
     /// <summary>Gets the maximum uncompressed size of one entry.</summary>
     /// <value>The inclusive per-entry bound in bytes. The default is 256 MiB.</value>
-    public long MaximumEntryBytes { get; init; } = 256L * 1024 * 1024;
+    /// <exception cref="ArgumentOutOfRangeException">The assigned value is zero or negative.</exception>
+    public long MaximumEntryBytes
+    {
+        get => maximumEntryBytes;
+        init => maximumEntryBytes = RequirePositive(value, nameof(MaximumEntryBytes));
+    }
 
     /// <summary>Gets the maximum total uncompressed archive size.</summary>
     /// <value>The inclusive sum of all entry lengths in bytes. The default is 2 GiB.</value>
-    public long MaximumTotalBytes { get; init; } = 2L * 1024 * 1024 * 1024;
+    /// <exception cref="ArgumentOutOfRangeException">The assigned value is zero or negative.</exception>
+    public long MaximumTotalBytes
+    {
+        get => maximumTotalBytes;
+        init => maximumTotalBytes = RequirePositive(value, nameof(MaximumTotalBytes));
+    }
 
     /// <summary>Gets the maximum uncompressed-to-compressed ratio for a non-empty entry.</summary>
     /// <value>The inclusive ratio bound. The default is 200.</value>
-    public double MaximumCompressionRatio { get; init; } = 200;
+    /// <exception cref="ArgumentOutOfRangeException">The assigned value is non-finite, zero, or negative.</exception>
+    public double MaximumCompressionRatio
+    {
+        get => maximumCompressionRatio;
+        init
+        {
+            if (!double.IsFinite(value) || value <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(MaximumCompressionRatio), value, "The maximum compression ratio must be finite and positive.");
+            }
+
+            maximumCompressionRatio = value;
+        }
+    }
 
     /// <summary>Gets the maximum collection database size.</summary>
     /// <value>The inclusive uncompressed <c>collection.anki2</c> length in bytes. The default is 512 MiB.</value>
-    public long MaximumCollectionBytes { get; init; } = 512L * 1024 * 1024;
+    /// <exception cref="ArgumentOutOfRangeException">The assigned value is zero or negative.</exception>
+    public long MaximumCollectionBytes
+    {
+        get => maximumCollectionBytes;
+        init => maximumCollectionBytes = RequirePositive(value, nameof(MaximumCollectionBytes));
+    }
+
+    internal void Validate()
+    {
+        _ = RequirePositive(MaximumEntries, nameof(MaximumEntries));
+        _ = RequirePositive(MaximumEntryBytes, nameof(MaximumEntryBytes));
+        _ = RequirePositive(MaximumTotalBytes, nameof(MaximumTotalBytes));
+        _ = RequirePositive(MaximumCollectionBytes, nameof(MaximumCollectionBytes));
+        if (!double.IsFinite(MaximumCompressionRatio) || MaximumCompressionRatio <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(MaximumCompressionRatio), MaximumCompressionRatio, "The maximum compression ratio must be finite and positive.");
+        }
+    }
+
+    private static int RequirePositive(int value, string parameterName)
+    {
+        if (value <= 0)
+        {
+            throw new ArgumentOutOfRangeException(parameterName, value, "The limit must be positive.");
+        }
+
+        return value;
+    }
+
+    private static long RequirePositive(long value, string parameterName)
+    {
+        if (value <= 0)
+        {
+            throw new ArgumentOutOfRangeException(parameterName, value, "The limit must be positive.");
+        }
+
+        return value;
+    }
 }
 
 /// <summary>Signals that an input package violates archive safety limits or structure.</summary>
