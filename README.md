@@ -1,10 +1,12 @@
-> **Transparency:** AnkiIO was built with substantial AI assistance; Julius does not claim sole authorship.
-
 # AnkiIO
 
-[API documentation](https://juliusjacobsohn.github.io/AnkiIO/) · [Sample projects](samples/README.md) · [MIT license](LICENSE)
+**[Browse the API documentation →](https://juliusjacobsohn.github.io/AnkiIO/)**
+
+[Sample projects](samples/README.md) · [MIT license](LICENSE)
 
 AnkiIO is an experimental, open-source .NET library for building, validating, and round-tripping Anki deck data. It provides a format-independent domain model, deterministic JSON, a CrowdAnki-inspired interchange adapter, media handling, scheduling models, and guarded package I/O.
+
+_Transparency: AnkiIO was built with substantial AI assistance; Julius does not claim sole authorship._
 
 AnkiIO is not affiliated with, endorsed by, or sponsored by Ankitects, Anki, AnkiDroid, or CrowdAnki. "Anki" is a trademark of Ankitects Pty Ltd.
 
