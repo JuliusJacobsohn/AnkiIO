@@ -1,0 +1,55 @@
+- name: Overview
+  href: index.md
+- name: Quick start
+  href: quick-start.md
+- name: Beginner guide
+  href: beginner-guide.md
+- name: API guide
+  href: api-guide.md
+- name: Decks and notes
+  href: deck-and-notes.md
+- name: Cards and templates
+  href: cards-and-templates.md
+- name: Media
+  href: media.md
+- name: Scheduling
+  href: scheduling.md
+- name: Advanced scheduling
+  href: advanced-scheduling.md
+- name: Import
+  href: import.md
+- name: Export
+  href: export.md
+- name: Native JSON
+  href: json-format.md
+- name: CrowdAnki notes
+  href: crowdanki.md
+- name: Package format
+  href: package-format.md
+- name: Validation
+  href: validation.md
+- name: Errors
+  href: errors.md
+- name: Security
+  href: security.md
+- name: Performance
+  href: performance.md
+- name: Local Anki testing
+  href: local-anki-testing.md
+- name: Compatibility
+  href: compatibility/index.md
+- name: Architecture
+  href: architecture.md
+- name: Migration
+  href: migration.md
+- name: Known limitations
+  href: known-limitations.md
+- name: FAQ
+  href: faq.md
+- name: Release process
+  href: release-process.md
+- name: Versioning and deprecation
+  href: versioning.md
+- name: API reference
+  href: api/index.md
+

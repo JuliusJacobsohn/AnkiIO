@@ -1,0 +1,781 @@
+### YamlMime:ManagedReference
+items:
+- uid: AnkiIO.AnkiScheduling
+  commentId: T:AnkiIO.AnkiScheduling
+  id: AnkiScheduling
+  parent: AnkiIO
+  children:
+  - AnkiIO.AnkiScheduling.CustomData
+  - AnkiIO.AnkiScheduling.Due
+  - AnkiIO.AnkiScheduling.EaseFactor
+  - AnkiIO.AnkiScheduling.Interval
+  - AnkiIO.AnkiScheduling.Lapses
+  - AnkiIO.AnkiScheduling.New
+  - AnkiIO.AnkiScheduling.OriginalDeckId
+  - AnkiIO.AnkiScheduling.OriginalDue
+  - AnkiIO.AnkiScheduling.Queue
+  - AnkiIO.AnkiScheduling.RemainingSteps
+  - AnkiIO.AnkiScheduling.Repetitions
+  - AnkiIO.AnkiScheduling.Type
+  langs:
+  - csharp
+  - vb
+  name: AnkiScheduling
+  nameWithType: AnkiScheduling
+  fullName: AnkiIO.AnkiScheduling
+  type: Class
+  source:
+    id: AnkiScheduling
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 38
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Represents scheduling fields stored on an Anki card.
+  remarks: Due has queue-dependent units. New cards use a position, learning cards may use Unix seconds, and review cards use a collection-relative day number.
+  example: []
+  syntax:
+    content: 'public sealed record AnkiScheduling : IEquatable<AnkiScheduling>'
+    content.vb: Public NotInheritable Class AnkiScheduling Implements IEquatable(Of AnkiScheduling)
+  inheritance:
+  - System.Object
+  implements:
+  - System.IEquatable{AnkiIO.AnkiScheduling}
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: AnkiIO.AnkiScheduling.New
+  commentId: P:AnkiIO.AnkiScheduling.New
+  id: New
+  parent: AnkiIO.AnkiScheduling
+  langs:
+  - csharp
+  - vb
+  name: New
+  nameWithType: AnkiScheduling.New
+  fullName: AnkiIO.AnkiScheduling.New
+  type: Property
+  source:
+    id: New
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 41
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets a safe state for a card that Anki should schedule as new.
+  example: []
+  syntax:
+    content: public static AnkiScheduling New { get; }
+    parameters: []
+    return:
+      type: AnkiIO.AnkiScheduling
+    content.vb: Public Shared ReadOnly Property [New] As AnkiScheduling
+  overload: AnkiIO.AnkiScheduling.New*
+- uid: AnkiIO.AnkiScheduling.Type
+  commentId: P:AnkiIO.AnkiScheduling.Type
+  id: Type
+  parent: AnkiIO.AnkiScheduling
+  langs:
+  - csharp
+  - vb
+  name: Type
+  nameWithType: AnkiScheduling.Type
+  fullName: AnkiIO.AnkiScheduling.Type
+  type: Property
+  source:
+    id: Type
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 44
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the scheduler phase.
+  example: []
+  syntax:
+    content: public AnkiCardType Type { get; init; }
+    parameters: []
+    return:
+      type: AnkiIO.AnkiCardType
+    content.vb: Public Property Type As AnkiCardType
+  overload: AnkiIO.AnkiScheduling.Type*
+- uid: AnkiIO.AnkiScheduling.Queue
+  commentId: P:AnkiIO.AnkiScheduling.Queue
+  id: Queue
+  parent: AnkiIO.AnkiScheduling
+  langs:
+  - csharp
+  - vb
+  name: Queue
+  nameWithType: AnkiScheduling.Queue
+  fullName: AnkiIO.AnkiScheduling.Queue
+  type: Property
+  source:
+    id: Queue
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 47
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the active queue, including suspended and buried states.
+  example: []
+  syntax:
+    content: public AnkiCardQueue Queue { get; init; }
+    parameters: []
+    return:
+      type: AnkiIO.AnkiCardQueue
+    content.vb: Public Property Queue As AnkiCardQueue
+  overload: AnkiIO.AnkiScheduling.Queue*
+- uid: AnkiIO.AnkiScheduling.Due
+  commentId: P:AnkiIO.AnkiScheduling.Due
+  id: Due
+  parent: AnkiIO.AnkiScheduling
+  langs:
+  - csharp
+  - vb
+  name: Due
+  nameWithType: AnkiScheduling.Due
+  fullName: AnkiIO.AnkiScheduling.Due
+  type: Property
+  source:
+    id: Due
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 50
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the queue-dependent due value.
+  example: []
+  syntax:
+    content: public long Due { get; init; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public Property Due As Long
+  overload: AnkiIO.AnkiScheduling.Due*
+- uid: AnkiIO.AnkiScheduling.Interval
+  commentId: P:AnkiIO.AnkiScheduling.Interval
+  id: Interval
+  parent: AnkiIO.AnkiScheduling
+  langs:
+  - csharp
+  - vb
+  name: Interval
+  nameWithType: AnkiScheduling.Interval
+  fullName: AnkiIO.AnkiScheduling.Interval
+  type: Property
+  source:
+    id: Interval
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 53
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the interval in days, or a negative seconds value for intraday learning.
+  example: []
+  syntax:
+    content: public int Interval { get; init; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Interval As Integer
+  overload: AnkiIO.AnkiScheduling.Interval*
+- uid: AnkiIO.AnkiScheduling.EaseFactor
+  commentId: P:AnkiIO.AnkiScheduling.EaseFactor
+  id: EaseFactor
+  parent: AnkiIO.AnkiScheduling
+  langs:
+  - csharp
+  - vb
+  name: EaseFactor
+  nameWithType: AnkiScheduling.EaseFactor
+  fullName: AnkiIO.AnkiScheduling.EaseFactor
+  type: Property
+  source:
+    id: EaseFactor
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 56
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the ease factor in per-mille units, such as 2500 for 250%.
+  example: []
+  syntax:
+    content: public int EaseFactor { get; init; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property EaseFactor As Integer
+  overload: AnkiIO.AnkiScheduling.EaseFactor*
+- uid: AnkiIO.AnkiScheduling.Repetitions
+  commentId: P:AnkiIO.AnkiScheduling.Repetitions
+  id: Repetitions
+  parent: AnkiIO.AnkiScheduling
+  langs:
+  - csharp
+  - vb
+  name: Repetitions
+  nameWithType: AnkiScheduling.Repetitions
+  fullName: AnkiIO.AnkiScheduling.Repetitions
+  type: Property
+  source:
+    id: Repetitions
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 59
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the number of answered reviews.
+  example: []
+  syntax:
+    content: public int Repetitions { get; init; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Repetitions As Integer
+  overload: AnkiIO.AnkiScheduling.Repetitions*
+- uid: AnkiIO.AnkiScheduling.Lapses
+  commentId: P:AnkiIO.AnkiScheduling.Lapses
+  id: Lapses
+  parent: AnkiIO.AnkiScheduling
+  langs:
+  - csharp
+  - vb
+  name: Lapses
+  nameWithType: AnkiScheduling.Lapses
+  fullName: AnkiIO.AnkiScheduling.Lapses
+  type: Property
+  source:
+    id: Lapses
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 62
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the number of lapses.
+  example: []
+  syntax:
+    content: public int Lapses { get; init; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Lapses As Integer
+  overload: AnkiIO.AnkiScheduling.Lapses*
+- uid: AnkiIO.AnkiScheduling.RemainingSteps
+  commentId: P:AnkiIO.AnkiScheduling.RemainingSteps
+  id: RemainingSteps
+  parent: AnkiIO.AnkiScheduling
+  langs:
+  - csharp
+  - vb
+  name: RemainingSteps
+  nameWithType: AnkiScheduling.RemainingSteps
+  fullName: AnkiIO.AnkiScheduling.RemainingSteps
+  type: Property
+  source:
+    id: RemainingSteps
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 65
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets remaining learning-step data in Anki's packed representation.
+  example: []
+  syntax:
+    content: public int RemainingSteps { get; init; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property RemainingSteps As Integer
+  overload: AnkiIO.AnkiScheduling.RemainingSteps*
+- uid: AnkiIO.AnkiScheduling.OriginalDue
+  commentId: P:AnkiIO.AnkiScheduling.OriginalDue
+  id: OriginalDue
+  parent: AnkiIO.AnkiScheduling
+  langs:
+  - csharp
+  - vb
+  name: OriginalDue
+  nameWithType: AnkiScheduling.OriginalDue
+  fullName: AnkiIO.AnkiScheduling.OriginalDue
+  type: Property
+  source:
+    id: OriginalDue
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 68
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the original due value used by filtered-deck and rescheduling operations.
+  example: []
+  syntax:
+    content: public long OriginalDue { get; init; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public Property OriginalDue As Long
+  overload: AnkiIO.AnkiScheduling.OriginalDue*
+- uid: AnkiIO.AnkiScheduling.OriginalDeckId
+  commentId: P:AnkiIO.AnkiScheduling.OriginalDeckId
+  id: OriginalDeckId
+  parent: AnkiIO.AnkiScheduling
+  langs:
+  - csharp
+  - vb
+  name: OriginalDeckId
+  nameWithType: AnkiScheduling.OriginalDeckId
+  fullName: AnkiIO.AnkiScheduling.OriginalDeckId
+  type: Property
+  source:
+    id: OriginalDeckId
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 71
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the original deck identifier, or zero when not moved to a filtered deck.
+  example: []
+  syntax:
+    content: public long OriginalDeckId { get; init; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public Property OriginalDeckId As Long
+  overload: AnkiIO.AnkiScheduling.OriginalDeckId*
+- uid: AnkiIO.AnkiScheduling.CustomData
+  commentId: P:AnkiIO.AnkiScheduling.CustomData
+  id: CustomData
+  parent: AnkiIO.AnkiScheduling
+  langs:
+  - csharp
+  - vb
+  name: CustomData
+  nameWithType: AnkiScheduling.CustomData
+  fullName: AnkiIO.AnkiScheduling.CustomData
+  type: Property
+  source:
+    id: CustomData
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 74
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets custom scheduler data that must be preserved without interpretation.
+  example: []
+  syntax:
+    content: public string CustomData { get; init; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CustomData As String
+  overload: AnkiIO.AnkiScheduling.CustomData*
+references:
+- uid: AnkiIO
+  commentId: N:AnkiIO
+  href: AnkiIO.html
+  name: AnkiIO
+  nameWithType: AnkiIO
+  fullName: AnkiIO
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.IEquatable{AnkiIO.AnkiScheduling}
+  commentId: T:System.IEquatable{AnkiIO.AnkiScheduling}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<AnkiScheduling>
+  nameWithType: IEquatable<AnkiScheduling>
+  fullName: System.IEquatable<AnkiIO.AnkiScheduling>
+  nameWithType.vb: IEquatable(Of AnkiScheduling)
+  fullName.vb: System.IEquatable(Of AnkiIO.AnkiScheduling)
+  name.vb: IEquatable(Of AnkiScheduling)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: AnkiIO.AnkiScheduling
+    name: AnkiScheduling
+    href: AnkiIO.AnkiScheduling.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: AnkiIO.AnkiScheduling
+    name: AnkiScheduling
+    href: AnkiIO.AnkiScheduling.html
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: AnkiIO.AnkiScheduling.New*
+  commentId: Overload:AnkiIO.AnkiScheduling.New
+  href: AnkiIO.AnkiScheduling.html#AnkiIO_AnkiScheduling_New
+  name: New
+  nameWithType: AnkiScheduling.New
+  fullName: AnkiIO.AnkiScheduling.New
+- uid: AnkiIO.AnkiScheduling
+  commentId: T:AnkiIO.AnkiScheduling
+  parent: AnkiIO
+  href: AnkiIO.AnkiScheduling.html
+  name: AnkiScheduling
+  nameWithType: AnkiScheduling
+  fullName: AnkiIO.AnkiScheduling
+- uid: AnkiIO.AnkiScheduling.Type*
+  commentId: Overload:AnkiIO.AnkiScheduling.Type
+  href: AnkiIO.AnkiScheduling.html#AnkiIO_AnkiScheduling_Type
+  name: Type
+  nameWithType: AnkiScheduling.Type
+  fullName: AnkiIO.AnkiScheduling.Type
+- uid: AnkiIO.AnkiCardType
+  commentId: T:AnkiIO.AnkiCardType
+  parent: AnkiIO
+  href: AnkiIO.AnkiCardType.html
+  name: AnkiCardType
+  nameWithType: AnkiCardType
+  fullName: AnkiIO.AnkiCardType
+- uid: AnkiIO.AnkiScheduling.Queue*
+  commentId: Overload:AnkiIO.AnkiScheduling.Queue
+  href: AnkiIO.AnkiScheduling.html#AnkiIO_AnkiScheduling_Queue
+  name: Queue
+  nameWithType: AnkiScheduling.Queue
+  fullName: AnkiIO.AnkiScheduling.Queue
+- uid: AnkiIO.AnkiCardQueue
+  commentId: T:AnkiIO.AnkiCardQueue
+  parent: AnkiIO
+  href: AnkiIO.AnkiCardQueue.html
+  name: AnkiCardQueue
+  nameWithType: AnkiCardQueue
+  fullName: AnkiIO.AnkiCardQueue
+- uid: AnkiIO.AnkiScheduling.Due*
+  commentId: Overload:AnkiIO.AnkiScheduling.Due
+  href: AnkiIO.AnkiScheduling.html#AnkiIO_AnkiScheduling_Due
+  name: Due
+  nameWithType: AnkiScheduling.Due
+  fullName: AnkiIO.AnkiScheduling.Due
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: AnkiIO.AnkiScheduling.Interval*
+  commentId: Overload:AnkiIO.AnkiScheduling.Interval
+  href: AnkiIO.AnkiScheduling.html#AnkiIO_AnkiScheduling_Interval
+  name: Interval
+  nameWithType: AnkiScheduling.Interval
+  fullName: AnkiIO.AnkiScheduling.Interval
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: AnkiIO.AnkiScheduling.EaseFactor*
+  commentId: Overload:AnkiIO.AnkiScheduling.EaseFactor
+  href: AnkiIO.AnkiScheduling.html#AnkiIO_AnkiScheduling_EaseFactor
+  name: EaseFactor
+  nameWithType: AnkiScheduling.EaseFactor
+  fullName: AnkiIO.AnkiScheduling.EaseFactor
+- uid: AnkiIO.AnkiScheduling.Repetitions*
+  commentId: Overload:AnkiIO.AnkiScheduling.Repetitions
+  href: AnkiIO.AnkiScheduling.html#AnkiIO_AnkiScheduling_Repetitions
+  name: Repetitions
+  nameWithType: AnkiScheduling.Repetitions
+  fullName: AnkiIO.AnkiScheduling.Repetitions
+- uid: AnkiIO.AnkiScheduling.Lapses*
+  commentId: Overload:AnkiIO.AnkiScheduling.Lapses
+  href: AnkiIO.AnkiScheduling.html#AnkiIO_AnkiScheduling_Lapses
+  name: Lapses
+  nameWithType: AnkiScheduling.Lapses
+  fullName: AnkiIO.AnkiScheduling.Lapses
+- uid: AnkiIO.AnkiScheduling.RemainingSteps*
+  commentId: Overload:AnkiIO.AnkiScheduling.RemainingSteps
+  href: AnkiIO.AnkiScheduling.html#AnkiIO_AnkiScheduling_RemainingSteps
+  name: RemainingSteps
+  nameWithType: AnkiScheduling.RemainingSteps
+  fullName: AnkiIO.AnkiScheduling.RemainingSteps
+- uid: AnkiIO.AnkiScheduling.OriginalDue*
+  commentId: Overload:AnkiIO.AnkiScheduling.OriginalDue
+  href: AnkiIO.AnkiScheduling.html#AnkiIO_AnkiScheduling_OriginalDue
+  name: OriginalDue
+  nameWithType: AnkiScheduling.OriginalDue
+  fullName: AnkiIO.AnkiScheduling.OriginalDue
+- uid: AnkiIO.AnkiScheduling.OriginalDeckId*
+  commentId: Overload:AnkiIO.AnkiScheduling.OriginalDeckId
+  href: AnkiIO.AnkiScheduling.html#AnkiIO_AnkiScheduling_OriginalDeckId
+  name: OriginalDeckId
+  nameWithType: AnkiScheduling.OriginalDeckId
+  fullName: AnkiIO.AnkiScheduling.OriginalDeckId
+- uid: AnkiIO.AnkiScheduling.CustomData*
+  commentId: Overload:AnkiIO.AnkiScheduling.CustomData
+  href: AnkiIO.AnkiScheduling.html#AnkiIO_AnkiScheduling_CustomData
+  name: CustomData
+  nameWithType: AnkiScheduling.CustomData
+  fullName: AnkiIO.AnkiScheduling.CustomData
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String

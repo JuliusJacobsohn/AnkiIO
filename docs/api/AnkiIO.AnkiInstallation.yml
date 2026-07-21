@@ -1,0 +1,692 @@
+### YamlMime:ManagedReference
+items:
+- uid: AnkiIO.AnkiInstallation
+  commentId: T:AnkiIO.AnkiInstallation
+  id: AnkiInstallation
+  parent: AnkiIO
+  children:
+  - AnkiIO.AnkiInstallation.#ctor(System.String,System.String,System.Version,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  - AnkiIO.AnkiInstallation.AddonsDirectoryPresent
+  - AnkiIO.AnkiInstallation.CollectionsPresent
+  - AnkiIO.AnkiInstallation.DataDirectory
+  - AnkiIO.AnkiInstallation.ExecutablePath
+  - AnkiIO.AnkiInstallation.InstallationDirectory
+  - AnkiIO.AnkiInstallation.MediaDirectoriesPresent
+  - AnkiIO.AnkiInstallation.ProfilesPresent
+  - AnkiIO.AnkiInstallation.Version
+  - AnkiIO.AnkiInstallation.VersionText
+  langs:
+  - csharp
+  - vb
+  name: AnkiInstallation
+  nameWithType: AnkiInstallation
+  fullName: AnkiIO.AnkiInstallation
+  type: Class
+  source:
+    id: AnkiInstallation
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    startLine: 5
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Describes one installed Anki application without exposing profile content.
+  example: []
+  syntax:
+    content: 'public sealed record AnkiInstallation : IEquatable<AnkiInstallation>'
+    content.vb: Public NotInheritable Class AnkiInstallation Implements IEquatable(Of AnkiInstallation)
+  inheritance:
+  - System.Object
+  implements:
+  - System.IEquatable{AnkiIO.AnkiInstallation}
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: AnkiIO.AnkiInstallation.#ctor(System.String,System.String,System.Version,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  commentId: M:AnkiIO.AnkiInstallation.#ctor(System.String,System.String,System.Version,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  id: '#ctor(System.String,System.String,System.Version,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)'
+  parent: AnkiIO.AnkiInstallation
+  langs:
+  - csharp
+  - vb
+  name: AnkiInstallation(string, string, Version, string, string?, bool, bool, bool, bool)
+  nameWithType: AnkiInstallation.AnkiInstallation(string, string, Version, string, string?, bool, bool, bool, bool)
+  fullName: AnkiIO.AnkiInstallation.AnkiInstallation(string, string, System.Version, string, string?, bool, bool, bool, bool)
+  type: Constructor
+  source:
+    id: .ctor
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    startLine: 5
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Describes one installed Anki application without exposing profile content.
+  example: []
+  syntax:
+    content: public AnkiInstallation(string ExecutablePath, string InstallationDirectory, Version Version, string VersionText, string? DataDirectory, bool ProfilesPresent, bool CollectionsPresent, bool MediaDirectoriesPresent, bool AddonsDirectoryPresent)
+    parameters:
+    - id: ExecutablePath
+      type: System.String
+    - id: InstallationDirectory
+      type: System.String
+    - id: Version
+      type: System.Version
+    - id: VersionText
+      type: System.String
+    - id: DataDirectory
+      type: System.String
+    - id: ProfilesPresent
+      type: System.Boolean
+    - id: CollectionsPresent
+      type: System.Boolean
+    - id: MediaDirectoriesPresent
+      type: System.Boolean
+    - id: AddonsDirectoryPresent
+      type: System.Boolean
+    content.vb: Public Sub New(ExecutablePath As String, InstallationDirectory As String, Version As Version, VersionText As String, DataDirectory As String, ProfilesPresent As Boolean, CollectionsPresent As Boolean, MediaDirectoriesPresent As Boolean, AddonsDirectoryPresent As Boolean)
+  overload: AnkiIO.AnkiInstallation.#ctor*
+  nameWithType.vb: AnkiInstallation.New(String, String, Version, String, String, Boolean, Boolean, Boolean, Boolean)
+  fullName.vb: AnkiIO.AnkiInstallation.New(String, String, System.Version, String, String, Boolean, Boolean, Boolean, Boolean)
+  name.vb: New(String, String, Version, String, String, Boolean, Boolean, Boolean, Boolean)
+- uid: AnkiIO.AnkiInstallation.ExecutablePath
+  commentId: P:AnkiIO.AnkiInstallation.ExecutablePath
+  id: ExecutablePath
+  parent: AnkiIO.AnkiInstallation
+  langs:
+  - csharp
+  - vb
+  name: ExecutablePath
+  nameWithType: AnkiInstallation.ExecutablePath
+  fullName: AnkiIO.AnkiInstallation.ExecutablePath
+  type: Property
+  source:
+    id: ExecutablePath
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    startLine: 6
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public string ExecutablePath { get; init; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ExecutablePath As String
+  overload: AnkiIO.AnkiInstallation.ExecutablePath*
+- uid: AnkiIO.AnkiInstallation.InstallationDirectory
+  commentId: P:AnkiIO.AnkiInstallation.InstallationDirectory
+  id: InstallationDirectory
+  parent: AnkiIO.AnkiInstallation
+  langs:
+  - csharp
+  - vb
+  name: InstallationDirectory
+  nameWithType: AnkiInstallation.InstallationDirectory
+  fullName: AnkiIO.AnkiInstallation.InstallationDirectory
+  type: Property
+  source:
+    id: InstallationDirectory
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    startLine: 7
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public string InstallationDirectory { get; init; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property InstallationDirectory As String
+  overload: AnkiIO.AnkiInstallation.InstallationDirectory*
+- uid: AnkiIO.AnkiInstallation.Version
+  commentId: P:AnkiIO.AnkiInstallation.Version
+  id: Version
+  parent: AnkiIO.AnkiInstallation
+  langs:
+  - csharp
+  - vb
+  name: Version
+  nameWithType: AnkiInstallation.Version
+  fullName: AnkiIO.AnkiInstallation.Version
+  type: Property
+  source:
+    id: Version
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    startLine: 8
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public Version Version { get; init; }
+    parameters: []
+    return:
+      type: System.Version
+    content.vb: Public Property Version As Version
+  overload: AnkiIO.AnkiInstallation.Version*
+- uid: AnkiIO.AnkiInstallation.VersionText
+  commentId: P:AnkiIO.AnkiInstallation.VersionText
+  id: VersionText
+  parent: AnkiIO.AnkiInstallation
+  langs:
+  - csharp
+  - vb
+  name: VersionText
+  nameWithType: AnkiInstallation.VersionText
+  fullName: AnkiIO.AnkiInstallation.VersionText
+  type: Property
+  source:
+    id: VersionText
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    startLine: 9
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public string VersionText { get; init; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VersionText As String
+  overload: AnkiIO.AnkiInstallation.VersionText*
+- uid: AnkiIO.AnkiInstallation.DataDirectory
+  commentId: P:AnkiIO.AnkiInstallation.DataDirectory
+  id: DataDirectory
+  parent: AnkiIO.AnkiInstallation
+  langs:
+  - csharp
+  - vb
+  name: DataDirectory
+  nameWithType: AnkiInstallation.DataDirectory
+  fullName: AnkiIO.AnkiInstallation.DataDirectory
+  type: Property
+  source:
+    id: DataDirectory
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    startLine: 10
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public string? DataDirectory { get; init; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataDirectory As String
+  overload: AnkiIO.AnkiInstallation.DataDirectory*
+- uid: AnkiIO.AnkiInstallation.ProfilesPresent
+  commentId: P:AnkiIO.AnkiInstallation.ProfilesPresent
+  id: ProfilesPresent
+  parent: AnkiIO.AnkiInstallation
+  langs:
+  - csharp
+  - vb
+  name: ProfilesPresent
+  nameWithType: AnkiInstallation.ProfilesPresent
+  fullName: AnkiIO.AnkiInstallation.ProfilesPresent
+  type: Property
+  source:
+    id: ProfilesPresent
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    startLine: 11
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public bool ProfilesPresent { get; init; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property ProfilesPresent As Boolean
+  overload: AnkiIO.AnkiInstallation.ProfilesPresent*
+- uid: AnkiIO.AnkiInstallation.CollectionsPresent
+  commentId: P:AnkiIO.AnkiInstallation.CollectionsPresent
+  id: CollectionsPresent
+  parent: AnkiIO.AnkiInstallation
+  langs:
+  - csharp
+  - vb
+  name: CollectionsPresent
+  nameWithType: AnkiInstallation.CollectionsPresent
+  fullName: AnkiIO.AnkiInstallation.CollectionsPresent
+  type: Property
+  source:
+    id: CollectionsPresent
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    startLine: 12
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public bool CollectionsPresent { get; init; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property CollectionsPresent As Boolean
+  overload: AnkiIO.AnkiInstallation.CollectionsPresent*
+- uid: AnkiIO.AnkiInstallation.MediaDirectoriesPresent
+  commentId: P:AnkiIO.AnkiInstallation.MediaDirectoriesPresent
+  id: MediaDirectoriesPresent
+  parent: AnkiIO.AnkiInstallation
+  langs:
+  - csharp
+  - vb
+  name: MediaDirectoriesPresent
+  nameWithType: AnkiInstallation.MediaDirectoriesPresent
+  fullName: AnkiIO.AnkiInstallation.MediaDirectoriesPresent
+  type: Property
+  source:
+    id: MediaDirectoriesPresent
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    startLine: 13
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public bool MediaDirectoriesPresent { get; init; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property MediaDirectoriesPresent As Boolean
+  overload: AnkiIO.AnkiInstallation.MediaDirectoriesPresent*
+- uid: AnkiIO.AnkiInstallation.AddonsDirectoryPresent
+  commentId: P:AnkiIO.AnkiInstallation.AddonsDirectoryPresent
+  id: AddonsDirectoryPresent
+  parent: AnkiIO.AnkiInstallation
+  langs:
+  - csharp
+  - vb
+  name: AddonsDirectoryPresent
+  nameWithType: AnkiInstallation.AddonsDirectoryPresent
+  fullName: AnkiIO.AnkiInstallation.AddonsDirectoryPresent
+  type: Property
+  source:
+    id: AddonsDirectoryPresent
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    startLine: 14
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public bool AddonsDirectoryPresent { get; init; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property AddonsDirectoryPresent As Boolean
+  overload: AnkiIO.AnkiInstallation.AddonsDirectoryPresent*
+references:
+- uid: AnkiIO
+  commentId: N:AnkiIO
+  href: AnkiIO.html
+  name: AnkiIO
+  nameWithType: AnkiIO
+  fullName: AnkiIO
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.IEquatable{AnkiIO.AnkiInstallation}
+  commentId: T:System.IEquatable{AnkiIO.AnkiInstallation}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<AnkiInstallation>
+  nameWithType: IEquatable<AnkiInstallation>
+  fullName: System.IEquatable<AnkiIO.AnkiInstallation>
+  nameWithType.vb: IEquatable(Of AnkiInstallation)
+  fullName.vb: System.IEquatable(Of AnkiIO.AnkiInstallation)
+  name.vb: IEquatable(Of AnkiInstallation)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: AnkiIO.AnkiInstallation
+    name: AnkiInstallation
+    href: AnkiIO.AnkiInstallation.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: AnkiIO.AnkiInstallation
+    name: AnkiInstallation
+    href: AnkiIO.AnkiInstallation.html
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: AnkiIO.AnkiInstallation.#ctor*
+  commentId: Overload:AnkiIO.AnkiInstallation.#ctor
+  href: AnkiIO.AnkiInstallation.html#AnkiIO_AnkiInstallation__ctor_System_String_System_String_System_Version_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  name: AnkiInstallation
+  nameWithType: AnkiInstallation.AnkiInstallation
+  fullName: AnkiIO.AnkiInstallation.AnkiInstallation
+  nameWithType.vb: AnkiInstallation.New
+  fullName.vb: AnkiIO.AnkiInstallation.New
+  name.vb: New
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Version
+  commentId: T:System.Version
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.version
+  name: Version
+  nameWithType: Version
+  fullName: System.Version
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: AnkiIO.AnkiInstallation.ExecutablePath*
+  commentId: Overload:AnkiIO.AnkiInstallation.ExecutablePath
+  href: AnkiIO.AnkiInstallation.html#AnkiIO_AnkiInstallation_ExecutablePath
+  name: ExecutablePath
+  nameWithType: AnkiInstallation.ExecutablePath
+  fullName: AnkiIO.AnkiInstallation.ExecutablePath
+- uid: AnkiIO.AnkiInstallation.InstallationDirectory*
+  commentId: Overload:AnkiIO.AnkiInstallation.InstallationDirectory
+  href: AnkiIO.AnkiInstallation.html#AnkiIO_AnkiInstallation_InstallationDirectory
+  name: InstallationDirectory
+  nameWithType: AnkiInstallation.InstallationDirectory
+  fullName: AnkiIO.AnkiInstallation.InstallationDirectory
+- uid: AnkiIO.AnkiInstallation.Version*
+  commentId: Overload:AnkiIO.AnkiInstallation.Version
+  href: AnkiIO.AnkiInstallation.html#AnkiIO_AnkiInstallation_Version
+  name: Version
+  nameWithType: AnkiInstallation.Version
+  fullName: AnkiIO.AnkiInstallation.Version
+- uid: AnkiIO.AnkiInstallation.VersionText*
+  commentId: Overload:AnkiIO.AnkiInstallation.VersionText
+  href: AnkiIO.AnkiInstallation.html#AnkiIO_AnkiInstallation_VersionText
+  name: VersionText
+  nameWithType: AnkiInstallation.VersionText
+  fullName: AnkiIO.AnkiInstallation.VersionText
+- uid: AnkiIO.AnkiInstallation.DataDirectory*
+  commentId: Overload:AnkiIO.AnkiInstallation.DataDirectory
+  href: AnkiIO.AnkiInstallation.html#AnkiIO_AnkiInstallation_DataDirectory
+  name: DataDirectory
+  nameWithType: AnkiInstallation.DataDirectory
+  fullName: AnkiIO.AnkiInstallation.DataDirectory
+- uid: AnkiIO.AnkiInstallation.ProfilesPresent*
+  commentId: Overload:AnkiIO.AnkiInstallation.ProfilesPresent
+  href: AnkiIO.AnkiInstallation.html#AnkiIO_AnkiInstallation_ProfilesPresent
+  name: ProfilesPresent
+  nameWithType: AnkiInstallation.ProfilesPresent
+  fullName: AnkiIO.AnkiInstallation.ProfilesPresent
+- uid: AnkiIO.AnkiInstallation.CollectionsPresent*
+  commentId: Overload:AnkiIO.AnkiInstallation.CollectionsPresent
+  href: AnkiIO.AnkiInstallation.html#AnkiIO_AnkiInstallation_CollectionsPresent
+  name: CollectionsPresent
+  nameWithType: AnkiInstallation.CollectionsPresent
+  fullName: AnkiIO.AnkiInstallation.CollectionsPresent
+- uid: AnkiIO.AnkiInstallation.MediaDirectoriesPresent*
+  commentId: Overload:AnkiIO.AnkiInstallation.MediaDirectoriesPresent
+  href: AnkiIO.AnkiInstallation.html#AnkiIO_AnkiInstallation_MediaDirectoriesPresent
+  name: MediaDirectoriesPresent
+  nameWithType: AnkiInstallation.MediaDirectoriesPresent
+  fullName: AnkiIO.AnkiInstallation.MediaDirectoriesPresent
+- uid: AnkiIO.AnkiInstallation.AddonsDirectoryPresent*
+  commentId: Overload:AnkiIO.AnkiInstallation.AddonsDirectoryPresent
+  href: AnkiIO.AnkiInstallation.html#AnkiIO_AnkiInstallation_AddonsDirectoryPresent
+  name: AddonsDirectoryPresent
+  nameWithType: AnkiInstallation.AddonsDirectoryPresent
+  fullName: AnkiIO.AnkiInstallation.AddonsDirectoryPresent

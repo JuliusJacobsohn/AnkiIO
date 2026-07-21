@@ -1,0 +1,688 @@
+### YamlMime:ManagedReference
+items:
+- uid: AnkiIO.AnkiJsonSerializer
+  commentId: T:AnkiIO.AnkiJsonSerializer
+  id: AnkiJsonSerializer
+  parent: AnkiIO
+  children:
+  - AnkiIO.AnkiJsonSerializer.CurrentFormatVersion
+  - AnkiIO.AnkiJsonSerializer.Deserialize(System.String)
+  - AnkiIO.AnkiJsonSerializer.ReadAsync(System.IO.Stream,System.Threading.CancellationToken)
+  - AnkiIO.AnkiJsonSerializer.Serialize(AnkiIO.AnkiDeck)
+  - AnkiIO.AnkiJsonSerializer.WriteAsync(AnkiIO.AnkiDeck,System.IO.Stream,System.Threading.CancellationToken)
+  langs:
+  - csharp
+  - vb
+  name: AnkiJsonSerializer
+  nameWithType: AnkiJsonSerializer
+  fullName: AnkiIO.AnkiJsonSerializer
+  type: Class
+  source:
+    id: AnkiJsonSerializer
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\AnkiJsonSerializer.cs
+    startLine: 6
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Reads and writes AnkiIO's deterministic, versioned native JSON format.
+  example: []
+  syntax:
+    content: public static class AnkiJsonSerializer
+    content.vb: Public Module AnkiJsonSerializer
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: AnkiIO.AnkiJsonSerializer.CurrentFormatVersion
+  commentId: F:AnkiIO.AnkiJsonSerializer.CurrentFormatVersion
+  id: CurrentFormatVersion
+  parent: AnkiIO.AnkiJsonSerializer
+  langs:
+  - csharp
+  - vb
+  name: CurrentFormatVersion
+  nameWithType: AnkiJsonSerializer.CurrentFormatVersion
+  fullName: AnkiIO.AnkiJsonSerializer.CurrentFormatVersion
+  type: Field
+  source:
+    id: CurrentFormatVersion
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\AnkiJsonSerializer.cs
+    startLine: 9
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the current native JSON format version.
+  example: []
+  syntax:
+    content: public const int CurrentFormatVersion = 1
+    return:
+      type: System.Int32
+    content.vb: Public Const CurrentFormatVersion As Integer = 1
+- uid: AnkiIO.AnkiJsonSerializer.Serialize(AnkiIO.AnkiDeck)
+  commentId: M:AnkiIO.AnkiJsonSerializer.Serialize(AnkiIO.AnkiDeck)
+  id: Serialize(AnkiIO.AnkiDeck)
+  parent: AnkiIO.AnkiJsonSerializer
+  langs:
+  - csharp
+  - vb
+  name: Serialize(AnkiDeck)
+  nameWithType: AnkiJsonSerializer.Serialize(AnkiDeck)
+  fullName: AnkiIO.AnkiJsonSerializer.Serialize(AnkiIO.AnkiDeck)
+  type: Method
+  source:
+    id: Serialize
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\AnkiJsonSerializer.cs
+    startLine: 20
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Serializes a validated deck hierarchy to culture-invariant JSON.
+  example: []
+  syntax:
+    content: public static string Serialize(AnkiDeck deck)
+    parameters:
+    - id: deck
+      type: AnkiIO.AnkiDeck
+    return:
+      type: System.String
+    content.vb: Public Shared Function Serialize(deck As AnkiDeck) As String
+  overload: AnkiIO.AnkiJsonSerializer.Serialize*
+  exceptions:
+  - type: AnkiIO.AnkiValidationException
+    commentId: T:AnkiIO.AnkiValidationException
+    description: The hierarchy contains unsafe or inconsistent data.
+- uid: AnkiIO.AnkiJsonSerializer.Deserialize(System.String)
+  commentId: M:AnkiIO.AnkiJsonSerializer.Deserialize(System.String)
+  id: Deserialize(System.String)
+  parent: AnkiIO.AnkiJsonSerializer
+  langs:
+  - csharp
+  - vb
+  name: Deserialize(string)
+  nameWithType: AnkiJsonSerializer.Deserialize(string)
+  fullName: AnkiIO.AnkiJsonSerializer.Deserialize(string)
+  type: Method
+  source:
+    id: Deserialize
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\AnkiJsonSerializer.cs
+    startLine: 30
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Deserializes native JSON and rejects unsupported versions or invalid content.
+  example: []
+  syntax:
+    content: public static AnkiDeck Deserialize(string json)
+    parameters:
+    - id: json
+      type: System.String
+    return:
+      type: AnkiIO.AnkiDeck
+    content.vb: Public Shared Function Deserialize(json As String) As AnkiDeck
+  overload: AnkiIO.AnkiJsonSerializer.Deserialize*
+  exceptions:
+  - type: System.Text.Json.JsonException
+    commentId: T:System.Text.Json.JsonException
+    description: The document is malformed or unsupported.
+  - type: AnkiIO.AnkiValidationException
+    commentId: T:AnkiIO.AnkiValidationException
+    description: The represented hierarchy violates domain invariants.
+  nameWithType.vb: AnkiJsonSerializer.Deserialize(String)
+  fullName.vb: AnkiIO.AnkiJsonSerializer.Deserialize(String)
+  name.vb: Deserialize(String)
+- uid: AnkiIO.AnkiJsonSerializer.WriteAsync(AnkiIO.AnkiDeck,System.IO.Stream,System.Threading.CancellationToken)
+  commentId: M:AnkiIO.AnkiJsonSerializer.WriteAsync(AnkiIO.AnkiDeck,System.IO.Stream,System.Threading.CancellationToken)
+  id: WriteAsync(AnkiIO.AnkiDeck,System.IO.Stream,System.Threading.CancellationToken)
+  parent: AnkiIO.AnkiJsonSerializer
+  langs:
+  - csharp
+  - vb
+  name: WriteAsync(AnkiDeck, Stream, CancellationToken)
+  nameWithType: AnkiJsonSerializer.WriteAsync(AnkiDeck, Stream, CancellationToken)
+  fullName: AnkiIO.AnkiJsonSerializer.WriteAsync(AnkiIO.AnkiDeck, System.IO.Stream, System.Threading.CancellationToken)
+  type: Method
+  source:
+    id: WriteAsync
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\AnkiJsonSerializer.cs
+    startLine: 46
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Writes native JSON asynchronously. The caller retains ownership of the stream.
+  example: []
+  syntax:
+    content: public static Task WriteAsync(AnkiDeck deck, Stream destination, CancellationToken cancellationToken = default)
+    parameters:
+    - id: deck
+      type: AnkiIO.AnkiDeck
+    - id: destination
+      type: System.IO.Stream
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+    return:
+      type: System.Threading.Tasks.Task
+    content.vb: Public Shared Function WriteAsync(deck As AnkiDeck, destination As Stream, cancellationToken As CancellationToken = Nothing) As Task
+  overload: AnkiIO.AnkiJsonSerializer.WriteAsync*
+- uid: AnkiIO.AnkiJsonSerializer.ReadAsync(System.IO.Stream,System.Threading.CancellationToken)
+  commentId: M:AnkiIO.AnkiJsonSerializer.ReadAsync(System.IO.Stream,System.Threading.CancellationToken)
+  id: ReadAsync(System.IO.Stream,System.Threading.CancellationToken)
+  parent: AnkiIO.AnkiJsonSerializer
+  langs:
+  - csharp
+  - vb
+  name: ReadAsync(Stream, CancellationToken)
+  nameWithType: AnkiJsonSerializer.ReadAsync(Stream, CancellationToken)
+  fullName: AnkiIO.AnkiJsonSerializer.ReadAsync(System.IO.Stream, System.Threading.CancellationToken)
+  type: Method
+  source:
+    id: ReadAsync
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\AnkiJsonSerializer.cs
+    startLine: 54
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Reads native JSON asynchronously. The caller retains ownership of the stream.
+  example: []
+  syntax:
+    content: public static Task<AnkiDeck> ReadAsync(Stream source, CancellationToken cancellationToken = default)
+    parameters:
+    - id: source
+      type: System.IO.Stream
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+    return:
+      type: System.Threading.Tasks.Task{AnkiIO.AnkiDeck}
+    content.vb: Public Shared Function ReadAsync(source As Stream, cancellationToken As CancellationToken = Nothing) As Task(Of AnkiDeck)
+  overload: AnkiIO.AnkiJsonSerializer.ReadAsync*
+references:
+- uid: AnkiIO
+  commentId: N:AnkiIO
+  href: AnkiIO.html
+  name: AnkiIO
+  nameWithType: AnkiIO
+  fullName: AnkiIO
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: AnkiIO.AnkiValidationException
+  commentId: T:AnkiIO.AnkiValidationException
+  href: AnkiIO.AnkiValidationException.html
+  name: AnkiValidationException
+  nameWithType: AnkiValidationException
+  fullName: AnkiIO.AnkiValidationException
+- uid: AnkiIO.AnkiJsonSerializer.Serialize*
+  commentId: Overload:AnkiIO.AnkiJsonSerializer.Serialize
+  href: AnkiIO.AnkiJsonSerializer.html#AnkiIO_AnkiJsonSerializer_Serialize_AnkiIO_AnkiDeck_
+  name: Serialize
+  nameWithType: AnkiJsonSerializer.Serialize
+  fullName: AnkiIO.AnkiJsonSerializer.Serialize
+- uid: AnkiIO.AnkiDeck
+  commentId: T:AnkiIO.AnkiDeck
+  parent: AnkiIO
+  href: AnkiIO.AnkiDeck.html
+  name: AnkiDeck
+  nameWithType: AnkiDeck
+  fullName: AnkiIO.AnkiDeck
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Text.Json.JsonException
+  commentId: T:System.Text.Json.JsonException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.jsonexception
+  name: JsonException
+  nameWithType: JsonException
+  fullName: System.Text.Json.JsonException
+- uid: AnkiIO.AnkiJsonSerializer.Deserialize*
+  commentId: Overload:AnkiIO.AnkiJsonSerializer.Deserialize
+  href: AnkiIO.AnkiJsonSerializer.html#AnkiIO_AnkiJsonSerializer_Deserialize_System_String_
+  name: Deserialize
+  nameWithType: AnkiJsonSerializer.Deserialize
+  fullName: AnkiIO.AnkiJsonSerializer.Deserialize
+- uid: AnkiIO.AnkiJsonSerializer.WriteAsync*
+  commentId: Overload:AnkiIO.AnkiJsonSerializer.WriteAsync
+  href: AnkiIO.AnkiJsonSerializer.html#AnkiIO_AnkiJsonSerializer_WriteAsync_AnkiIO_AnkiDeck_System_IO_Stream_System_Threading_CancellationToken_
+  name: WriteAsync
+  nameWithType: AnkiJsonSerializer.WriteAsync
+  fullName: AnkiIO.AnkiJsonSerializer.WriteAsync
+- uid: System.IO.Stream
+  commentId: T:System.IO.Stream
+  parent: System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  name: Stream
+  nameWithType: Stream
+  fullName: System.IO.Stream
+- uid: System.Threading.CancellationToken
+  commentId: T:System.Threading.CancellationToken
+  parent: System.Threading
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  name: CancellationToken
+  nameWithType: CancellationToken
+  fullName: System.Threading.CancellationToken
+- uid: System.Threading.Tasks.Task
+  commentId: T:System.Threading.Tasks.Task
+  parent: System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+  name: Task
+  nameWithType: Task
+  fullName: System.Threading.Tasks.Task
+- uid: System.IO
+  commentId: N:System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.IO
+  nameWithType: System.IO
+  fullName: System.IO
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+- uid: System.Threading
+  commentId: N:System.Threading
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading
+  nameWithType: System.Threading
+  fullName: System.Threading
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: AnkiIO.AnkiJsonSerializer.ReadAsync*
+  commentId: Overload:AnkiIO.AnkiJsonSerializer.ReadAsync
+  href: AnkiIO.AnkiJsonSerializer.html#AnkiIO_AnkiJsonSerializer_ReadAsync_System_IO_Stream_System_Threading_CancellationToken_
+  name: ReadAsync
+  nameWithType: AnkiJsonSerializer.ReadAsync
+  fullName: AnkiIO.AnkiJsonSerializer.ReadAsync
+- uid: System.Threading.Tasks.Task{AnkiIO.AnkiDeck}
+  commentId: T:System.Threading.Tasks.Task{AnkiIO.AnkiDeck}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<AnkiDeck>
+  nameWithType: Task<AnkiDeck>
+  fullName: System.Threading.Tasks.Task<AnkiIO.AnkiDeck>
+  nameWithType.vb: Task(Of AnkiDeck)
+  fullName.vb: System.Threading.Tasks.Task(Of AnkiIO.AnkiDeck)
+  name.vb: Task(Of AnkiDeck)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: AnkiIO.AnkiDeck
+    name: AnkiDeck
+    href: AnkiIO.AnkiDeck.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: AnkiIO.AnkiDeck
+    name: AnkiDeck
+    href: AnkiIO.AnkiDeck.html
+  - name: )
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )

@@ -1,0 +1,765 @@
+### YamlMime:ManagedReference
+items:
+- uid: AnkiIO.AnkiDiagnostic
+  commentId: T:AnkiIO.AnkiDiagnostic
+  id: AnkiDiagnostic
+  parent: AnkiIO
+  children:
+  - AnkiIO.AnkiDiagnostic.#ctor(AnkiIO.AnkiDiagnosticSeverity,System.String,System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.String)
+  - AnkiIO.AnkiDiagnostic.CardId
+  - AnkiIO.AnkiDiagnostic.Code
+  - AnkiIO.AnkiDiagnostic.DeckId
+  - AnkiIO.AnkiDiagnostic.FieldName
+  - AnkiIO.AnkiDiagnostic.Location
+  - AnkiIO.AnkiDiagnostic.MediaFileName
+  - AnkiIO.AnkiDiagnostic.Message
+  - AnkiIO.AnkiDiagnostic.NoteId
+  - AnkiIO.AnkiDiagnostic.Severity
+  - AnkiIO.AnkiDiagnostic.SuggestedRemediation
+  langs:
+  - csharp
+  - vb
+  name: AnkiDiagnostic
+  nameWithType: AnkiDiagnostic
+  fullName: AnkiIO.AnkiDiagnostic
+  type: Class
+  source:
+    id: AnkiDiagnostic
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    startLine: 16
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Provides machine-readable context for an inspectable content problem.
+  example: []
+  syntax:
+    content: 'public sealed record AnkiDiagnostic : IEquatable<AnkiDiagnostic>'
+    content.vb: Public NotInheritable Class AnkiDiagnostic Implements IEquatable(Of AnkiDiagnostic)
+  inheritance:
+  - System.Object
+  implements:
+  - System.IEquatable{AnkiIO.AnkiDiagnostic}
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: AnkiIO.AnkiDiagnostic.#ctor(AnkiIO.AnkiDiagnosticSeverity,System.String,System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.String)
+  commentId: M:AnkiIO.AnkiDiagnostic.#ctor(AnkiIO.AnkiDiagnosticSeverity,System.String,System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.String)
+  id: '#ctor(AnkiIO.AnkiDiagnosticSeverity,System.String,System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.String)'
+  parent: AnkiIO.AnkiDiagnostic
+  langs:
+  - csharp
+  - vb
+  name: AnkiDiagnostic(AnkiDiagnosticSeverity, string, string, string?, long?, long?, long?, string?, string?, string?)
+  nameWithType: AnkiDiagnostic.AnkiDiagnostic(AnkiDiagnosticSeverity, string, string, string?, long?, long?, long?, string?, string?, string?)
+  fullName: AnkiIO.AnkiDiagnostic.AnkiDiagnostic(AnkiIO.AnkiDiagnosticSeverity, string, string, string?, long?, long?, long?, string?, string?, string?)
+  type: Constructor
+  source:
+    id: .ctor
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    startLine: 16
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Provides machine-readable context for an inspectable content problem.
+  example: []
+  syntax:
+    content: public AnkiDiagnostic(AnkiDiagnosticSeverity Severity, string Code, string Message, string? Location = null, long? DeckId = null, long? NoteId = null, long? CardId = null, string? FieldName = null, string? MediaFileName = null, string? SuggestedRemediation = null)
+    parameters:
+    - id: Severity
+      type: AnkiIO.AnkiDiagnosticSeverity
+    - id: Code
+      type: System.String
+    - id: Message
+      type: System.String
+    - id: Location
+      type: System.String
+    - id: DeckId
+      type: System.Nullable{System.Int64}
+    - id: NoteId
+      type: System.Nullable{System.Int64}
+    - id: CardId
+      type: System.Nullable{System.Int64}
+    - id: FieldName
+      type: System.String
+    - id: MediaFileName
+      type: System.String
+    - id: SuggestedRemediation
+      type: System.String
+    content.vb: Public Sub New(Severity As AnkiDiagnosticSeverity, Code As String, Message As String, Location As String = Nothing, DeckId As Long? = Nothing, NoteId As Long? = Nothing, CardId As Long? = Nothing, FieldName As String = Nothing, MediaFileName As String = Nothing, SuggestedRemediation As String = Nothing)
+  overload: AnkiIO.AnkiDiagnostic.#ctor*
+  nameWithType.vb: AnkiDiagnostic.New(AnkiDiagnosticSeverity, String, String, String, Long?, Long?, Long?, String, String, String)
+  fullName.vb: AnkiIO.AnkiDiagnostic.New(AnkiIO.AnkiDiagnosticSeverity, String, String, String, Long?, Long?, Long?, String, String, String)
+  name.vb: New(AnkiDiagnosticSeverity, String, String, String, Long?, Long?, Long?, String, String, String)
+- uid: AnkiIO.AnkiDiagnostic.Severity
+  commentId: P:AnkiIO.AnkiDiagnostic.Severity
+  id: Severity
+  parent: AnkiIO.AnkiDiagnostic
+  langs:
+  - csharp
+  - vb
+  name: Severity
+  nameWithType: AnkiDiagnostic.Severity
+  fullName: AnkiIO.AnkiDiagnostic.Severity
+  type: Property
+  source:
+    id: Severity
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    startLine: 17
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public AnkiDiagnosticSeverity Severity { get; init; }
+    parameters: []
+    return:
+      type: AnkiIO.AnkiDiagnosticSeverity
+    content.vb: Public Property Severity As AnkiDiagnosticSeverity
+  overload: AnkiIO.AnkiDiagnostic.Severity*
+- uid: AnkiIO.AnkiDiagnostic.Code
+  commentId: P:AnkiIO.AnkiDiagnostic.Code
+  id: Code
+  parent: AnkiIO.AnkiDiagnostic
+  langs:
+  - csharp
+  - vb
+  name: Code
+  nameWithType: AnkiDiagnostic.Code
+  fullName: AnkiIO.AnkiDiagnostic.Code
+  type: Property
+  source:
+    id: Code
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    startLine: 18
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public string Code { get; init; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Code As String
+  overload: AnkiIO.AnkiDiagnostic.Code*
+- uid: AnkiIO.AnkiDiagnostic.Message
+  commentId: P:AnkiIO.AnkiDiagnostic.Message
+  id: Message
+  parent: AnkiIO.AnkiDiagnostic
+  langs:
+  - csharp
+  - vb
+  name: Message
+  nameWithType: AnkiDiagnostic.Message
+  fullName: AnkiIO.AnkiDiagnostic.Message
+  type: Property
+  source:
+    id: Message
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    startLine: 19
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public string Message { get; init; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Message As String
+  overload: AnkiIO.AnkiDiagnostic.Message*
+- uid: AnkiIO.AnkiDiagnostic.Location
+  commentId: P:AnkiIO.AnkiDiagnostic.Location
+  id: Location
+  parent: AnkiIO.AnkiDiagnostic
+  langs:
+  - csharp
+  - vb
+  name: Location
+  nameWithType: AnkiDiagnostic.Location
+  fullName: AnkiIO.AnkiDiagnostic.Location
+  type: Property
+  source:
+    id: Location
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    startLine: 20
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public string? Location { get; init; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Location As String
+  overload: AnkiIO.AnkiDiagnostic.Location*
+- uid: AnkiIO.AnkiDiagnostic.DeckId
+  commentId: P:AnkiIO.AnkiDiagnostic.DeckId
+  id: DeckId
+  parent: AnkiIO.AnkiDiagnostic
+  langs:
+  - csharp
+  - vb
+  name: DeckId
+  nameWithType: AnkiDiagnostic.DeckId
+  fullName: AnkiIO.AnkiDiagnostic.DeckId
+  type: Property
+  source:
+    id: DeckId
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    startLine: 21
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public long? DeckId { get; init; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int64}
+    content.vb: Public Property DeckId As Long?
+  overload: AnkiIO.AnkiDiagnostic.DeckId*
+- uid: AnkiIO.AnkiDiagnostic.NoteId
+  commentId: P:AnkiIO.AnkiDiagnostic.NoteId
+  id: NoteId
+  parent: AnkiIO.AnkiDiagnostic
+  langs:
+  - csharp
+  - vb
+  name: NoteId
+  nameWithType: AnkiDiagnostic.NoteId
+  fullName: AnkiIO.AnkiDiagnostic.NoteId
+  type: Property
+  source:
+    id: NoteId
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    startLine: 22
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public long? NoteId { get; init; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int64}
+    content.vb: Public Property NoteId As Long?
+  overload: AnkiIO.AnkiDiagnostic.NoteId*
+- uid: AnkiIO.AnkiDiagnostic.CardId
+  commentId: P:AnkiIO.AnkiDiagnostic.CardId
+  id: CardId
+  parent: AnkiIO.AnkiDiagnostic
+  langs:
+  - csharp
+  - vb
+  name: CardId
+  nameWithType: AnkiDiagnostic.CardId
+  fullName: AnkiIO.AnkiDiagnostic.CardId
+  type: Property
+  source:
+    id: CardId
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    startLine: 23
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public long? CardId { get; init; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int64}
+    content.vb: Public Property CardId As Long?
+  overload: AnkiIO.AnkiDiagnostic.CardId*
+- uid: AnkiIO.AnkiDiagnostic.FieldName
+  commentId: P:AnkiIO.AnkiDiagnostic.FieldName
+  id: FieldName
+  parent: AnkiIO.AnkiDiagnostic
+  langs:
+  - csharp
+  - vb
+  name: FieldName
+  nameWithType: AnkiDiagnostic.FieldName
+  fullName: AnkiIO.AnkiDiagnostic.FieldName
+  type: Property
+  source:
+    id: FieldName
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    startLine: 24
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public string? FieldName { get; init; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property FieldName As String
+  overload: AnkiIO.AnkiDiagnostic.FieldName*
+- uid: AnkiIO.AnkiDiagnostic.MediaFileName
+  commentId: P:AnkiIO.AnkiDiagnostic.MediaFileName
+  id: MediaFileName
+  parent: AnkiIO.AnkiDiagnostic
+  langs:
+  - csharp
+  - vb
+  name: MediaFileName
+  nameWithType: AnkiDiagnostic.MediaFileName
+  fullName: AnkiIO.AnkiDiagnostic.MediaFileName
+  type: Property
+  source:
+    id: MediaFileName
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    startLine: 25
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public string? MediaFileName { get; init; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property MediaFileName As String
+  overload: AnkiIO.AnkiDiagnostic.MediaFileName*
+- uid: AnkiIO.AnkiDiagnostic.SuggestedRemediation
+  commentId: P:AnkiIO.AnkiDiagnostic.SuggestedRemediation
+  id: SuggestedRemediation
+  parent: AnkiIO.AnkiDiagnostic
+  langs:
+  - csharp
+  - vb
+  name: SuggestedRemediation
+  nameWithType: AnkiDiagnostic.SuggestedRemediation
+  fullName: AnkiIO.AnkiDiagnostic.SuggestedRemediation
+  type: Property
+  source:
+    id: SuggestedRemediation
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    startLine: 26
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public string? SuggestedRemediation { get; init; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property SuggestedRemediation As String
+  overload: AnkiIO.AnkiDiagnostic.SuggestedRemediation*
+references:
+- uid: AnkiIO
+  commentId: N:AnkiIO
+  href: AnkiIO.html
+  name: AnkiIO
+  nameWithType: AnkiIO
+  fullName: AnkiIO
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.IEquatable{AnkiIO.AnkiDiagnostic}
+  commentId: T:System.IEquatable{AnkiIO.AnkiDiagnostic}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<AnkiDiagnostic>
+  nameWithType: IEquatable<AnkiDiagnostic>
+  fullName: System.IEquatable<AnkiIO.AnkiDiagnostic>
+  nameWithType.vb: IEquatable(Of AnkiDiagnostic)
+  fullName.vb: System.IEquatable(Of AnkiIO.AnkiDiagnostic)
+  name.vb: IEquatable(Of AnkiDiagnostic)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: AnkiIO.AnkiDiagnostic
+    name: AnkiDiagnostic
+    href: AnkiIO.AnkiDiagnostic.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: AnkiIO.AnkiDiagnostic
+    name: AnkiDiagnostic
+    href: AnkiIO.AnkiDiagnostic.html
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: AnkiIO.AnkiDiagnostic.#ctor*
+  commentId: Overload:AnkiIO.AnkiDiagnostic.#ctor
+  href: AnkiIO.AnkiDiagnostic.html#AnkiIO_AnkiDiagnostic__ctor_AnkiIO_AnkiDiagnosticSeverity_System_String_System_String_System_String_System_Nullable_System_Int64__System_Nullable_System_Int64__System_Nullable_System_Int64__System_String_System_String_System_String_
+  name: AnkiDiagnostic
+  nameWithType: AnkiDiagnostic.AnkiDiagnostic
+  fullName: AnkiIO.AnkiDiagnostic.AnkiDiagnostic
+  nameWithType.vb: AnkiDiagnostic.New
+  fullName.vb: AnkiIO.AnkiDiagnostic.New
+  name.vb: New
+- uid: AnkiIO.AnkiDiagnosticSeverity
+  commentId: T:AnkiIO.AnkiDiagnosticSeverity
+  parent: AnkiIO
+  href: AnkiIO.AnkiDiagnosticSeverity.html
+  name: AnkiDiagnosticSeverity
+  nameWithType: AnkiDiagnosticSeverity
+  fullName: AnkiIO.AnkiDiagnosticSeverity
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Nullable{System.Int64}
+  commentId: T:System.Nullable{System.Int64}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long?
+  nameWithType: long?
+  fullName: long?
+  nameWithType.vb: Long?
+  fullName.vb: Long?
+  name.vb: Long?
+  spec.csharp:
+  - uid: System.Int64
+    name: long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: '?'
+  spec.vb:
+  - uid: System.Int64
+    name: Long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: AnkiIO.AnkiDiagnostic.Severity*
+  commentId: Overload:AnkiIO.AnkiDiagnostic.Severity
+  href: AnkiIO.AnkiDiagnostic.html#AnkiIO_AnkiDiagnostic_Severity
+  name: Severity
+  nameWithType: AnkiDiagnostic.Severity
+  fullName: AnkiIO.AnkiDiagnostic.Severity
+- uid: AnkiIO.AnkiDiagnostic.Code*
+  commentId: Overload:AnkiIO.AnkiDiagnostic.Code
+  href: AnkiIO.AnkiDiagnostic.html#AnkiIO_AnkiDiagnostic_Code
+  name: Code
+  nameWithType: AnkiDiagnostic.Code
+  fullName: AnkiIO.AnkiDiagnostic.Code
+- uid: AnkiIO.AnkiDiagnostic.Message*
+  commentId: Overload:AnkiIO.AnkiDiagnostic.Message
+  href: AnkiIO.AnkiDiagnostic.html#AnkiIO_AnkiDiagnostic_Message
+  name: Message
+  nameWithType: AnkiDiagnostic.Message
+  fullName: AnkiIO.AnkiDiagnostic.Message
+- uid: AnkiIO.AnkiDiagnostic.Location*
+  commentId: Overload:AnkiIO.AnkiDiagnostic.Location
+  href: AnkiIO.AnkiDiagnostic.html#AnkiIO_AnkiDiagnostic_Location
+  name: Location
+  nameWithType: AnkiDiagnostic.Location
+  fullName: AnkiIO.AnkiDiagnostic.Location
+- uid: AnkiIO.AnkiDiagnostic.DeckId*
+  commentId: Overload:AnkiIO.AnkiDiagnostic.DeckId
+  href: AnkiIO.AnkiDiagnostic.html#AnkiIO_AnkiDiagnostic_DeckId
+  name: DeckId
+  nameWithType: AnkiDiagnostic.DeckId
+  fullName: AnkiIO.AnkiDiagnostic.DeckId
+- uid: AnkiIO.AnkiDiagnostic.NoteId*
+  commentId: Overload:AnkiIO.AnkiDiagnostic.NoteId
+  href: AnkiIO.AnkiDiagnostic.html#AnkiIO_AnkiDiagnostic_NoteId
+  name: NoteId
+  nameWithType: AnkiDiagnostic.NoteId
+  fullName: AnkiIO.AnkiDiagnostic.NoteId
+- uid: AnkiIO.AnkiDiagnostic.CardId*
+  commentId: Overload:AnkiIO.AnkiDiagnostic.CardId
+  href: AnkiIO.AnkiDiagnostic.html#AnkiIO_AnkiDiagnostic_CardId
+  name: CardId
+  nameWithType: AnkiDiagnostic.CardId
+  fullName: AnkiIO.AnkiDiagnostic.CardId
+- uid: AnkiIO.AnkiDiagnostic.FieldName*
+  commentId: Overload:AnkiIO.AnkiDiagnostic.FieldName
+  href: AnkiIO.AnkiDiagnostic.html#AnkiIO_AnkiDiagnostic_FieldName
+  name: FieldName
+  nameWithType: AnkiDiagnostic.FieldName
+  fullName: AnkiIO.AnkiDiagnostic.FieldName
+- uid: AnkiIO.AnkiDiagnostic.MediaFileName*
+  commentId: Overload:AnkiIO.AnkiDiagnostic.MediaFileName
+  href: AnkiIO.AnkiDiagnostic.html#AnkiIO_AnkiDiagnostic_MediaFileName
+  name: MediaFileName
+  nameWithType: AnkiDiagnostic.MediaFileName
+  fullName: AnkiIO.AnkiDiagnostic.MediaFileName
+- uid: AnkiIO.AnkiDiagnostic.SuggestedRemediation*
+  commentId: Overload:AnkiIO.AnkiDiagnostic.SuggestedRemediation
+  href: AnkiIO.AnkiDiagnostic.html#AnkiIO_AnkiDiagnostic_SuggestedRemediation
+  name: SuggestedRemediation
+  nameWithType: AnkiDiagnostic.SuggestedRemediation
+  fullName: AnkiIO.AnkiDiagnostic.SuggestedRemediation

@@ -1,0 +1,551 @@
+### YamlMime:ManagedReference
+items:
+- uid: AnkiIO.AnkiMediaFile
+  commentId: T:AnkiIO.AnkiMediaFile
+  id: AnkiMediaFile
+  parent: AnkiIO
+  children:
+  - AnkiIO.AnkiMediaFile.FileName
+  - AnkiIO.AnkiMediaFile.Length
+  - AnkiIO.AnkiMediaFile.OpenReadAsync(System.Threading.CancellationToken)
+  - AnkiIO.AnkiMediaFile.Sha256
+  langs:
+  - csharp
+  - vb
+  name: AnkiMediaFile
+  nameWithType: AnkiMediaFile
+  fullName: AnkiIO.AnkiMediaFile
+  type: Class
+  source:
+    id: AnkiMediaFile
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Media.cs
+    startLine: 5
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Describes one media payload and provides repeatable streaming access.
+  example: []
+  syntax:
+    content: public sealed class AnkiMediaFile
+    content.vb: Public NotInheritable Class AnkiMediaFile
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: AnkiIO.AnkiMediaFile.FileName
+  commentId: P:AnkiIO.AnkiMediaFile.FileName
+  id: FileName
+  parent: AnkiIO.AnkiMediaFile
+  langs:
+  - csharp
+  - vb
+  name: FileName
+  nameWithType: AnkiMediaFile.FileName
+  fullName: AnkiIO.AnkiMediaFile.FileName
+  type: Property
+  source:
+    id: FileName
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Media.cs
+    startLine: 18
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the safe collection-relative filename referenced by note HTML or sound markup.
+  example: []
+  syntax:
+    content: public string FileName { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property FileName As String
+  overload: AnkiIO.AnkiMediaFile.FileName*
+- uid: AnkiIO.AnkiMediaFile.Length
+  commentId: P:AnkiIO.AnkiMediaFile.Length
+  id: Length
+  parent: AnkiIO.AnkiMediaFile
+  langs:
+  - csharp
+  - vb
+  name: Length
+  nameWithType: AnkiMediaFile.Length
+  fullName: AnkiIO.AnkiMediaFile.Length
+  type: Property
+  source:
+    id: Length
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Media.cs
+    startLine: 21
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the payload size in bytes.
+  example: []
+  syntax:
+    content: public long Length { get; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public ReadOnly Property Length As Long
+  overload: AnkiIO.AnkiMediaFile.Length*
+- uid: AnkiIO.AnkiMediaFile.Sha256
+  commentId: P:AnkiIO.AnkiMediaFile.Sha256
+  id: Sha256
+  parent: AnkiIO.AnkiMediaFile
+  langs:
+  - csharp
+  - vb
+  name: Sha256
+  nameWithType: AnkiMediaFile.Sha256
+  fullName: AnkiIO.AnkiMediaFile.Sha256
+  type: Property
+  source:
+    id: Sha256
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Media.cs
+    startLine: 24
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the lowercase SHA-256 digest.
+  example: []
+  syntax:
+    content: public string Sha256 { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property Sha256 As String
+  overload: AnkiIO.AnkiMediaFile.Sha256*
+- uid: AnkiIO.AnkiMediaFile.OpenReadAsync(System.Threading.CancellationToken)
+  commentId: M:AnkiIO.AnkiMediaFile.OpenReadAsync(System.Threading.CancellationToken)
+  id: OpenReadAsync(System.Threading.CancellationToken)
+  parent: AnkiIO.AnkiMediaFile
+  langs:
+  - csharp
+  - vb
+  name: OpenReadAsync(CancellationToken)
+  nameWithType: AnkiMediaFile.OpenReadAsync(CancellationToken)
+  fullName: AnkiIO.AnkiMediaFile.OpenReadAsync(System.Threading.CancellationToken)
+  type: Method
+  source:
+    id: OpenReadAsync
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Media.cs
+    startLine: 28
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Opens a new readable stream. The caller owns the returned stream.
+  example: []
+  syntax:
+    content: public ValueTask<Stream> OpenReadAsync(CancellationToken cancellationToken = default)
+    parameters:
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+      description: Cancels before the stream is opened.
+    return:
+      type: System.Threading.Tasks.ValueTask{System.IO.Stream}
+    content.vb: Public Function OpenReadAsync(cancellationToken As CancellationToken = Nothing) As ValueTask(Of Stream)
+  overload: AnkiIO.AnkiMediaFile.OpenReadAsync*
+references:
+- uid: AnkiIO
+  commentId: N:AnkiIO
+  href: AnkiIO.html
+  name: AnkiIO
+  nameWithType: AnkiIO
+  fullName: AnkiIO
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: AnkiIO.AnkiMediaFile.FileName*
+  commentId: Overload:AnkiIO.AnkiMediaFile.FileName
+  href: AnkiIO.AnkiMediaFile.html#AnkiIO_AnkiMediaFile_FileName
+  name: FileName
+  nameWithType: AnkiMediaFile.FileName
+  fullName: AnkiIO.AnkiMediaFile.FileName
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: AnkiIO.AnkiMediaFile.Length*
+  commentId: Overload:AnkiIO.AnkiMediaFile.Length
+  href: AnkiIO.AnkiMediaFile.html#AnkiIO_AnkiMediaFile_Length
+  name: Length
+  nameWithType: AnkiMediaFile.Length
+  fullName: AnkiIO.AnkiMediaFile.Length
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: AnkiIO.AnkiMediaFile.Sha256*
+  commentId: Overload:AnkiIO.AnkiMediaFile.Sha256
+  href: AnkiIO.AnkiMediaFile.html#AnkiIO_AnkiMediaFile_Sha256
+  name: Sha256
+  nameWithType: AnkiMediaFile.Sha256
+  fullName: AnkiIO.AnkiMediaFile.Sha256
+- uid: AnkiIO.AnkiMediaFile.OpenReadAsync*
+  commentId: Overload:AnkiIO.AnkiMediaFile.OpenReadAsync
+  href: AnkiIO.AnkiMediaFile.html#AnkiIO_AnkiMediaFile_OpenReadAsync_System_Threading_CancellationToken_
+  name: OpenReadAsync
+  nameWithType: AnkiMediaFile.OpenReadAsync
+  fullName: AnkiIO.AnkiMediaFile.OpenReadAsync
+- uid: System.Threading.CancellationToken
+  commentId: T:System.Threading.CancellationToken
+  parent: System.Threading
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  name: CancellationToken
+  nameWithType: CancellationToken
+  fullName: System.Threading.CancellationToken
+- uid: System.Threading.Tasks.ValueTask{System.IO.Stream}
+  commentId: T:System.Threading.Tasks.ValueTask{System.IO.Stream}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.ValueTask`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+  name: ValueTask<Stream>
+  nameWithType: ValueTask<Stream>
+  fullName: System.Threading.Tasks.ValueTask<System.IO.Stream>
+  nameWithType.vb: ValueTask(Of Stream)
+  fullName.vb: System.Threading.Tasks.ValueTask(Of System.IO.Stream)
+  name.vb: ValueTask(Of Stream)
+  spec.csharp:
+  - uid: System.Threading.Tasks.ValueTask`1
+    name: ValueTask
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+  - name: <
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.ValueTask`1
+    name: ValueTask
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: )
+- uid: System.Threading
+  commentId: N:System.Threading
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading
+  nameWithType: System.Threading
+  fullName: System.Threading
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+- uid: System.Threading.Tasks.ValueTask`1
+  commentId: T:System.Threading.Tasks.ValueTask`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+  name: ValueTask<TResult>
+  nameWithType: ValueTask<TResult>
+  fullName: System.Threading.Tasks.ValueTask<TResult>
+  nameWithType.vb: ValueTask(Of TResult)
+  fullName.vb: System.Threading.Tasks.ValueTask(Of TResult)
+  name.vb: ValueTask(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.ValueTask`1
+    name: ValueTask
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.ValueTask`1
+    name: ValueTask
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks

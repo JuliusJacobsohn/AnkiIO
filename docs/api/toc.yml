@@ -1,0 +1,103 @@
+### YamlMime:TableOfContent
+items:
+- uid: AnkiIO
+  name: AnkiIO
+  type: Namespace
+  items:
+  - uid: AnkiIO.AnkiCard
+    name: AnkiCard
+    type: Class
+  - uid: AnkiIO.AnkiCardQueue
+    name: AnkiCardQueue
+    type: Enum
+  - uid: AnkiIO.AnkiCardTemplate
+    name: AnkiCardTemplate
+    type: Class
+  - uid: AnkiIO.AnkiCardType
+    name: AnkiCardType
+    type: Enum
+  - uid: AnkiIO.AnkiCompatibilityRegistry
+    name: AnkiCompatibilityRegistry
+    type: Class
+  - uid: AnkiIO.AnkiDeck
+    name: AnkiDeck
+    type: Class
+  - uid: AnkiIO.AnkiDiagnostic
+    name: AnkiDiagnostic
+    type: Class
+  - uid: AnkiIO.AnkiDiagnosticSeverity
+    name: AnkiDiagnosticSeverity
+    type: Enum
+  - uid: AnkiIO.AnkiField
+    name: AnkiField
+    type: Class
+  - uid: AnkiIO.AnkiId
+    name: AnkiId
+    type: Class
+  - uid: AnkiIO.AnkiInstallation
+    name: AnkiInstallation
+    type: Class
+  - uid: AnkiIO.AnkiInstallationDetector
+    name: AnkiInstallationDetector
+    type: Class
+  - uid: AnkiIO.AnkiJsonSerializer
+    name: AnkiJsonSerializer
+    type: Class
+  - uid: AnkiIO.AnkiMediaCollection
+    name: AnkiMediaCollection
+    type: Class
+  - uid: AnkiIO.AnkiMediaFile
+    name: AnkiMediaFile
+    type: Class
+  - uid: AnkiIO.AnkiNote
+    name: AnkiNote
+    type: Class
+  - uid: AnkiIO.AnkiNoteType
+    name: AnkiNoteType
+    type: Class
+  - uid: AnkiIO.AnkiNoteTypeKind
+    name: AnkiNoteTypeKind
+    type: Enum
+  - uid: AnkiIO.AnkiNoteTypes
+    name: AnkiNoteTypes
+    type: Class
+  - uid: AnkiIO.AnkiPackage
+    name: AnkiPackage
+    type: Class
+  - uid: AnkiIO.AnkiPackageLimits
+    name: AnkiPackageLimits
+    type: Class
+  - uid: AnkiIO.AnkiPackageReader
+    name: AnkiPackageReader
+    type: Class
+  - uid: AnkiIO.AnkiPackageSecurityException
+    name: AnkiPackageSecurityException
+    type: Class
+  - uid: AnkiIO.AnkiPackageWriter
+    name: AnkiPackageWriter
+    type: Class
+  - uid: AnkiIO.AnkiReviewLog
+    name: AnkiReviewLog
+    type: Class
+  - uid: AnkiIO.AnkiScheduling
+    name: AnkiScheduling
+    type: Class
+  - uid: AnkiIO.AnkiValidationException
+    name: AnkiValidationException
+    type: Class
+  - uid: AnkiIO.AnkiValidationResult
+    name: AnkiValidationResult
+    type: Class
+  - uid: AnkiIO.AnkiValidator
+    name: AnkiValidator
+    type: Class
+  - uid: AnkiIO.CrowdAnkiImportResult
+    name: CrowdAnkiImportResult
+    type: Class
+  - uid: AnkiIO.CrowdAnkiJson
+    name: CrowdAnkiJson
+    type: Class
+  - uid: AnkiIO.IAnkiVersionAdapter
+    name: IAnkiVersionAdapter
+    type: Interface
+memberLayout: SamePage

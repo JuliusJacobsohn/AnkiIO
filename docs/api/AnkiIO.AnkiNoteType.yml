@@ -1,0 +1,824 @@
+### YamlMime:ManagedReference
+items:
+- uid: AnkiIO.AnkiNoteType
+  commentId: T:AnkiIO.AnkiNoteType
+  id: AnkiNoteType
+  parent: AnkiIO
+  children:
+  - AnkiIO.AnkiNoteType.#ctor(System.String,AnkiIO.AnkiNoteTypeKind,System.Nullable{System.Int64})
+  - AnkiIO.AnkiNoteType.AddField(System.String)
+  - AnkiIO.AnkiNoteType.AddTemplate(System.String,System.String,System.String)
+  - AnkiIO.AnkiNoteType.Css
+  - AnkiIO.AnkiNoteType.Fields
+  - AnkiIO.AnkiNoteType.Id
+  - AnkiIO.AnkiNoteType.Kind
+  - AnkiIO.AnkiNoteType.Name
+  - AnkiIO.AnkiNoteType.Templates
+  langs:
+  - csharp
+  - vb
+  name: AnkiNoteType
+  nameWithType: AnkiNoteType
+  fullName: AnkiIO.AnkiNoteType
+  type: Class
+  source:
+    id: AnkiNoteType
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    startLine: 40
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Defines fields, templates, and shared CSS for a family of notes.
+  remarks: Instances use controlled mutation while being assembled. Notes retain a reference to the type, so callers should finish configuring it before adding notes.
+  example: []
+  syntax:
+    content: public sealed class AnkiNoteType
+    content.vb: Public NotInheritable Class AnkiNoteType
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: AnkiIO.AnkiNoteType.#ctor(System.String,AnkiIO.AnkiNoteTypeKind,System.Nullable{System.Int64})
+  commentId: M:AnkiIO.AnkiNoteType.#ctor(System.String,AnkiIO.AnkiNoteTypeKind,System.Nullable{System.Int64})
+  id: '#ctor(System.String,AnkiIO.AnkiNoteTypeKind,System.Nullable{System.Int64})'
+  parent: AnkiIO.AnkiNoteType
+  langs:
+  - csharp
+  - vb
+  name: AnkiNoteType(string, AnkiNoteTypeKind, long?)
+  nameWithType: AnkiNoteType.AnkiNoteType(string, AnkiNoteTypeKind, long?)
+  fullName: AnkiIO.AnkiNoteType.AnkiNoteType(string, AnkiIO.AnkiNoteTypeKind, long?)
+  type: Constructor
+  source:
+    id: .ctor
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    startLine: 49
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Initializes an empty standard note type.
+  example: []
+  syntax:
+    content: public AnkiNoteType(string name, AnkiNoteTypeKind kind = AnkiNoteTypeKind.Standard, long? id = null)
+    parameters:
+    - id: name
+      type: System.String
+      description: The user-visible note type name.
+    - id: kind
+      type: AnkiIO.AnkiNoteTypeKind
+      description: The card-generation strategy.
+    - id: id
+      type: System.Nullable{System.Int64}
+      description: A stable ID, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> to generate one.
+    content.vb: Public Sub New(name As String, kind As AnkiNoteTypeKind = AnkiNoteTypeKind.Standard, id As Long? = Nothing)
+  overload: AnkiIO.AnkiNoteType.#ctor*
+  nameWithType.vb: AnkiNoteType.New(String, AnkiNoteTypeKind, Long?)
+  fullName.vb: AnkiIO.AnkiNoteType.New(String, AnkiIO.AnkiNoteTypeKind, Long?)
+  name.vb: New(String, AnkiNoteTypeKind, Long?)
+- uid: AnkiIO.AnkiNoteType.Id
+  commentId: P:AnkiIO.AnkiNoteType.Id
+  id: Id
+  parent: AnkiIO.AnkiNoteType
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: AnkiNoteType.Id
+  fullName: AnkiIO.AnkiNoteType.Id
+  type: Property
+  source:
+    id: Id
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    startLine: 58
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the stable numeric note-type identifier.
+  example: []
+  syntax:
+    content: public long Id { get; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public ReadOnly Property Id As Long
+  overload: AnkiIO.AnkiNoteType.Id*
+- uid: AnkiIO.AnkiNoteType.Name
+  commentId: P:AnkiIO.AnkiNoteType.Name
+  id: Name
+  parent: AnkiIO.AnkiNoteType
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: AnkiNoteType.Name
+  fullName: AnkiIO.AnkiNoteType.Name
+  type: Property
+  source:
+    id: Name
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    startLine: 61
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the user-visible name.
+  example: []
+  syntax:
+    content: public string Name { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property Name As String
+  overload: AnkiIO.AnkiNoteType.Name*
+- uid: AnkiIO.AnkiNoteType.Kind
+  commentId: P:AnkiIO.AnkiNoteType.Kind
+  id: Kind
+  parent: AnkiIO.AnkiNoteType
+  langs:
+  - csharp
+  - vb
+  name: Kind
+  nameWithType: AnkiNoteType.Kind
+  fullName: AnkiIO.AnkiNoteType.Kind
+  type: Property
+  source:
+    id: Kind
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    startLine: 64
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the card-generation strategy.
+  example: []
+  syntax:
+    content: public AnkiNoteTypeKind Kind { get; }
+    parameters: []
+    return:
+      type: AnkiIO.AnkiNoteTypeKind
+    content.vb: Public ReadOnly Property Kind As AnkiNoteTypeKind
+  overload: AnkiIO.AnkiNoteType.Kind*
+- uid: AnkiIO.AnkiNoteType.Css
+  commentId: P:AnkiIO.AnkiNoteType.Css
+  id: Css
+  parent: AnkiIO.AnkiNoteType
+  langs:
+  - csharp
+  - vb
+  name: Css
+  nameWithType: AnkiNoteType.Css
+  fullName: AnkiIO.AnkiNoteType.Css
+  type: Property
+  source:
+    id: Css
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    startLine: 67
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets or sets shared card CSS.
+  example: []
+  syntax:
+    content: public string Css { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Css As String
+  overload: AnkiIO.AnkiNoteType.Css*
+- uid: AnkiIO.AnkiNoteType.Fields
+  commentId: P:AnkiIO.AnkiNoteType.Fields
+  id: Fields
+  parent: AnkiIO.AnkiNoteType
+  langs:
+  - csharp
+  - vb
+  name: Fields
+  nameWithType: AnkiNoteType.Fields
+  fullName: AnkiIO.AnkiNoteType.Fields
+  type: Property
+  source:
+    id: Fields
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    startLine: 70
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets fields in their storage and display order.
+  example: []
+  syntax:
+    content: public IReadOnlyList<AnkiField> Fields { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IReadOnlyList{AnkiIO.AnkiField}
+    content.vb: Public ReadOnly Property Fields As IReadOnlyList(Of AnkiField)
+  overload: AnkiIO.AnkiNoteType.Fields*
+- uid: AnkiIO.AnkiNoteType.Templates
+  commentId: P:AnkiIO.AnkiNoteType.Templates
+  id: Templates
+  parent: AnkiIO.AnkiNoteType
+  langs:
+  - csharp
+  - vb
+  name: Templates
+  nameWithType: AnkiNoteType.Templates
+  fullName: AnkiIO.AnkiNoteType.Templates
+  type: Property
+  source:
+    id: Templates
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    startLine: 73
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets templates in card-ordinal order.
+  example: []
+  syntax:
+    content: public IReadOnlyList<AnkiCardTemplate> Templates { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IReadOnlyList{AnkiIO.AnkiCardTemplate}
+    content.vb: Public ReadOnly Property Templates As IReadOnlyList(Of AnkiCardTemplate)
+  overload: AnkiIO.AnkiNoteType.Templates*
+- uid: AnkiIO.AnkiNoteType.AddField(System.String)
+  commentId: M:AnkiIO.AnkiNoteType.AddField(System.String)
+  id: AddField(System.String)
+  parent: AnkiIO.AnkiNoteType
+  langs:
+  - csharp
+  - vb
+  name: AddField(string)
+  nameWithType: AnkiNoteType.AddField(string)
+  fullName: AnkiIO.AnkiNoteType.AddField(string)
+  type: Method
+  source:
+    id: AddField
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    startLine: 79
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Adds a uniquely named field at the end of the field order.
+  example: []
+  syntax:
+    content: public AnkiNoteType AddField(string name)
+    parameters:
+    - id: name
+      type: System.String
+      description: The field name used by notes and template references.
+    return:
+      type: AnkiIO.AnkiNoteType
+      description: This instance for fluent construction.
+    content.vb: Public Function AddField(name As String) As AnkiNoteType
+  overload: AnkiIO.AnkiNoteType.AddField*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The name is blank or duplicates a field ignoring case.
+  nameWithType.vb: AnkiNoteType.AddField(String)
+  fullName.vb: AnkiIO.AnkiNoteType.AddField(String)
+  name.vb: AddField(String)
+- uid: AnkiIO.AnkiNoteType.AddTemplate(System.String,System.String,System.String)
+  commentId: M:AnkiIO.AnkiNoteType.AddTemplate(System.String,System.String,System.String)
+  id: AddTemplate(System.String,System.String,System.String)
+  parent: AnkiIO.AnkiNoteType
+  langs:
+  - csharp
+  - vb
+  name: AddTemplate(string, string, string)
+  nameWithType: AnkiNoteType.AddTemplate(string, string, string)
+  fullName: AnkiIO.AnkiNoteType.AddTemplate(string, string, string)
+  type: Method
+  source:
+    id: AddTemplate
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    startLine: 96
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Adds a card template at the next ordinal.
+  example: []
+  syntax:
+    content: public AnkiNoteType AddTemplate(string name, string questionFormat, string answerFormat)
+    parameters:
+    - id: name
+      type: System.String
+      description: The unique template name.
+    - id: questionFormat
+      type: System.String
+      description: Anki template markup for the front.
+    - id: answerFormat
+      type: System.String
+      description: Anki template markup for the back.
+    return:
+      type: AnkiIO.AnkiNoteType
+      description: This instance for fluent construction.
+    content.vb: Public Function AddTemplate(name As String, questionFormat As String, answerFormat As String) As AnkiNoteType
+  overload: AnkiIO.AnkiNoteType.AddTemplate*
+  nameWithType.vb: AnkiNoteType.AddTemplate(String, String, String)
+  fullName.vb: AnkiIO.AnkiNoteType.AddTemplate(String, String, String)
+  name.vb: AddTemplate(String, String, String)
+references:
+- uid: AnkiIO
+  commentId: N:AnkiIO
+  href: AnkiIO.html
+  name: AnkiIO
+  nameWithType: AnkiIO
+  fullName: AnkiIO
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: AnkiIO.AnkiNoteType.#ctor*
+  commentId: Overload:AnkiIO.AnkiNoteType.#ctor
+  href: AnkiIO.AnkiNoteType.html#AnkiIO_AnkiNoteType__ctor_System_String_AnkiIO_AnkiNoteTypeKind_System_Nullable_System_Int64__
+  name: AnkiNoteType
+  nameWithType: AnkiNoteType.AnkiNoteType
+  fullName: AnkiIO.AnkiNoteType.AnkiNoteType
+  nameWithType.vb: AnkiNoteType.New
+  fullName.vb: AnkiIO.AnkiNoteType.New
+  name.vb: New
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: AnkiIO.AnkiNoteTypeKind
+  commentId: T:AnkiIO.AnkiNoteTypeKind
+  parent: AnkiIO
+  href: AnkiIO.AnkiNoteTypeKind.html
+  name: AnkiNoteTypeKind
+  nameWithType: AnkiNoteTypeKind
+  fullName: AnkiIO.AnkiNoteTypeKind
+- uid: System.Nullable{System.Int64}
+  commentId: T:System.Nullable{System.Int64}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long?
+  nameWithType: long?
+  fullName: long?
+  nameWithType.vb: Long?
+  fullName.vb: Long?
+  name.vb: Long?
+  spec.csharp:
+  - uid: System.Int64
+    name: long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: '?'
+  spec.vb:
+  - uid: System.Int64
+    name: Long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: AnkiIO.AnkiNoteType.Id*
+  commentId: Overload:AnkiIO.AnkiNoteType.Id
+  href: AnkiIO.AnkiNoteType.html#AnkiIO_AnkiNoteType_Id
+  name: Id
+  nameWithType: AnkiNoteType.Id
+  fullName: AnkiIO.AnkiNoteType.Id
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: AnkiIO.AnkiNoteType.Name*
+  commentId: Overload:AnkiIO.AnkiNoteType.Name
+  href: AnkiIO.AnkiNoteType.html#AnkiIO_AnkiNoteType_Name
+  name: Name
+  nameWithType: AnkiNoteType.Name
+  fullName: AnkiIO.AnkiNoteType.Name
+- uid: AnkiIO.AnkiNoteType.Kind*
+  commentId: Overload:AnkiIO.AnkiNoteType.Kind
+  href: AnkiIO.AnkiNoteType.html#AnkiIO_AnkiNoteType_Kind
+  name: Kind
+  nameWithType: AnkiNoteType.Kind
+  fullName: AnkiIO.AnkiNoteType.Kind
+- uid: AnkiIO.AnkiNoteType.Css*
+  commentId: Overload:AnkiIO.AnkiNoteType.Css
+  href: AnkiIO.AnkiNoteType.html#AnkiIO_AnkiNoteType_Css
+  name: Css
+  nameWithType: AnkiNoteType.Css
+  fullName: AnkiIO.AnkiNoteType.Css
+- uid: AnkiIO.AnkiNoteType.Fields*
+  commentId: Overload:AnkiIO.AnkiNoteType.Fields
+  href: AnkiIO.AnkiNoteType.html#AnkiIO_AnkiNoteType_Fields
+  name: Fields
+  nameWithType: AnkiNoteType.Fields
+  fullName: AnkiIO.AnkiNoteType.Fields
+- uid: System.Collections.Generic.IReadOnlyList{AnkiIO.AnkiField}
+  commentId: T:System.Collections.Generic.IReadOnlyList{AnkiIO.AnkiField}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<AnkiField>
+  nameWithType: IReadOnlyList<AnkiField>
+  fullName: System.Collections.Generic.IReadOnlyList<AnkiIO.AnkiField>
+  nameWithType.vb: IReadOnlyList(Of AnkiField)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of AnkiIO.AnkiField)
+  name.vb: IReadOnlyList(Of AnkiField)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - uid: AnkiIO.AnkiField
+    name: AnkiField
+    href: AnkiIO.AnkiField.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: AnkiIO.AnkiField
+    name: AnkiField
+    href: AnkiIO.AnkiField.html
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyList`1
+  commentId: T:System.Collections.Generic.IReadOnlyList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<T>
+  nameWithType: IReadOnlyList<T>
+  fullName: System.Collections.Generic.IReadOnlyList<T>
+  nameWithType.vb: IReadOnlyList(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of T)
+  name.vb: IReadOnlyList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: AnkiIO.AnkiNoteType.Templates*
+  commentId: Overload:AnkiIO.AnkiNoteType.Templates
+  href: AnkiIO.AnkiNoteType.html#AnkiIO_AnkiNoteType_Templates
+  name: Templates
+  nameWithType: AnkiNoteType.Templates
+  fullName: AnkiIO.AnkiNoteType.Templates
+- uid: System.Collections.Generic.IReadOnlyList{AnkiIO.AnkiCardTemplate}
+  commentId: T:System.Collections.Generic.IReadOnlyList{AnkiIO.AnkiCardTemplate}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<AnkiCardTemplate>
+  nameWithType: IReadOnlyList<AnkiCardTemplate>
+  fullName: System.Collections.Generic.IReadOnlyList<AnkiIO.AnkiCardTemplate>
+  nameWithType.vb: IReadOnlyList(Of AnkiCardTemplate)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of AnkiIO.AnkiCardTemplate)
+  name.vb: IReadOnlyList(Of AnkiCardTemplate)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - uid: AnkiIO.AnkiCardTemplate
+    name: AnkiCardTemplate
+    href: AnkiIO.AnkiCardTemplate.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: AnkiIO.AnkiCardTemplate
+    name: AnkiCardTemplate
+    href: AnkiIO.AnkiCardTemplate.html
+  - name: )
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentexception
+  name: ArgumentException
+  nameWithType: ArgumentException
+  fullName: System.ArgumentException
+- uid: AnkiIO.AnkiNoteType.AddField*
+  commentId: Overload:AnkiIO.AnkiNoteType.AddField
+  href: AnkiIO.AnkiNoteType.html#AnkiIO_AnkiNoteType_AddField_System_String_
+  name: AddField
+  nameWithType: AnkiNoteType.AddField
+  fullName: AnkiIO.AnkiNoteType.AddField
+- uid: AnkiIO.AnkiNoteType
+  commentId: T:AnkiIO.AnkiNoteType
+  parent: AnkiIO
+  href: AnkiIO.AnkiNoteType.html
+  name: AnkiNoteType
+  nameWithType: AnkiNoteType
+  fullName: AnkiIO.AnkiNoteType
+- uid: AnkiIO.AnkiNoteType.AddTemplate*
+  commentId: Overload:AnkiIO.AnkiNoteType.AddTemplate
+  href: AnkiIO.AnkiNoteType.html#AnkiIO_AnkiNoteType_AddTemplate_System_String_System_String_System_String_
+  name: AddTemplate
+  nameWithType: AnkiNoteType.AddTemplate
+  fullName: AnkiIO.AnkiNoteType.AddTemplate

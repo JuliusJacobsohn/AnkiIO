@@ -1,0 +1,90 @@
+### YamlMime:ManagedReference
+items:
+- uid: AnkiIO.AnkiNoteTypeKind
+  commentId: T:AnkiIO.AnkiNoteTypeKind
+  id: AnkiNoteTypeKind
+  parent: AnkiIO
+  children:
+  - AnkiIO.AnkiNoteTypeKind.Cloze
+  - AnkiIO.AnkiNoteTypeKind.Standard
+  langs:
+  - csharp
+  - vb
+  name: AnkiNoteTypeKind
+  nameWithType: AnkiNoteTypeKind
+  fullName: AnkiIO.AnkiNoteTypeKind
+  type: Enum
+  source:
+    id: AnkiNoteTypeKind
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    startLine: 3
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Identifies how a note type generates cards.
+  example: []
+  syntax:
+    content: public enum AnkiNoteTypeKind
+    content.vb: Public Enum AnkiNoteTypeKind
+- uid: AnkiIO.AnkiNoteTypeKind.Standard
+  commentId: F:AnkiIO.AnkiNoteTypeKind.Standard
+  id: Standard
+  parent: AnkiIO.AnkiNoteTypeKind
+  langs:
+  - csharp
+  - vb
+  name: Standard
+  nameWithType: AnkiNoteTypeKind.Standard
+  fullName: AnkiIO.AnkiNoteTypeKind.Standard
+  type: Field
+  source:
+    id: Standard
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    startLine: 6
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Each applicable template produces one card.
+  example: []
+  syntax:
+    content: Standard = 0
+    return:
+      type: AnkiIO.AnkiNoteTypeKind
+- uid: AnkiIO.AnkiNoteTypeKind.Cloze
+  commentId: F:AnkiIO.AnkiNoteTypeKind.Cloze
+  id: Cloze
+  parent: AnkiIO.AnkiNoteTypeKind
+  langs:
+  - csharp
+  - vb
+  name: Cloze
+  nameWithType: AnkiNoteTypeKind.Cloze
+  fullName: AnkiIO.AnkiNoteTypeKind.Cloze
+  type: Field
+  source:
+    id: Cloze
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    startLine: 9
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Cloze indexes in the text produce cards.
+  example: []
+  syntax:
+    content: Cloze = 1
+    return:
+      type: AnkiIO.AnkiNoteTypeKind
+references:
+- uid: AnkiIO
+  commentId: N:AnkiIO
+  href: AnkiIO.html
+  name: AnkiIO
+  nameWithType: AnkiIO
+  fullName: AnkiIO
+- uid: AnkiIO.AnkiNoteTypeKind
+  commentId: T:AnkiIO.AnkiNoteTypeKind
+  parent: AnkiIO
+  href: AnkiIO.AnkiNoteTypeKind.html
+  name: AnkiNoteTypeKind
+  nameWithType: AnkiNoteTypeKind
+  fullName: AnkiIO.AnkiNoteTypeKind

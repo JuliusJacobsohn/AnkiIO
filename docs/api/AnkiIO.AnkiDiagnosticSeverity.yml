@@ -1,0 +1,115 @@
+### YamlMime:ManagedReference
+items:
+- uid: AnkiIO.AnkiDiagnosticSeverity
+  commentId: T:AnkiIO.AnkiDiagnosticSeverity
+  id: AnkiDiagnosticSeverity
+  parent: AnkiIO
+  children:
+  - AnkiIO.AnkiDiagnosticSeverity.Error
+  - AnkiIO.AnkiDiagnosticSeverity.Information
+  - AnkiIO.AnkiDiagnosticSeverity.Warning
+  langs:
+  - csharp
+  - vb
+  name: AnkiDiagnosticSeverity
+  nameWithType: AnkiDiagnosticSeverity
+  fullName: AnkiIO.AnkiDiagnosticSeverity
+  type: Enum
+  source:
+    id: AnkiDiagnosticSeverity
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    startLine: 5
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Indicates how strongly a diagnostic should affect an operation.
+  example: []
+  syntax:
+    content: public enum AnkiDiagnosticSeverity
+    content.vb: Public Enum AnkiDiagnosticSeverity
+- uid: AnkiIO.AnkiDiagnosticSeverity.Information
+  commentId: F:AnkiIO.AnkiDiagnosticSeverity.Information
+  id: Information
+  parent: AnkiIO.AnkiDiagnosticSeverity
+  langs:
+  - csharp
+  - vb
+  name: Information
+  nameWithType: AnkiDiagnosticSeverity.Information
+  fullName: AnkiIO.AnkiDiagnosticSeverity.Information
+  type: Field
+  source:
+    id: Information
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    startLine: 8
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Informational compatibility or preservation detail.
+  example: []
+  syntax:
+    content: Information = 0
+    return:
+      type: AnkiIO.AnkiDiagnosticSeverity
+- uid: AnkiIO.AnkiDiagnosticSeverity.Warning
+  commentId: F:AnkiIO.AnkiDiagnosticSeverity.Warning
+  id: Warning
+  parent: AnkiIO.AnkiDiagnosticSeverity
+  langs:
+  - csharp
+  - vb
+  name: Warning
+  nameWithType: AnkiDiagnosticSeverity.Warning
+  fullName: AnkiIO.AnkiDiagnosticSeverity.Warning
+  type: Field
+  source:
+    id: Warning
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    startLine: 10
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Suspicious content that can still be represented.
+  example: []
+  syntax:
+    content: Warning = 1
+    return:
+      type: AnkiIO.AnkiDiagnosticSeverity
+- uid: AnkiIO.AnkiDiagnosticSeverity.Error
+  commentId: F:AnkiIO.AnkiDiagnosticSeverity.Error
+  id: Error
+  parent: AnkiIO.AnkiDiagnosticSeverity
+  langs:
+  - csharp
+  - vb
+  name: Error
+  nameWithType: AnkiDiagnosticSeverity.Error
+  fullName: AnkiIO.AnkiDiagnosticSeverity.Error
+  type: Field
+  source:
+    id: Error
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    startLine: 12
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Invalid content that prevents a safe write.
+  example: []
+  syntax:
+    content: Error = 2
+    return:
+      type: AnkiIO.AnkiDiagnosticSeverity
+references:
+- uid: AnkiIO
+  commentId: N:AnkiIO
+  href: AnkiIO.html
+  name: AnkiIO
+  nameWithType: AnkiIO
+  fullName: AnkiIO
+- uid: AnkiIO.AnkiDiagnosticSeverity
+  commentId: T:AnkiIO.AnkiDiagnosticSeverity
+  parent: AnkiIO
+  href: AnkiIO.AnkiDiagnosticSeverity.html
+  name: AnkiDiagnosticSeverity
+  nameWithType: AnkiDiagnosticSeverity
+  fullName: AnkiIO.AnkiDiagnosticSeverity

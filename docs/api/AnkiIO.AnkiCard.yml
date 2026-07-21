@@ -1,0 +1,668 @@
+### YamlMime:ManagedReference
+items:
+- uid: AnkiIO.AnkiCard
+  commentId: T:AnkiIO.AnkiCard
+  id: AnkiCard
+  parent: AnkiIO
+  children:
+  - AnkiIO.AnkiCard.#ctor(System.Int64,System.Int64,System.Int64,System.Int32,AnkiIO.AnkiScheduling)
+  - AnkiIO.AnkiCard.DeckId
+  - AnkiIO.AnkiCard.Flag
+  - AnkiIO.AnkiCard.Id
+  - AnkiIO.AnkiCard.NoteId
+  - AnkiIO.AnkiCard.ReviewHistory
+  - AnkiIO.AnkiCard.Scheduling
+  - AnkiIO.AnkiCard.TemplateOrdinal
+  langs:
+  - csharp
+  - vb
+  name: AnkiCard
+  nameWithType: AnkiCard
+  fullName: AnkiIO.AnkiCard
+  type: Class
+  source:
+    id: AnkiCard
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    startLine: 209
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Represents a study prompt generated from a note template.
+  example: []
+  syntax:
+    content: public sealed class AnkiCard
+    content.vb: Public NotInheritable Class AnkiCard
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: AnkiIO.AnkiCard.#ctor(System.Int64,System.Int64,System.Int64,System.Int32,AnkiIO.AnkiScheduling)
+  commentId: M:AnkiIO.AnkiCard.#ctor(System.Int64,System.Int64,System.Int64,System.Int32,AnkiIO.AnkiScheduling)
+  id: '#ctor(System.Int64,System.Int64,System.Int64,System.Int32,AnkiIO.AnkiScheduling)'
+  parent: AnkiIO.AnkiCard
+  langs:
+  - csharp
+  - vb
+  name: AnkiCard(long, long, long, int, AnkiScheduling)
+  nameWithType: AnkiCard.AnkiCard(long, long, long, int, AnkiScheduling)
+  fullName: AnkiIO.AnkiCard.AnkiCard(long, long, long, int, AnkiIO.AnkiScheduling)
+  type: Constructor
+  source:
+    id: .ctor
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    startLine: 212
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Initializes a card for advanced import and adapter scenarios.
+  example: []
+  syntax:
+    content: public AnkiCard(long id, long noteId, long deckId, int templateOrdinal, AnkiScheduling scheduling)
+    parameters:
+    - id: id
+      type: System.Int64
+    - id: noteId
+      type: System.Int64
+    - id: deckId
+      type: System.Int64
+    - id: templateOrdinal
+      type: System.Int32
+    - id: scheduling
+      type: AnkiIO.AnkiScheduling
+    content.vb: Public Sub New(id As Long, noteId As Long, deckId As Long, templateOrdinal As Integer, scheduling As AnkiScheduling)
+  overload: AnkiIO.AnkiCard.#ctor*
+  nameWithType.vb: AnkiCard.New(Long, Long, Long, Integer, AnkiScheduling)
+  fullName.vb: AnkiIO.AnkiCard.New(Long, Long, Long, Integer, AnkiIO.AnkiScheduling)
+  name.vb: New(Long, Long, Long, Integer, AnkiScheduling)
+- uid: AnkiIO.AnkiCard.Id
+  commentId: P:AnkiIO.AnkiCard.Id
+  id: Id
+  parent: AnkiIO.AnkiCard
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: AnkiCard.Id
+  fullName: AnkiIO.AnkiCard.Id
+  type: Property
+  source:
+    id: Id
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    startLine: 224
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the stable numeric card identifier.
+  example: []
+  syntax:
+    content: public long Id { get; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public ReadOnly Property Id As Long
+  overload: AnkiIO.AnkiCard.Id*
+- uid: AnkiIO.AnkiCard.NoteId
+  commentId: P:AnkiIO.AnkiCard.NoteId
+  id: NoteId
+  parent: AnkiIO.AnkiCard
+  langs:
+  - csharp
+  - vb
+  name: NoteId
+  nameWithType: AnkiCard.NoteId
+  fullName: AnkiIO.AnkiCard.NoteId
+  type: Property
+  source:
+    id: NoteId
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    startLine: 227
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the owning note identifier.
+  example: []
+  syntax:
+    content: public long NoteId { get; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public ReadOnly Property NoteId As Long
+  overload: AnkiIO.AnkiCard.NoteId*
+- uid: AnkiIO.AnkiCard.DeckId
+  commentId: P:AnkiIO.AnkiCard.DeckId
+  id: DeckId
+  parent: AnkiIO.AnkiCard
+  langs:
+  - csharp
+  - vb
+  name: DeckId
+  nameWithType: AnkiCard.DeckId
+  fullName: AnkiIO.AnkiCard.DeckId
+  type: Property
+  source:
+    id: DeckId
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    startLine: 230
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets or sets the deck in which this card appears.
+  example: []
+  syntax:
+    content: public long DeckId { get; set; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public Property DeckId As Long
+  overload: AnkiIO.AnkiCard.DeckId*
+- uid: AnkiIO.AnkiCard.TemplateOrdinal
+  commentId: P:AnkiIO.AnkiCard.TemplateOrdinal
+  id: TemplateOrdinal
+  parent: AnkiIO.AnkiCard
+  langs:
+  - csharp
+  - vb
+  name: TemplateOrdinal
+  nameWithType: AnkiCard.TemplateOrdinal
+  fullName: AnkiIO.AnkiCard.TemplateOrdinal
+  type: Property
+  source:
+    id: TemplateOrdinal
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    startLine: 233
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets the template ordinal, or zero-based cloze index.
+  example: []
+  syntax:
+    content: public int TemplateOrdinal { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property TemplateOrdinal As Integer
+  overload: AnkiIO.AnkiCard.TemplateOrdinal*
+- uid: AnkiIO.AnkiCard.Scheduling
+  commentId: P:AnkiIO.AnkiCard.Scheduling
+  id: Scheduling
+  parent: AnkiIO.AnkiCard
+  langs:
+  - csharp
+  - vb
+  name: Scheduling
+  nameWithType: AnkiCard.Scheduling
+  fullName: AnkiIO.AnkiCard.Scheduling
+  type: Property
+  source:
+    id: Scheduling
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    startLine: 236
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets or sets validated scheduler state.
+  example: []
+  syntax:
+    content: public AnkiScheduling Scheduling { get; set; }
+    parameters: []
+    return:
+      type: AnkiIO.AnkiScheduling
+    content.vb: Public Property Scheduling As AnkiScheduling
+  overload: AnkiIO.AnkiCard.Scheduling*
+- uid: AnkiIO.AnkiCard.Flag
+  commentId: P:AnkiIO.AnkiCard.Flag
+  id: Flag
+  parent: AnkiIO.AnkiCard
+  langs:
+  - csharp
+  - vb
+  name: Flag
+  nameWithType: AnkiCard.Flag
+  fullName: AnkiIO.AnkiCard.Flag
+  type: Property
+  source:
+    id: Flag
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    startLine: 239
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets or sets Anki's low three-bit color flag value.
+  example: []
+  syntax:
+    content: public int Flag { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Flag As Integer
+  overload: AnkiIO.AnkiCard.Flag*
+- uid: AnkiIO.AnkiCard.ReviewHistory
+  commentId: P:AnkiIO.AnkiCard.ReviewHistory
+  id: ReviewHistory
+  parent: AnkiIO.AnkiCard
+  langs:
+  - csharp
+  - vb
+  name: ReviewHistory
+  nameWithType: AnkiCard.ReviewHistory
+  fullName: AnkiIO.AnkiCard.ReviewHistory
+  type: Property
+  source:
+    id: ReviewHistory
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    startLine: 242
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Gets review-history records retained for round trips.
+  example: []
+  syntax:
+    content: public IList<AnkiReviewLog> ReviewHistory { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IList{AnkiIO.AnkiReviewLog}
+    content.vb: Public ReadOnly Property ReviewHistory As IList(Of AnkiReviewLog)
+  overload: AnkiIO.AnkiCard.ReviewHistory*
+references:
+- uid: AnkiIO
+  commentId: N:AnkiIO
+  href: AnkiIO.html
+  name: AnkiIO
+  nameWithType: AnkiIO
+  fullName: AnkiIO
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: AnkiIO.AnkiCard.#ctor*
+  commentId: Overload:AnkiIO.AnkiCard.#ctor
+  href: AnkiIO.AnkiCard.html#AnkiIO_AnkiCard__ctor_System_Int64_System_Int64_System_Int64_System_Int32_AnkiIO_AnkiScheduling_
+  name: AnkiCard
+  nameWithType: AnkiCard.AnkiCard
+  fullName: AnkiIO.AnkiCard.AnkiCard
+  nameWithType.vb: AnkiCard.New
+  fullName.vb: AnkiIO.AnkiCard.New
+  name.vb: New
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: AnkiIO.AnkiScheduling
+  commentId: T:AnkiIO.AnkiScheduling
+  parent: AnkiIO
+  href: AnkiIO.AnkiScheduling.html
+  name: AnkiScheduling
+  nameWithType: AnkiScheduling
+  fullName: AnkiIO.AnkiScheduling
+- uid: AnkiIO.AnkiCard.Id*
+  commentId: Overload:AnkiIO.AnkiCard.Id
+  href: AnkiIO.AnkiCard.html#AnkiIO_AnkiCard_Id
+  name: Id
+  nameWithType: AnkiCard.Id
+  fullName: AnkiIO.AnkiCard.Id
+- uid: AnkiIO.AnkiCard.NoteId*
+  commentId: Overload:AnkiIO.AnkiCard.NoteId
+  href: AnkiIO.AnkiCard.html#AnkiIO_AnkiCard_NoteId
+  name: NoteId
+  nameWithType: AnkiCard.NoteId
+  fullName: AnkiIO.AnkiCard.NoteId
+- uid: AnkiIO.AnkiCard.DeckId*
+  commentId: Overload:AnkiIO.AnkiCard.DeckId
+  href: AnkiIO.AnkiCard.html#AnkiIO_AnkiCard_DeckId
+  name: DeckId
+  nameWithType: AnkiCard.DeckId
+  fullName: AnkiIO.AnkiCard.DeckId
+- uid: AnkiIO.AnkiCard.TemplateOrdinal*
+  commentId: Overload:AnkiIO.AnkiCard.TemplateOrdinal
+  href: AnkiIO.AnkiCard.html#AnkiIO_AnkiCard_TemplateOrdinal
+  name: TemplateOrdinal
+  nameWithType: AnkiCard.TemplateOrdinal
+  fullName: AnkiIO.AnkiCard.TemplateOrdinal
+- uid: AnkiIO.AnkiCard.Scheduling*
+  commentId: Overload:AnkiIO.AnkiCard.Scheduling
+  href: AnkiIO.AnkiCard.html#AnkiIO_AnkiCard_Scheduling
+  name: Scheduling
+  nameWithType: AnkiCard.Scheduling
+  fullName: AnkiIO.AnkiCard.Scheduling
+- uid: AnkiIO.AnkiCard.Flag*
+  commentId: Overload:AnkiIO.AnkiCard.Flag
+  href: AnkiIO.AnkiCard.html#AnkiIO_AnkiCard_Flag
+  name: Flag
+  nameWithType: AnkiCard.Flag
+  fullName: AnkiIO.AnkiCard.Flag
+- uid: AnkiIO.AnkiCard.ReviewHistory*
+  commentId: Overload:AnkiIO.AnkiCard.ReviewHistory
+  href: AnkiIO.AnkiCard.html#AnkiIO_AnkiCard_ReviewHistory
+  name: ReviewHistory
+  nameWithType: AnkiCard.ReviewHistory
+  fullName: AnkiIO.AnkiCard.ReviewHistory
+- uid: System.Collections.Generic.IList{AnkiIO.AnkiReviewLog}
+  commentId: T:System.Collections.Generic.IList{AnkiIO.AnkiReviewLog}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<AnkiReviewLog>
+  nameWithType: IList<AnkiReviewLog>
+  fullName: System.Collections.Generic.IList<AnkiIO.AnkiReviewLog>
+  nameWithType.vb: IList(Of AnkiReviewLog)
+  fullName.vb: System.Collections.Generic.IList(Of AnkiIO.AnkiReviewLog)
+  name.vb: IList(Of AnkiReviewLog)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - uid: AnkiIO.AnkiReviewLog
+    name: AnkiReviewLog
+    href: AnkiIO.AnkiReviewLog.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: AnkiIO.AnkiReviewLog
+    name: AnkiReviewLog
+    href: AnkiIO.AnkiReviewLog.html
+  - name: )
+- uid: System.Collections.Generic.IList`1
+  commentId: T:System.Collections.Generic.IList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<T>
+  nameWithType: IList<T>
+  fullName: System.Collections.Generic.IList<T>
+  nameWithType.vb: IList(Of T)
+  fullName.vb: System.Collections.Generic.IList(Of T)
+  name.vb: IList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic

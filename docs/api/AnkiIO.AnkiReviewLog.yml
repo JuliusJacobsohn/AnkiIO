@@ -1,0 +1,666 @@
+### YamlMime:ManagedReference
+items:
+- uid: AnkiIO.AnkiReviewLog
+  commentId: T:AnkiIO.AnkiReviewLog
+  id: AnkiReviewLog
+  parent: AnkiIO
+  children:
+  - AnkiIO.AnkiReviewLog.#ctor(System.Int64,System.DateTimeOffset,System.Int32,System.Int32,System.Int32,System.Int32,System.TimeSpan,System.Int32)
+  - AnkiIO.AnkiReviewLog.AnswerTime
+  - AnkiIO.AnkiReviewLog.Ease
+  - AnkiIO.AnkiReviewLog.EaseFactor
+  - AnkiIO.AnkiReviewLog.Id
+  - AnkiIO.AnkiReviewLog.Interval
+  - AnkiIO.AnkiReviewLog.PreviousInterval
+  - AnkiIO.AnkiReviewLog.ReviewType
+  - AnkiIO.AnkiReviewLog.ReviewedAt
+  langs:
+  - csharp
+  - vb
+  name: AnkiReviewLog
+  nameWithType: AnkiReviewLog
+  fullName: AnkiIO.AnkiReviewLog
+  type: Class
+  source:
+    id: AnkiReviewLog
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 78
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Represents a review-history entry without conflating it with current scheduling state.
+  example: []
+  syntax:
+    content: 'public sealed record AnkiReviewLog : IEquatable<AnkiReviewLog>'
+    content.vb: Public NotInheritable Class AnkiReviewLog Implements IEquatable(Of AnkiReviewLog)
+  inheritance:
+  - System.Object
+  implements:
+  - System.IEquatable{AnkiIO.AnkiReviewLog}
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: AnkiIO.AnkiReviewLog.#ctor(System.Int64,System.DateTimeOffset,System.Int32,System.Int32,System.Int32,System.Int32,System.TimeSpan,System.Int32)
+  commentId: M:AnkiIO.AnkiReviewLog.#ctor(System.Int64,System.DateTimeOffset,System.Int32,System.Int32,System.Int32,System.Int32,System.TimeSpan,System.Int32)
+  id: '#ctor(System.Int64,System.DateTimeOffset,System.Int32,System.Int32,System.Int32,System.Int32,System.TimeSpan,System.Int32)'
+  parent: AnkiIO.AnkiReviewLog
+  langs:
+  - csharp
+  - vb
+  name: AnkiReviewLog(long, DateTimeOffset, int, int, int, int, TimeSpan, int)
+  nameWithType: AnkiReviewLog.AnkiReviewLog(long, DateTimeOffset, int, int, int, int, TimeSpan, int)
+  fullName: AnkiIO.AnkiReviewLog.AnkiReviewLog(long, System.DateTimeOffset, int, int, int, int, System.TimeSpan, int)
+  type: Constructor
+  source:
+    id: .ctor
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 78
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Represents a review-history entry without conflating it with current scheduling state.
+  example: []
+  syntax:
+    content: public AnkiReviewLog(long Id, DateTimeOffset ReviewedAt, int Ease, int Interval, int PreviousInterval, int EaseFactor, TimeSpan AnswerTime, int ReviewType)
+    parameters:
+    - id: Id
+      type: System.Int64
+    - id: ReviewedAt
+      type: System.DateTimeOffset
+    - id: Ease
+      type: System.Int32
+    - id: Interval
+      type: System.Int32
+    - id: PreviousInterval
+      type: System.Int32
+    - id: EaseFactor
+      type: System.Int32
+    - id: AnswerTime
+      type: System.TimeSpan
+    - id: ReviewType
+      type: System.Int32
+    content.vb: Public Sub New(Id As Long, ReviewedAt As DateTimeOffset, Ease As Integer, Interval As Integer, PreviousInterval As Integer, EaseFactor As Integer, AnswerTime As TimeSpan, ReviewType As Integer)
+  overload: AnkiIO.AnkiReviewLog.#ctor*
+  nameWithType.vb: AnkiReviewLog.New(Long, DateTimeOffset, Integer, Integer, Integer, Integer, TimeSpan, Integer)
+  fullName.vb: AnkiIO.AnkiReviewLog.New(Long, System.DateTimeOffset, Integer, Integer, Integer, Integer, System.TimeSpan, Integer)
+  name.vb: New(Long, DateTimeOffset, Integer, Integer, Integer, Integer, TimeSpan, Integer)
+- uid: AnkiIO.AnkiReviewLog.Id
+  commentId: P:AnkiIO.AnkiReviewLog.Id
+  id: Id
+  parent: AnkiIO.AnkiReviewLog
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: AnkiReviewLog.Id
+  fullName: AnkiIO.AnkiReviewLog.Id
+  type: Property
+  source:
+    id: Id
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 79
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public long Id { get; init; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public Property Id As Long
+  overload: AnkiIO.AnkiReviewLog.Id*
+- uid: AnkiIO.AnkiReviewLog.ReviewedAt
+  commentId: P:AnkiIO.AnkiReviewLog.ReviewedAt
+  id: ReviewedAt
+  parent: AnkiIO.AnkiReviewLog
+  langs:
+  - csharp
+  - vb
+  name: ReviewedAt
+  nameWithType: AnkiReviewLog.ReviewedAt
+  fullName: AnkiIO.AnkiReviewLog.ReviewedAt
+  type: Property
+  source:
+    id: ReviewedAt
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 80
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public DateTimeOffset ReviewedAt { get; init; }
+    parameters: []
+    return:
+      type: System.DateTimeOffset
+    content.vb: Public Property ReviewedAt As DateTimeOffset
+  overload: AnkiIO.AnkiReviewLog.ReviewedAt*
+- uid: AnkiIO.AnkiReviewLog.Ease
+  commentId: P:AnkiIO.AnkiReviewLog.Ease
+  id: Ease
+  parent: AnkiIO.AnkiReviewLog
+  langs:
+  - csharp
+  - vb
+  name: Ease
+  nameWithType: AnkiReviewLog.Ease
+  fullName: AnkiIO.AnkiReviewLog.Ease
+  type: Property
+  source:
+    id: Ease
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 81
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public int Ease { get; init; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Ease As Integer
+  overload: AnkiIO.AnkiReviewLog.Ease*
+- uid: AnkiIO.AnkiReviewLog.Interval
+  commentId: P:AnkiIO.AnkiReviewLog.Interval
+  id: Interval
+  parent: AnkiIO.AnkiReviewLog
+  langs:
+  - csharp
+  - vb
+  name: Interval
+  nameWithType: AnkiReviewLog.Interval
+  fullName: AnkiIO.AnkiReviewLog.Interval
+  type: Property
+  source:
+    id: Interval
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 82
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public int Interval { get; init; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Interval As Integer
+  overload: AnkiIO.AnkiReviewLog.Interval*
+- uid: AnkiIO.AnkiReviewLog.PreviousInterval
+  commentId: P:AnkiIO.AnkiReviewLog.PreviousInterval
+  id: PreviousInterval
+  parent: AnkiIO.AnkiReviewLog
+  langs:
+  - csharp
+  - vb
+  name: PreviousInterval
+  nameWithType: AnkiReviewLog.PreviousInterval
+  fullName: AnkiIO.AnkiReviewLog.PreviousInterval
+  type: Property
+  source:
+    id: PreviousInterval
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 83
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public int PreviousInterval { get; init; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property PreviousInterval As Integer
+  overload: AnkiIO.AnkiReviewLog.PreviousInterval*
+- uid: AnkiIO.AnkiReviewLog.EaseFactor
+  commentId: P:AnkiIO.AnkiReviewLog.EaseFactor
+  id: EaseFactor
+  parent: AnkiIO.AnkiReviewLog
+  langs:
+  - csharp
+  - vb
+  name: EaseFactor
+  nameWithType: AnkiReviewLog.EaseFactor
+  fullName: AnkiIO.AnkiReviewLog.EaseFactor
+  type: Property
+  source:
+    id: EaseFactor
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 84
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public int EaseFactor { get; init; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property EaseFactor As Integer
+  overload: AnkiIO.AnkiReviewLog.EaseFactor*
+- uid: AnkiIO.AnkiReviewLog.AnswerTime
+  commentId: P:AnkiIO.AnkiReviewLog.AnswerTime
+  id: AnswerTime
+  parent: AnkiIO.AnkiReviewLog
+  langs:
+  - csharp
+  - vb
+  name: AnswerTime
+  nameWithType: AnkiReviewLog.AnswerTime
+  fullName: AnkiIO.AnkiReviewLog.AnswerTime
+  type: Property
+  source:
+    id: AnswerTime
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 85
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public TimeSpan AnswerTime { get; init; }
+    parameters: []
+    return:
+      type: System.TimeSpan
+    content.vb: Public Property AnswerTime As TimeSpan
+  overload: AnkiIO.AnkiReviewLog.AnswerTime*
+- uid: AnkiIO.AnkiReviewLog.ReviewType
+  commentId: P:AnkiIO.AnkiReviewLog.ReviewType
+  id: ReviewType
+  parent: AnkiIO.AnkiReviewLog
+  langs:
+  - csharp
+  - vb
+  name: ReviewType
+  nameWithType: AnkiReviewLog.ReviewType
+  fullName: AnkiIO.AnkiReviewLog.ReviewType
+  type: Property
+  source:
+    id: ReviewType
+    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    startLine: 86
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  syntax:
+    content: public int ReviewType { get; init; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property ReviewType As Integer
+  overload: AnkiIO.AnkiReviewLog.ReviewType*
+references:
+- uid: AnkiIO
+  commentId: N:AnkiIO
+  href: AnkiIO.html
+  name: AnkiIO
+  nameWithType: AnkiIO
+  fullName: AnkiIO
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.IEquatable{AnkiIO.AnkiReviewLog}
+  commentId: T:System.IEquatable{AnkiIO.AnkiReviewLog}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<AnkiReviewLog>
+  nameWithType: IEquatable<AnkiReviewLog>
+  fullName: System.IEquatable<AnkiIO.AnkiReviewLog>
+  nameWithType.vb: IEquatable(Of AnkiReviewLog)
+  fullName.vb: System.IEquatable(Of AnkiIO.AnkiReviewLog)
+  name.vb: IEquatable(Of AnkiReviewLog)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: AnkiIO.AnkiReviewLog
+    name: AnkiReviewLog
+    href: AnkiIO.AnkiReviewLog.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: AnkiIO.AnkiReviewLog
+    name: AnkiReviewLog
+    href: AnkiIO.AnkiReviewLog.html
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: AnkiIO.AnkiReviewLog.#ctor*
+  commentId: Overload:AnkiIO.AnkiReviewLog.#ctor
+  href: AnkiIO.AnkiReviewLog.html#AnkiIO_AnkiReviewLog__ctor_System_Int64_System_DateTimeOffset_System_Int32_System_Int32_System_Int32_System_Int32_System_TimeSpan_System_Int32_
+  name: AnkiReviewLog
+  nameWithType: AnkiReviewLog.AnkiReviewLog
+  fullName: AnkiIO.AnkiReviewLog.AnkiReviewLog
+  nameWithType.vb: AnkiReviewLog.New
+  fullName.vb: AnkiIO.AnkiReviewLog.New
+  name.vb: New
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: System.DateTimeOffset
+  commentId: T:System.DateTimeOffset
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.datetimeoffset
+  name: DateTimeOffset
+  nameWithType: DateTimeOffset
+  fullName: System.DateTimeOffset
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.TimeSpan
+  commentId: T:System.TimeSpan
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.timespan
+  name: TimeSpan
+  nameWithType: TimeSpan
+  fullName: System.TimeSpan
+- uid: AnkiIO.AnkiReviewLog.Id*
+  commentId: Overload:AnkiIO.AnkiReviewLog.Id
+  href: AnkiIO.AnkiReviewLog.html#AnkiIO_AnkiReviewLog_Id
+  name: Id
+  nameWithType: AnkiReviewLog.Id
+  fullName: AnkiIO.AnkiReviewLog.Id
+- uid: AnkiIO.AnkiReviewLog.ReviewedAt*
+  commentId: Overload:AnkiIO.AnkiReviewLog.ReviewedAt
+  href: AnkiIO.AnkiReviewLog.html#AnkiIO_AnkiReviewLog_ReviewedAt
+  name: ReviewedAt
+  nameWithType: AnkiReviewLog.ReviewedAt
+  fullName: AnkiIO.AnkiReviewLog.ReviewedAt
+- uid: AnkiIO.AnkiReviewLog.Ease*
+  commentId: Overload:AnkiIO.AnkiReviewLog.Ease
+  href: AnkiIO.AnkiReviewLog.html#AnkiIO_AnkiReviewLog_Ease
+  name: Ease
+  nameWithType: AnkiReviewLog.Ease
+  fullName: AnkiIO.AnkiReviewLog.Ease
+- uid: AnkiIO.AnkiReviewLog.Interval*
+  commentId: Overload:AnkiIO.AnkiReviewLog.Interval
+  href: AnkiIO.AnkiReviewLog.html#AnkiIO_AnkiReviewLog_Interval
+  name: Interval
+  nameWithType: AnkiReviewLog.Interval
+  fullName: AnkiIO.AnkiReviewLog.Interval
+- uid: AnkiIO.AnkiReviewLog.PreviousInterval*
+  commentId: Overload:AnkiIO.AnkiReviewLog.PreviousInterval
+  href: AnkiIO.AnkiReviewLog.html#AnkiIO_AnkiReviewLog_PreviousInterval
+  name: PreviousInterval
+  nameWithType: AnkiReviewLog.PreviousInterval
+  fullName: AnkiIO.AnkiReviewLog.PreviousInterval
+- uid: AnkiIO.AnkiReviewLog.EaseFactor*
+  commentId: Overload:AnkiIO.AnkiReviewLog.EaseFactor
+  href: AnkiIO.AnkiReviewLog.html#AnkiIO_AnkiReviewLog_EaseFactor
+  name: EaseFactor
+  nameWithType: AnkiReviewLog.EaseFactor
+  fullName: AnkiIO.AnkiReviewLog.EaseFactor
+- uid: AnkiIO.AnkiReviewLog.AnswerTime*
+  commentId: Overload:AnkiIO.AnkiReviewLog.AnswerTime
+  href: AnkiIO.AnkiReviewLog.html#AnkiIO_AnkiReviewLog_AnswerTime
+  name: AnswerTime
+  nameWithType: AnkiReviewLog.AnswerTime
+  fullName: AnkiIO.AnkiReviewLog.AnswerTime
+- uid: AnkiIO.AnkiReviewLog.ReviewType*
+  commentId: Overload:AnkiIO.AnkiReviewLog.ReviewType
+  href: AnkiIO.AnkiReviewLog.html#AnkiIO_AnkiReviewLog_ReviewType
+  name: ReviewType
+  nameWithType: AnkiReviewLog.ReviewType
+  fullName: AnkiIO.AnkiReviewLog.ReviewType
