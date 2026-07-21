@@ -89,6 +89,8 @@ public sealed class AnkiDeck
 
     internal void AddExistingSubdeck(AnkiDeck deck) => subdecks.Add(deck);
 
+    internal void AddExistingNote(AnkiNote note) => notes.Add(note);
+
     /// <summary>Enumerates this deck followed by every descendant in stable insertion order.</summary>
     public IEnumerable<AnkiDeck> Traverse()
     {
