@@ -3,13 +3,17 @@
   "isRoot": true,
   "tools": {
     "docfx": {
-      "version": "2.78.3",
-      "commands": ["docfx"],
+      "version": "2.78.5",
+      "commands": [
+        "docfx"
+      ],
       "rollForward": false
     },
     "dotnet-reportgenerator-globaltool": {
-      "version": "5.4.7",
-      "commands": ["reportgenerator"],
+      "version": "5.5.10",
+      "commands": [
+        "reportgenerator"
+      ],
       "rollForward": false
     }
   }
