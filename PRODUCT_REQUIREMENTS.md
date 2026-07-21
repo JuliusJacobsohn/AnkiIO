@@ -18,6 +18,7 @@ The existing `AnkiIO` library remains the package-generation boundary. The web p
 - Generate one multilingual note containing German, English, Russian, and Spanish.
 - Let the user download a valid `.apkg` file for later import into Anki.
 - Make AI output reviewable and correctable before bad data becomes permanent study material.
+- Let users manage their recordings, translations, vocabulary, household glossary, and AI configuration without direct database access.
 
 ## 3. Non-goals for the first release
 
@@ -123,7 +124,48 @@ The initial structured-processing model should be configurable. Start evaluation
 - Each entry links back to every source occurrence and recording.
 - Failed or ambiguous output is recoverable without re-recording.
 
-### 6.6 Anki notes and export
+### 6.6 Recording and translation management
+
+- Users can list, search, filter, sort, paginate, view, edit, trash, restore, and permanently delete their recordings.
+- Recording details show audio, capture metadata, transcripts, translations, extracted words, job history, and the deck entries created from the recording.
+- Audio bytes are immutable. Replacing a mistaken recording creates a new recording and preserves an explicit relationship to the superseded one.
+- Users can create a manual transcript or translation, edit generated text, mark one version as preferred, and restore an earlier revision.
+- User-authored corrections are distinguished from model output and take precedence during later processing.
+- Reprocessing is an explicit operation with a preview of which generated fields may change. It never overwrites protected user edits.
+- Deletion uses a recoverable trash period followed by permanent deletion. Permanent deletion removes the private audio and recording-specific derived content; shared lexemes remain only when supported by another occurrence or explicitly retained as manual vocabulary.
+- Bulk delete, bulk reprocess, and bulk accept/exclude require confirmation and report partial failures.
+- All mutations use owner authorization, optimistic concurrency, idempotency where appropriate, and a queryable revision/audit history.
+
+### 6.7 Household glossary
+
+Users need a personal database for recurring expressions, nicknames, running gags, private meanings, preferred spellings, and translations that a general-purpose model cannot infer.
+
+- Glossary entries are scoped to an owner. A later household-sharing feature may introduce an explicitly shared scope; entries are private by default.
+- An entry stores a source term or phrase, aliases, source language, explanation/context, register, enabled state, priority, and optional validity dates.
+- It may store preferred translations and notes independently for German, English, Russian, and Spanish.
+- Users can create, view, search, edit, disable, delete, import, and export glossary entries.
+- Matching supports exact aliases first and conservative normalized/fuzzy candidates second. The UI shows which glossary entries influenced a result.
+- Relevant entries are supplied to immediate translation and background processing as structured reference data, not concatenated as trusted instructions.
+- A glossary match guides transcription, translation, lemma selection, and examples but does not bypass schema validation.
+- Every model call records the IDs and revision numbers of glossary entries supplied to it so results can be reproduced.
+- Editing a glossary entry can optionally enqueue reprocessing of affected recordings after showing the impact and estimated number of calls.
+
+### 6.8 Editable AI prompts and model settings
+
+All application-owned system prompts are stored and versioned in the database. The repository contains seed defaults so a new database is usable and prompt history can be recovered.
+
+- Prompt templates have a stable purpose key, such as `immediate-translation`, `transcription`, `linguistic-processing`, or `deck-entry-generation`.
+- Each immutable prompt version stores its system text, required variables, compatible response-schema version, target-language applicability, author, timestamp, notes, and checksum.
+- A prompt template has draft, active, and archived versions. Activating or rolling back a version is atomic.
+- Users with permission can create drafts, edit them, compare versions, preview rendered prompts using redacted/sample data, validate required placeholders, run an explicit paid test call, activate, archive, and roll back.
+- Editing creates a new version; historical versions referenced by model calls never change.
+- Seed updates add new defaults but never overwrite an active user-edited version silently.
+- Model IDs and permitted model parameters are database-backed settings with validated allowlists and safe defaults. API credentials and other secrets are never stored in prompt records.
+- Response schemas remain independently versioned and application-validated. An editable prompt cannot weaken authorization, storage rules, or schema validation.
+- Each `ModelCall` references the exact prompt version, schema version, model settings, and glossary revisions used.
+- Prompt and model-setting changes are audit logged. Dangerous or invalid configurations fail closed and can be reset to the shipped default.
+
+### 6.9 Anki notes and export
 
 Each vocabulary note contains at least:
 
@@ -149,7 +191,7 @@ Export requirements:
 - Keep export generation idempotent and safe under concurrent requests.
 - Record export history and a checksum; old export files may expire independently of vocabulary data.
 
-### 6.7 History and operations
+### 6.10 History and operations
 
 - Users can browse recordings and see every processing stage and failure.
 - Jobs retry transient failures with bounded exponential backoff.
@@ -168,12 +210,18 @@ The relational database stores structured, queryable records rather than treatin
 | `Utterance` | Recording, verbatim/clean transcript, source language, user corrections |
 | `UtteranceTranslation` | Utterance, target language, text, register, source/model provenance, correction state |
 | `ProcessingJob` | Recording, job type, state, attempts, lease, timestamps, last error |
-| `ModelCall` | Job, provider request ID, model, prompt/schema version, latency, usage, status, retained full response reference |
+| `ModelCall` | Job, provider request ID, model, prompt/schema version, glossary snapshot, latency, usage, status, retained full response reference |
 | `Lexeme` | Owner, German lemma, POS, morphology, canonical key, review state |
 | `LexemeTranslation` | Lexeme, target language, translated lemma, notes, provenance/correction state |
 | `Occurrence` | Lexeme, utterance, surface form, position, contextual sense |
 | `DeckEntry` | Lexeme, stable note GUID, included flag, template version, timestamps |
 | `DeckExport` | Owner, object key, checksum, entry count, status, generated/expiry time |
+| `GlossaryEntry` | Owner/scope, source term, aliases, context, register, priority, enabled state, revision |
+| `GlossaryTranslation` | Glossary entry, language, preferred text, usage note |
+| `PromptTemplate` | Stable purpose key, owner/default scope, active version, enabled state |
+| `PromptVersion` | Immutable prompt text, variables, compatible schema, author, checksum, lifecycle state |
+| `ModelProfile` | Purpose, model ID, validated parameters, owner/default scope, revision |
+| `EntityRevision` | Entity type/ID, owner, operation, before/after snapshot or patch, actor, timestamp |
 
 Audio and generated package bytes belong in private object/file storage; the relational database stores their metadata and opaque keys. The complete provider response must also be retained under the user account for audit and reproducibility, with secrets removed and an explicit retention policy. Its important fields are persisted in the normalized rows above, so the raw JSON is evidence rather than the domain model.
 
@@ -189,6 +237,8 @@ All owner-bound queries require an explicit user key. Foreign keys, uniqueness c
 - Typed OpenAI gateway isolated behind application interfaces, with timeouts, cancellation, retry classification, schema validation, and model configuration.
 - Existing `AnkiIO` library for deterministic deck construction and `.apkg` export.
 - OpenTelemetry-compatible logs, metrics, and traces with audio/transcript content excluded by default.
+
+During development, the web solution may use a local project reference to `AnkiIO`. The integration boundary must use only its supported public API so the reference can be replaced mechanically with the official `AnkiIO` 1.0.0 NuGet package when available.
 
 Suggested solution boundaries:
 
@@ -237,6 +287,9 @@ Initial targets to validate on a real phone and production-like network:
 - `Ich bin nach Hause gegangen` can produce the verb lemma `gehen`, not a separate entry for `gegangen`.
 - Repeating the same normalized word in another recording does not create a duplicate deck entry.
 - A user correction survives a retry or reprocessing operation.
+- A user can trash and restore a recording, edit a translation with revision history, and permanently delete the recording and its private derived data.
+- A configured running gag is translated using its household meaning, and the result identifies the glossary revision that influenced it.
+- A user can draft, validate, activate, and roll back a system-prompt version; subsequent model calls reference the selected immutable version.
 - The user can download an `.apkg`, import it into the supported Anki version, and see a German-front note with all three translations.
 - API keys and another user's data cannot be obtained from browser traffic or predictable URLs.
 - Automated tests cover authorization, idempotency, normalization fixtures, deduplication races, job retries, and package export.

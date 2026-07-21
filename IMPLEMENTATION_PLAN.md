@@ -20,6 +20,7 @@ Exit criteria: the exact phone workflow is known, one end-to-end API call works,
 - [ ] Add `AnkiIO.Daily.Domain`, `AnkiIO.Daily.Application`, `AnkiIO.Daily.Infrastructure`, and `AnkiIO.Daily.Web` projects without changing the public responsibilities of `AnkiIO`.
 - [ ] Add focused unit, integration, architecture, and browser-test projects.
 - [ ] Add configuration options for model IDs, duration/size limits, storage paths, retention, and job timing.
+- [ ] Use a local `AnkiIO` project reference behind the export adapter for development; add a tracked task to replace it with the official 1.0.0 package reference without changing application code.
 - [ ] Add local development secrets guidance and safe configuration validation at startup.
 - [ ] Add a development database and migrations.
 - [ ] Add CI jobs for restore, build, tests, formatting/analyzers, and migration validation.
@@ -81,7 +82,26 @@ Exit criteria: the selected translation appears reliably and meets the agreed la
 
 Exit criteria: killing the application during processing causes safe continuation or retry, never loss or duplicate application of results.
 
-## Phase 6 - Structured transcription, translation, and morphology
+## Phase 6 - Glossary and AI configuration control plane
+
+- [ ] Add `GlossaryEntry` and `GlossaryTranslation` tables with owner scoping, aliases, context, priority, enabled state, and optimistic concurrency.
+- [ ] Build glossary list, search, create, edit, disable, delete, import, and export operations.
+- [ ] Implement exact alias matching plus conservative normalized candidate matching.
+- [ ] Pass matched entries to model gateways as structured reference data and record every supplied entry revision on `ModelCall`.
+- [ ] Show glossary matches on recording/result pages and allow users to add a corrected phrase directly to the glossary.
+- [ ] Add an impact preview and opt-in reprocessing job when a glossary entry changes.
+- [ ] Add seeded `PromptTemplate`, immutable `PromptVersion`, and validated `ModelProfile` storage.
+- [ ] Define stable prompt-purpose keys and required variables for every AI workflow.
+- [ ] Build prompt draft/edit/diff/validate/preview/activate/archive/rollback operations.
+- [ ] Make seed upgrades non-destructive to user-authored active versions and provide reset-to-default.
+- [ ] Validate model IDs/parameters against an application allowlist and keep credentials outside the database records.
+- [ ] Require an explicit confirmation for paid prompt test calls and show the selected model.
+- [ ] Reference exact prompt, schema, model-profile, and glossary revisions from every model call.
+- [ ] Add authorization, concurrency, rollback, invalid-placeholder, and prompt-injection regression tests.
+
+Exit criteria: a user can teach the system a private expression, activate a versioned prompt safely, reproduce which configuration produced a result, and roll back without editing database rows manually.
+
+## Phase 7 - Structured transcription, translation, and morphology
 
 - [ ] Define the strict structured-output schema described in the requirements.
 - [ ] Build a curated, consented evaluation set covering casual German, compound nouns, separable/reflexive verbs, idioms, fillers, Russian aspect/stress/register, and ambiguous senses.
@@ -94,22 +114,28 @@ Exit criteria: killing the application during processing causes safe continuatio
 
 Exit criteria: the fixed evaluation set reaches an agreed accuracy threshold and all accepted output is schema-valid and queryable without parsing provider JSON.
 
-## Phase 7 - Deduplication and review
+## Phase 8 - CRUD, deduplication, and review
 
 - [ ] Implement the canonical-key algorithm and document Unicode/case/whitespace normalization.
 - [ ] Add a per-user unique database constraint for the canonical key.
 - [ ] Upsert lexemes and occurrences transactionally under concurrent jobs.
 - [ ] Preserve distinct senses through explicit user separation while merging inflected variants.
 - [ ] Build recording history and result-detail pages.
+- [ ] Add searchable, filterable, sortable, paginated recording and translation lists.
+- [ ] Add recording detail, metadata editing, immutable-audio replacement via a superseding recording, trash, restore, and permanent deletion.
+- [ ] Add manual transcript/translation creation, preferred-version selection, editing, deletion, and revision restoration.
+- [ ] Add `EntityRevision` audit records and optimistic-concurrency conflict handling for user-editable entities.
+- [ ] Define and test permanent-deletion cascades so private recording data is removed while legitimately shared/manual vocabulary follows the documented retention rule.
+- [ ] Add confirmed bulk accept, exclude, reprocess, trash, and restore with partial-failure reporting.
 - [ ] Build vocabulary queues for pending, accepted, excluded, ambiguous, and failed items.
 - [ ] Add transcript, lemma, morphology, translation, sentence, and register editing.
 - [ ] Mark corrected fields as user-owned so reprocessing cannot overwrite them.
 - [ ] Add merge, split, exclude, include, reprocess, and retry actions with audit history.
 - [ ] Test races by processing the same word in simultaneous recordings.
 
-Exit criteria: repeats create occurrences, not duplicate entries; users can repair every relevant class of AI mistake.
+Exit criteria: repeats create occurrences rather than duplicate entries; users can perform basic CRUD with history and safe deletion, and can repair every relevant class of AI mistake.
 
-## Phase 8 - Anki note generation and download
+## Phase 9 - Anki note generation and download
 
 - [ ] Define and version the multilingual note type, CSS, and stable field order.
 - [ ] Define a stable GUID derived from the application deck-entry identity, not translated text.
@@ -124,7 +150,7 @@ Exit criteria: repeats create occurrences, not duplicate entries; users can repa
 
 Exit criteria: the user downloads and repeatedly imports a valid deck without duplicate notes, and corrections appear after a later export/import.
 
-## Phase 9 - Privacy, observability, and production readiness
+## Phase 10 - Privacy, observability, and production readiness
 
 - [ ] Complete a threat model for authentication, IDOR, CSRF, uploads, stored XSS, prompt injection, rate abuse, secrets, and backups.
 - [ ] Confirm HTTPS, secure headers/cookies, anti-forgery, output encoding, and per-endpoint authorization.
@@ -140,7 +166,7 @@ Exit criteria: the user downloads and repeatedly imports a valid deck without du
 
 Exit criteria: production deployment is reproducible, monitored, recoverable, private by default, and has an explicit operating budget.
 
-## Phase 10 - Post-MVP options
+## Phase 11 - Post-MVP options
 
 - [ ] Add spoken translated output where it improves the conversation flow.
 - [ ] Add opt-in reverse and target-specific cards.
