@@ -1,6 +1,14 @@
 namespace AnkiIO;
 
-/// <summary>Represents the semantic content read from an Anki deck package.</summary>
+/// <summary>Represents the supported semantic content read from one Anki deck package.</summary>
+/// <remarks>
+/// The package owns no open file, archive, database, or stream resources and does not implement <see cref="IDisposable"/>.
+/// Its deck and media models remain mutable and are not safe for concurrent mutation. Media payloads are copied into the
+/// package-level <see cref="Media"/> collection; they are not automatically registered in a deck's
+/// <see cref="AnkiDeck.Media"/> collection. Consequently, callers that read and then write a deck must deliberately copy
+/// the required registrations to that deck before using <see cref="AnkiPackageWriter"/>. The current writer accepts one
+/// top-level hierarchy rather than an <see cref="AnkiPackage"/> and therefore cannot write multiple roots in one call.
+/// </remarks>
 public sealed class AnkiPackage
 {
     internal AnkiPackage(IReadOnlyList<AnkiDeck> decks, AnkiMediaCollection media, IReadOnlyList<AnkiDiagnostic> diagnostics)
@@ -10,48 +18,89 @@ public sealed class AnkiPackage
         Diagnostics = diagnostics;
     }
 
-    /// <summary>Gets top-level deck hierarchies.</summary>
+    /// <summary>Gets the top-level deck hierarchies represented by the supported package data.</summary>
+    /// <value>
+    /// A read-only collection of mutable deck graphs. The collection itself cannot be changed through this API.
+    /// </value>
     public IReadOnlyList<AnkiDeck> Decks { get; }
 
     /// <summary>Gets media extracted into caller-independent memory.</summary>
+    /// <value>
+    /// A mutable collection whose payloads no longer depend on the input package stream or archive file.
+    /// </value>
+    /// <remarks>
+    /// Media extraction is eager. This collection may therefore retain memory proportional to the total extracted media
+    /// size, and it is separate from every <see cref="AnkiDeck.Media"/> collection in <see cref="Decks"/>.
+    /// </remarks>
     public AnkiMediaCollection Media { get; }
 
     /// <summary>Gets compatibility and preservation diagnostics produced while reading.</summary>
+    /// <value>A read-only, ordered collection describing non-fatal format limitations and preservation decisions.</value>
     public IReadOnlyList<AnkiDiagnostic> Diagnostics { get; }
 
-    /// <summary>Enumerates every note in every hierarchy.</summary>
+    /// <summary>Enumerates every note currently reachable from every top-level hierarchy.</summary>
+    /// <value>A lazy enumeration that reflects subsequent mutations to the deck graphs.</value>
+    /// <remarks>Do not mutate the hierarchy while an enumeration is in progress.</remarks>
     public IEnumerable<AnkiNote> Notes => Decks.SelectMany(deck => deck.Traverse()).SelectMany(deck => deck.Notes);
 
-    /// <summary>Enumerates every generated or imported card.</summary>
+    /// <summary>Enumerates every card currently reachable through <see cref="Notes"/>.</summary>
+    /// <value>A lazy enumeration that reflects subsequent note and card mutations.</value>
+    /// <remarks>Do not mutate notes or their card collections while an enumeration is in progress.</remarks>
     public IEnumerable<AnkiCard> Cards => Notes.SelectMany(note => note.Cards);
 }
 
 /// <summary>Configures defenses applied to untrusted package archives.</summary>
+/// <remarks>
+/// Instances are immutable after initialization and can be copied with a record <c>with</c> expression. Limit values are
+/// compared as supplied and are not normalized or validated by the constructor. Use finite, non-negative values; a
+/// negative bound generally rejects every corresponding archive value, while <see cref="double.NaN"/> can defeat the
+/// compression-ratio comparison. These limits reduce common archive-exhaustion risks but do not make malformed ZIP,
+/// JSON, or SQLite content valid.
+/// </remarks>
 public sealed record AnkiPackageLimits
 {
-    /// <summary>Gets the safe default limits.</summary>
+    /// <summary>Initializes package limits with the documented safe defaults.</summary>
+    /// <remarks>Property values are not validated if callers replace them in an object initializer or <c>with</c> expression.</remarks>
+    public AnkiPackageLimits()
+    {
+    }
+
+    /// <summary>Gets the shared safe default limits.</summary>
+    /// <value>An immutable default instance; use a <c>with</c> expression to customize a value.</value>
     public static AnkiPackageLimits Default { get; } = new();
 
     /// <summary>Gets the maximum archive entry count.</summary>
+    /// <value>The inclusive entry-count bound. The default is 10,000.</value>
     public int MaximumEntries { get; init; } = 10_000;
 
     /// <summary>Gets the maximum uncompressed size of one entry.</summary>
+    /// <value>The inclusive per-entry bound in bytes. The default is 256 MiB.</value>
     public long MaximumEntryBytes { get; init; } = 256L * 1024 * 1024;
 
     /// <summary>Gets the maximum total uncompressed archive size.</summary>
+    /// <value>The inclusive sum of all entry lengths in bytes. The default is 2 GiB.</value>
     public long MaximumTotalBytes { get; init; } = 2L * 1024 * 1024 * 1024;
 
     /// <summary>Gets the maximum uncompressed-to-compressed ratio for a non-empty entry.</summary>
+    /// <value>The inclusive ratio bound. The default is 200.</value>
     public double MaximumCompressionRatio { get; init; } = 200;
 
     /// <summary>Gets the maximum collection database size.</summary>
+    /// <value>The inclusive uncompressed <c>collection.anki2</c> length in bytes. The default is 512 MiB.</value>
     public long MaximumCollectionBytes { get; init; } = 512L * 1024 * 1024;
 }
 
 /// <summary>Signals that an input package violates archive safety limits or structure.</summary>
+/// <remarks>
+/// This exception identifies a deliberate AnkiIO safety rejection. Other malformed package data may instead produce
+/// <see cref="InvalidDataException"/>, <see cref="System.Text.Json.JsonException"/>,
+/// <see cref="Microsoft.Data.Sqlite.SqliteException"/>, or an I/O exception.
+/// </remarks>
 public sealed class AnkiPackageSecurityException : IOException
 {
     /// <summary>Initializes a package-security failure.</summary>
+    /// <param name="message">A description of the rejected limit or structural condition.</param>
+    /// <remarks>The message is intended for diagnostics; callers should use the exception type rather than parse its text.</remarks>
     public AnkiPackageSecurityException(string message)
         : base(message)
     {

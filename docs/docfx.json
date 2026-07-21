@@ -1,9 +1,9 @@
 {
-  "metadata": [{ "src": [{ "src": "..", "files": ["src/AnkiIO/AnkiIO.csproj"] }], "dest": "api" }],
   "build": {
-    "content": [{ "files": ["**/*.{md,yml}", "api/**.yml"] }],
+    "content": [{ "files": ["**/*.{md,yml}"] }],
+    "resource": [{ "files": ["api/index.html"] }],
     "dest": "../artifacts/docs",
     "globalMetadata": { "_appName": "AnkiIO", "_appTitle": "AnkiIO documentation" },
-    "sitemap": { "baseUrl": "https://example.invalid/AnkiIO/" }
+    "sitemap": { "baseUrl": "https://juliusjacobsohn.github.io/AnkiIO/" }
   }
 }

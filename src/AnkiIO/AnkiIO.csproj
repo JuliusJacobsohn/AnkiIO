@@ -3,6 +3,7 @@
     <AssemblyName>AnkiIO</AssemblyName>
     <RootNamespace>AnkiIO</RootNamespace>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <WarningsAsErrors>$(WarningsAsErrors);CS1591</WarningsAsErrors>
     <PackageId>AnkiIO</PackageId>
     <Title>AnkiIO</Title>
     <Version>0.1.0-alpha.1</Version>

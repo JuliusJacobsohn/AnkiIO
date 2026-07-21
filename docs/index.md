@@ -5,6 +5,8 @@
 
 AnkiIO is a format-independent C# model plus explicitly versioned adapters. Start with [Anki concepts](beginner-guide.md), then [quick start](quick-start.md), [API guide](api-guide.md), [JSON formats](json-format.md), and [package compatibility](package-format.md).
 
+The [comprehensive API reference](api/index.html) is generated directly from the compiled assembly and source XML comments, with searchable type and member pages.
+
 AnkiIO is not affiliated with Ankitects, Anki, AnkiDroid, or CrowdAnki.
 
 ## Guides

@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "dependencies": {
+    ".NETFramework,Version=v4.7.2": {
+      "EWSoftware.SHFB": {
+        "type": "Direct",
+        "requested": "[2026.3.29, )",
+        "resolved": "2026.3.29",
+        "contentHash": "hUxGtuWT3ZWptJB52WLKAhPCH+NEOW3Fd8Uq5CrCbWH+K/rYNF1Ran7ImGAW9RcGP4fLeB/5lMMczROX8mhzEQ=="
+      },
+      "EWSoftware.SHFB.NET": {
+        "type": "Direct",
+        "requested": "[10.0.0, )",
+        "resolved": "10.0.0",
+        "contentHash": "YvTZo/JZLMZv/20CzDkPZJHoXGAUJYRhWTReKX8zKqR159eBUivqKiwi9zOVt7CXUMgGFnX0puxNLP+lbHxvgw=="
+      }
+    }
+  }
+}
