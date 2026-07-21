@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace AnkiIO;
@@ -36,6 +37,9 @@ public sealed class AnkiDeck
     /// <summary>Gets custom string metadata preserved by native JSON.</summary>
     public IDictionary<string, string> Metadata { get; } = new Dictionary<string, string>(StringComparer.Ordinal);
 
+    /// <summary>Gets unrecognized native-JSON properties retained for forward-compatible round trips.</summary>
+    public IDictionary<string, JsonElement> UnknownData { get; } = new Dictionary<string, JsonElement>(StringComparer.Ordinal);
+
     /// <summary>Gets the media collection owned by this deck root.</summary>
     public AnkiMediaCollection Media { get; }
 
@@ -47,15 +51,16 @@ public sealed class AnkiDeck
 
     /// <summary>Adds a direct child deck.</summary>
     /// <param name="name">The child's local name segment.</param>
+    /// <param name="id">A stable deck ID, or <see langword="null"/> to generate one.</param>
     /// <returns>The created child.</returns>
-    public AnkiDeck AddSubdeck(string name)
+    public AnkiDeck AddSubdeck(string name, long? id = null)
     {
         if (subdecks.Any(deck => string.Equals(deck.Name, name, StringComparison.OrdinalIgnoreCase)))
         {
             throw new ArgumentException($"Subdeck '{name}' already exists.", nameof(name));
         }
 
-        var deck = new AnkiDeck(name);
+        var deck = new AnkiDeck(name, id);
         subdecks.Add(deck);
         return deck;
     }
@@ -65,12 +70,13 @@ public sealed class AnkiDeck
     /// <param name="fields">Values keyed by field name.</param>
     /// <param name="tags">Optional note tags.</param>
     /// <param name="guid">An optional stable Anki GUID.</param>
+    /// <param name="id">A stable note ID, or <see langword="null"/> to generate one.</param>
     /// <returns>The created note.</returns>
-    public AnkiNote AddNote(AnkiNoteType noteType, IReadOnlyDictionary<string, string> fields, IEnumerable<string>? tags = null, string? guid = null)
+    public AnkiNote AddNote(AnkiNoteType noteType, IReadOnlyDictionary<string, string> fields, IEnumerable<string>? tags = null, string? guid = null, long? id = null)
     {
         ArgumentNullException.ThrowIfNull(noteType);
         ArgumentNullException.ThrowIfNull(fields);
-        var note = new AnkiNote(noteType, fields, tags, guid: guid);
+        var note = new AnkiNote(noteType, fields, tags, id, guid);
         note.GenerateCards(Id);
         notes.Add(note);
         return note;
@@ -80,6 +86,8 @@ public sealed class AnkiDeck
     /// <param name="note">The note to remove.</param>
     /// <returns><see langword="true"/> when the note was owned by this deck.</returns>
     public bool RemoveNote(AnkiNote note) => notes.Remove(note);
+
+    internal void AddExistingSubdeck(AnkiDeck deck) => subdecks.Add(deck);
 
     /// <summary>Enumerates this deck followed by every descendant in stable insertion order.</summary>
     public IEnumerable<AnkiDeck> Traverse()
@@ -184,6 +192,12 @@ public sealed partial class AnkiNote
         {
             cards.Add(new AnkiCard(AnkiId.New(), Id, deckId, ordinal, AnkiScheduling.New));
         }
+    }
+
+    internal void RestoreCards(IEnumerable<AnkiCard> restored)
+    {
+        cards.Clear();
+        cards.AddRange(restored);
     }
 
     [GeneratedRegex(@"\{\{c(\d+)::", RegexOptions.CultureInvariant)]
