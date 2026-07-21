@@ -1,4 +1,6 @@
+using System.Buffers.Binary;
 using System.IO.Compression;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using Xunit;
@@ -125,6 +127,77 @@ public sealed class PackageHardeningTests
     }
 
     [Fact]
+    public async Task ReaderRejectsUnreadableSeekableInput()
+    {
+        using var directory = new TemporaryDirectory();
+        var path = Path.Combine(directory.FullName, "write-only.apkg");
+        await using var source = new FileStream(path, FileMode.CreateNew, FileAccess.Write, FileShare.None);
+        Assert.True(source.CanSeek);
+        Assert.False(source.CanRead);
+
+        var exception = await Assert.ThrowsAsync<ArgumentException>(() => AnkiPackageReader.ReadAsync(source));
+
+        Assert.Equal("source", exception.ParamName);
+    }
+
+    [Fact]
+    public async Task WriterRejectsReadOnlyDestinationBeforeWriting()
+    {
+        byte[] original = [4, 3, 2, 1];
+        await using var destination = new MemoryStream(original, writable: false);
+
+        var exception = await Assert.ThrowsAsync<ArgumentException>(() => AnkiPackageWriter.WriteAsync(CreateDeck(), destination));
+
+        Assert.Equal("destination", exception.ParamName);
+        Assert.Equal(original, destination.ToArray());
+        Assert.Equal(0, destination.Position);
+    }
+
+    [Fact]
+    public async Task ConflictingHierarchyMediaIsRejectedBeforeStreamMutation()
+    {
+        var deck = CreateDeck();
+        deck.Media.AddBytes("shared.png", [1]);
+        deck.AddSubdeck("Child").Media.AddBytes("shared.png", [2]);
+        await using var destination = new MemoryStream();
+        await destination.WriteAsync(new byte[] { 9, 8, 7 });
+        destination.Position = 1;
+
+        await Assert.ThrowsAsync<InvalidOperationException>(() => AnkiPackageWriter.WriteAsync(deck, destination));
+
+        Assert.Equal([9, 8, 7], destination.ToArray());
+        Assert.Equal(1, destination.Position);
+    }
+
+    [Fact]
+    public async Task PackageCollectionsAreReadOnlySnapshotsAndMultipleRootsRoundTrip()
+    {
+        var roots = new List<AnkiDeck> { CreateDeck("First"), CreateDeck("Second") };
+        var diagnostics = new List<AnkiDiagnostic>
+        {
+            new(AnkiDiagnosticSeverity.Information, "TEST001", "Fixture diagnostic."),
+        };
+        var package = CreatePackage(roots, diagnostics);
+        roots.Clear();
+        diagnostics.Clear();
+
+        Assert.Equal(2, package.Decks.Count);
+        Assert.Single(package.Diagnostics);
+        var deckList = Assert.IsAssignableFrom<IList<AnkiDeck>>(package.Decks);
+        var diagnosticList = Assert.IsAssignableFrom<IList<AnkiDiagnostic>>(package.Diagnostics);
+        Assert.True(deckList.IsReadOnly);
+        Assert.True(diagnosticList.IsReadOnly);
+        Assert.Throws<NotSupportedException>(() => deckList.Add(CreateDeck("Third")));
+        Assert.Throws<NotSupportedException>(() => diagnosticList.Clear());
+
+        await using var output = new MemoryStream();
+        await AnkiPackageWriter.WriteAsync(package, output);
+        output.Position = 0;
+        var restored = await AnkiPackageReader.ReadAsync(output);
+        Assert.Equal(["First", "Second"], restored.Decks.Select(deck => deck.Name).Order(StringComparer.Ordinal));
+    }
+
+    [Fact]
     public async Task ReaderRejectsDuplicateArchiveNames()
     {
         await using var stream = new MemoryStream();
@@ -137,6 +210,21 @@ public sealed class PackageHardeningTests
         stream.Position = 0;
         var exception = await Assert.ThrowsAsync<AnkiPackageSecurityException>(() => AnkiPackageReader.ReadAsync(stream));
         Assert.Contains("Duplicate archive path", exception.Message, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task ReaderRejectsNonEmptyEntryReportingZeroCompressedBytes()
+    {
+        await using var valid = CreateArchive([("collection.anki2", new byte[] { 1 })]);
+        var bytes = valid.ToArray();
+        var centralDirectory = FindSignature(bytes, 0x02014b50u);
+        Assert.True(centralDirectory >= 0);
+        BinaryPrimitives.WriteUInt32LittleEndian(bytes.AsSpan(centralDirectory + 20, sizeof(uint)), 0);
+        await using var malformed = new MemoryStream(bytes, writable: false);
+
+        var exception = await Assert.ThrowsAsync<AnkiPackageSecurityException>(() => AnkiPackageReader.ReadAsync(malformed));
+
+        Assert.Contains("zero compressed bytes", exception.Message, StringComparison.Ordinal);
     }
 
     [Theory]
@@ -166,7 +254,6 @@ public sealed class PackageHardeningTests
     [InlineData("{\"not-numeric\":\"sound.mp3\"}")]
     [InlineData("{\"\":\"sound.mp3\"}")]
     [InlineData("{\"0\":\"../sound.mp3\"}")]
-    [InlineData("{\"0\":null}")]
     public async Task ReaderRejectsUnsafeMediaMapKeysAndNames(string mediaMap)
     {
         await using var stream = await CreatePackageWithMediaMapAsync(mediaMap);
@@ -185,14 +272,36 @@ public sealed class PackageHardeningTests
     public async Task ReaderRejectsMalformedMediaMapJson()
     {
         await using var stream = await CreatePackageWithMediaMapAsync("{");
-        await Assert.ThrowsAsync<JsonException>(() => AnkiPackageReader.ReadAsync(stream));
+        await Assert.ThrowsAnyAsync<JsonException>(() => AnkiPackageReader.ReadAsync(stream));
     }
 
-    private static AnkiDeck CreateDeck()
+    [Theory]
+    [InlineData("null")]
+    [InlineData("[]")]
+    [InlineData("{\"0\":null}")]
+    [InlineData("{\"0\":123}")]
+    [InlineData("{\"0\":\"first.png\",\"0\":\"second.png\"}")]
+    public async Task ReaderRejectsStructurallyInvalidMediaMaps(string mediaMap)
     {
-        var deck = new AnkiDeck("Deck");
+        await using var stream = await CreatePackageWithMediaMapAsync(mediaMap);
+        await Assert.ThrowsAnyAsync<JsonException>(() => AnkiPackageReader.ReadAsync(stream));
+    }
+
+    private static AnkiDeck CreateDeck(string name = "Deck")
+    {
+        var deck = new AnkiDeck(name);
         deck.AddBasicNote("front", "back");
         return deck;
+    }
+
+    private static AnkiPackage CreatePackage(IReadOnlyList<AnkiDeck> roots, IReadOnlyList<AnkiDiagnostic> diagnostics)
+    {
+        var constructor = typeof(AnkiPackage).GetConstructor(
+            BindingFlags.Instance | BindingFlags.NonPublic,
+            binder: null,
+            [typeof(IReadOnlyList<AnkiDeck>), typeof(AnkiMediaCollection), typeof(IReadOnlyList<AnkiDiagnostic>)],
+            modifiers: null)!;
+        return (AnkiPackage)constructor.Invoke([roots, new AnkiMediaCollection(), diagnostics]);
     }
 
     private static MemoryStream CreateArchive(IEnumerable<(string Name, byte[] Content)> entries)
@@ -226,6 +335,19 @@ public sealed class PackageHardeningTests
 
         stream.Position = 0;
         return stream;
+    }
+
+    private static int FindSignature(ReadOnlySpan<byte> bytes, uint signature)
+    {
+        for (var index = 0; index <= bytes.Length - sizeof(uint); index++)
+        {
+            if (BinaryPrimitives.ReadUInt32LittleEndian(bytes[index..]) == signature)
+            {
+                return index;
+            }
+        }
+
+        return -1;
     }
 
     private sealed class TemporaryDirectory : IDisposable

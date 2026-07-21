@@ -3,24 +3,43 @@ using System.Text.Json;
 
 namespace AnkiIO;
 
-/// <summary>Reads guarded legacy <c>.apkg</c> package representations accepted by Anki 26.05.</summary>
+/// <summary>Reads guarded legacy-compatible <c>.apkg</c> archives into AnkiIO's in-memory package model.</summary>
 /// <remarks>
-/// This reader treats every archive, media map, and SQLite database as untrusted input and applies
-/// <see cref="AnkiPackageLimits"/> before extraction. It supports a ZIP archive containing
-/// <c>collection.anki2</c> with legacy JSON model and deck metadata. It accepts collection schema values 11 and 18 only
-/// when that metadata remains in the legacy JSON representation. It does not decode modern schema-18 protobuf metadata,
-/// <c>collection.anki21</c>, <c>collection.anki21b</c>, or <c>meta</c> package entries commonly produced by current Anki.
-/// Anki 26.05 can import the legacy representation, but that acceptance does not make it Anki's native current format.
 /// <para>
-/// Supported decks, notes, front/back templates, cards, scheduling fields, low three-bit card flags, descriptions, and
-/// media are reconstructed. Review-log rows, deck configuration, graves, unknown SQLite columns, note/card auxiliary
-/// columns, and unsupported model metadata are not preserved. Supported field editor settings and browser-only template
-/// formats are retained.
-/// Media payloads are eagerly copied into memory and returned through
-/// <see cref="AnkiPackage.Media"/> rather than attached to individual decks. Calls are safe to run concurrently when each
-/// call receives its own stream; returned mutable package graphs are not safe for concurrent mutation.
+/// This reader treats the ZIP directory, entry names and sizes, media map, and SQLite database as untrusted. It validates
+/// <see cref="AnkiPackageLimits"/> and archive metadata before extracting the collection database or copying media. Limits
+/// mitigate common archive-exhaustion attacks but are not a sandbox; see <see cref="AnkiPackageLimits"/> for the threat
+/// model and choose smaller bounds for network uploads.
+/// </para>
+/// <para>
+/// The supported input is a ZIP archive containing <c>collection.anki2</c> and legacy JSON model/deck metadata. Collection
+/// schema values 11 and 18 are accepted only when that metadata is still JSON. Modern native entries such as
+/// <c>collection.anki21</c>, <c>collection.anki21b</c>, schema-18 protobuf metadata, and <c>meta</c> are not decoded. Anki
+/// 26.05 was verified to import the legacy representation written by AnkiIO; this reader does not claim general support for
+/// every package exported by that version.
+/// </para>
+/// <para>
+/// Decks, notes, front/back templates, cards, supported scheduling fields, low three-bit card flags, descriptions, field
+/// editor settings, browser-only template formats, and mapped media are reconstructed. Review-log rows, deck configuration,
+/// graves, unknown SQLite columns, note/card auxiliary columns, and unsupported model metadata are not preserved.
+/// Consult <see cref="AnkiPackage.Diagnostics"/> after reading.
+/// </para>
+/// <para>
+/// Media payloads are eagerly copied into <see cref="AnkiPackage.Media"/> and are not attached to individual decks. The
+/// returned package owns those copies and no archive handles, but may retain memory proportional to allowed media size.
+/// Separate calls may run concurrently when they use separate streams; returned graphs are mutable and not thread-safe.
 /// </para>
 /// </remarks>
+/// <example>
+/// <code>
+/// var limits = AnkiPackageLimits.Default with { MaximumTotalBytes = 128L * 1024 * 1024 };
+/// var package = await AnkiPackageReader.ReadAsync("deck.apkg", limits);
+/// foreach (var diagnostic in package.Diagnostics)
+/// {
+///     Console.WriteLine($"{diagnostic.Code}: {diagnostic.Message}");
+/// }
+/// </code>
+/// </example>
 public static class AnkiPackageReader
 {
     /// <summary>Reads a package file without modifying the source file or an Anki profile.</summary>
@@ -31,9 +50,11 @@ public static class AnkiPackageReader
     /// <param name="cancellationToken">Cancels extraction, database reads, media copying, and JSON deserialization.</param>
     /// <returns>A task whose result owns the supported deck graph, diagnostics, and copied media registrations.</returns>
     /// <remarks>
-    /// The source is opened read-only and closed before the returned task completes. The method attempts to remove
-    /// temporary extracted database content on success, cancellation, or failure. Cancellation is observed by asynchronous
-    /// I/O and database work; synchronous ZIP structure validation and in-memory media hashing are not individually cancelable.
+    /// The source file is opened with read access and file sharing for other readers, and is closed before the task
+    /// completes. The file is never modified and no Anki profile is opened. The collection database is extracted into an
+    /// isolated temporary directory that is removed on success, cancellation, or failure. Media is copied eagerly into the
+    /// returned package. Cancellation is observed by asynchronous file, database, and media operations; synchronous ZIP
+    /// metadata validation is not individually cancelable.
     /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="path"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException"><paramref name="path"/> is blank or has invalid path syntax.</exception>
@@ -69,10 +90,12 @@ public static class AnkiPackageReader
     /// <param name="cancellationToken">Cancels extraction, database reads, media copying, and JSON deserialization.</param>
     /// <returns>A task whose result owns the supported deck graph, diagnostics, and copied media registrations.</returns>
     /// <remarks>
-    /// The caller retains ownership of <paramref name="source"/>. The method does not restore its original position, and
-    /// callers must not access or reposition it concurrently while reading is in progress. The method attempts to remove
-    /// temporary extracted database content on success, cancellation, or failure. Cancellation is observed by asynchronous
-    /// I/O and database work; synchronous ZIP structure validation and in-memory media hashing are not individually cancelable.
+    /// Position <paramref name="source"/> at the beginning of the complete ZIP archive before calling. The caller retains
+    /// ownership and the stream remains open on success or failure. Its final position is unspecified and the original
+    /// position is not restored. Do not read, write, seek, or dispose it concurrently. Seeking is required because the ZIP
+    /// central directory must be inspected before extraction. The collection database is copied to an isolated temporary
+    /// directory and removed afterward; media is copied eagerly into the returned package. Cancellation is observed by
+    /// asynchronous stream, database, and media operations, not every synchronous metadata check.
     /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException"><paramref name="source"/> is not readable and seekable.</exception>
@@ -128,7 +151,7 @@ public static class AnkiPackageReader
             if (mediaMapEntry is not null)
             {
                 await using var mapStream = mediaMapEntry.Open();
-                var map = await JsonSerializer.DeserializeAsync<Dictionary<string, string>>(mapStream, cancellationToken: cancellationToken).ConfigureAwait(false) ?? [];
+                var map = await ReadMediaMapAsync(mapStream, cancellationToken).ConfigureAwait(false);
                 foreach (var pair in map.OrderBy(pair => pair.Key, StringComparer.Ordinal))
                 {
                     try
@@ -169,6 +192,31 @@ public static class AnkiPackageReader
         }
     }
 
+    private static async Task<IReadOnlyDictionary<string, string>> ReadMediaMapAsync(Stream stream, CancellationToken cancellationToken)
+    {
+        using var document = await JsonDocument.ParseAsync(stream, cancellationToken: cancellationToken).ConfigureAwait(false);
+        if (document.RootElement.ValueKind != JsonValueKind.Object)
+        {
+            throw new JsonException("The media map must be a JSON object whose property names are numeric archive entries and whose values are filenames.");
+        }
+
+        var map = new Dictionary<string, string>(StringComparer.Ordinal);
+        foreach (var property in document.RootElement.EnumerateObject())
+        {
+            if (property.Value.ValueKind != JsonValueKind.String)
+            {
+                throw new JsonException($"Media map entry '{property.Name}' must contain a JSON string filename.");
+            }
+
+            if (!map.TryAdd(property.Name, property.Value.GetString()!))
+            {
+                throw new JsonException($"The media map contains duplicate entry key '{property.Name}'.");
+            }
+        }
+
+        return map;
+    }
+
     private static void ValidateArchive(ZipArchive archive, AnkiPackageLimits limits)
     {
         if (archive.Entries.Count > limits.MaximumEntries)
@@ -205,6 +253,11 @@ public static class AnkiPackageReader
             if (total > limits.MaximumTotalBytes)
             {
                 throw new AnkiPackageSecurityException("Archive exceeds the total uncompressed-size limit.");
+            }
+
+            if (entry.Length > 0 && entry.CompressedLength == 0)
+            {
+                throw new AnkiPackageSecurityException($"Non-empty entry '{entry.FullName}' reports zero compressed bytes.");
             }
 
             if (entry.CompressedLength > 0 && entry.Length / (double)entry.CompressedLength > limits.MaximumCompressionRatio)

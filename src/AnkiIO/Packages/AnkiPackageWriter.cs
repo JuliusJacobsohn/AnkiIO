@@ -4,28 +4,47 @@ using System.Text.Json;
 
 namespace AnkiIO;
 
-/// <summary>Writes guarded legacy <c>.apkg</c> package representations accepted by the Anki 26.05 importer.</summary>
+/// <summary>Writes validated deck data as a legacy-compatible <c>.apkg</c> archive accepted by Anki 26.05.</summary>
 /// <remarks>
-/// Output is a ZIP archive containing <c>collection.anki2</c> with schema-11 JSON model/deck metadata, a fixed legacy
-/// scheduler-version-2 collection configuration, and the traditional numeric-entry media map. Anki 26.05 has been
-/// verified to import this backward-compatible representation. This writer does not emit Anki 26.05's native modern
-/// <c>collection.anki21b</c>, schema-18 protobuf metadata, or <c>meta</c> entries, and it does not claim byte-for-byte
-/// compatibility with packages exported by Anki 26.05.
 /// <para>
-/// Deck overloads write one supplied root and all descendants. Package overloads write every top-level hierarchy and
-/// combine package-level media with media registered on any traversed deck. A fixed default deck configuration is emitted;
-/// deck options, <see cref="AnkiDeck.Metadata"/>, <see cref="AnkiDeck.UnknownData"/>, and unsupported storage fields are
-/// not preserved. Review-log rows are written, but <see cref="AnkiReviewLog.ReviewedAt"/> is not independently encoded;
-/// the numeric <see cref="AnkiReviewLog.Id"/> is written as the legacy review-log key.
+/// Choose a deck overload for a newly constructed hierarchy: it writes that root, its descendants, and media registered on
+/// those decks. Choose a package overload for read-modify-write: it writes every root and combines
+/// <see cref="AnkiPackage.Media"/> with deck media. Passing only <c>package.Decks[0]</c> intentionally omits other roots and
+/// package-only media.
 /// </para>
 /// <para>
-/// Duplicate case-sensitive media filenames with identical length and SHA-256 are coalesced. A duplicate filename with
-/// conflicting content is rejected before output is opened. This type has no mutable global state, so separate writes may
-/// run concurrently. Supplied package graphs, note types, cards, review histories, media collections, and path-backed
-/// media files must not be mutated during a write. Collection modification timestamps are generated at write time, so
-/// repeated writes are not byte-for-byte deterministic.
+/// Output contains <c>collection.anki2</c> with schema-11 JSON metadata, a fixed scheduler-version-2 configuration, and a
+/// traditional numeric media map. Anki 26.05 was verified to import this representation. The writer does not emit native
+/// <c>collection.anki21b</c>, schema-18 protobuf metadata, or <c>meta</c>, and does not produce byte-identical Anki exports.
+/// A fixed default deck configuration is emitted; deck options, <see cref="AnkiDeck.Metadata"/>,
+/// <see cref="AnkiDeck.UnknownData"/>, and unsupported storage columns are not preserved. Review rows are written, but
+/// <see cref="AnkiReviewLog.ReviewedAt"/> is not independently encoded; <see cref="AnkiReviewLog.Id"/> becomes the legacy
+/// review-log key.
+/// </para>
+/// <para>
+/// Every graph is validated before archive output begins. Identical case-sensitive media names with equal length and
+/// SHA-256 are coalesced; conflicting content is rejected. Path-backed media is rehashed while writing and rejected if it
+/// changed after registration. Do not mutate graphs, note types, cards, review histories, media collections, or backing
+/// files during a write. Separate calls have no shared mutable writer state and may run concurrently with separate inputs.
+/// Write timestamps make output semantically repeatable but not byte-for-byte deterministic.
 /// </para>
 /// </remarks>
+/// <example>
+/// Create a new deck and write it atomically to a path:
+/// <code>
+/// var deck = new AnkiDeck("Spanish");
+/// deck.AddBasicNote("hola", "hello");
+/// await AnkiPackageWriter.WriteAsync(deck, "spanish.apkg");
+/// </code>
+/// </example>
+/// <example>
+/// Preserve package-level media while modifying an existing package:
+/// <code>
+/// var package = await AnkiPackageReader.ReadAsync("input.apkg");
+/// package.Decks[0].AddBasicNote("adiós", "goodbye");
+/// await AnkiPackageWriter.WriteAsync(package, "output.apkg");
+/// </code>
+/// </example>
 public static class AnkiPackageWriter
 {
     /// <summary>Writes one deck hierarchy to a package file without opening or modifying an Anki profile.</summary>
@@ -34,11 +53,12 @@ public static class AnkiPackageWriter
     /// <param name="cancellationToken">Cancels database creation and asynchronous archive or media I/O.</param>
     /// <returns>A task that completes after the archive has been finalized and committed to the destination path.</returns>
     /// <remarks>
-    /// The hierarchy and media-name collisions are validated before any destination or temporary output file is opened.
-    /// Output is built in a uniquely named temporary file in the destination directory, then committed with a same-directory
-    /// replacement move. An existing destination remains unchanged if validation, database creation, archive creation,
-    /// media verification, or cancellation fails before that move. Parent directories are not created. Temporary output is
-    /// removed on failure. Path-backed media is streamed and SHA-256 verified against its registration-time digest.
+    /// The graph and media-name collisions are validated before a destination or temporary output file is opened. The
+    /// complete archive is built in a uniquely named file beside <paramref name="path"/>, closed, then committed with one
+    /// same-directory overwrite move. Until that move, an existing destination is never opened or truncated; a missing
+    /// destination remains absent. Failures or cancellation before commit leave the previous destination unchanged and the
+    /// temporary file is removed. The move provides filesystem rename atomicity, not a backup or a guarantee against power
+    /// loss. Parent directories are not created, and the filename extension is not enforced.
     /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="deck"/> or <paramref name="path"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException"><paramref name="path"/> is blank or has invalid path syntax.</exception>
@@ -66,11 +86,13 @@ public static class AnkiPackageWriter
     /// <param name="cancellationToken">Cancels database creation and asynchronous archive or media I/O.</param>
     /// <returns>A task that completes after the archive has been finalized and committed to the destination path.</returns>
     /// <remarks>
-    /// Use this overload for lossless supported-media read-modify-write workflows. It includes every registration in
+    /// Use this overload for supported read-modify-write workflows. It includes every registration in
     /// <see cref="AnkiPackage.Media"/> as well as registrations added to any deck in <see cref="AnkiPackage.Decks"/>.
-    /// Identical duplicate registrations are coalesced and conflicting registrations are rejected before output is opened.
-    /// The path is written through a same-directory temporary file and replacement move; an existing destination remains
-    /// unchanged on any failure before the final move, and temporary output is removed on failure.
+    /// Identical duplicate registrations are coalesced; conflicting registrations and invalid graphs are rejected before
+    /// output is opened. The complete archive is closed in a same-directory temporary file and committed with one overwrite
+    /// move. Failure before commit leaves an existing destination unchanged, and temporary output is removed. This is
+    /// lossless only for the explicitly supported fields described by <see cref="AnkiPackageReader"/>; unsupported Anki
+    /// storage data discarded during reading cannot be recovered by this method.
     /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="package"/> or <paramref name="path"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException"><paramref name="package"/> contains no top-level decks, or <paramref name="path"/> is blank or invalid.</exception>
@@ -98,11 +120,12 @@ public static class AnkiPackageWriter
     /// <param name="cancellationToken">Cancels database creation and asynchronous archive or media I/O.</param>
     /// <returns>A task that completes after the archive and its central directory have been finalized.</returns>
     /// <remarks>
-    /// The caller retains ownership of <paramref name="destination"/>. Seeking is not required, but the stream must be
-    /// writable and must not be accessed concurrently. Existing content is not truncated, the initial position is not
-    /// restored, and a failure or cancellation can leave partial archive bytes. For a reusable seekable stream, callers
-    /// should position and truncate it before writing. The destination is not touched when domain or media-collision
-    /// validation fails. Path-backed media is streamed and SHA-256 verified against its registration-time digest.
+    /// The caller owns and must eventually dispose <paramref name="destination"/>; this method leaves it open on success or
+    /// failure. Seeking is not required. Archive bytes begin at the current position, the original position is not restored,
+    /// and existing content is not truncated. Before reusing a seekable stream, normally set <c>Position = 0</c> and
+    /// <c>SetLength(0)</c>. Validation and media-collision checks occur before the first write. Failures after output begins
+    /// can leave partial ZIP bytes, so use the path overload when transactional replacement matters. Do not access the stream
+    /// concurrently.
     /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="deck"/> or <paramref name="destination"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException"><paramref name="destination"/> is not writable.</exception>
@@ -132,10 +155,12 @@ public static class AnkiPackageWriter
     /// <param name="cancellationToken">Cancels database creation and asynchronous archive or media I/O.</param>
     /// <returns>A task that completes after the archive and its central directory have been finalized.</returns>
     /// <remarks>
-    /// Use this overload for lossless supported-media read-modify-write workflows. Every registration in
-    /// <see cref="AnkiPackage.Media"/> is combined with media registered on the package's deck hierarchies. The caller
-    /// retains ownership of <paramref name="destination"/>. Seeking is not required. Validation occurs before the stream is
-    /// written, but later failure or cancellation can leave partial archive bytes in the caller-owned stream.
+    /// Use this overload for supported read-modify-write workflows. Every registration in <see cref="AnkiPackage.Media"/>
+    /// is combined with media on all package deck hierarchies. The caller owns and must dispose
+    /// <paramref name="destination"/>; the method leaves it open on success or failure. Seeking is not required. Output
+    /// starts at the current position, existing content is not truncated, and the original position is not restored.
+    /// Validation occurs before the first write, but database, media, cancellation, or I/O failure afterward can leave
+    /// partial ZIP bytes. Use the path overload when an existing artifact must remain unchanged on failure.
     /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="package"/> or <paramref name="destination"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException"><paramref name="package"/> contains no top-level decks, or <paramref name="destination"/> is not writable.</exception>
@@ -159,7 +184,7 @@ public static class AnkiPackageWriter
         await WriteArchiveAsync(plan, destination, cancellationToken).ConfigureAwait(false);
     }
 
-    private static WritePlan CreatePackageWritePlan(AnkiPackage package)
+    private static AnkiPackageWritePlan CreatePackageWritePlan(AnkiPackage package)
     {
         var roots = package.Decks.ToArray();
         if (roots.Length == 0)
@@ -170,10 +195,9 @@ public static class AnkiPackageWriter
         return CreateWritePlan(roots, package.Media.Files);
     }
 
-    private static WritePlan CreateWritePlan(IReadOnlyList<AnkiDeck> roots, IEnumerable<AnkiMediaFile>? packageMedia)
+    private static AnkiPackageWritePlan CreateWritePlan(IReadOnlyList<AnkiDeck> roots, IEnumerable<AnkiMediaFile>? packageMedia)
     {
-        var diagnostics = roots.SelectMany(root => AnkiValidator.Validate(root).Diagnostics).ToArray();
-        var validation = new AnkiValidationResult(diagnostics);
+        var validation = AnkiValidator.Validate(roots);
         if (!validation.IsValid)
         {
             throw new AnkiValidationException(validation);
@@ -193,7 +217,7 @@ public static class AnkiPackageWriter
             AddMedia(mediaByName, media);
         }
 
-        return new WritePlan(roots, mediaByName.Values.OrderBy(media => media.FileName, StringComparer.Ordinal).ToArray());
+        return new AnkiPackageWritePlan(roots, mediaByName.Values.OrderBy(media => media.FileName, StringComparer.Ordinal).ToArray());
     }
 
     private static void AddMedia(Dictionary<string, AnkiMediaFile> mediaByName, AnkiMediaFile media)
@@ -218,7 +242,7 @@ public static class AnkiPackageWriter
         }
     }
 
-    private static async Task WritePathAsync(WritePlan plan, string path, CancellationToken cancellationToken)
+    private static async Task WritePathAsync(AnkiPackageWritePlan plan, string path, CancellationToken cancellationToken)
     {
         var destinationPath = Path.GetFullPath(path);
         var destinationDirectory = Path.GetDirectoryName(destinationPath) ?? Directory.GetCurrentDirectory();
@@ -245,7 +269,7 @@ public static class AnkiPackageWriter
         }
     }
 
-    private static async Task WriteArchiveAsync(WritePlan plan, Stream destination, CancellationToken cancellationToken)
+    private static async Task WriteArchiveAsync(AnkiPackageWritePlan plan, Stream destination, CancellationToken cancellationToken)
     {
         var tempDirectory = Path.Combine(Path.GetTempPath(), "AnkiIO-write-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(tempDirectory);
@@ -300,5 +324,4 @@ public static class AnkiPackageWriter
         }
     }
 
-    private sealed record WritePlan(IReadOnlyList<AnkiDeck> Roots, IReadOnlyList<AnkiMediaFile> Media);
 }

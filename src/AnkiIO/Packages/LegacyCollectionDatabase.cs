@@ -262,7 +262,7 @@ internal static class LegacyCollectionDatabase
         return root.ToJsonString();
     }
 
-    private static string BuildDecksJson(IEnumerable<AnkiDeck> decks, IReadOnlyDictionary<long, string> names, long now)
+    private static string BuildDecksJson(IEnumerable<AnkiDeck> decks, Dictionary<long, string> names, long now)
     {
         var root = new JsonObject();
         foreach (var deck in decks.OrderBy(deck => deck.Id))
