@@ -227,6 +227,19 @@ public sealed class DomainTests
     }
 
     [Fact]
+    public void ClozeHelperRejectsMalformedMarkerBeforeValidDeletion()
+    {
+        var deck = new AnkiDeck("Invalid cloze");
+
+        var exception = Assert.Throws<ArgumentException>(() =>
+            deck.AddClozeNote("{{cx::malformed}} followed by {{c1::valid}}"));
+
+        Assert.Equal("text", exception.ParamName);
+        Assert.Contains("positive numeric index", exception.Message, StringComparison.Ordinal);
+        Assert.Empty(deck.Notes);
+    }
+
+    [Fact]
     public void LowLevelClozeGenerationRejectsUnrepresentableIndexesWithoutOverflowing()
     {
         var deck = new AnkiDeck("Advanced cloze");

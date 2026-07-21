@@ -157,8 +157,9 @@ public sealed partial class AnkiDeck
             var indexStart = markerIndex + marker.Length;
             if (indexStart >= text.Length || text[indexStart] is < '0' or > '9')
             {
-                searchIndex = indexStart;
-                continue;
+                throw new ArgumentException(
+                    "Cloze markers must place a positive numeric index after '{{c', such as '{{c1::answer}}'.",
+                    nameof(text));
             }
 
             var contentSeparator = indexStart;
