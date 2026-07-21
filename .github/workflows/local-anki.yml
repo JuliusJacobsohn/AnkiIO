@@ -7,10 +7,15 @@ jobs:
     runs-on: [self-hosted, windows, anki-compatibility]
     env: { ANKI_LOCAL_COMPATIBILITY: "1" }
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
-        with: { dotnet-version: 8.0.x }
-      - run: dotnet test tests/AnkiIO.CompatibilityTests -c Release --filter Category=LocalAnkiCompatibility --logger "trx;LogFileName=local-anki.trx"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with: { dotnet-version: 10.0.x }
+      - run: dotnet restore tests/AnkiIO.CompatibilityTests --locked-mode
+      - run: dotnet test tests/AnkiIO.CompatibilityTests -c Release --no-restore --filter Category=LocalAnkiCompatibility --logger "trx;LogFileName=local-anki.trx"
+      - uses: actions/upload-artifact@v7
         if: always()
-        with: { name: local-anki-compatibility, path: "**/local-anki.trx" }
+        with:
+          name: local-anki-compatibility
+          path: "**/local-anki.trx"
+          if-no-files-found: warn
+          retention-days: 14

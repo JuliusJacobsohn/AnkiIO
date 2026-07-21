@@ -2,27 +2,36 @@
 
 **[Browse the API documentation →](https://juliusjacobsohn.github.io/AnkiIO/)**
 
-[Sample projects](samples/README.md) · [MIT license](LICENSE)
+[Sample projects](samples/README.md) · [Formats and safety](https://juliusjacobsohn.github.io/AnkiIO/formats_and_safety.html) · [MIT license](LICENSE)
 
-AnkiIO is an experimental, open-source .NET library for building, validating, and round-tripping Anki deck data. It provides a format-independent domain model, deterministic JSON, a CrowdAnki-inspired interchange adapter, media handling, scheduling models, and guarded package I/O.
+AnkiIO is a stable, open-source .NET 8 library for creating, validating, importing, editing, and exporting Anki deck data. Its 1.0 API covers a format-independent deck model, practical helpers for common note types, deterministic JSON, a CrowdAnki-inspired interchange format, media, scheduling state, diagnostics, and guarded legacy APKG I/O.
 
-_Transparency: AnkiIO was built with substantial AI assistance; Julius does not claim sole authorship._
+AnkiIO is maintained by Julius Jacobsohn and was developed with substantial AI assistance.
 
-AnkiIO is not affiliated with, endorsed by, or sponsored by Ankitects, Anki, AnkiDroid, or CrowdAnki. "Anki" is a trademark of Ankitects Pty Ltd.
+AnkiIO is not affiliated with, endorsed by, or sponsored by Ankitects, Anki, AnkiDroid, or CrowdAnki. “Anki” is a trademark of Ankitects Pty Ltd.
 
-## Compatibility target
+## Compatibility and scope
 
-Development is tied to **Anki 26.05** (build `e64c6b1a`) on Windows 11 (build 10.0.26200), collection schema 18, and the v3 scheduler. Portable builds target .NET 8. The package adapter emits the legacy `collection.anki2` APKG representation accepted in an isolated Anki 26.05 backend test; modern `collection.anki21b` emission is not yet claimed.
+The 1.0 compatibility target is deliberately narrow: **Anki 26.05** (build `e64c6b1a`), collection schema 18, and the v3 scheduler. The library targets `net8.0` and can be consumed by .NET 8 or a compatible later runtime. Repository builds use the .NET 10 SDK pinned by `global.json`; consumers do not need .NET 10.
 
-See [formats, compatibility, and safety](https://juliusjacobsohn.github.io/AnkiIO/formats_and_safety.html) before using package I/O.
+APKG export writes the legacy `collection.anki2` representation, which is accepted by the isolated Anki 26.05 compatibility test. Native JSON and CrowdAnki-inspired JSON support documented subsets rather than every field used by every Anki add-on. Unknown native-JSON properties are retained where the API documents preservation.
+
+AnkiIO does not write a live Anki profile. Modern `collection.anki21b` generation, filtered decks, arbitrary schema-18 database mutation, and complete review-log or deck-configuration preservation are outside the 1.0 support boundary. Read [formats, compatibility, and safety](https://juliusjacobsohn.github.io/AnkiIO/formats_and_safety.html) before processing untrusted packages or important data.
 
 ## Install
 
+The repository is prepared as version `1.0.0`; NuGet publication is a separate release action. After the package is published:
+
 ```shell
-dotnet add package AnkiIO --prerelease
+dotnet add package AnkiIO --version 1.0.0
 ```
 
-The package has not been published. Build `0.1.0-alpha.1` locally with `dotnet pack -c Release`.
+To consume a local package from this checkout:
+
+```shell
+dotnet pack src/AnkiIO/AnkiIO.csproj --configuration Release --output artifacts/packages
+dotnet add package AnkiIO --version 1.0.0 --source artifacts/packages
+```
 
 ## Quick start
 
@@ -35,32 +44,38 @@ deck.AddBasicNote("Haus", "house", tags: ["german", "vocabulary"]);
 await AnkiPackageWriter.WriteAsync(deck, "GermanVocabulary.apkg");
 ```
 
-A note stores information; a card is a study prompt generated from a note template. Scheduling belongs to cards. Explicit scheduling is advanced and is rejected when its queue/type combination is inconsistent.
+A note stores information; a card is a study prompt generated from a note template. Scheduling belongs to cards. New cards receive a safe default schedule, while explicit scheduling is validated and rejected when its queue/type combination is inconsistent.
 
-## Features
+## Highlights
 
 - Decks and nested `Parent::Child` hierarchies
-- Notes, ordered fields, note types, templates, CSS, tags, GUIDs, and cards
-- Safe new-card initialization and explicit validated scheduling state
+- Notes, ordered fields, custom note types, card templates, CSS, tags, GUIDs, and cards
+- Helpers for Basic, Basic-and-reversed, and Cloze notes, including safe cloze-markup construction
+- Safe new-card initialization and explicit, validated scheduling state
 - Streaming media ingestion with SHA-256 integrity metadata
 - Deterministic, versioned native JSON and CrowdAnki-inspired JSON
-- Guarded APKG import/export with archive limits and path-traversal defenses
-- Structured validation diagnostics and unknown JSON metadata preservation
-- Read-only installed-Anki detection and opt-in local compatibility testing
+- Guarded APKG import/export with configurable archive limits and path-traversal defenses
+- Structured validation diagnostics and documented unknown-data preservation
+- Read-only installed-Anki detection and opt-in, isolated local compatibility testing
 
-Partial: review log and deck-configuration preservation; legacy APKG scheduling round trips. Unsupported: direct writes to a live collection, modern `collection.anki21b` generation, filtered decks, and arbitrary schema-18 database mutation.
+See the [samples](samples/README.md) for focused programs and the [German–English showcase](samples/AnkiIO.GermanEnglishShowcase/README.md) for a complete custom deck with note types, media, tags, and verification.
 
-## Build and test
+## Build and verify
+
+Install the SDK selected by `global.json`, then run the complete local gate:
 
 ```shell
-dotnet restore
-dotnet build --configuration Release --no-restore
-dotnet test --configuration Release --no-build
-dotnet test --filter Category=LocalAnkiCompatibility
-dotnet pack src/AnkiIO/AnkiIO.csproj --configuration Release
-./build/build-docs.ps1
+./build/build.ps1
 ```
 
-Local-Anki tests are opt-in and use unique temporary workspaces. They never modify the normal profile. The searchable [API reference](https://juliusjacobsohn.github.io/AnkiIO/) is generated by Doxygen from the public source comments, including the source-resident guides, so API and documentation changes travel together.
+That script performs locked restore, formatting verification, a Release build, sample and benchmark builds, portable tests, coverage enforcement, package creation and validation, a clean package-consumer round trip, and a strict Doxygen build. The same checks run in CI on Linux, Windows, and macOS.
 
-Versioning follows Semantic Versioning. Contributions use feature branches, Conventional Commits, pull requests, required CI, and squash merging; see [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under [MIT](LICENSE).
+The local-Anki compatibility suite is intentionally opt-in because it requires an installed Anki instance:
+
+```shell
+dotnet test tests/AnkiIO.CompatibilityTests --configuration Release --filter Category=LocalAnkiCompatibility
+```
+
+Local-Anki tests use unique temporary workspaces and never modify the normal profile. API documentation is generated by Doxygen from source comments and source-resident guides; do not edit generated HTML.
+
+Versioning follows Semantic Versioning. Contributions use focused pull requests and must preserve the documented 1.x compatibility contract; see [CONTRIBUTING.md](CONTRIBUTING.md). Security reports follow [SECURITY.md](SECURITY.md). Licensed under [MIT](LICENSE).

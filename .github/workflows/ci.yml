@@ -1,19 +1,34 @@
 name: CI
+
 on:
-  push: { branches: [main] }
+  push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
+
 permissions:
   contents: read
+
 jobs:
   build-test-pack:
+    name: Build, test, and pack (${{ matrix.os }})
     strategy:
-      matrix: { os: [ubuntu-latest, windows-latest, macos-latest] }
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
-        with: { dotnet-version: 8.0.x }
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+      - name: Restore solution
+        run: dotnet restore AnkiIO.sln --locked-mode
+      - name: Restore samples and benchmarks
+        run: |
+          dotnet restore samples/AnkiIO.Samples/AnkiIO.Samples.csproj --locked-mode
+          dotnet restore samples/AnkiIO.GermanEnglishShowcase/AnkiIO.GermanEnglishShowcase.csproj --locked-mode
+          dotnet restore benchmarks/AnkiIO.Benchmarks/AnkiIO.Benchmarks.csproj --locked-mode
       - name: Resolve package version
         shell: pwsh
         run: |
@@ -23,36 +38,60 @@ jobs:
           if ([string]::IsNullOrWhiteSpace($version)) { throw "Package version resolution returned an empty value." }
           "PACKAGE_VERSION=$version" >> $env:GITHUB_ENV
           "PACKAGE_PATH=artifacts/packages/AnkiIO.$version.nupkg" >> $env:GITHUB_ENV
-      - run: dotnet restore AnkiIO.sln --locked-mode
-      - run: dotnet format AnkiIO.sln --verify-no-changes --no-restore
-      - run: dotnet build AnkiIO.sln -c Release --no-restore
-      - run: dotnet build samples/AnkiIO.Samples/AnkiIO.Samples.csproj -c Release
-      - run: dotnet restore samples/AnkiIO.GermanEnglishShowcase/AnkiIO.GermanEnglishShowcase.csproj --locked-mode
-      - run: dotnet build samples/AnkiIO.GermanEnglishShowcase/AnkiIO.GermanEnglishShowcase.csproj -c Release --no-restore
-      - run: dotnet run --project samples/AnkiIO.GermanEnglishShowcase/AnkiIO.GermanEnglishShowcase.csproj -c Release --no-build -- artifacts/samples/AnkiIO-German-English-Showcase.apkg
-      - run: dotnet build benchmarks/AnkiIO.Benchmarks/AnkiIO.Benchmarks.csproj -c Release
-      - run: dotnet test AnkiIO.sln -c Release --no-build --no-restore --filter "Category!=LocalAnkiCompatibility" --collect:"XPlat Code Coverage" --settings coverlet.runsettings --results-directory artifacts/test-results
-      - run: dotnet tool restore
-      - run: dotnet tool run reportgenerator "-reports:artifacts/test-results/**/coverage.cobertura.xml" "-targetdir:artifacts/coverage" "-reporttypes:Cobertura;Html"
-      - shell: pwsh
-        run: ./build/verify-coverage.ps1 artifacts/coverage/Cobertura.xml 80 60
-      - run: dotnet pack src/AnkiIO/AnkiIO.csproj -c Release --no-build -o artifacts/packages
-      - shell: pwsh
-        run: ./build/validate-package.ps1 $env:PACKAGE_PATH
-      - shell: pwsh
+      - name: Audit dependencies
+        shell: pwsh
+        run: ./build/verify-dependencies.ps1 @('AnkiIO.sln', 'samples/AnkiIO.Samples/AnkiIO.Samples.csproj', 'samples/AnkiIO.GermanEnglishShowcase/AnkiIO.GermanEnglishShowcase.csproj', 'benchmarks/AnkiIO.Benchmarks/AnkiIO.Benchmarks.csproj')
+      - name: Verify formatting
+        run: dotnet format AnkiIO.sln --verify-no-changes --no-restore
+      - name: Build solution
+        run: dotnet build AnkiIO.sln --configuration Release --no-restore
+      - name: Build samples and benchmarks
+        run: |
+          dotnet build samples/AnkiIO.Samples/AnkiIO.Samples.csproj --configuration Release --no-restore
+          dotnet build samples/AnkiIO.GermanEnglishShowcase/AnkiIO.GermanEnglishShowcase.csproj --configuration Release --no-restore
+          dotnet build benchmarks/AnkiIO.Benchmarks/AnkiIO.Benchmarks.csproj --configuration Release --no-restore
+      - name: Generate and verify showcase deck
+        run: dotnet run --project samples/AnkiIO.GermanEnglishShowcase/AnkiIO.GermanEnglishShowcase.csproj --configuration Release --no-build -- artifacts/samples/AnkiIO-German-English-Showcase.apkg
+      - name: Run portable tests with coverage
+        run: dotnet test AnkiIO.sln --configuration Release --no-build --no-restore --filter "Category!=LocalAnkiCompatibility" --collect:"XPlat Code Coverage" --settings coverlet.runsettings --results-directory artifacts/test-results
+      - name: Build merged coverage report
+        run: |
+          dotnet tool restore
+          dotnet tool run reportgenerator "-reports:artifacts/test-results/**/coverage.cobertura.xml" "-targetdir:artifacts/coverage" "-reporttypes:Cobertura;Html"
+      - name: Enforce coverage
+        shell: pwsh
+        run: ./build/verify-coverage.ps1 artifacts/coverage/Cobertura.xml
+      - name: Pack
+        run: dotnet pack src/AnkiIO/AnkiIO.csproj --configuration Release --no-build --output artifacts/packages
+      - name: Validate package and symbols
+        shell: pwsh
+        run: ./build/validate-package.ps1 $env:PACKAGE_PATH $env:PACKAGE_VERSION
+      - name: Test clean package consumer
+        shell: pwsh
         run: ./build/test-package-consumer.ps1 artifacts/packages $env:PACKAGE_VERSION
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
-        with: { name: "artifacts-${{ matrix.os }}", path: artifacts }
+        with:
+          name: artifacts-${{ matrix.os }}
+          path: artifacts
+          if-no-files-found: warn
+          retention-days: 7
+
   docs:
+    name: Strict API documentation
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: 8.0.x
-      - shell: pwsh
+          dotnet-version: 10.0.x
+      - name: Build Doxygen documentation
+        shell: pwsh
         run: ./build/build-docs.ps1
       - uses: actions/upload-artifact@v7
         if: always()
-        with: { name: documentation, path: artifacts/docs/html }
+        with:
+          name: documentation
+          path: artifacts/docs/html
+          if-no-files-found: warn
+          retention-days: 7

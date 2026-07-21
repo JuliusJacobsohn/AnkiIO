@@ -1,22 +1,38 @@
 name: Release
+
 on:
   workflow_dispatch:
     inputs:
-      tag: { description: SemVer tag, required: true, default: v0.1.0-alpha.1, type: string }
-      create_release: { description: Create GitHub prerelease, required: true, default: false, type: boolean }
-      publish: { description: Publish to NuGet, required: true, default: false, type: boolean }
-permissions: { contents: write }
+      tag:
+        description: SemVer tag matching the package version
+        required: true
+        default: v1.0.0
+        type: string
+      create_release:
+        description: Create a stable GitHub release
+        required: true
+        default: false
+        type: boolean
+      publish:
+        description: Publish packages to NuGet
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
 jobs:
   release:
+    name: Verify and prepare ${{ inputs.tag }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with: { fetch-depth: 0 }
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@v7
         with:
-          dotnet-version: |
-            8.0.x
-            10.0.301
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
       - name: Resolve and validate release identity
         shell: pwsh
         env:
@@ -40,19 +56,25 @@ jobs:
           "PACKAGE_VERSION=$version" >> $env:GITHUB_ENV
           "PACKAGE_PATH=artifacts/release/AnkiIO.$version.nupkg" >> $env:GITHUB_ENV
           "RELEASE_TAG=$expectedTag" >> $env:GITHUB_ENV
-      - run: dotnet restore AnkiIO.sln --locked-mode
-      - run: dotnet build -c Release --no-restore
-      - run: dotnet test -c Release --no-build --filter "Category!=LocalAnkiCompatibility"
-      - shell: pwsh
-        run: ./build/build-docs.ps1
-      - run: dotnet pack src/AnkiIO/AnkiIO.csproj -c Release --no-build -o artifacts/release
-      - shell: pwsh
-        run: ./build/validate-package.ps1 $env:PACKAGE_PATH
-      - shell: pwsh
-        run: ./build/test-package-consumer.ps1 artifacts/release $env:PACKAGE_VERSION
-      - name: Checksums
-        run: sha256sum artifacts/release/* > artifacts/release/SHA256SUMS
-      - name: Bind release tag to built commit
+      - name: Run complete release gate
+        shell: pwsh
+        run: ./build/build.ps1
+      - name: Assemble and revalidate release payload
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path artifacts/release -Force | Out-Null
+          Copy-Item -LiteralPath "artifacts/packages/AnkiIO.$env:PACKAGE_VERSION.nupkg" -Destination artifacts/release
+          Copy-Item -LiteralPath "artifacts/packages/AnkiIO.$env:PACKAGE_VERSION.snupkg" -Destination artifacts/release
+          ./build/validate-package.ps1 $env:PACKAGE_PATH $env:PACKAGE_VERSION
+          ./build/test-package-consumer.ps1 artifacts/release $env:PACKAGE_VERSION
+      - name: Create checksums
+        shell: pwsh
+        run: |
+          $lines = Get-ChildItem -LiteralPath artifacts/release -File |
+            Sort-Object Name |
+            ForEach-Object { "{0}  {1}" -f (Get-FileHash -Algorithm SHA256 -LiteralPath $_.FullName).Hash.ToLowerInvariant(), $_.Name }
+          [System.IO.File]::WriteAllLines((Join-Path $PWD "artifacts/release/SHA256SUMS"), $lines, [System.Text.UTF8Encoding]::new($false))
+      - name: Bind release tag to verified commit
         if: inputs.publish || inputs.create_release
         shell: pwsh
         run: |
@@ -68,13 +90,20 @@ jobs:
             git push origin "refs/tags/$env:RELEASE_TAG"
             if ($LASTEXITCODE -ne 0) { throw "Publishing release tag failed." }
           }
-      - name: Publish NuGet
+      - name: Publish NuGet packages
         if: inputs.publish
-        env: { NUGET_API_KEY: "${{ secrets.NUGET_API_KEY }}" }
-        run: dotnet nuget push "artifacts/release/*.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json
-      - name: Create GitHub prerelease
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push "artifacts/release/AnkiIO.${PACKAGE_VERSION}.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json
+      - name: Create stable GitHub release
         if: inputs.create_release
-        env: { GH_TOKEN: "${{ github.token }}" }
-        run: gh release create "$RELEASE_TAG" artifacts/release/* --generate-notes --prerelease --verify-tag
-      - uses: actions/upload-artifact@v4
-        with: { name: release-dry-run, path: artifacts/release }
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$RELEASE_TAG" artifacts/release/* --title "AnkiIO $PACKAGE_VERSION" --generate-notes --verify-tag
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: release-${{ inputs.tag }}
+          path: artifacts/release
+          if-no-files-found: warn
+          retention-days: 14

@@ -11,10 +11,14 @@ jobs:
       - uses: actions/checkout@v7
         with: { fetch-depth: 0 }
       - uses: actions/setup-dotnet@v6
-        with: { dotnet-version: 8.0.x }
-      - run: dotnet restore
-      - run: dotnet list package --vulnerable --include-transitive
-      - run: dotnet test -c Release --filter "FullyQualifiedName~PackageTests"
+        with: { dotnet-version: 10.0.x }
+      - run: dotnet restore AnkiIO.sln --locked-mode
+      - run: dotnet restore samples/AnkiIO.Samples/AnkiIO.Samples.csproj --locked-mode
+      - run: dotnet restore samples/AnkiIO.GermanEnglishShowcase/AnkiIO.GermanEnglishShowcase.csproj --locked-mode
+      - run: dotnet restore benchmarks/AnkiIO.Benchmarks/AnkiIO.Benchmarks.csproj --locked-mode
+      - shell: pwsh
+        run: ./build/verify-dependencies.ps1 @('AnkiIO.sln', 'samples/AnkiIO.Samples/AnkiIO.Samples.csproj', 'samples/AnkiIO.GermanEnglishShowcase/AnkiIO.GermanEnglishShowcase.csproj', 'benchmarks/AnkiIO.Benchmarks/AnkiIO.Benchmarks.csproj')
+      - run: dotnet test AnkiIO.sln -c Release --no-restore --filter "FullyQualifiedName~PackageTests"
       - uses: gitleaks/gitleaks-action@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -94,6 +94,7 @@ try {
         (Join-Path $htmlRoot "index.html"),
         (Join-Path $htmlRoot "annotated.html"),
         (Join-Path $htmlRoot "search/searchdata.js"),
+        (Join-Path $htmlRoot "ankiio-doxygen.css"),
         (Join-Path $htmlRoot "getting_started.html"),
         (Join-Path $htmlRoot "anki_concepts.html"),
         (Join-Path $htmlRoot "formats_and_safety.html")
@@ -102,6 +103,15 @@ try {
         if (-not (Test-Path -LiteralPath $requiredFile)) {
             throw "Doxygen output is incomplete; expected '$requiredFile'."
         }
+    }
+
+    $homePage = Get-Content -Raw -LiteralPath (Join-Path $htmlRoot "index.html")
+    if ($homePage -notmatch 'ankiio-doxygen\.css') {
+        throw "Doxygen output does not reference the project stylesheet."
+    }
+    $projectStyles = Get-Content -Raw -LiteralPath (Join-Path $htmlRoot "ankiio-doxygen.css")
+    if ($projectStyles -notmatch '#projectlogo' -or $projectStyles -notmatch 'max-height:\s*48px') {
+        throw "Doxygen project-logo constraints are missing from the generated stylesheet."
     }
 
     $classIndex = Get-Content -Raw -LiteralPath (Join-Path $htmlRoot "annotated.html")

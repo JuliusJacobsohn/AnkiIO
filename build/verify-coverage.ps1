@@ -1,7 +1,7 @@
 param(
     [Parameter(Mandatory = $true)][string]$CoberturaPath,
-    [double]$MinimumLinePercent = 80,
-    [double]$MinimumBranchPercent = 60
+    [double]$MinimumLinePercent = 95,
+    [double]$MinimumBranchPercent = 85
 )
 $ErrorActionPreference = "Stop"
 [xml]$report = Get-Content -Raw -LiteralPath $CoberturaPath
