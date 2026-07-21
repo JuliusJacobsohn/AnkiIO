@@ -13,6 +13,12 @@ dotnet build AnkiIO.sln --configuration $Configuration --no-restore
 Assert-NativeSuccess "Solution build"
 dotnet build samples/AnkiIO.Samples/AnkiIO.Samples.csproj --configuration $Configuration
 Assert-NativeSuccess "Sample build"
+dotnet restore samples/AnkiIO.GermanEnglishShowcase/AnkiIO.GermanEnglishShowcase.csproj --locked-mode
+Assert-NativeSuccess "German-English showcase restore"
+dotnet build samples/AnkiIO.GermanEnglishShowcase/AnkiIO.GermanEnglishShowcase.csproj --configuration $Configuration --no-restore
+Assert-NativeSuccess "German-English showcase build"
+dotnet run --project samples/AnkiIO.GermanEnglishShowcase/AnkiIO.GermanEnglishShowcase.csproj --configuration $Configuration --no-build -- artifacts/samples/AnkiIO-German-English-Showcase.apkg
+Assert-NativeSuccess "German-English showcase generation and verification"
 dotnet build benchmarks/AnkiIO.Benchmarks/AnkiIO.Benchmarks.csproj --configuration $Configuration
 Assert-NativeSuccess "Benchmark build"
 dotnet test AnkiIO.sln --configuration $Configuration --no-build --no-restore --filter "Category!=LocalAnkiCompatibility"

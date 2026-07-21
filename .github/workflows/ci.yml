@@ -27,6 +27,9 @@ jobs:
       - run: dotnet format AnkiIO.sln --verify-no-changes --no-restore
       - run: dotnet build AnkiIO.sln -c Release --no-restore
       - run: dotnet build samples/AnkiIO.Samples/AnkiIO.Samples.csproj -c Release
+      - run: dotnet restore samples/AnkiIO.GermanEnglishShowcase/AnkiIO.GermanEnglishShowcase.csproj --locked-mode
+      - run: dotnet build samples/AnkiIO.GermanEnglishShowcase/AnkiIO.GermanEnglishShowcase.csproj -c Release --no-restore
+      - run: dotnet run --project samples/AnkiIO.GermanEnglishShowcase/AnkiIO.GermanEnglishShowcase.csproj -c Release --no-build -- artifacts/samples/AnkiIO-German-English-Showcase.apkg
       - run: dotnet build benchmarks/AnkiIO.Benchmarks/AnkiIO.Benchmarks.csproj -c Release
       - run: dotnet test AnkiIO.sln -c Release --no-build --no-restore --filter "Category!=LocalAnkiCompatibility" --collect:"XPlat Code Coverage" --settings coverlet.runsettings --results-directory artifacts/test-results
       - run: dotnet tool restore

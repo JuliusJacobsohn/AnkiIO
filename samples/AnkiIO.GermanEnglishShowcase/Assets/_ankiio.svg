@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="AnkiIO">
+  <title>AnkiIO</title>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b2b5b"/>
+      <stop offset="1" stop-color="#06162f"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#0284c7"/>
+    </linearGradient>
+  </defs>
+  <rect x="3" y="3" width="122" height="122" rx="28" fill="url(#background)" stroke="#164e8a" stroke-width="6"/>
+  <path d="m43 18 8 18 20 2-15 13 4 20-17-10-18 10 5-20-16-13 21-2Z" fill="#fff" stroke="url(#blue)" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M33 91h25M45.5 78v26" stroke="#fbbf24" stroke-width="8" stroke-linecap="round"/>
+  <path d="M76 78v27" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="103" cy="91.5" r="14" fill="none" stroke="#fff" stroke-width="9"/>
+</svg>

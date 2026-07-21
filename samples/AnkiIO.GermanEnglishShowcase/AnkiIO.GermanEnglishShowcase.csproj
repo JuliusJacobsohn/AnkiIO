@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\AnkiIO\AnkiIO.csproj" />
+    <None Include="Assets\_ankiio.svg" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
