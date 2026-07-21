@@ -3,10 +3,21 @@ using System.Text.Json.Serialization;
 
 namespace AnkiIO;
 
-/// <summary>Reads and writes AnkiIO's deterministic, versioned native JSON format.</summary>
+/// <summary>Serializes complete deck hierarchies using AnkiIO's deterministic, versioned native JSON format.</summary>
+/// <remarks>
+/// Native JSON is AnkiIO's loss-minimizing text interchange format for modeled decks, note types, notes, generated cards,
+/// scheduling, and review history. It is an AnkiIO format, not an Anki package or CrowdAnki document. Version 1 does not
+/// embed media payloads; transfer files from <see cref="AnkiDeck.Media"/> separately. Unknown properties are retained only
+/// on deck objects through <see cref="AnkiDeck.UnknownData"/>. Unknown document, note-type, note, card, and scheduling
+/// properties are ignored during import and are not reproduced.
+/// </remarks>
 public static class AnkiJsonSerializer
 {
-    /// <summary>Gets the current native JSON format version.</summary>
+    /// <summary>Identifies the native JSON schema emitted and accepted by this release.</summary>
+    /// <remarks>
+    /// The value is written to the top-level <c>formatVersion</c> property. Readers reject other versions instead of
+    /// attempting an implicit migration.
+    /// </remarks>
     public const int CurrentFormatVersion = 1;
 
     private static readonly JsonSerializerOptions Options = new()
@@ -16,8 +27,18 @@ public static class AnkiJsonSerializer
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
     };
 
-    /// <summary>Serializes a validated deck hierarchy to culture-invariant JSON.</summary>
-    /// <exception cref="AnkiValidationException">The hierarchy contains unsafe or inconsistent data.</exception>
+    /// <summary>Serializes a validated deck hierarchy to a culture-invariant JSON string.</summary>
+    /// <param name="deck">The root deck whose entire descendant hierarchy will be serialized.</param>
+    /// <returns>
+    /// Indented UTF-16 JSON using camel-case property names and ending with a single line-feed character.
+    /// </returns>
+    /// <remarks>
+    /// Note types, notes, tags, review records, subdecks, metadata keys, and extension-data keys are ordered before writing,
+    /// so an unchanged hierarchy produces stable text. The method does not mutate <paramref name="deck"/>. Media filenames
+    /// and bytes in <see cref="AnkiDeck.Media"/> are not included in native JSON version 1.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException"><paramref name="deck"/> is <see langword="null"/>.</exception>
+    /// <exception cref="AnkiValidationException">The hierarchy contains one or more error-severity validation diagnostics.</exception>
     public static string Serialize(AnkiDeck deck)
     {
         ArgumentNullException.ThrowIfNull(deck);
@@ -25,9 +46,23 @@ public static class AnkiJsonSerializer
         return JsonSerializer.Serialize(ToDocument(deck), Options) + "\n";
     }
 
-    /// <summary>Deserializes native JSON and rejects unsupported versions or invalid content.</summary>
-    /// <exception cref="JsonException">The document is malformed or unsupported.</exception>
-    /// <exception cref="AnkiValidationException">The represented hierarchy violates domain invariants.</exception>
+    /// <summary>Deserializes an AnkiIO native JSON document and validates the reconstructed hierarchy.</summary>
+    /// <param name="json">A complete native JSON document encoded as a .NET string.</param>
+    /// <returns>A new, mutable root deck containing the represented hierarchy.</returns>
+    /// <remarks>
+    /// The method accepts only <see cref="CurrentFormatVersion"/>. Note types are reconstructed first and shared by notes
+    /// that reference the same ID. Media payloads are not represented by version 1, so the returned root has an empty media
+    /// collection. Unrecognized deck-object properties are cloned into <see cref="AnkiDeck.UnknownData"/> for round trips.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException"><paramref name="json"/> is <see langword="null"/>.</exception>
+    /// <exception cref="JsonException">
+    /// <paramref name="json"/> is empty or malformed, declares an unsupported format version, omits its root deck, references
+    /// a missing note type, or gives a note a field count inconsistent with its note type.
+    /// </exception>
+    /// <exception cref="ArgumentException">
+    /// The document contains duplicate note-type IDs or values that cannot form valid AnkiIO domain objects.
+    /// </exception>
+    /// <exception cref="AnkiValidationException">The reconstructed hierarchy contains error-severity validation diagnostics.</exception>
     public static AnkiDeck Deserialize(string json)
     {
         ArgumentNullException.ThrowIfNull(json);
@@ -43,7 +78,22 @@ public static class AnkiJsonSerializer
         return deck;
     }
 
-    /// <summary>Writes native JSON asynchronously. The caller retains ownership of the stream.</summary>
+    /// <summary>Asynchronously writes a validated hierarchy as UTF-8 native JSON.</summary>
+    /// <param name="deck">The root deck whose entire descendant hierarchy will be serialized.</param>
+    /// <param name="destination">A writable stream positioned where the JSON document should begin.</param>
+    /// <param name="cancellationToken">A token that can cancel asynchronous JSON serialization and stream writes.</param>
+    /// <returns>A task that completes after the JSON document has been written.</returns>
+    /// <remarks>
+    /// The caller retains ownership of <paramref name="destination"/>. This method neither closes nor rewinds the stream and
+    /// does not append the trailing line feed produced by <see cref="Serialize"/>. It validates before serialization and does
+    /// not mutate <paramref name="deck"/>. Native JSON version 1 does not include media payloads.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException"><paramref name="deck"/> or <paramref name="destination"/> is <see langword="null"/>.</exception>
+    /// <exception cref="AnkiValidationException">The hierarchy contains one or more error-severity validation diagnostics.</exception>
+    /// <exception cref="OperationCanceledException"><paramref name="cancellationToken"/> is canceled before the operation completes.</exception>
+    /// <exception cref="NotSupportedException"><paramref name="destination"/> does not support writing.</exception>
+    /// <exception cref="ObjectDisposedException"><paramref name="destination"/> is closed.</exception>
+    /// <exception cref="IOException">An I/O error occurs while writing the stream.</exception>
     public static async Task WriteAsync(AnkiDeck deck, Stream destination, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(destination);
@@ -51,7 +101,28 @@ public static class AnkiJsonSerializer
         await JsonSerializer.SerializeAsync(destination, ToDocument(deck), Options, cancellationToken).ConfigureAwait(false);
     }
 
-    /// <summary>Reads native JSON asynchronously. The caller retains ownership of the stream.</summary>
+    /// <summary>Asynchronously reads and validates a native JSON hierarchy from a UTF-8 stream.</summary>
+    /// <param name="source">A readable stream positioned at the beginning of a native JSON document.</param>
+    /// <param name="cancellationToken">A token that can cancel asynchronous JSON parsing and stream reads.</param>
+    /// <returns>A task whose result is a new, mutable root deck containing the represented hierarchy.</returns>
+    /// <remarks>
+    /// The caller retains ownership of <paramref name="source"/>. This method neither closes nor rewinds the stream; reading
+    /// starts at its current position. Only <see cref="CurrentFormatVersion"/> is accepted. Version 1 returns an empty media
+    /// collection because it does not embed media payloads.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="JsonException">
+    /// The stream is empty, contains malformed JSON, declares an unsupported format version, omits its root deck, references
+    /// a missing note type, or gives a note a field count inconsistent with its note type.
+    /// </exception>
+    /// <exception cref="ArgumentException">
+    /// The document contains duplicate note-type IDs or values that cannot form valid AnkiIO domain objects.
+    /// </exception>
+    /// <exception cref="AnkiValidationException">The reconstructed hierarchy contains error-severity validation diagnostics.</exception>
+    /// <exception cref="OperationCanceledException"><paramref name="cancellationToken"/> is canceled before the operation completes.</exception>
+    /// <exception cref="NotSupportedException"><paramref name="source"/> does not support reading.</exception>
+    /// <exception cref="ObjectDisposedException"><paramref name="source"/> is closed.</exception>
+    /// <exception cref="IOException">An I/O error occurs while reading the stream.</exception>
     public static async Task<AnkiDeck> ReadAsync(Stream source, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -117,12 +188,12 @@ public static class AnkiJsonSerializer
         var type = new AnkiNoteType(value.Name, value.Kind, value.Id) { Css = value.Css };
         foreach (var field in value.Fields)
         {
-            type.AddField(field.Name);
+            type.AddConfiguredField(field);
         }
 
         foreach (var template in value.Templates)
         {
-            type.AddTemplate(template.Name, template.QuestionFormat, template.AnswerFormat);
+            type.AddConfiguredTemplate(template);
         }
 
         return type;
@@ -238,13 +309,23 @@ public static class AnkiJsonSerializer
     }
 }
 
-/// <summary>Signals that inspectable validation errors prevent a safe operation.</summary>
+/// <summary>Represents a failed operation caused by one or more structured, error-severity validation diagnostics.</summary>
+/// <remarks>
+/// Inspect <see cref="ValidationResult"/> instead of parsing <see cref="Exception.Message"/>. The supplied validation result
+/// is retained by reference and is not recalculated when the underlying mutable deck graph later changes.
+/// </remarks>
 public sealed class AnkiValidationException : Exception
 {
-    /// <summary>Initializes the exception from a validation pass.</summary>
+    /// <summary>Initializes an exception from a completed validation pass.</summary>
+    /// <param name="validationResult">The structured validation result that prevented the operation.</param>
+    /// <remarks>
+    /// The exception message contains the number of error-severity diagnostics; warnings and informational diagnostics remain
+    /// available through <see cref="ValidationResult"/>.
+    /// </remarks>
     public AnkiValidationException(AnkiValidationResult validationResult)
         : base($"Anki content validation failed with {validationResult.Diagnostics.Count(value => value.Severity == AnkiDiagnosticSeverity.Error)} error(s).") => ValidationResult = validationResult;
 
-    /// <summary>Gets the complete structured validation result.</summary>
+    /// <summary>Gets the complete structured validation result associated with the failed operation.</summary>
+    /// <value>The same validation-result instance supplied to the constructor.</value>
     public AnkiValidationResult ValidationResult { get; }
 }

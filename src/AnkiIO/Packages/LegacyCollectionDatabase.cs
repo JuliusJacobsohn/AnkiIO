@@ -277,8 +277,30 @@ internal static class LegacyCollectionDatabase
             var value = pair.Value?.AsObject() ?? throw new InvalidDataException("Null note type.");
             var id = value["id"]?.GetValue<long>() ?? long.Parse(pair.Key, CultureInfo.InvariantCulture);
             var type = new AnkiNoteType(value["name"]?.GetValue<string>() ?? "Unnamed", (AnkiNoteTypeKind)(value["type"]?.GetValue<int>() ?? 0), id) { Css = value["css"]?.GetValue<string>() ?? string.Empty };
-            foreach (var field in value["flds"]?.AsArray() ?? []) type.AddField(field?["name"]?.GetValue<string>() ?? throw new InvalidDataException("Unnamed field."));
-            foreach (var template in value["tmpls"]?.AsArray() ?? []) type.AddTemplate(template?["name"]?.GetValue<string>() ?? "Card", template?["qfmt"]?.GetValue<string>() ?? string.Empty, template?["afmt"]?.GetValue<string>() ?? string.Empty);
+            foreach (var fieldNode in value["flds"]?.AsArray() ?? [])
+            {
+                var field = fieldNode?.AsObject() ?? throw new InvalidDataException("Null field.");
+                type.AddConfiguredField(new AnkiField(
+                    field["name"]?.GetValue<string>() ?? throw new InvalidDataException("Unnamed field."),
+                    IsRightToLeft: field["rtl"]?.GetValue<bool>() ?? false,
+                    IsSticky: field["sticky"]?.GetValue<bool>() ?? false,
+                    Font: field["font"]?.GetValue<string>() ?? "Arial",
+                    FontSize: field["size"]?.GetValue<int>() ?? 20));
+            }
+
+            foreach (var templateNode in value["tmpls"]?.AsArray() ?? [])
+            {
+                var template = templateNode?.AsObject() ?? throw new InvalidDataException("Null template.");
+                var browserQuestion = template["bqfmt"]?.GetValue<string>();
+                var browserAnswer = template["bafmt"]?.GetValue<string>();
+                type.AddConfiguredTemplate(new AnkiCardTemplate(
+                    template["name"]?.GetValue<string>() ?? "Card",
+                    template["qfmt"]?.GetValue<string>() ?? string.Empty,
+                    template["afmt"]?.GetValue<string>() ?? string.Empty,
+                    string.IsNullOrEmpty(browserQuestion) ? null : browserQuestion,
+                    string.IsNullOrEmpty(browserAnswer) ? null : browserAnswer));
+            }
+
             result.Add(id, type);
         }
 

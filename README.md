@@ -5,7 +5,7 @@
 
 AnkiIO is an experimental, open-source .NET library for building, validating, and round-tripping Anki deck data. It provides a format-independent domain model, deterministic JSON, a CrowdAnki-inspired interchange adapter, media handling, scheduling models, and guarded package I/O.
 
-AnkiIO is not affiliated with, endorsed by, or sponsored by Ankitects, Anki, AnkiDroid, or CrowdAnki. “Anki” is a trademark of Ankitects Pty Ltd.
+AnkiIO is not affiliated with, endorsed by, or sponsored by Ankitects, Anki, AnkiDroid, or CrowdAnki. "Anki" is a trademark of Ankitects Pty Ltd.
 
 ## Compatibility target
 
@@ -27,12 +27,7 @@ The package has not been published. Build `0.1.0-alpha.1` locally with `dotnet p
 using AnkiIO;
 
 var deck = new AnkiDeck("German Vocabulary");
-var basic = AnkiNoteTypes.CreateBasic();
-deck.AddNote(basic, new Dictionary<string, string>
-{
-    ["Front"] = "Haus",
-    ["Back"] = "house",
-}, ["german", "vocabulary"]);
+deck.AddBasicNote("Haus", "house", tags: ["german", "vocabulary"]);
 
 await AnkiPackageWriter.WriteAsync(deck, "GermanVocabulary.apkg");
 ```
@@ -60,8 +55,9 @@ dotnet build --configuration Release --no-restore
 dotnet test --configuration Release --no-build
 dotnet test --filter Category=LocalAnkiCompatibility
 dotnet pack src/AnkiIO/AnkiIO.csproj --configuration Release
+./build/build-docs.ps1
 ```
 
-Local-Anki tests are opt-in and use unique temporary workspaces. They never modify the normal profile. See [local testing safety](docs/local-anki-testing.md), [samples](samples/README.md), and the [documentation index](docs/index.md).
+Local-Anki tests are opt-in and use unique temporary workspaces. They never modify the normal profile. The comprehensive API reference is generated from the compiled public surface and XML comments—generated API metadata is not committed. See [local testing safety](docs/local-anki-testing.md), [samples](samples/README.md), and the [documentation index](docs/index.md).
 
 Versioning follows Semantic Versioning. Contributions use feature branches, Conventional Commits, pull requests, required CI, and squash merging; see [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under [MIT](LICENSE).

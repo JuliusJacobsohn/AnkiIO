@@ -14,8 +14,8 @@ internal static class Scenarios
     {
         var root = new AnkiDeck("Languages");
         var german = root.AddSubdeck("German");
-        german.AddSubdeck("Verbs").AddNote(AnkiNoteTypes.CreateBasic(), Fields("gehen", "to go"));
-        root.AddSubdeck("Spanish").AddNote(AnkiNoteTypes.CreateBasic(), Fields("casa", "house"));
+        german.AddSubdeck("Verbs").AddBasicNote("gehen", "to go");
+        root.AddSubdeck("Spanish").AddBasicNote("casa", "house");
         await AnkiPackageWriter.WriteAsync(root, Output(args, "nested.apkg"));
     }
 
@@ -37,7 +37,7 @@ internal static class Scenarios
     public static Task ReversedAsync(string[] args)
     {
         var deck = new AnkiDeck("Two directions");
-        var note = deck.AddNote(AnkiNoteTypes.CreateBasicAndReversed(), Fields("Haus", "house"));
+        var note = deck.AddBasicAndReversedNote("Haus", "house");
         Console.WriteLine($"One note generated {note.Cards.Count} cards.");
         return Task.CompletedTask;
     }
@@ -45,7 +45,7 @@ internal static class Scenarios
     public static Task ClozeAsync(string[] args)
     {
         var deck = new AnkiDeck("Cloze");
-        var note = deck.AddNote(AnkiNoteTypes.CreateCloze(), new Dictionary<string, string> { ["Text"] = "{{c1::Berlin}} is in {{c2::Germany}}.", ["Extra"] = "Geography" });
+        var note = deck.AddClozeNote($"{AnkiCloze.Wrap("Berlin")} is in {AnkiCloze.Wrap("Germany", 2)}.", "Geography");
         Console.WriteLine(string.Join(",", note.Cards.Select(card => card.TemplateOrdinal)));
         return Task.CompletedTask;
     }
@@ -169,7 +169,7 @@ internal static class Scenarios
     private static AnkiDeck BasicDeck()
     {
         var deck = new AnkiDeck("German");
-        deck.AddNote(AnkiNoteTypes.CreateBasic(), Fields("Haus", "house"), ["german"]);
+        deck.AddBasicNote("Haus", "house", ["german"]);
         return deck;
     }
 

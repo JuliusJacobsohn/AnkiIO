@@ -36,6 +36,31 @@ public sealed class JsonTests
     }
 
     [Fact]
+    public void NativeJsonRoundTripPreservesFieldAndBrowserTemplateMetadata()
+    {
+        var noteType = new AnkiNoteType("Arabic", id: 200)
+            .AddConfiguredField(new AnkiField("Prompt", IsRightToLeft: true, IsSticky: true, Font: "Noto Sans Arabic", FontSize: 28))
+            .AddField("Meaning")
+            .AddConfiguredTemplate(new AnkiCardTemplate(
+                "Recognition",
+                "{{Prompt}}",
+                "{{Meaning}}",
+                BrowserQuestionFormat: "Question: {{Prompt}}",
+                BrowserAnswerFormat: "Answer: {{Meaning}}"));
+        var deck = new AnkiDeck("Language", 201);
+        deck.AddNote(
+            noteType,
+            new Dictionary<string, string> { ["Prompt"] = "بيت", ["Meaning"] = "house" },
+            id: 202);
+
+        var restored = AnkiJsonSerializer.Deserialize(AnkiJsonSerializer.Serialize(deck));
+        var restoredType = restored.Notes[0].NoteType;
+
+        Assert.Equal(noteType.Fields, restoredType.Fields);
+        Assert.Equal(noteType.Templates, restoredType.Templates);
+    }
+
+    [Fact]
     public void UnknownDeckPropertyIsPreserved()
     {
         var deck = new AnkiDeck("Deck", 1);

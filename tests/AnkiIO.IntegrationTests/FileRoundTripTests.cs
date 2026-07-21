@@ -11,7 +11,7 @@ public sealed class FileRoundTripTests
         try
         {
             var deck = new AnkiDeck("Synthetic");
-            deck.AddNote(AnkiNoteTypes.CreateBasic(), new Dictionary<string, string> { ["Front"] = "front", ["Back"] = "back" });
+            deck.AddBasicNote("front", "back");
             await AnkiPackageWriter.WriteAsync(deck, output);
             var package = await AnkiPackageReader.ReadAsync(output);
             Assert.Single(package.Notes);
