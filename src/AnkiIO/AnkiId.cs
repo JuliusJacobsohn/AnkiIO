@@ -4,11 +4,12 @@ using System.Text;
 
 namespace AnkiIO;
 
-/// <summary>Creates generated or deterministic positive identifiers suitable for Anki domain objects.</summary>
+/// <summary>Creates positive 64-bit identifiers for new objects or repeatable external imports.</summary>
 /// <remarks>
-/// AnkiIO identifiers are signed 64-bit values. <see cref="New"/> serves newly created in-process objects, while
-/// <see cref="FromStableValue"/> supports repeatable imports from an external identity. Neither method queries or mutates
-/// an installed Anki profile.
+/// Decks, note types, notes, and cards occupy a shared validation namespace in an AnkiIO object graph. Use <see cref="New"/>
+/// for fresh objects and <see cref="FromStableValue"/> when the same external record must receive the same ID on every run.
+/// Neither method reserves IDs in another process, examines caller-supplied IDs, or queries an installed Anki profile;
+/// always validate the complete graph before output.
 /// </remarks>
 public static class AnkiId
 {
@@ -17,8 +18,10 @@ public static class AnkiId
     /// <summary>Creates a positive, process-unique identifier for a new deck, note type, note, or card.</summary>
     /// <returns>A value greater than zero that has not previously been returned by this process.</returns>
     /// <remarks>
-    /// The method is thread-safe and combines a millisecond timestamp-shaped starting point with an atomic counter. It does
-    /// not coordinate across processes or machines; use <see cref="FromStableValue"/> when repeatability is required.
+    /// The method is thread-safe and combines a millisecond timestamp-shaped starting point with an atomic counter. Its
+    /// guarantee is process-local: another process, an explicit imported ID, or an existing Anki collection could use the
+    /// same number. It is also deliberately not repeatable across runs. Use <see cref="FromStableValue"/> for deterministic
+    /// imports and let <see cref="AnkiValidator"/> detect collisions within the graph being written.
     /// </remarks>
     /// <example>
     /// <code>
@@ -34,9 +37,14 @@ public static class AnkiId
     /// <remarks>
     /// The UTF-8 encoding of <paramref name="scope"/>, a null separator, and <paramref name="value"/> is hashed with
     /// SHA-256. The low eight hash bytes are interpreted consistently as little-endian, with the sign bit cleared. Equal
-    /// ordinal inputs always produce equal IDs across supported platforms. As with any fixed-width hash projection, a
-    /// collision is theoretically possible; callers importing adversarial or very large datasets should still validate
-    /// identifier uniqueness.
+    /// ordinal inputs—including case and whitespace—always produce equal IDs across supported platforms.
+    ///
+    /// <para>
+    /// Use different scopes for different object kinds (for example <c>deck</c>, <c>note</c>, and <c>card</c>) so equal
+    /// source keys do not collide across the shared graph namespace. The 63-bit projection has a small but non-zero
+    /// collision probability; validation is still required, especially for adversarial or very large imports. This method
+    /// maps identity only—it does not create a stable Anki note GUID; pass that separately to <see cref="AnkiNote"/>.
+    /// </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="scope"/> or <paramref name="value"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException"><paramref name="scope"/> or <paramref name="value"/> is empty or whitespace.</exception>
