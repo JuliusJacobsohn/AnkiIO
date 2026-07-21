@@ -73,7 +73,7 @@ public sealed class AnkiMediaCollection
     /// <value>
     /// A newly allocated, read-only view ordered by <see cref="AnkiMediaFile.FileName"/> using ordinal comparison.
     /// </value>
-    public IReadOnlyCollection<AnkiMediaFile> Files => files.Values.OrderBy(file => file.FileName, StringComparer.Ordinal).ToArray();
+    public IReadOnlyCollection<AnkiMediaFile> Files => Array.AsReadOnly(files.Values.OrderBy(file => file.FileName, StringComparer.Ordinal).ToArray());
 
     /// <summary>Hashes and registers a local file without loading it into memory.</summary>
     /// <param name="path">

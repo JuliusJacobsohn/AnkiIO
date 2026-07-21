@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using Microsoft.Win32;
 
 namespace AnkiIO;
@@ -290,7 +291,7 @@ public sealed class Anki2605VersionAdapter : IAnkiVersionAdapter
 
     /// <summary>Gets the verified Anki collection schema identifiers.</summary>
     /// <value>A read-only set containing schema <c>18</c>.</value>
-    public IReadOnlySet<int> CollectionSchemas { get; } = new HashSet<int> { 18 };
+    public IReadOnlySet<int> CollectionSchemas { get; } = new[] { 18 }.ToFrozenSet();
 
     /// <summary>Gets the verified scheduler generation.</summary>
     /// <value><c>3</c>, representing Anki's v3 scheduler.</value>
@@ -301,5 +302,5 @@ public sealed class Anki2605VersionAdapter : IAnkiVersionAdapter
     /// A case-sensitive set containing <c>collection.anki2</c>, <c>collection.anki21</c>,
     /// <c>collection.anki21b</c>, <c>meta</c>, and <c>media</c>.
     /// </value>
-    public IReadOnlySet<string> PackageEntries { get; } = new HashSet<string>(StringComparer.Ordinal) { "collection.anki2", "collection.anki21", "collection.anki21b", "meta", "media" };
+    public IReadOnlySet<string> PackageEntries { get; } = new[] { "collection.anki2", "collection.anki21", "collection.anki21b", "meta", "media" }.ToFrozenSet(StringComparer.Ordinal);
 }

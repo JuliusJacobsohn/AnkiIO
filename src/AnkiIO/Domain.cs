@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -13,6 +14,8 @@ public sealed partial class AnkiDeck
 {
     private readonly List<AnkiDeck> subdecks = [];
     private readonly List<AnkiNote> notes = [];
+    private readonly ReadOnlyCollection<AnkiDeck> subdecksView;
+    private readonly ReadOnlyCollection<AnkiNote> notesView;
     private ConventionalNoteTypeCache conventionalNoteTypes;
 
     /// <summary>Initializes a top-level deck with an empty note and subdeck collection.</summary>
@@ -39,6 +42,8 @@ public sealed partial class AnkiDeck
         Name = name;
         Id = id ?? AnkiId.New();
         Media = new AnkiMediaCollection();
+        subdecksView = subdecks.AsReadOnly();
+        notesView = notes.AsReadOnly();
         this.conventionalNoteTypes = conventionalNoteTypes;
     }
 
@@ -76,11 +81,11 @@ public sealed partial class AnkiDeck
 
     /// <summary>Gets direct child decks.</summary>
     /// <value>A live read-only view in insertion order. It is not an immutable snapshot.</value>
-    public IReadOnlyList<AnkiDeck> Subdecks => subdecks;
+    public IReadOnlyList<AnkiDeck> Subdecks => subdecksView;
 
     /// <summary>Gets notes assigned directly to this deck.</summary>
     /// <value>A live read-only view in insertion order. Descendant notes are not included.</value>
-    public IReadOnlyList<AnkiNote> Notes => notes;
+    public IReadOnlyList<AnkiNote> Notes => notesView;
 
     /// <summary>Creates and adds a direct child deck.</summary>
     /// <param name="name">A non-empty local name segment without Anki's <c>::</c> hierarchy separator.</param>
@@ -111,7 +116,7 @@ public sealed partial class AnkiDeck
     /// <summary>Adds a note and generates its cards using safe new-card scheduling.</summary>
     /// <param name="noteType">The fully configured note type.</param>
     /// <param name="fields">Values keyed by field name.</param>
-    /// <param name="tags">Optional note tags.</param>
+    /// <param name="tags">Optional non-empty tags without whitespace; duplicates are collapsed ordinally.</param>
     /// <param name="guid">An optional stable Anki GUID.</param>
     /// <param name="id">A stable note ID, or <see langword="null"/> to generate one.</param>
     /// <returns>The created note.</returns>
@@ -123,8 +128,9 @@ public sealed partial class AnkiDeck
     /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="noteType"/> or <paramref name="fields"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">
-    /// <paramref name="fields"/> contains a name not defined by <paramref name="noteType"/>, or a Cloze <c>Text</c> value
-    /// contains a numeric index outside the range supported by <see cref="int"/>.
+    /// <paramref name="fields"/> contains a name not defined by <paramref name="noteType"/>, <paramref name="tags"/>
+    /// contains a blank or whitespace-containing tag, or a Cloze <c>Text</c> value contains a numeric index outside the
+    /// range supported by <see cref="int"/>.
     /// </exception>
     public AnkiNote AddNote(AnkiNoteType noteType, IReadOnlyDictionary<string, string> fields, IEnumerable<string>? tags = null, string? guid = null, long? id = null)
     {
@@ -151,6 +157,7 @@ public sealed partial class AnkiDeck
 
     internal void AddExistingNote(AnkiNote note)
     {
+        note.AttachToDeck(Id);
         notes.Add(note);
         conventionalNoteTypes.Observe(note.NoteType);
     }
@@ -196,19 +203,32 @@ public sealed partial class AnkiNote
     private readonly Dictionary<string, string> fields;
     private readonly HashSet<string> tags;
     private readonly List<AnkiCard> cards = [];
+    private readonly ReadOnlyDictionary<string, string> fieldsView;
+    private readonly ReadOnlyCollection<AnkiCard> cardsView;
+    private long? generatedDeckId;
+    private bool cardsHaveBeenGenerated;
 
     /// <summary>Initializes a detached note while preserving its stable identity.</summary>
     /// <param name="noteType">The configured note type retained by reference.</param>
     /// <param name="fields">Field values keyed by exact, ordinal field name. Missing defined fields become empty strings.</param>
-    /// <param name="tags">Optional tags; duplicates are collapsed using ordinal comparison.</param>
+    /// <param name="tags">
+    /// Optional non-empty tags without whitespace; duplicates are collapsed using ordinal comparison. The whitespace
+    /// restriction ensures tags can be represented losslessly by legacy Anki package storage.
+    /// </param>
     /// <param name="id">An optional stable numeric note identifier, or <see langword="null"/> to generate one.</param>
     /// <param name="guid">An optional stable Anki import GUID, or <see langword="null"/> or blank to generate one.</param>
-    /// <remarks>This constructor does not generate cards or attach the note to a deck.</remarks>
+    /// <remarks>
+    /// This constructor does not generate cards or attach the note to a deck. After all arguments have been validated, it
+    /// freezes <paramref name="noteType"/> against later field, template, and CSS changes.
+    /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="noteType"/> or <paramref name="fields"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="fields"/> contains a name absent from <paramref name="noteType"/>.</exception>
+    /// <exception cref="ArgumentException">
+    /// <paramref name="fields"/> contains a name absent from <paramref name="noteType"/>, or <paramref name="tags"/>
+    /// contains a blank or whitespace-containing value.
+    /// </exception>
     public AnkiNote(AnkiNoteType noteType, IReadOnlyDictionary<string, string> fields, IEnumerable<string>? tags = null, long? id = null, string? guid = null)
     {
-        NoteType = noteType ?? throw new ArgumentNullException(nameof(noteType));
+        ArgumentNullException.ThrowIfNull(noteType);
         ArgumentNullException.ThrowIfNull(fields);
         Id = id ?? AnkiId.New();
         Guid = string.IsNullOrWhiteSpace(guid) ? System.Guid.NewGuid().ToString("N")[..10] : guid;
@@ -224,7 +244,17 @@ public sealed partial class AnkiNote
             throw new ArgumentException($"Field '{unknown}' is not defined by note type '{noteType.Name}'.", nameof(fields));
         }
 
-        this.tags = new HashSet<string>(tags ?? [], StringComparer.Ordinal);
+        this.tags = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var tag in tags ?? [])
+        {
+            ValidateTag(tag, nameof(tags));
+            this.tags.Add(tag);
+        }
+
+        fieldsView = new ReadOnlyDictionary<string, string>(this.fields);
+        cardsView = cards.AsReadOnly();
+        NoteType = noteType;
+        noteType.Freeze();
     }
 
     /// <summary>Gets the stable numeric note identifier.</summary>
@@ -236,27 +266,28 @@ public sealed partial class AnkiNote
     public string Guid { get; }
 
     /// <summary>Gets the note type that defines field order and card generation.</summary>
-    /// <value>The same mutable instance supplied to the constructor.</value>
+    /// <value>The same instance supplied to the constructor, frozen against structural changes when this note was created.</value>
     public AnkiNoteType NoteType { get; }
 
     /// <summary>Gets field values by name.</summary>
     /// <value>A live read-only view. Use <see cref="SetField"/> to change a value.</value>
-    public IReadOnlyDictionary<string, string> Fields => fields;
+    public IReadOnlyDictionary<string, string> Fields => fieldsView;
 
     /// <summary>Gets tags in ordinal sorted order for deterministic serialization.</summary>
     /// <value>A newly allocated sorted snapshot.</value>
-    public IReadOnlyCollection<string> Tags => tags.Order(StringComparer.Ordinal).ToArray();
+    public IReadOnlyCollection<string> Tags => Array.AsReadOnly(tags.Order(StringComparer.Ordinal).ToArray());
 
     /// <summary>Gets cards currently generated for the note.</summary>
     /// <value>A live read-only view in template or cloze-index order.</value>
-    public IReadOnlyList<AnkiCard> Cards => cards;
+    public IReadOnlyList<AnkiCard> Cards => cardsView;
 
     /// <summary>Replaces a defined field value.</summary>
     /// <param name="name">The exact, case-sensitive field name.</param>
     /// <param name="value">The replacement value, including any Anki HTML or template markup.</param>
     /// <remarks>
-    /// This method does not regenerate cards. In particular, changing a Cloze note's <c>Text</c> can make
-    /// <see cref="Cards"/> stale; create the final cloze text before adding the note to a deck.
+    /// Changing a generated Cloze note's <c>Text</c> immediately reconciles <see cref="Cards"/> with its distinct positive
+    /// indexes. Cards for indexes that remain are retained with their identity, scheduling, flag, and review history;
+    /// removed indexes lose their cards and new indexes receive safe new-card state. Other field changes do not affect cards.
     /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException"><paramref name="name"/> is not defined by <see cref="NoteType"/>.</exception>
@@ -268,16 +299,28 @@ public sealed partial class AnkiNote
             throw new ArgumentException($"Field '{name}' is not defined by note type '{NoteType.Name}'.", nameof(name));
         }
 
+        int[]? clozeOrdinals = null;
+        if (cardsHaveBeenGenerated
+            && NoteType.Kind == AnkiNoteTypeKind.Cloze
+            && string.Equals(name, "Text", StringComparison.Ordinal))
+        {
+            clozeOrdinals = GetClozeOrdinals(value, nameof(value));
+        }
+
         fields[name] = value;
+        if (clozeOrdinals is not null)
+        {
+            ReconcileClozeCards(clozeOrdinals, generatedDeckId ?? throw new InvalidOperationException("The generated note is not associated with a deck."));
+        }
     }
 
-    /// <summary>Adds a non-empty note tag.</summary>
-    /// <param name="tag">The case-sensitive tag text. Existing identical tags are left unchanged.</param>
-    /// <exception cref="ArgumentException"><paramref name="tag"/> is blank.</exception>
+    /// <summary>Adds a non-empty, legacy-package-safe note tag.</summary>
+    /// <param name="tag">The case-sensitive tag text without whitespace. Existing identical tags are left unchanged.</param>
+    /// <exception cref="ArgumentException"><paramref name="tag"/> is blank or contains whitespace.</exception>
     /// <exception cref="ArgumentNullException"><paramref name="tag"/> is <see langword="null"/>.</exception>
     public void AddTag(string tag)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(tag);
+        ValidateTag(tag, nameof(tag));
         tags.Add(tag);
     }
 
@@ -288,38 +331,80 @@ public sealed partial class AnkiNote
 
     internal void GenerateCards(long deckId, string invalidClozeParameterName)
     {
-        cards.Clear();
         if (NoteType.Kind == AnkiNoteTypeKind.Cloze)
         {
             fields.TryGetValue("Text", out var text);
-            var indexes = ClozePattern().Matches(text ?? string.Empty)
-                .Select(match => int.TryParse(
-                    match.Groups[1].Value,
-                    System.Globalization.NumberStyles.None,
-                    System.Globalization.CultureInfo.InvariantCulture,
-                    out var index)
-                    ? index
-                    : throw new ArgumentException(
-                        $"The cloze Text field contains index '{match.Groups[1].Value}', which is outside the range supported by System.Int32.",
-                        invalidClozeParameterName))
-                .Where(index => index > 0)
-                .Distinct()
-                .Order()
-                .ToArray();
-            cards.AddRange(indexes.Select(index => new AnkiCard(AnkiId.New(), Id, deckId, index - 1, AnkiScheduling.New)));
+            var ordinals = GetClozeOrdinals(text ?? string.Empty, invalidClozeParameterName);
+            cards.Clear();
+            cards.AddRange(ordinals.Select(ordinal => CreateNewCard(deckId, ordinal)));
+            generatedDeckId = deckId;
+            cardsHaveBeenGenerated = true;
             return;
         }
 
+        cards.Clear();
         for (var ordinal = 0; ordinal < NoteType.Templates.Count; ordinal++)
         {
-            cards.Add(new AnkiCard(AnkiId.New(), Id, deckId, ordinal, AnkiScheduling.New));
+            cards.Add(CreateNewCard(deckId, ordinal));
         }
+
+        generatedDeckId = deckId;
+        cardsHaveBeenGenerated = true;
     }
 
     internal void RestoreCards(IEnumerable<AnkiCard> restored)
     {
+        ArgumentNullException.ThrowIfNull(restored);
+        var restoredCards = restored.ToArray();
         cards.Clear();
-        cards.AddRange(restored);
+        cards.AddRange(restoredCards);
+        generatedDeckId ??= restoredCards.FirstOrDefault()?.DeckId;
+        cardsHaveBeenGenerated = true;
+    }
+
+    internal void AttachToDeck(long deckId) => generatedDeckId ??= deckId;
+
+    private static int[] GetClozeOrdinals(string text, string invalidClozeParameterName) => ClozePattern().Matches(text)
+        .Select(match => int.TryParse(
+            match.Groups[1].Value,
+            System.Globalization.NumberStyles.None,
+            System.Globalization.CultureInfo.InvariantCulture,
+            out var index)
+            ? index
+            : throw new ArgumentException(
+                $"The cloze Text field contains index '{match.Groups[1].Value}', which is outside the range supported by System.Int32.",
+                invalidClozeParameterName))
+        .Where(index => index > 0)
+        .Select(index => index - 1)
+        .Distinct()
+        .Order()
+        .ToArray();
+
+    private void ReconcileClozeCards(IEnumerable<int> ordinals, long deckId)
+    {
+        var existing = cards
+            .GroupBy(card => card.TemplateOrdinal)
+            .ToDictionary(group => group.Key, group => group.First());
+        var reconciled = ordinals
+            .Select(ordinal => existing.GetValueOrDefault(ordinal) ?? CreateNewCard(deckId, ordinal))
+            .ToArray();
+        cards.Clear();
+        cards.AddRange(reconciled);
+    }
+
+    private AnkiCard CreateNewCard(long deckId, int ordinal) => new(AnkiId.New(), Id, deckId, ordinal, AnkiScheduling.New);
+
+    private static void ValidateTag(string tag, string parameterName)
+    {
+        if (tag is null)
+        {
+            throw new ArgumentNullException(parameterName);
+        }
+
+        if (string.IsNullOrWhiteSpace(tag) || tag.Any(char.IsWhiteSpace))
+        {
+            throw new ArgumentException("Anki tags cannot be blank or contain whitespace.", parameterName);
+        }
     }
 
     [GeneratedRegex(@"\{\{c(\d+)::", RegexOptions.CultureInvariant)]
@@ -333,6 +418,8 @@ public sealed partial class AnkiNote
 /// </remarks>
 public sealed class AnkiCard
 {
+    private AnkiScheduling scheduling;
+
     /// <summary>Initializes a card for advanced import and adapter scenarios.</summary>
     /// <param name="id">The stable numeric card identifier.</param>
     /// <param name="noteId">The identifier of the owning note.</param>
@@ -349,7 +436,7 @@ public sealed class AnkiCard
         NoteId = noteId;
         DeckId = deckId;
         TemplateOrdinal = templateOrdinal;
-        Scheduling = scheduling ?? throw new ArgumentNullException(nameof(scheduling));
+        this.scheduling = scheduling ?? throw new ArgumentNullException(nameof(scheduling));
     }
 
     /// <summary>Gets the stable numeric card identifier.</summary>
@@ -370,7 +457,11 @@ public sealed class AnkiCard
 
     /// <summary>Gets or sets scheduler state.</summary>
     /// <value>A non-null state object. Assignment is unchecked; validation is deferred to <see cref="AnkiValidator"/>.</value>
-    public AnkiScheduling Scheduling { get; set; }
+    public AnkiScheduling Scheduling
+    {
+        get => scheduling;
+        set => scheduling = value ?? throw new ArgumentNullException(nameof(value), "Scheduling cannot be null.");
+    }
 
     /// <summary>Gets or sets Anki's low three-bit color flag value.</summary>
     /// <value>An integer expected to be between zero and seven; validation is deferred.</value>

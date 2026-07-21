@@ -1,3 +1,5 @@
+using System.Collections.ObjectModel;
+
 namespace AnkiIO;
 
 /// <summary>Specifies the strategy an <see cref="AnkiNoteType"/> uses to generate cards from a note.</summary>
@@ -108,9 +110,9 @@ public sealed record AnkiCardTemplate(
 
 /// <summary>Defines the ordered fields, card templates, and shared CSS for a family of Anki notes.</summary>
 /// <remarks>
-/// Instances use controlled mutation while being assembled. Notes retain a reference to their note type, so finish
-/// configuring an instance before passing it to <see cref="AnkiDeck.AddNote"/>. Field and template names are unique
-/// without regard to case, while field lookups in note values use the stored spelling.
+/// Instances use controlled mutation while being assembled. Constructing the first <see cref="AnkiNote"/> freezes the
+/// shared definition permanently, so finish configuring it before passing it to <see cref="AnkiDeck.AddNote"/>. Field and
+/// template names are unique without regard to case, while field lookups in note values use the stored spelling.
 /// </remarks>
 /// <example>
 /// <code>
@@ -126,6 +128,10 @@ public sealed class AnkiNoteType
 
     private readonly List<AnkiField> fields = [];
     private readonly List<AnkiCardTemplate> templates = [];
+    private readonly ReadOnlyCollection<AnkiField> fieldsView;
+    private readonly ReadOnlyCollection<AnkiCardTemplate> templatesView;
+    private string css = DefaultCss;
+    private bool isFrozen;
 
     /// <summary>Initializes an empty note type.</summary>
     /// <param name="name">The non-empty user-visible note-type name.</param>
@@ -142,6 +148,8 @@ public sealed class AnkiNoteType
         Name = name;
         Kind = kind;
         Id = id ?? AnkiId.New();
+        fieldsView = fields.AsReadOnly();
+        templatesView = templates.AsReadOnly();
     }
 
     /// <summary>Gets the stable numeric note-type identifier.</summary>
@@ -158,16 +166,41 @@ public sealed class AnkiNoteType
 
     /// <summary>Gets or sets CSS shared by every card template in this note type.</summary>
     /// <value>Anki-compatible CSS. The default renders centered black Arial text on a white background.</value>
-    /// <remarks>The value is stored verbatim. AnkiIO does not parse, sanitize, or normalize CSS.</remarks>
-    public string Css { get; set; } = DefaultCss;
+    /// <remarks>
+    /// The value is stored verbatim. AnkiIO does not parse, sanitize, or normalize CSS. Assignment is rejected after the
+    /// note type has been used to construct a note so existing notes cannot be invalidated by a later structural change.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The assigned value is <see langword="null"/>.</exception>
+    /// <exception cref="InvalidOperationException">The note type is frozen because a note already uses it.</exception>
+    public string Css
+    {
+        get => css;
+        set
+        {
+            ArgumentNullException.ThrowIfNull(value);
+            EnsureMutable();
+            css = value;
+        }
+    }
+
+    /// <summary>Gets whether fields, templates, and CSS can no longer be changed.</summary>
+    /// <value>
+    /// <see langword="true"/> after this instance has been supplied to an <see cref="AnkiNote"/> constructor; otherwise,
+    /// <see langword="false"/>.
+    /// </value>
+    /// <remarks>
+    /// Freezing is automatic and permanent. It protects every note that retains this shared definition from later changes
+    /// to its field order, card ordinals, or rendering CSS.
+    /// </remarks>
+    public bool IsFrozen => isFrozen;
 
     /// <summary>Gets fields in their storage and display order.</summary>
     /// <value>A read-only view that reflects fields subsequently added to this note type.</value>
-    public IReadOnlyList<AnkiField> Fields => fields;
+    public IReadOnlyList<AnkiField> Fields => fieldsView;
 
     /// <summary>Gets templates in card-ordinal order.</summary>
     /// <value>A read-only view that reflects templates subsequently added to this note type.</value>
-    public IReadOnlyList<AnkiCardTemplate> Templates => templates;
+    public IReadOnlyList<AnkiCardTemplate> Templates => templatesView;
 
     /// <summary>Adds a uniquely named field at the end of the field order.</summary>
     /// <param name="name">The non-empty field name used by notes and template references.</param>
@@ -175,8 +208,10 @@ public sealed class AnkiNoteType
     /// <remarks>This overload creates a field with the default editor direction, stickiness, font, and font size.</remarks>
     /// <exception cref="ArgumentException"><paramref name="name"/> is blank or duplicates a field name without regard to case.</exception>
     /// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="InvalidOperationException">The note type is frozen because a note already uses it.</exception>
     public AnkiNoteType AddField(string name)
     {
+        EnsureMutable();
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
         if (fields.Any(field => string.Equals(field.Name, name, StringComparison.OrdinalIgnoreCase)))
         {
@@ -199,8 +234,10 @@ public sealed class AnkiNoteType
     /// The field name or font is blank, or the name duplicates an existing field without regard to case.
     /// </exception>
     /// <exception cref="ArgumentOutOfRangeException"><see cref="AnkiField.FontSize"/> is less than one.</exception>
+    /// <exception cref="InvalidOperationException">The note type is frozen because a note already uses it.</exception>
     public AnkiNoteType AddConfiguredField(AnkiField field)
     {
+        EnsureMutable();
         ArgumentNullException.ThrowIfNull(field);
         ArgumentException.ThrowIfNullOrWhiteSpace(field.Name);
         ArgumentException.ThrowIfNullOrWhiteSpace(field.Font);
@@ -222,8 +259,10 @@ public sealed class AnkiNoteType
     /// <remarks>This overload leaves the optional browser-specific question and answer formats unset.</remarks>
     /// <exception cref="ArgumentNullException">Any argument is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException"><paramref name="name"/> is blank or duplicates a template name without regard to case.</exception>
+    /// <exception cref="InvalidOperationException">The note type is frozen because a note already uses it.</exception>
     public AnkiNoteType AddTemplate(string name, string questionFormat, string answerFormat)
     {
+        EnsureMutable();
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
         ArgumentNullException.ThrowIfNull(questionFormat);
         ArgumentNullException.ThrowIfNull(answerFormat);
@@ -250,8 +289,10 @@ public sealed class AnkiNoteType
     /// <exception cref="ArgumentException">
     /// The template name is blank or duplicates an existing template name without regard to case.
     /// </exception>
+    /// <exception cref="InvalidOperationException">The note type is frozen because a note already uses it.</exception>
     public AnkiNoteType AddConfiguredTemplate(AnkiCardTemplate template)
     {
+        EnsureMutable();
         ArgumentNullException.ThrowIfNull(template);
         ArgumentException.ThrowIfNullOrWhiteSpace(template.Name);
         ArgumentNullException.ThrowIfNull(template.QuestionFormat);
@@ -271,6 +312,16 @@ public sealed class AnkiNoteType
         && string.Equals(Css, other.Css, StringComparison.Ordinal)
         && fields.SequenceEqual(other.fields)
         && templates.SequenceEqual(other.templates);
+
+    internal void Freeze() => isFrozen = true;
+
+    private void EnsureMutable()
+    {
+        if (isFrozen)
+        {
+            throw new InvalidOperationException($"Note type '{Name}' is frozen because it is already used by a note.");
+        }
+    }
 }
 
 /// <summary>Creates fresh conventional Anki note types with safe fields, templates, and CSS defaults.</summary>
