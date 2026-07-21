@@ -1,0 +1,65 @@
+DOXYFILE_ENCODING          = UTF-8
+PROJECT_NAME               = AnkiIO
+PROJECT_NUMBER             = $(ANKIIO_DOC_VERSION)
+PROJECT_BRIEF              = "Build, validate, import, and export Anki-compatible decks from .NET"
+PROJECT_LOGO               = $(ANKIIO_REPOSITORY_ROOT)/assets/icon.png
+
+OUTPUT_DIRECTORY           = $(ANKIIO_REPOSITORY_ROOT)/artifacts/docs
+HTML_OUTPUT                = html
+FULL_PATH_NAMES            = YES
+STRIP_FROM_PATH            = $(ANKIIO_REPOSITORY_ROOT)
+
+EXTENSION_MAPPING          = cs=Csharp
+MARKDOWN_SUPPORT           = YES
+MARKDOWN_STRICT            = YES
+MARKDOWN_ID_STYLE          = GITHUB
+AUTOLINK_SUPPORT           = YES
+
+EXTRACT_ALL                = NO
+EXTRACT_PRIVATE            = NO
+EXTRACT_PACKAGE            = NO
+EXTRACT_STATIC             = YES
+HIDE_UNDOC_MEMBERS         = NO
+HIDE_UNDOC_CLASSES         = NO
+HIDE_UNDOC_NAMESPACES      = NO
+
+WARNINGS                   = YES
+WARN_IF_UNDOCUMENTED       = YES
+WARN_IF_DOC_ERROR          = YES
+WARN_IF_INCOMPLETE_DOC     = YES
+WARN_NO_PARAMDOC           = YES
+WARN_IF_UNDOC_ENUM_VAL     = YES
+WARN_AS_ERROR              = FAIL_ON_WARNINGS_PRINT
+
+INPUT                      = $(ANKIIO_REPOSITORY_ROOT)/src/AnkiIO
+FILE_PATTERNS              = *.cs
+RECURSIVE                  = YES
+EXCLUDE_PATTERNS           = */bin/* */obj/*
+
+SOURCE_BROWSER             = YES
+INLINE_SOURCES             = NO
+SHOW_FILES                 = NO
+SHOW_NAMESPACES            = YES
+
+GENERATE_HTML              = YES
+HTML_COLORSTYLE            = TOGGLE
+HTML_DYNAMIC_MENUS         = YES
+HTML_DYNAMIC_SECTIONS      = YES
+GENERATE_TREEVIEW          = YES
+FULL_SIDEBAR               = YES
+PAGE_OUTLINE_PANEL         = YES
+DISABLE_INDEX              = NO
+SEARCHENGINE               = YES
+SERVER_BASED_SEARCH        = NO
+TIMESTAMP                  = NO
+
+GENERATE_LATEX             = NO
+GENERATE_RTF               = NO
+GENERATE_MAN               = NO
+GENERATE_XML               = NO
+GENERATE_DOCBOOK           = NO
+
+ENABLE_PREPROCESSING       = YES
+MACRO_EXPANSION            = YES
+EXPAND_ONLY_PREDEF         = YES
+PREDEFINED                 = record=class

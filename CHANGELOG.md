@@ -13,7 +13,7 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ### Changed
 
-- API documentation is now generated from the compiled public surface and comprehensive source XML comments with Sandcastle Help File Builder, including member pages and full-text search.
+- API documentation is generated directly from source comments with Doxygen, including source-resident guides, member pages, tree navigation, and client-side search.
 
 ### Fixed
 

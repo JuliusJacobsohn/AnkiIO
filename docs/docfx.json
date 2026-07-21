@@ -1,9 +1,0 @@
-{
-  "build": {
-    "content": [{ "files": ["**/*.{md,yml}"] }],
-    "resource": [{ "files": ["api/index.html"] }],
-    "dest": "../artifacts/docs",
-    "globalMetadata": { "_appName": "AnkiIO", "_appTitle": "AnkiIO documentation" },
-    "sitemap": { "baseUrl": "https://juliusjacobsohn.github.io/AnkiIO/" }
-  }
-}

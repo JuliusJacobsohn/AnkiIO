@@ -13,7 +13,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>Initial AI-assisted prerelease targeting Anki 26.05. See CHANGELOG.md and docs/releases/0.1.0-alpha.1.md.</PackageReleaseNotes>
+    <PackageReleaseNotes>Initial AI-assisted prerelease targeting Anki 26.05. See CHANGELOG.md and the project API documentation.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/JuliusJacobsohn/AnkiIO</RepositoryUrl>
     <PackageProjectUrl>https://github.com/JuliusJacobsohn/AnkiIO</PackageProjectUrl>

@@ -323,7 +323,10 @@ public sealed class AnkiValidationException : Exception
     /// available through <see cref="ValidationResult"/>.
     /// </remarks>
     public AnkiValidationException(AnkiValidationResult validationResult)
-        : base($"Anki content validation failed with {validationResult.Diagnostics.Count(value => value.Severity == AnkiDiagnosticSeverity.Error)} error(s).") => ValidationResult = validationResult;
+        : base($"Anki content validation failed with {validationResult.Diagnostics.Count(value => value.Severity == AnkiDiagnosticSeverity.Error)} error(s).")
+    {
+        ValidationResult = validationResult;
+    }
 
     /// <summary>Gets the complete structured validation result associated with the failed operation.</summary>
     /// <value>The same validation-result instance supplied to the constructor.</value>

@@ -10,16 +10,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: |
-            8.0.x
-            10.0.301
+          dotnet-version: 8.0.x
+      - uses: actions/configure-pages@v6
       - shell: pwsh
         run: ./build/build-docs.ps1
-      - uses: actions/upload-pages-artifact@v3
-        with: { path: artifacts/docs }
+      - uses: actions/upload-pages-artifact@v5
+        with: { path: artifacts/docs/html }
   deploy:
     if: github.ref == 'refs/heads/main'
     needs: build
@@ -27,4 +26,12 @@ jobs:
     environment: { name: github-pages, url: "${{ steps.deployment.outputs.page_url }}" }
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
+      - name: Verify deployed API documentation
+        shell: bash
+        env:
+          DOCUMENTATION_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          base_url="${DOCUMENTATION_URL%/}"
+          curl --fail --silent --show-error --retry 5 --retry-all-errors --retry-delay 3 "$base_url/index.html" > /dev/null
+          curl --fail --silent --show-error --retry 5 --retry-all-errors --retry-delay 3 "$base_url/annotated.html" > /dev/null
