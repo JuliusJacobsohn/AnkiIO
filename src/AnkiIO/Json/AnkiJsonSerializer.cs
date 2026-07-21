@@ -13,6 +13,8 @@ namespace AnkiIO;
 /// </remarks>
 public static class AnkiJsonSerializer
 {
+    private const string CurrentGeneratorName = "AnkiIO/1.0";
+
     /// <summary>Identifies the native JSON schema emitted and accepted by this release.</summary>
     /// <remarks>
     /// The value is written to the top-level <c>formatVersion</c> property. Readers reject other versions instead of
@@ -67,15 +69,7 @@ public static class AnkiJsonSerializer
     {
         ArgumentNullException.ThrowIfNull(json);
         var document = JsonSerializer.Deserialize<NativeDocument>(json, Options) ?? throw new JsonException("The JSON document was empty.");
-        if (document.FormatVersion != CurrentFormatVersion)
-        {
-            throw new JsonException($"Unsupported AnkiIO JSON format version {document.FormatVersion}; expected {CurrentFormatVersion}.");
-        }
-
-        var noteTypes = document.NoteTypes.ToDictionary(value => value.Id, FromDto);
-        var deck = FromDto(document.Deck ?? throw new JsonException("The root deck is missing."), noteTypes);
-        EnsureValid(deck);
-        return deck;
+        return FromDocument(document);
     }
 
     /// <summary>Asynchronously writes a validated hierarchy as UTF-8 native JSON.</summary>
@@ -127,12 +121,20 @@ public static class AnkiJsonSerializer
     {
         ArgumentNullException.ThrowIfNull(source);
         var document = await JsonSerializer.DeserializeAsync<NativeDocument>(source, Options, cancellationToken).ConfigureAwait(false) ?? throw new JsonException("The JSON document was empty.");
+        return FromDocument(document);
+    }
+
+    private static AnkiDeck FromDocument(NativeDocument document)
+    {
         if (document.FormatVersion != CurrentFormatVersion)
         {
             throw new JsonException($"Unsupported AnkiIO JSON format version {document.FormatVersion}; expected {CurrentFormatVersion}.");
         }
 
-        var types = document.NoteTypes.ToDictionary(value => value.Id, FromDto);
+        var serializedTypes = document.NoteTypes ?? throw new JsonException("The noteTypes collection cannot be null.");
+        var types = serializedTypes.ToDictionary(
+            value => (value ?? throw new JsonException("The noteTypes collection contains a null entry.")).Id,
+            value => FromDto(value!));
         var deck = FromDto(document.Deck ?? throw new JsonException("The root deck is missing."), types);
         EnsureValid(deck);
         return deck;
@@ -141,7 +143,7 @@ public static class AnkiJsonSerializer
     private static NativeDocument ToDocument(AnkiDeck deck)
     {
         var types = deck.Traverse().SelectMany(value => value.Notes).Select(note => note.NoteType).GroupBy(type => type.Id).Select(group => group.First()).OrderBy(type => type.Id).Select(ToDto).ToList();
-        return new NativeDocument { FormatVersion = CurrentFormatVersion, Generator = "AnkiIO/0.1", NoteTypes = types, Deck = ToDto(deck) };
+        return new NativeDocument { FormatVersion = CurrentFormatVersion, Generator = CurrentGeneratorName, NoteTypes = types, Deck = ToDto(deck) };
     }
 
     private static NoteTypeDto ToDto(AnkiNoteType value) => new()
@@ -186,14 +188,14 @@ public static class AnkiJsonSerializer
     private static AnkiNoteType FromDto(NoteTypeDto value)
     {
         var type = new AnkiNoteType(value.Name, value.Kind, value.Id) { Css = value.Css };
-        foreach (var field in value.Fields)
+        foreach (var field in value.Fields ?? throw new JsonException($"Note type {value.Id} has a null fields collection."))
         {
-            type.AddConfiguredField(field);
+            type.AddConfiguredField(field ?? throw new JsonException($"Note type {value.Id} contains a null field definition."));
         }
 
-        foreach (var template in value.Templates)
+        foreach (var template in value.Templates ?? throw new JsonException($"Note type {value.Id} has a null templates collection."))
         {
-            type.AddConfiguredTemplate(template);
+            type.AddConfiguredTemplate(template ?? throw new JsonException($"Note type {value.Id} contains a null template definition."));
         }
 
         return type;
@@ -202,9 +204,9 @@ public static class AnkiJsonSerializer
     private static AnkiDeck FromDto(DeckDto value, IReadOnlyDictionary<long, AnkiNoteType> noteTypes)
     {
         var deck = new AnkiDeck(value.Name, value.Id) { Description = value.Description };
-        foreach (var pair in value.Metadata)
+        foreach (var pair in value.Metadata ?? throw new JsonException($"Deck {value.Id} has a null metadata object."))
         {
-            deck.Metadata.Add(pair.Key, pair.Value);
+            deck.Metadata.Add(pair.Key, pair.Value ?? throw new JsonException($"Deck {value.Id} metadata '{pair.Key}' has a null value."));
         }
 
         if (value.ExtensionData is not null)
@@ -215,35 +217,50 @@ public static class AnkiJsonSerializer
             }
         }
 
-        foreach (var valueNote in value.Notes)
+        foreach (var valueNote in value.Notes ?? throw new JsonException($"Deck {value.Id} has a null notes collection."))
         {
+            if (valueNote is null)
+            {
+                throw new JsonException($"Deck {value.Id} contains a null note.");
+            }
+
             if (!noteTypes.TryGetValue(valueNote.NoteTypeId, out var type))
             {
                 throw new JsonException($"Note {valueNote.Id} references missing note type {valueNote.NoteTypeId}.");
             }
 
-            if (valueNote.Fields.Count != type.Fields.Count)
+            var serializedFields = valueNote.Fields ?? throw new JsonException($"Note {valueNote.Id} has a null fields collection.");
+            if (serializedFields.Count != type.Fields.Count)
             {
-                throw new JsonException($"Note {valueNote.Id} has {valueNote.Fields.Count} fields; note type {type.Id} requires {type.Fields.Count}.");
+                throw new JsonException($"Note {valueNote.Id} has {serializedFields.Count} fields; note type {type.Id} requires {type.Fields.Count}.");
             }
 
-            var fields = type.Fields.Select((field, index) => (field.Name, Value: valueNote.Fields[index])).ToDictionary(pair => pair.Name, pair => pair.Value, StringComparer.Ordinal);
-            var note = deck.AddNote(type, fields, valueNote.Tags, valueNote.Guid, valueNote.Id);
-            note.RestoreCards(valueNote.Cards.Select(card =>
+            var fields = type.Fields.Select((field, index) => (field.Name, Value: serializedFields[index] ?? throw new JsonException($"Note {valueNote.Id} contains a null value for field '{field.Name}'."))).ToDictionary(pair => pair.Name, pair => pair.Value, StringComparer.Ordinal);
+            var tags = valueNote.Tags ?? throw new JsonException($"Note {valueNote.Id} has a null tags collection.");
+            if (tags.Any(tag => tag is null))
             {
-                var restored = new AnkiCard(card.Id, valueNote.Id, card.DeckId, card.TemplateOrdinal, card.Scheduling) { Flag = card.Flag };
-                foreach (var review in card.ReviewHistory)
+                throw new JsonException($"Note {valueNote.Id} contains a null tag.");
+            }
+
+            var note = deck.AddNote(type, fields, tags, valueNote.Guid, valueNote.Id);
+            var cards = valueNote.Cards ?? throw new JsonException($"Note {valueNote.Id} has a null cards collection.");
+            note.RestoreCards(cards.Select(cardValue =>
+            {
+                var card = cardValue ?? throw new JsonException($"Note {valueNote.Id} contains a null card.");
+                var scheduling = card.Scheduling ?? throw new JsonException($"Card {card.Id} has a null scheduling object.");
+                var restored = new AnkiCard(card.Id, valueNote.Id, card.DeckId, card.TemplateOrdinal, scheduling) { Flag = card.Flag };
+                foreach (var review in card.ReviewHistory ?? throw new JsonException($"Card {card.Id} has a null reviewHistory collection."))
                 {
-                    restored.ReviewHistory.Add(review);
+                    restored.ReviewHistory.Add(review ?? throw new JsonException($"Card {card.Id} contains a null review-history entry."));
                 }
 
                 return restored;
             }));
         }
 
-        foreach (var child in value.Subdecks)
+        foreach (var child in value.Subdecks ?? throw new JsonException($"Deck {value.Id} has a null subdecks collection."))
         {
-            deck.AddExistingSubdeck(FromDto(child, noteTypes));
+            deck.AddExistingSubdeck(FromDto(child ?? throw new JsonException($"Deck {value.Id} contains a null subdeck."), noteTypes));
         }
 
         return deck;
@@ -258,77 +275,4 @@ public static class AnkiJsonSerializer
         }
     }
 
-    private sealed class NativeDocument
-    {
-        public int FormatVersion { get; set; }
-        public string Generator { get; set; } = string.Empty;
-        public List<NoteTypeDto> NoteTypes { get; set; } = [];
-        public DeckDto? Deck { get; set; }
-    }
-
-    private sealed class NoteTypeDto
-    {
-        public long Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public AnkiNoteTypeKind Kind { get; set; }
-        public string Css { get; set; } = string.Empty;
-        public List<AnkiField> Fields { get; set; } = [];
-        public List<AnkiCardTemplate> Templates { get; set; } = [];
-    }
-
-    private sealed class DeckDto
-    {
-        public long Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
-        public SortedDictionary<string, string> Metadata { get; set; } = new(StringComparer.Ordinal);
-        public List<NoteDto> Notes { get; set; } = [];
-        public List<DeckDto> Subdecks { get; set; } = [];
-        [JsonExtensionData]
-        public SortedDictionary<string, JsonElement>? ExtensionData { get; set; }
-    }
-
-    private sealed class NoteDto
-    {
-        public long Id { get; set; }
-        public string Guid { get; set; } = string.Empty;
-        public long NoteTypeId { get; set; }
-        public List<string> Fields { get; set; } = [];
-        public List<string> Tags { get; set; } = [];
-        public List<CardDto> Cards { get; set; } = [];
-    }
-
-    private sealed class CardDto
-    {
-        public long Id { get; set; }
-        public long DeckId { get; set; }
-        public int TemplateOrdinal { get; set; }
-        public int Flag { get; set; }
-        public AnkiScheduling Scheduling { get; set; } = AnkiScheduling.New;
-        public List<AnkiReviewLog> ReviewHistory { get; set; } = [];
-    }
-}
-
-/// <summary>Represents a failed operation caused by one or more structured, error-severity validation diagnostics.</summary>
-/// <remarks>
-/// Inspect <see cref="ValidationResult"/> instead of parsing <see cref="Exception.Message"/>. The supplied validation result
-/// is retained by reference and is not recalculated when the underlying mutable deck graph later changes.
-/// </remarks>
-public sealed class AnkiValidationException : Exception
-{
-    /// <summary>Initializes an exception from a completed validation pass.</summary>
-    /// <param name="validationResult">The structured validation result that prevented the operation.</param>
-    /// <remarks>
-    /// The exception message contains the number of error-severity diagnostics; warnings and informational diagnostics remain
-    /// available through <see cref="ValidationResult"/>.
-    /// </remarks>
-    public AnkiValidationException(AnkiValidationResult validationResult)
-        : base($"Anki content validation failed with {validationResult.Diagnostics.Count(value => value.Severity == AnkiDiagnosticSeverity.Error)} error(s).")
-    {
-        ValidationResult = validationResult;
-    }
-
-    /// <summary>Gets the complete structured validation result associated with the failed operation.</summary>
-    /// <value>The same validation-result instance supplied to the constructor.</value>
-    public AnkiValidationResult ValidationResult { get; }
 }
