@@ -66,4 +66,19 @@ public sealed class DomainTests
         Assert.Equal(AnkiId.FromStableValue("note", "abc"), AnkiId.FromStableValue("note", "abc"));
         Assert.NotEqual(AnkiId.FromStableValue("note", "abc"), AnkiId.FromStableValue("card", "abc"));
     }
+
+    [Fact]
+    public void ControlledMutationRejectsDuplicatesAndSupportsRemoval()
+    {
+        var type = AnkiNoteTypes.CreateBasic();
+        Assert.Throws<ArgumentException>(() => type.AddField("front"));
+        Assert.Throws<ArgumentException>(() => type.AddTemplate("card 1", "x", "y"));
+        var deck = new AnkiDeck("Root");
+        deck.AddSubdeck("Child");
+        Assert.Throws<ArgumentException>(() => deck.AddSubdeck("child"));
+        var note = deck.AddNote(type, new Dictionary<string, string> { ["Front"] = "a", ["Back"] = "b" }, ["one"]);
+        note.AddTag("two");
+        Assert.True(note.RemoveTag("one"));
+        Assert.True(deck.RemoveNote(note));
+    }
 }

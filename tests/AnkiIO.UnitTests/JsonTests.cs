@@ -53,4 +53,20 @@ public sealed class JsonTests
         var exception = Assert.Throws<JsonException>(() => AnkiJsonSerializer.Deserialize("{\"formatVersion\":99,\"noteTypes\":[],\"deck\":{}}"));
         Assert.Contains("Unsupported", exception.Message, StringComparison.Ordinal);
     }
+
+    [Fact]
+    public async Task AsyncJsonRoundTripLeavesStreamsOpen()
+    {
+        var deck = new AnkiDeck("Async");
+        deck.AddNote(AnkiNoteTypes.CreateBasic(), new Dictionary<string, string> { ["Front"] = "a", ["Back"] = "b" });
+        await using var stream = new MemoryStream();
+
+        await AnkiJsonSerializer.WriteAsync(deck, stream);
+        Assert.True(stream.CanWrite);
+        stream.Position = 0;
+        var restored = await AnkiJsonSerializer.ReadAsync(stream);
+
+        Assert.True(stream.CanRead);
+        Assert.Equal("Async", restored.Name);
+    }
 }

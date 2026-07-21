@@ -124,13 +124,13 @@ internal static class Scenarios
         Console.WriteLine(read.Cards.Single().Scheduling == ReviewScheduling());
     }
 
-    public static Task ExplicitSchedulingAsync(string[] args)
+    public static async Task ExplicitSchedulingAsync(string[] args)
     {
         Console.Error.WriteLine("WARNING: explicit scheduling is advanced and version-sensitive.");
         var deck = BasicDeck();
         deck.Notes[0].Cards[0].Scheduling = ReviewScheduling() with { Queue = AnkiCardQueue.Suspended };
         Console.WriteLine(AnkiValidator.Validate(deck).IsValid);
-        return Task.CompletedTask;
+        await AnkiPackageWriter.WriteAsync(deck, Output(args, "explicit-scheduling.apkg"));
     }
 
     public static Task NewSchedulingAsync(string[] args)

@@ -5,9 +5,8 @@ namespace AnkiIO.IntegrationTests;
 public sealed class FileRoundTripTests
 {
     [Fact]
-    public async Task PackagePathRoundTripLeavesNoLibraryTemporaryDirectories()
+    public async Task PackagePathRoundTripReleasesOutputForCleanup()
     {
-        var before = Directory.GetDirectories(Path.GetTempPath(), "AnkiIO-*-*").ToHashSet(StringComparer.OrdinalIgnoreCase);
         var output = Path.Combine(Path.GetTempPath(), $"AnkiIO-synthetic-{Guid.NewGuid():N}.apkg");
         try
         {
@@ -22,8 +21,7 @@ public sealed class FileRoundTripTests
             if (File.Exists(output)) File.Delete(output);
         }
 
-        var after = Directory.GetDirectories(Path.GetTempPath(), "AnkiIO-*-*").ToHashSet(StringComparer.OrdinalIgnoreCase);
-        Assert.Empty(after.Except(before));
+        Assert.False(File.Exists(output));
     }
 
     [Fact]

@@ -55,4 +55,47 @@ public sealed class PackageTests
         await AnkiPackageReader.ReadAsync(stream);
         Assert.True(stream.CanRead);
     }
+
+    [Fact]
+    public async Task ReaderEnforcesEntryCountAndCompressionRatio()
+    {
+        await using var entries = new MemoryStream();
+        using (var archive = new ZipArchive(entries, ZipArchiveMode.Create, leaveOpen: true))
+        {
+            archive.CreateEntry("collection.anki2");
+            archive.CreateEntry("media");
+        }
+
+        entries.Position = 0;
+        await Assert.ThrowsAsync<AnkiPackageSecurityException>(() => AnkiPackageReader.ReadAsync(entries, new AnkiPackageLimits { MaximumEntries = 1 }));
+
+        await using var compressed = new MemoryStream();
+        using (var archive = new ZipArchive(compressed, ZipArchiveMode.Create, leaveOpen: true))
+        {
+            await using var target = archive.CreateEntry("collection.anki2", CompressionLevel.Optimal).Open();
+            await target.WriteAsync(new byte[100_000]);
+        }
+
+        compressed.Position = 0;
+        await Assert.ThrowsAsync<AnkiPackageSecurityException>(() => AnkiPackageReader.ReadAsync(compressed, new AnkiPackageLimits { MaximumCompressionRatio = 2 }));
+    }
+
+    [Fact]
+    public async Task ReaderRejectsSymlinksAndModernOnlyPackages()
+    {
+        await using var symlink = new MemoryStream();
+        using (var archive = new ZipArchive(symlink, ZipArchiveMode.Create, leaveOpen: true))
+        {
+            archive.CreateEntry("collection.anki2").ExternalAttributes = 0xA000 << 16;
+        }
+
+        symlink.Position = 0;
+        await Assert.ThrowsAsync<AnkiPackageSecurityException>(() => AnkiPackageReader.ReadAsync(symlink));
+
+        await using var modern = new MemoryStream();
+        using (var archive = new ZipArchive(modern, ZipArchiveMode.Create, leaveOpen: true)) archive.CreateEntry("collection.anki21b");
+        modern.Position = 0;
+        var exception = await Assert.ThrowsAsync<NotSupportedException>(() => AnkiPackageReader.ReadAsync(modern));
+        Assert.Contains("collection.anki21b", exception.Message, StringComparison.Ordinal);
+    }
 }

@@ -107,6 +107,12 @@ public static class AnkiPackageReader
                 throw new AnkiPackageSecurityException($"Unsafe archive path '{entry.FullName}'.");
             }
 
+            var unixFileType = (entry.ExternalAttributes >> 16) & 0xF000;
+            if (unixFileType == 0xA000)
+            {
+                throw new AnkiPackageSecurityException($"Symbolic-link archive entry '{entry.FullName}' is not allowed.");
+            }
+
             if (entry.Length > limits.MaximumEntryBytes)
             {
                 throw new AnkiPackageSecurityException($"Entry '{entry.FullName}' exceeds the per-entry limit.");
@@ -125,4 +131,3 @@ public static class AnkiPackageReader
         }
     }
 }
-

@@ -1,5 +1,10 @@
 name: Release
-on: { workflow_dispatch: { inputs: { publish: { description: Publish to NuGet, required: true, default: false, type: boolean } } } }
+on:
+  workflow_dispatch:
+    inputs:
+      tag: { description: SemVer tag, required: true, default: v0.1.0-alpha.1, type: string }
+      create_release: { description: Create GitHub prerelease, required: true, default: false, type: boolean }
+      publish: { description: Publish to NuGet, required: true, default: false, type: boolean }
 permissions: { contents: write }
 jobs:
   release:
@@ -12,12 +17,22 @@ jobs:
       - run: dotnet restore
       - run: dotnet build -c Release --no-restore
       - run: dotnet test -c Release --no-build --filter "Category!=LocalAnkiCompatibility"
+      - run: dotnet tool restore
+      - run: dotnet docfx docs/docfx.json --warningsAsErrors
       - run: dotnet pack src/AnkiIO/AnkiIO.csproj -c Release --no-build -o artifacts/release
+      - shell: pwsh
+        run: ./build/validate-package.ps1 artifacts/release/AnkiIO.0.1.0-alpha.1.nupkg
+      - shell: pwsh
+        run: ./build/test-package-consumer.ps1 artifacts/release 0.1.0-alpha.1
       - name: Checksums
         run: sha256sum artifacts/release/* > artifacts/release/SHA256SUMS
       - name: Publish NuGet
         if: inputs.publish && env.NUGET_API_KEY != ''
         env: { NUGET_API_KEY: "${{ secrets.NUGET_API_KEY }}" }
         run: dotnet nuget push "artifacts/release/*.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json --skip-duplicate
+      - name: Create GitHub prerelease
+        if: inputs.create_release
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: gh release create "${{ inputs.tag }}" artifacts/release/* --generate-notes --prerelease
       - uses: actions/upload-artifact@v4
         with: { name: release-dry-run, path: artifacts/release }

@@ -34,6 +34,8 @@
   href: security.md
 - name: Performance
   href: performance.md
+- name: Coverage
+  href: coverage.md
 - name: Local Anki testing
   href: local-anki-testing.md
 - name: Compatibility
@@ -48,8 +50,9 @@
   href: faq.md
 - name: Release process
   href: release-process.md
+- name: Release checklist
+  href: release-checklist.md
 - name: Versioning and deprecation
   href: versioning.md
 - name: API reference
   href: api/index.md
-
