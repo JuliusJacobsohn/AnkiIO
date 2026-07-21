@@ -17,6 +17,7 @@ jobs:
       - run: dotnet restore AnkiIO.sln --locked-mode
       - run: dotnet format AnkiIO.sln --verify-no-changes --no-restore
       - run: dotnet build AnkiIO.sln -c Release --no-restore
+      - run: dotnet build samples/AnkiIO.Samples/AnkiIO.Samples.csproj -c Release
       - run: dotnet test AnkiIO.sln -c Release --no-build --no-restore --filter "Category!=LocalAnkiCompatibility" --collect:"XPlat Code Coverage" --results-directory artifacts/test-results
       - run: dotnet pack src/AnkiIO/AnkiIO.csproj -c Release --no-build -o artifacts/packages
       - uses: actions/upload-artifact@v4
