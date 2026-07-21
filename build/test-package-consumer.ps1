@@ -16,7 +16,7 @@ $workspace = Join-Path ([System.IO.Path]::GetTempPath()) ("AnkiIO-consumer-" + [
 $consumerPackages = Join-Path $workspace ".nuget/packages"
 New-Item -ItemType Directory -Path $workspace | Out-Null
 try {
-    dotnet new console --framework net8.0 --output $workspace --force --no-restore
+    dotnet new console --framework net10.0 --output $workspace --force --no-restore
     if ($LASTEXITCODE -ne 0) { throw "Clean consumer project creation failed." }
     dotnet add $workspace package AnkiIO --version $Version --no-restore
     if ($LASTEXITCODE -ne 0) { throw "Adding the AnkiIO $Version package reference failed." }

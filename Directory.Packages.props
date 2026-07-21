@@ -3,7 +3,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Microsoft.Data.Sqlite" Version="8.0.29" />
+    <PackageVersion Include="Microsoft.Data.Sqlite" Version="10.0.10" />
     <!-- Override Microsoft.Data.Sqlite's broad transitive minimum to avoid GHSA-2m69-gcr7-jv3q. -->
     <PackageVersion Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.4" />
     <PackageVersion Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="5.6.0" />

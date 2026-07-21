@@ -1,18 +1,21 @@
 # AnkiIO
 
+> [!WARNING]
+> Generated with help from **GPT-5.6-Sol Ultra**. Tested and working for my use cases. This project does not reflect my abilities as a developer—for better or worse.
+
 **[Browse the API documentation →](https://juliusjacobsohn.github.io/AnkiIO/)**
 
 [Sample projects](samples/README.md) · [Formats and safety](https://juliusjacobsohn.github.io/AnkiIO/formats_and_safety.html) · [MIT license](LICENSE)
 
-AnkiIO is a stable, open-source .NET 8 library for creating, validating, importing, editing, and exporting Anki deck data. Its 1.0 API covers a format-independent deck model, practical helpers for common note types, deterministic JSON, a CrowdAnki-inspired interchange format, media, scheduling state, diagnostics, and guarded legacy APKG I/O.
+AnkiIO is a stable, open-source .NET 10 library for creating, validating, importing, editing, and exporting Anki deck data. Its 1.0 API covers a format-independent deck model, practical helpers for common note types, deterministic JSON, a CrowdAnki-inspired interchange format, media, scheduling state, diagnostics, and guarded legacy APKG I/O.
 
-AnkiIO is maintained by Julius Jacobsohn and was developed with substantial AI assistance.
+AnkiIO is maintained by Julius Jacobsohn.
 
 AnkiIO is not affiliated with, endorsed by, or sponsored by Ankitects, Anki, AnkiDroid, or CrowdAnki. “Anki” is a trademark of Ankitects Pty Ltd.
 
 ## Compatibility and scope
 
-The 1.0 compatibility target is deliberately narrow: **Anki 26.05** (build `e64c6b1a`), collection schema 18, and the v3 scheduler. The library targets `net8.0` and can be consumed by .NET 8 or a compatible later runtime. Repository builds use the .NET 10 SDK pinned by `global.json`; consumers do not need .NET 10.
+The 1.0 compatibility target is deliberately narrow: **Anki 26.05** (build `e64c6b1a`), collection schema 18, and the v3 scheduler. The library targets `net10.0`, so consumers require the .NET 10 runtime or a compatible later runtime. Repository builds use the .NET 10 SDK pinned by `global.json`.
 
 APKG export writes the legacy `collection.anki2` representation, which is accepted by the isolated Anki 26.05 compatibility test. Native JSON and CrowdAnki-inspired JSON support documented subsets rather than every field used by every Anki add-on. Unknown native-JSON properties are retained where the API documents preservation.
 

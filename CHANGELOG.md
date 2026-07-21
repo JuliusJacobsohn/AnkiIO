@@ -18,6 +18,7 @@ This is the first stable release. Its compatibility promise covers the documente
 
 ### Changed
 
+- Raised the library and all supported projects to .NET 10 (`net10.0`).
 - Replaced the earlier documentation stacks with a single strict Doxygen build generated from source comments and source-resident guides.
 - Expanded public API documentation to explain ownership, units, Anki concepts, valid combinations, compatibility limits, exceptions, and practical usage.
 - Organized public top-level types into one source file per type.

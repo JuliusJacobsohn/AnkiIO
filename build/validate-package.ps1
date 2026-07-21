@@ -62,13 +62,13 @@ try {
     $entries = @{}
     foreach ($entry in $archive.Entries) { $entries[$entry.FullName] = $entry }
 
-    foreach ($required in @("lib/net8.0/AnkiIO.dll", "lib/net8.0/AnkiIO.xml", "README.md", "icon.png", "LICENSE", "THIRD_PARTY_NOTICES.md")) {
+    foreach ($required in @("lib/net10.0/AnkiIO.dll", "lib/net10.0/AnkiIO.xml", "README.md", "icon.png", "LICENSE", "THIRD_PARTY_NOTICES.md")) {
         if (-not $entries.ContainsKey($required)) { throw "Package is missing '$required'." }
         if ($entries[$required].Length -eq 0) { throw "Package entry '$required' is empty." }
     }
 
     if ($entries["icon.png"].Length -gt 1MB) { throw "Package icon exceeds 1 MB." }
-    $xmlDocumentation = Read-ArchiveText $entries["lib/net8.0/AnkiIO.xml"]
+    $xmlDocumentation = Read-ArchiveText $entries["lib/net10.0/AnkiIO.xml"]
     if ($xmlDocumentation -notmatch '<members>') { throw "Package XML documentation does not contain API members." }
     $packageReadme = Read-ArchiveText $entries["README.md"]
     if ($packageReadme -notmatch 'https://juliusjacobsohn\.github\.io/AnkiIO/') { throw "Package README does not link to the API documentation." }
@@ -108,10 +108,10 @@ try {
 
     $namespace = [System.Xml.XmlNamespaceManager]::new($nuspec.NameTable)
     $namespace.AddNamespace("n", $nuspec.DocumentElement.NamespaceURI)
-    $dependencyNodes = $nuspec.SelectNodes("/n:package/n:metadata/n:dependencies/n:group[@targetFramework='net8.0']/n:dependency", $namespace)
+    $dependencyNodes = $nuspec.SelectNodes("/n:package/n:metadata/n:dependencies/n:group[@targetFramework='net10.0']/n:dependency", $namespace)
     $dependencies = @{}
     foreach ($dependency in $dependencyNodes) { $dependencies[$dependency.GetAttribute("id")] = $dependency.GetAttribute("version") }
-    if ($dependencies["Microsoft.Data.Sqlite"] -ne "8.0.29") { throw "Package must depend on Microsoft.Data.Sqlite 8.0.29." }
+    if ($dependencies["Microsoft.Data.Sqlite"] -ne "10.0.10") { throw "Package must depend on Microsoft.Data.Sqlite 10.0.10." }
     if ($dependencies["SQLitePCLRaw.bundle_e_sqlite3"] -ne "3.0.4") { throw "Package must explicitly select the maintained SQLitePCLRaw 3.0.4 bundle." }
 }
 finally {
@@ -123,8 +123,8 @@ if (-not (Test-Path -LiteralPath $symbolPath)) { throw "Symbol package '$symbolP
 $symbolArchive = [System.IO.Compression.ZipFile]::OpenRead($symbolPath)
 try {
     Assert-SafeArchiveEntries $symbolArchive "Symbol package"
-    $pdb = $symbolArchive.GetEntry("lib/net8.0/AnkiIO.pdb")
-    if ($null -eq $pdb -or $pdb.Length -eq 0) { throw "Symbol package is missing 'lib/net8.0/AnkiIO.pdb'." }
+    $pdb = $symbolArchive.GetEntry("lib/net10.0/AnkiIO.pdb")
+    if ($null -eq $pdb -or $pdb.Length -eq 0) { throw "Symbol package is missing 'lib/net10.0/AnkiIO.pdb'." }
     $symbolNuspec = Read-Nuspec $symbolArchive "Symbol package"
     $symbolVersion = (Get-MetadataNode $symbolNuspec "version").InnerText
     if (-not [string]::IsNullOrWhiteSpace($ExpectedVersion) -and $symbolVersion -ne $ExpectedVersion) {

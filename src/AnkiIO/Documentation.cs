@@ -1,7 +1,7 @@
 /*!
 @mainpage AnkiIO API reference
 
-AnkiIO is a .NET 8 library for creating, validating, reading, and writing Anki-compatible deck data. It offers a
+AnkiIO is a .NET 10 library for creating, validating, reading, and writing Anki-compatible deck data. It offers a
 format-independent object model, conventional Basic and Cloze helpers, custom note types, media, scheduling state,
 deterministic JSON, a CrowdAnki-inspired interchange format, and guarded legacy APKG I/O.
 
@@ -36,7 +36,7 @@ diagnostics when using advanced state, and import the resulting package through 
 
 ## Install
 
-Reference the `AnkiIO` package from a .NET 8 or newer application:
+Reference the `AnkiIO` package from a .NET 10 or newer application:
 
 @code{.sh}
 dotnet add package AnkiIO

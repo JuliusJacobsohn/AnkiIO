@@ -5,6 +5,7 @@ AnkiIO 1.0 establishes a stable public API for the documented Anki 26.05, native
 ## 1.0 release scope
 
 - Stable deck, note, card, note-type, template, media, scheduling, validation, JSON, and package APIs
+- A single supported runtime target of .NET 10 (`net10.0`)
 - Practical Doxygen reference generated directly from source documentation
 - Public API compatibility enforcement, deterministic builds, package validation, and clean-consumer testing
 - Portable CI on Linux, Windows, and macOS plus opt-in Anki 26.05 acceptance testing
