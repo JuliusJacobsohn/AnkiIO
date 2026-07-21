@@ -1,0 +1,16 @@
+name: Local Anki compatibility
+on: { workflow_dispatch: {} }
+permissions: { contents: read }
+jobs:
+  compatibility:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: [self-hosted, windows, anki-compatibility]
+    env: { ANKI_LOCAL_COMPATIBILITY: "1" }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with: { dotnet-version: 8.0.x }
+      - run: dotnet test tests/AnkiIO.CompatibilityTests -c Release --filter Category=LocalAnkiCompatibility --logger "trx;LogFileName=local-anki.trx"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: local-anki-compatibility, path: "**/local-anki.trx" }

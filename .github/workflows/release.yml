@@ -1,0 +1,23 @@
+name: Release
+on: { workflow_dispatch: { inputs: { publish: { description: Publish to NuGet, required: true, default: false, type: boolean } } } }
+permissions: { contents: write }
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-dotnet@v4
+        with: { dotnet-version: 8.0.x }
+      - run: dotnet restore
+      - run: dotnet build -c Release --no-restore
+      - run: dotnet test -c Release --no-build --filter "Category!=LocalAnkiCompatibility"
+      - run: dotnet pack src/AnkiIO/AnkiIO.csproj -c Release --no-build -o artifacts/release
+      - name: Checksums
+        run: sha256sum artifacts/release/* > artifacts/release/SHA256SUMS
+      - name: Publish NuGet
+        if: inputs.publish && env.NUGET_API_KEY != ''
+        env: { NUGET_API_KEY: "${{ secrets.NUGET_API_KEY }}" }
+        run: dotnet nuget push "artifacts/release/*.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json --skip-duplicate
+      - uses: actions/upload-artifact@v4
+        with: { name: release-dry-run, path: artifacts/release }

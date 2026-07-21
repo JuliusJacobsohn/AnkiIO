@@ -1,0 +1,10 @@
+name: Feature request
+description: Propose an API or compatibility improvement.
+body:
+  - type: textarea
+    id: usecase
+    attributes: { label: Use case }
+    validations: { required: true }
+  - type: textarea
+    id: compatibility
+    attributes: { label: Anki/version/format implications }

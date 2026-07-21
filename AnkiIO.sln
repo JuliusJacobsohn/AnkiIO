@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnkiIO", "src\AnkiIO\AnkiIO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnkiIO.UnitTests", "tests\AnkiIO.UnitTests\AnkiIO.UnitTests.csproj", "{74C4B0A1-AE81-42D7-953B-9C8A7FDCC7A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnkiIO.IntegrationTests", "tests\AnkiIO.IntegrationTests\AnkiIO.IntegrationTests.csproj", "{7B20E198-B2C1-4630-8EED-8EE0B456A518}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnkiIO.CompatibilityTests", "tests\AnkiIO.CompatibilityTests\AnkiIO.CompatibilityTests.csproj", "{4C664040-318A-46DE-908B-21422BEBD9A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,13 @@ Global
 		{74C4B0A1-AE81-42D7-953B-9C8A7FDCC7A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74C4B0A1-AE81-42D7-953B-9C8A7FDCC7A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74C4B0A1-AE81-42D7-953B-9C8A7FDCC7A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B20E198-B2C1-4630-8EED-8EE0B456A518}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B20E198-B2C1-4630-8EED-8EE0B456A518}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B20E198-B2C1-4630-8EED-8EE0B456A518}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B20E198-B2C1-4630-8EED-8EE0B456A518}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C664040-318A-46DE-908B-21422BEBD9A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C664040-318A-46DE-908B-21422BEBD9A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C664040-318A-46DE-908B-21422BEBD9A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C664040-318A-46DE-908B-21422BEBD9A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
-
