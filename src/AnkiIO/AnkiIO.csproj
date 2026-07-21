@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>AnkiIO</AssemblyName>
+    <RootNamespace>AnkiIO</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <PackageId>AnkiIO</PackageId>
+    <Version>0.1.0-alpha.1</Version>
+    <Authors>AnkiIO contributors</Authors>
+    <Description>Format-independent Anki deck models, validation, JSON, media, and guarded package I/O.</Description>
+    <PackageTags>anki;flashcards;spaced-repetition;apkg</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/your-org/AnkiIO</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/your-org/AnkiIO</PackageProjectUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+</Project>
+
