@@ -140,4 +140,26 @@ public sealed class AnkiCompatibilityRegistry
     /// <summary>Returns the first adapter supporting the version.</summary>
     /// <exception cref="NotSupportedException">No registered adapter supports the version.</exception>
     public IAnkiVersionAdapter Resolve(Version version) => adapters.FirstOrDefault(adapter => adapter.Supports(version)) ?? throw new NotSupportedException($"Anki {version} is not supported. Register an IAnkiVersionAdapter after validating its collection, scheduler, and package formats.");
+
+    /// <summary>Creates the built-in registry containing only versions with recorded compatibility evidence.</summary>
+    public static AnkiCompatibilityRegistry CreateDefault() => new AnkiCompatibilityRegistry().Add(new Anki2605VersionAdapter());
+}
+
+/// <summary>Describes verified format capabilities for Anki 26.05.</summary>
+public sealed class Anki2605VersionAdapter : IAnkiVersionAdapter
+{
+    /// <inheritdoc />
+    public string Name => "Anki 26.05";
+
+    /// <inheritdoc />
+    public bool Supports(Version version) => version.Major == 26 && version.Minor == 5;
+
+    /// <inheritdoc />
+    public IReadOnlySet<int> CollectionSchemas { get; } = new HashSet<int> { 18 };
+
+    /// <inheritdoc />
+    public int SchedulerVersion => 3;
+
+    /// <inheritdoc />
+    public IReadOnlySet<string> PackageEntries { get; } = new HashSet<string>(StringComparer.Ordinal) { "collection.anki2", "collection.anki21", "collection.anki21b", "meta", "media" };
 }

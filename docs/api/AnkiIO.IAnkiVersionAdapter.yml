@@ -18,8 +18,12 @@ items:
   fullName: AnkiIO.IAnkiVersionAdapter
   type: Interface
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: IAnkiVersionAdapter
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 108
   assemblies:
   - AnkiIO
@@ -41,8 +45,12 @@ items:
   fullName: AnkiIO.IAnkiVersionAdapter.Name
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Name
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 111
   assemblies:
   - AnkiIO
@@ -68,8 +76,12 @@ items:
   fullName: AnkiIO.IAnkiVersionAdapter.Supports(System.Version)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Supports
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 114
   assemblies:
   - AnkiIO
@@ -97,8 +109,12 @@ items:
   fullName: AnkiIO.IAnkiVersionAdapter.CollectionSchemas
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: CollectionSchemas
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 117
   assemblies:
   - AnkiIO
@@ -124,8 +140,12 @@ items:
   fullName: AnkiIO.IAnkiVersionAdapter.SchedulerVersion
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: SchedulerVersion
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 120
   assemblies:
   - AnkiIO
@@ -151,8 +171,12 @@ items:
   fullName: AnkiIO.IAnkiVersionAdapter.PackageEntries
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: PackageEntries
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 123
   assemblies:
   - AnkiIO

@@ -4,6 +4,9 @@ items:
   name: AnkiIO
   type: Namespace
   items:
+  - uid: AnkiIO.Anki2605VersionAdapter
+    name: Anki2605VersionAdapter
+    type: Class
   - uid: AnkiIO.AnkiCard
     name: AnkiCard
     type: Class

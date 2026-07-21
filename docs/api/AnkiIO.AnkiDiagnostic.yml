@@ -24,8 +24,12 @@ items:
   fullName: AnkiIO.AnkiDiagnostic
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiDiagnostic
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 16
   assemblies:
   - AnkiIO
@@ -58,8 +62,12 @@ items:
   fullName: AnkiIO.AnkiDiagnostic.AnkiDiagnostic(AnkiIO.AnkiDiagnosticSeverity, string, string, string?, long?, long?, long?, string?, string?, string?)
   type: Constructor
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: .ctor
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 16
   assemblies:
   - AnkiIO
@@ -106,8 +114,12 @@ items:
   fullName: AnkiIO.AnkiDiagnostic.Severity
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Severity
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 17
   assemblies:
   - AnkiIO
@@ -131,8 +143,12 @@ items:
   fullName: AnkiIO.AnkiDiagnostic.Code
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Code
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 18
   assemblies:
   - AnkiIO
@@ -156,8 +172,12 @@ items:
   fullName: AnkiIO.AnkiDiagnostic.Message
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Message
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 19
   assemblies:
   - AnkiIO
@@ -181,8 +201,12 @@ items:
   fullName: AnkiIO.AnkiDiagnostic.Location
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Location
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 20
   assemblies:
   - AnkiIO
@@ -206,8 +230,12 @@ items:
   fullName: AnkiIO.AnkiDiagnostic.DeckId
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: DeckId
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 21
   assemblies:
   - AnkiIO
@@ -231,8 +259,12 @@ items:
   fullName: AnkiIO.AnkiDiagnostic.NoteId
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: NoteId
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 22
   assemblies:
   - AnkiIO
@@ -256,8 +288,12 @@ items:
   fullName: AnkiIO.AnkiDiagnostic.CardId
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: CardId
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 23
   assemblies:
   - AnkiIO
@@ -281,8 +317,12 @@ items:
   fullName: AnkiIO.AnkiDiagnostic.FieldName
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: FieldName
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 24
   assemblies:
   - AnkiIO
@@ -306,8 +346,12 @@ items:
   fullName: AnkiIO.AnkiDiagnostic.MediaFileName
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: MediaFileName
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 25
   assemblies:
   - AnkiIO
@@ -331,8 +375,12 @@ items:
   fullName: AnkiIO.AnkiDiagnostic.SuggestedRemediation
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: SuggestedRemediation
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 26
   assemblies:
   - AnkiIO

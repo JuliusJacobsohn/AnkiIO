@@ -25,8 +25,12 @@ items:
   fullName: AnkiIO.AnkiScheduling
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiScheduling
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 38
   assemblies:
   - AnkiIO
@@ -60,8 +64,12 @@ items:
   fullName: AnkiIO.AnkiScheduling.New
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: New
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 41
   assemblies:
   - AnkiIO
@@ -87,8 +95,12 @@ items:
   fullName: AnkiIO.AnkiScheduling.Type
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Type
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 44
   assemblies:
   - AnkiIO
@@ -114,8 +126,12 @@ items:
   fullName: AnkiIO.AnkiScheduling.Queue
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Queue
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 47
   assemblies:
   - AnkiIO
@@ -141,8 +157,12 @@ items:
   fullName: AnkiIO.AnkiScheduling.Due
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Due
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 50
   assemblies:
   - AnkiIO
@@ -168,8 +188,12 @@ items:
   fullName: AnkiIO.AnkiScheduling.Interval
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Interval
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 53
   assemblies:
   - AnkiIO
@@ -195,8 +219,12 @@ items:
   fullName: AnkiIO.AnkiScheduling.EaseFactor
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: EaseFactor
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 56
   assemblies:
   - AnkiIO
@@ -222,8 +250,12 @@ items:
   fullName: AnkiIO.AnkiScheduling.Repetitions
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Repetitions
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 59
   assemblies:
   - AnkiIO
@@ -249,8 +281,12 @@ items:
   fullName: AnkiIO.AnkiScheduling.Lapses
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Lapses
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 62
   assemblies:
   - AnkiIO
@@ -276,8 +312,12 @@ items:
   fullName: AnkiIO.AnkiScheduling.RemainingSteps
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: RemainingSteps
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 65
   assemblies:
   - AnkiIO
@@ -303,8 +343,12 @@ items:
   fullName: AnkiIO.AnkiScheduling.OriginalDue
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: OriginalDue
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 68
   assemblies:
   - AnkiIO
@@ -330,8 +374,12 @@ items:
   fullName: AnkiIO.AnkiScheduling.OriginalDeckId
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: OriginalDeckId
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 71
   assemblies:
   - AnkiIO
@@ -357,8 +405,12 @@ items:
   fullName: AnkiIO.AnkiScheduling.CustomData
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: CustomData
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 74
   assemblies:
   - AnkiIO

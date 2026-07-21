@@ -16,8 +16,12 @@ items:
   fullName: AnkiIO.AnkiNoteTypes
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiNoteTypes
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 112
   assemblies:
   - AnkiIO
@@ -49,8 +53,12 @@ items:
   fullName: AnkiIO.AnkiNoteTypes.CreateBasic()
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: CreateBasic
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 115
   assemblies:
   - AnkiIO
@@ -75,8 +83,12 @@ items:
   fullName: AnkiIO.AnkiNoteTypes.CreateBasicAndReversed()
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: CreateBasicAndReversed
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 121
   assemblies:
   - AnkiIO
@@ -101,8 +113,12 @@ items:
   fullName: AnkiIO.AnkiNoteTypes.CreateCloze()
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: CreateCloze
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 128
   assemblies:
   - AnkiIO

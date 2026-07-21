@@ -19,8 +19,12 @@ items:
   fullName: AnkiIO.AnkiCardTemplate
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiCardTemplate
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 31
   assemblies:
   - AnkiIO
@@ -53,8 +57,12 @@ items:
   fullName: AnkiIO.AnkiCardTemplate.AnkiCardTemplate(string, string, string, string?, string?)
   type: Constructor
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: .ctor
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 31
   assemblies:
   - AnkiIO
@@ -96,8 +104,12 @@ items:
   fullName: AnkiIO.AnkiCardTemplate.Name
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Name
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 32
   assemblies:
   - AnkiIO
@@ -123,8 +135,12 @@ items:
   fullName: AnkiIO.AnkiCardTemplate.QuestionFormat
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: QuestionFormat
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 33
   assemblies:
   - AnkiIO
@@ -150,8 +166,12 @@ items:
   fullName: AnkiIO.AnkiCardTemplate.AnswerFormat
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnswerFormat
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 34
   assemblies:
   - AnkiIO
@@ -177,8 +197,12 @@ items:
   fullName: AnkiIO.AnkiCardTemplate.BrowserQuestionFormat
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: BrowserQuestionFormat
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 35
   assemblies:
   - AnkiIO
@@ -204,8 +228,12 @@ items:
   fullName: AnkiIO.AnkiCardTemplate.BrowserAnswerFormat
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: BrowserAnswerFormat
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 36
   assemblies:
   - AnkiIO

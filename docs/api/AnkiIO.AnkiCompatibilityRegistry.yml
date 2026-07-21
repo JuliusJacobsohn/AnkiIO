@@ -6,6 +6,7 @@ items:
   parent: AnkiIO
   children:
   - AnkiIO.AnkiCompatibilityRegistry.Add(AnkiIO.IAnkiVersionAdapter)
+  - AnkiIO.AnkiCompatibilityRegistry.CreateDefault
   - AnkiIO.AnkiCompatibilityRegistry.Resolve(System.Version)
   langs:
   - csharp
@@ -15,8 +16,12 @@ items:
   fullName: AnkiIO.AnkiCompatibilityRegistry
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiCompatibilityRegistry
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 127
   assemblies:
   - AnkiIO
@@ -47,8 +52,12 @@ items:
   fullName: AnkiIO.AnkiCompatibilityRegistry.Add(AnkiIO.IAnkiVersionAdapter)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Add
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 132
   assemblies:
   - AnkiIO
@@ -76,8 +85,12 @@ items:
   fullName: AnkiIO.AnkiCompatibilityRegistry.Resolve(System.Version)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Resolve
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 141
   assemblies:
   - AnkiIO
@@ -97,6 +110,36 @@ items:
   - type: System.NotSupportedException
     commentId: T:System.NotSupportedException
     description: No registered adapter supports the version.
+- uid: AnkiIO.AnkiCompatibilityRegistry.CreateDefault
+  commentId: M:AnkiIO.AnkiCompatibilityRegistry.CreateDefault
+  id: CreateDefault
+  parent: AnkiIO.AnkiCompatibilityRegistry
+  langs:
+  - csharp
+  - vb
+  name: CreateDefault()
+  nameWithType: AnkiCompatibilityRegistry.CreateDefault()
+  fullName: AnkiIO.AnkiCompatibilityRegistry.CreateDefault()
+  type: Method
+  source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
+    id: CreateDefault
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
+    startLine: 144
+  assemblies:
+  - AnkiIO
+  namespace: AnkiIO
+  summary: Creates the built-in registry containing only versions with recorded compatibility evidence.
+  example: []
+  syntax:
+    content: public static AnkiCompatibilityRegistry CreateDefault()
+    return:
+      type: AnkiIO.AnkiCompatibilityRegistry
+    content.vb: Public Shared Function CreateDefault() As AnkiCompatibilityRegistry
+  overload: AnkiIO.AnkiCompatibilityRegistry.CreateDefault*
 references:
 - uid: AnkiIO
   commentId: N:AnkiIO
@@ -358,3 +401,9 @@ references:
   name: Version
   nameWithType: Version
   fullName: System.Version
+- uid: AnkiIO.AnkiCompatibilityRegistry.CreateDefault*
+  commentId: Overload:AnkiIO.AnkiCompatibilityRegistry.CreateDefault
+  href: AnkiIO.AnkiCompatibilityRegistry.html#AnkiIO_AnkiCompatibilityRegistry_CreateDefault
+  name: CreateDefault
+  nameWithType: AnkiCompatibilityRegistry.CreateDefault
+  fullName: AnkiIO.AnkiCompatibilityRegistry.CreateDefault

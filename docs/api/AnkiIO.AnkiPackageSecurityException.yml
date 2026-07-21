@@ -14,8 +14,12 @@ items:
   fullName: AnkiIO.AnkiPackageSecurityException
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Packages/AnkiPackage.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiPackageSecurityException
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Packages\AnkiPackage.cs
+    path: ../src/AnkiIO/Packages/AnkiPackage.cs
     startLine: 51
   assemblies:
   - AnkiIO
@@ -60,8 +64,12 @@ items:
   fullName: AnkiIO.AnkiPackageSecurityException.AnkiPackageSecurityException(string)
   type: Constructor
   source:
+    remote:
+      path: src/AnkiIO/Packages/AnkiPackage.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: .ctor
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Packages\AnkiPackage.cs
+    path: ../src/AnkiIO/Packages/AnkiPackage.cs
     startLine: 54
   assemblies:
   - AnkiIO

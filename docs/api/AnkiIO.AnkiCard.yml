@@ -21,8 +21,12 @@ items:
   fullName: AnkiIO.AnkiCard
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiCard
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 209
   assemblies:
   - AnkiIO
@@ -53,8 +57,12 @@ items:
   fullName: AnkiIO.AnkiCard.AnkiCard(long, long, long, int, AnkiIO.AnkiScheduling)
   type: Constructor
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: .ctor
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 212
   assemblies:
   - AnkiIO
@@ -91,8 +99,12 @@ items:
   fullName: AnkiIO.AnkiCard.Id
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Id
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 224
   assemblies:
   - AnkiIO
@@ -118,8 +130,12 @@ items:
   fullName: AnkiIO.AnkiCard.NoteId
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: NoteId
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 227
   assemblies:
   - AnkiIO
@@ -145,8 +161,12 @@ items:
   fullName: AnkiIO.AnkiCard.DeckId
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: DeckId
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 230
   assemblies:
   - AnkiIO
@@ -172,8 +192,12 @@ items:
   fullName: AnkiIO.AnkiCard.TemplateOrdinal
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: TemplateOrdinal
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 233
   assemblies:
   - AnkiIO
@@ -199,8 +223,12 @@ items:
   fullName: AnkiIO.AnkiCard.Scheduling
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Scheduling
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 236
   assemblies:
   - AnkiIO
@@ -226,8 +254,12 @@ items:
   fullName: AnkiIO.AnkiCard.Flag
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Flag
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 239
   assemblies:
   - AnkiIO
@@ -253,8 +285,12 @@ items:
   fullName: AnkiIO.AnkiCard.ReviewHistory
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: ReviewHistory
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 242
   assemblies:
   - AnkiIO

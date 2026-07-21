@@ -18,8 +18,12 @@ items:
   fullName: AnkiIO.AnkiPackage
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Packages/AnkiPackage.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiPackage
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Packages\AnkiPackage.cs
+    path: ../src/AnkiIO/Packages/AnkiPackage.cs
     startLine: 3
   assemblies:
   - AnkiIO
@@ -50,8 +54,12 @@ items:
   fullName: AnkiIO.AnkiPackage.Decks
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Packages/AnkiPackage.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Decks
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Packages\AnkiPackage.cs
+    path: ../src/AnkiIO/Packages/AnkiPackage.cs
     startLine: 13
   assemblies:
   - AnkiIO
@@ -77,8 +85,12 @@ items:
   fullName: AnkiIO.AnkiPackage.Media
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Packages/AnkiPackage.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Media
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Packages\AnkiPackage.cs
+    path: ../src/AnkiIO/Packages/AnkiPackage.cs
     startLine: 16
   assemblies:
   - AnkiIO
@@ -104,8 +116,12 @@ items:
   fullName: AnkiIO.AnkiPackage.Diagnostics
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Packages/AnkiPackage.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Diagnostics
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Packages\AnkiPackage.cs
+    path: ../src/AnkiIO/Packages/AnkiPackage.cs
     startLine: 19
   assemblies:
   - AnkiIO
@@ -131,8 +147,12 @@ items:
   fullName: AnkiIO.AnkiPackage.Notes
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Packages/AnkiPackage.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Notes
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Packages\AnkiPackage.cs
+    path: ../src/AnkiIO/Packages/AnkiPackage.cs
     startLine: 22
   assemblies:
   - AnkiIO
@@ -158,8 +178,12 @@ items:
   fullName: AnkiIO.AnkiPackage.Cards
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Packages/AnkiPackage.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Cards
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Packages\AnkiPackage.cs
+    path: ../src/AnkiIO/Packages/AnkiPackage.cs
     startLine: 25
   assemblies:
   - AnkiIO

@@ -15,8 +15,12 @@ items:
   fullName: AnkiIO.AnkiValidationResult
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiValidationResult
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 29
   assemblies:
   - AnkiIO
@@ -47,8 +51,12 @@ items:
   fullName: AnkiIO.AnkiValidationResult.Diagnostics
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Diagnostics
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 34
   assemblies:
   - AnkiIO
@@ -74,8 +82,12 @@ items:
   fullName: AnkiIO.AnkiValidationResult.IsValid
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: IsValid
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 37
   assemblies:
   - AnkiIO

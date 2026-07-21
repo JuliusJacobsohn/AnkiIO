@@ -15,8 +15,12 @@ items:
   fullName: AnkiIO.AnkiId
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Identifiers.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiId
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Identifiers.cs
+    path: ../src/AnkiIO/Identifiers.cs
     startLine: 6
   assemblies:
   - AnkiIO
@@ -48,8 +52,12 @@ items:
   fullName: AnkiIO.AnkiId.New()
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Identifiers.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: New
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Identifiers.cs
+    path: ../src/AnkiIO/Identifiers.cs
     startLine: 11
   assemblies:
   - AnkiIO
@@ -74,8 +82,12 @@ items:
   fullName: AnkiIO.AnkiId.FromStableValue(string, string)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Identifiers.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: FromStableValue
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Identifiers.cs
+    path: ../src/AnkiIO/Identifiers.cs
     startLine: 17
   assemblies:
   - AnkiIO

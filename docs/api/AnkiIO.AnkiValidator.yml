@@ -47,8 +47,12 @@ items:
   fullName: AnkiIO.AnkiValidator.Validate(AnkiIO.AnkiDeck)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Validate
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 44
   assemblies:
   - AnkiIO

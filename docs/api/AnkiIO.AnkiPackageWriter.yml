@@ -15,8 +15,12 @@ items:
   fullName: AnkiIO.AnkiPackageWriter
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Packages/AnkiPackageWriter.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiPackageWriter
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Packages\AnkiPackageWriter.cs
+    path: ../src/AnkiIO/Packages/AnkiPackageWriter.cs
     startLine: 7
   assemblies:
   - AnkiIO
@@ -48,8 +52,12 @@ items:
   fullName: AnkiIO.AnkiPackageWriter.WriteAsync(AnkiIO.AnkiDeck, string, System.Threading.CancellationToken)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Packages/AnkiPackageWriter.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: WriteAsync
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Packages\AnkiPackageWriter.cs
+    path: ../src/AnkiIO/Packages/AnkiPackageWriter.cs
     startLine: 10
   assemblies:
   - AnkiIO
@@ -84,8 +92,12 @@ items:
   fullName: AnkiIO.AnkiPackageWriter.WriteAsync(AnkiIO.AnkiDeck, System.IO.Stream, System.Threading.CancellationToken)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Packages/AnkiPackageWriter.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: WriteAsync
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Packages\AnkiPackageWriter.cs
+    path: ../src/AnkiIO/Packages/AnkiPackageWriter.cs
     startLine: 18
   assemblies:
   - AnkiIO

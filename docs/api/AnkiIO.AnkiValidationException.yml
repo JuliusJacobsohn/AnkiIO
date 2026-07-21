@@ -15,8 +15,12 @@ items:
   fullName: AnkiIO.AnkiValidationException
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Json/AnkiJsonSerializer.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiValidationException
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\AnkiJsonSerializer.cs
+    path: ../src/AnkiIO/Json/AnkiJsonSerializer.cs
     startLine: 241
   assemblies:
   - AnkiIO
@@ -59,8 +63,12 @@ items:
   fullName: AnkiIO.AnkiValidationException.AnkiValidationException(AnkiIO.AnkiValidationResult)
   type: Constructor
   source:
+    remote:
+      path: src/AnkiIO/Json/AnkiJsonSerializer.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: .ctor
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\AnkiJsonSerializer.cs
+    path: ../src/AnkiIO/Json/AnkiJsonSerializer.cs
     startLine: 244
   assemblies:
   - AnkiIO
@@ -89,8 +97,12 @@ items:
   fullName: AnkiIO.AnkiValidationException.ValidationResult
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Json/AnkiJsonSerializer.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: ValidationResult
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\AnkiJsonSerializer.cs
+    path: ../src/AnkiIO/Json/AnkiJsonSerializer.cs
     startLine: 248
   assemblies:
   - AnkiIO

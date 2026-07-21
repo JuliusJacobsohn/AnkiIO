@@ -17,8 +17,12 @@ items:
   fullName: AnkiIO.AnkiMediaCollection
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Media.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiMediaCollection
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Media.cs
+    path: ../src/AnkiIO/Media.cs
     startLine: 33
   assemblies:
   - AnkiIO
@@ -50,8 +54,12 @@ items:
   fullName: AnkiIO.AnkiMediaCollection.Files
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Media.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Files
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Media.cs
+    path: ../src/AnkiIO/Media.cs
     startLine: 38
   assemblies:
   - AnkiIO
@@ -77,8 +85,12 @@ items:
   fullName: AnkiIO.AnkiMediaCollection.AddFileAsync(string, System.Threading.CancellationToken)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Media.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AddFileAsync
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Media.cs
+    path: ../src/AnkiIO/Media.cs
     startLine: 44
   assemblies:
   - AnkiIO
@@ -114,8 +126,12 @@ items:
   fullName: AnkiIO.AnkiMediaCollection.AddBytes(string, System.ReadOnlySpan<byte>)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Media.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AddBytes
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Media.cs
+    path: ../src/AnkiIO/Media.cs
     startLine: 66
   assemblies:
   - AnkiIO
@@ -151,8 +167,12 @@ items:
   fullName: AnkiIO.AnkiMediaCollection.Remove(string)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Media.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Remove
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Media.cs
+    path: ../src/AnkiIO/Media.cs
     startLine: 81
   assemblies:
   - AnkiIO

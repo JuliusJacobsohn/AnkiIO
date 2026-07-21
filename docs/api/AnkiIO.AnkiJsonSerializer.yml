@@ -18,8 +18,12 @@ items:
   fullName: AnkiIO.AnkiJsonSerializer
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Json/AnkiJsonSerializer.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiJsonSerializer
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\AnkiJsonSerializer.cs
+    path: ../src/AnkiIO/Json/AnkiJsonSerializer.cs
     startLine: 6
   assemblies:
   - AnkiIO
@@ -51,8 +55,12 @@ items:
   fullName: AnkiIO.AnkiJsonSerializer.CurrentFormatVersion
   type: Field
   source:
+    remote:
+      path: src/AnkiIO/Json/AnkiJsonSerializer.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: CurrentFormatVersion
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\AnkiJsonSerializer.cs
+    path: ../src/AnkiIO/Json/AnkiJsonSerializer.cs
     startLine: 9
   assemblies:
   - AnkiIO
@@ -76,8 +84,12 @@ items:
   fullName: AnkiIO.AnkiJsonSerializer.Serialize(AnkiIO.AnkiDeck)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Json/AnkiJsonSerializer.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Serialize
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\AnkiJsonSerializer.cs
+    path: ../src/AnkiIO/Json/AnkiJsonSerializer.cs
     startLine: 20
   assemblies:
   - AnkiIO
@@ -109,8 +121,12 @@ items:
   fullName: AnkiIO.AnkiJsonSerializer.Deserialize(string)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Json/AnkiJsonSerializer.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Deserialize
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\AnkiJsonSerializer.cs
+    path: ../src/AnkiIO/Json/AnkiJsonSerializer.cs
     startLine: 30
   assemblies:
   - AnkiIO
@@ -148,8 +164,12 @@ items:
   fullName: AnkiIO.AnkiJsonSerializer.WriteAsync(AnkiIO.AnkiDeck, System.IO.Stream, System.Threading.CancellationToken)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Json/AnkiJsonSerializer.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: WriteAsync
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\AnkiJsonSerializer.cs
+    path: ../src/AnkiIO/Json/AnkiJsonSerializer.cs
     startLine: 46
   assemblies:
   - AnkiIO
@@ -181,8 +201,12 @@ items:
   fullName: AnkiIO.AnkiJsonSerializer.ReadAsync(System.IO.Stream, System.Threading.CancellationToken)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Json/AnkiJsonSerializer.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: ReadAsync
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\AnkiJsonSerializer.cs
+    path: ../src/AnkiIO/Json/AnkiJsonSerializer.cs
     startLine: 54
   assemblies:
   - AnkiIO

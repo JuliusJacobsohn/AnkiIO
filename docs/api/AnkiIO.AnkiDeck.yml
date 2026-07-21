@@ -26,8 +26,12 @@ items:
   fullName: AnkiIO.AnkiDeck
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiDeck
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 6
   assemblies:
   - AnkiIO
@@ -58,8 +62,12 @@ items:
   fullName: AnkiIO.AnkiDeck.AnkiDeck(string, long?)
   type: Constructor
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: .ctor
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 14
   assemblies:
   - AnkiIO
@@ -92,8 +100,12 @@ items:
   fullName: AnkiIO.AnkiDeck.Id
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Id
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 28
   assemblies:
   - AnkiIO
@@ -119,8 +131,12 @@ items:
   fullName: AnkiIO.AnkiDeck.Name
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Name
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 31
   assemblies:
   - AnkiIO
@@ -146,8 +162,12 @@ items:
   fullName: AnkiIO.AnkiDeck.Description
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Description
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 34
   assemblies:
   - AnkiIO
@@ -173,8 +193,12 @@ items:
   fullName: AnkiIO.AnkiDeck.Metadata
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Metadata
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 37
   assemblies:
   - AnkiIO
@@ -200,8 +224,12 @@ items:
   fullName: AnkiIO.AnkiDeck.UnknownData
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: UnknownData
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 40
   assemblies:
   - AnkiIO
@@ -227,8 +255,12 @@ items:
   fullName: AnkiIO.AnkiDeck.Media
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Media
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 43
   assemblies:
   - AnkiIO
@@ -254,8 +286,12 @@ items:
   fullName: AnkiIO.AnkiDeck.Subdecks
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Subdecks
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 46
   assemblies:
   - AnkiIO
@@ -281,8 +317,12 @@ items:
   fullName: AnkiIO.AnkiDeck.Notes
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Notes
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 49
   assemblies:
   - AnkiIO
@@ -308,8 +348,12 @@ items:
   fullName: AnkiIO.AnkiDeck.AddSubdeck(string, long?)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AddSubdeck
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 55
   assemblies:
   - AnkiIO
@@ -345,8 +389,12 @@ items:
   fullName: AnkiIO.AnkiDeck.AddNote(AnkiIO.AnkiNoteType, System.Collections.Generic.IReadOnlyDictionary<string, string>, System.Collections.Generic.IEnumerable<string>?, string?, long?)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AddNote
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 74
   assemblies:
   - AnkiIO
@@ -391,8 +439,12 @@ items:
   fullName: AnkiIO.AnkiDeck.RemoveNote(AnkiIO.AnkiNote)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: RemoveNote
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 87
   assemblies:
   - AnkiIO
@@ -422,8 +474,12 @@ items:
   fullName: AnkiIO.AnkiDeck.Traverse()
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Traverse
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 94
   assemblies:
   - AnkiIO

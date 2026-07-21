@@ -17,8 +17,12 @@ items:
   fullName: AnkiIO.AnkiMediaFile
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Media.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiMediaFile
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Media.cs
+    path: ../src/AnkiIO/Media.cs
     startLine: 5
   assemblies:
   - AnkiIO
@@ -49,8 +53,12 @@ items:
   fullName: AnkiIO.AnkiMediaFile.FileName
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Media.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: FileName
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Media.cs
+    path: ../src/AnkiIO/Media.cs
     startLine: 18
   assemblies:
   - AnkiIO
@@ -76,8 +84,12 @@ items:
   fullName: AnkiIO.AnkiMediaFile.Length
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Media.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Length
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Media.cs
+    path: ../src/AnkiIO/Media.cs
     startLine: 21
   assemblies:
   - AnkiIO
@@ -103,8 +115,12 @@ items:
   fullName: AnkiIO.AnkiMediaFile.Sha256
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Media.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Sha256
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Media.cs
+    path: ../src/AnkiIO/Media.cs
     startLine: 24
   assemblies:
   - AnkiIO
@@ -130,8 +146,12 @@ items:
   fullName: AnkiIO.AnkiMediaFile.OpenReadAsync(System.Threading.CancellationToken)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Media.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: OpenReadAsync
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Media.cs
+    path: ../src/AnkiIO/Media.cs
     startLine: 28
   assemblies:
   - AnkiIO

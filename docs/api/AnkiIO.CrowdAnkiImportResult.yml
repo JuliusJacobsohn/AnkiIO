@@ -16,8 +16,12 @@ items:
   fullName: AnkiIO.CrowdAnkiImportResult
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Json/CrowdAnkiJson.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: CrowdAnkiImportResult
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\CrowdAnkiJson.cs
+    path: ../src/AnkiIO/Json/CrowdAnkiJson.cs
     startLine: 8
   assemblies:
   - AnkiIO
@@ -50,8 +54,12 @@ items:
   fullName: AnkiIO.CrowdAnkiImportResult.CrowdAnkiImportResult(AnkiIO.AnkiDeck, System.Collections.Generic.IReadOnlyList<AnkiIO.AnkiDiagnostic>)
   type: Constructor
   source:
+    remote:
+      path: src/AnkiIO/Json/CrowdAnkiJson.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: .ctor
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\CrowdAnkiJson.cs
+    path: ../src/AnkiIO/Json/CrowdAnkiJson.cs
     startLine: 8
   assemblies:
   - AnkiIO
@@ -82,8 +90,12 @@ items:
   fullName: AnkiIO.CrowdAnkiImportResult.Deck
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Json/CrowdAnkiJson.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Deck
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\CrowdAnkiJson.cs
+    path: ../src/AnkiIO/Json/CrowdAnkiJson.cs
     startLine: 8
   assemblies:
   - AnkiIO
@@ -107,8 +119,12 @@ items:
   fullName: AnkiIO.CrowdAnkiImportResult.Diagnostics
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Json/CrowdAnkiJson.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Diagnostics
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Json\CrowdAnkiJson.cs
+    path: ../src/AnkiIO/Json/CrowdAnkiJson.cs
     startLine: 8
   assemblies:
   - AnkiIO

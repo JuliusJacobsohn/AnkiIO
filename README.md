@@ -9,9 +9,9 @@ AnkiIO is not affiliated with, endorsed by, or sponsored by Ankitects, Anki, Ank
 
 ## Compatibility target
 
-Development is tied to **Anki 25.02.7** on Windows 11 (build 10.0.26200), collection schema 18, and the v3 scheduler. Portable builds target .NET 8. The package adapter emits the legacy `collection.anki2` APKG representation accepted by modern Anki; modern `collection.anki21b` emission is not yet claimed.
+Development is tied to **Anki 26.05** (build `e64c6b1a`) on Windows 11 (build 10.0.26200), collection schema 18, and the v3 scheduler. Portable builds target .NET 8. The package adapter emits the legacy `collection.anki2` APKG representation accepted in an isolated Anki 26.05 backend test; modern `collection.anki21b` emission is not yet claimed.
 
-See [the compatibility report](docs/compatibility/anki-25.02.7.md) and [known limitations](docs/known-limitations.md) before using package I/O.
+See [the compatibility report](docs/compatibility/anki-26.05.md) and [known limitations](docs/known-limitations.md) before using package I/O.
 
 ## Install
 
@@ -65,4 +65,3 @@ dotnet pack src/AnkiIO/AnkiIO.csproj --configuration Release
 Local-Anki tests are opt-in and use unique temporary workspaces. They never modify the normal profile. See [local testing safety](docs/local-anki-testing.md), [samples](samples/README.md), and the [documentation index](docs/index.md).
 
 Versioning follows Semantic Versioning. Contributions use feature branches, Conventional Commits, pull requests, required CI, and squash merging; see [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under [MIT](LICENSE).
-

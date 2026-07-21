@@ -19,8 +19,12 @@ items:
   fullName: AnkiIO.AnkiField
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiField
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 18
   assemblies:
   - AnkiIO
@@ -53,8 +57,12 @@ items:
   fullName: AnkiIO.AnkiField.AnkiField(string, bool, bool, string, int)
   type: Constructor
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: .ctor
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 18
   assemblies:
   - AnkiIO
@@ -96,8 +104,12 @@ items:
   fullName: AnkiIO.AnkiField.Name
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Name
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 19
   assemblies:
   - AnkiIO
@@ -123,8 +135,12 @@ items:
   fullName: AnkiIO.AnkiField.IsRightToLeft
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: IsRightToLeft
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 20
   assemblies:
   - AnkiIO
@@ -150,8 +166,12 @@ items:
   fullName: AnkiIO.AnkiField.IsSticky
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: IsSticky
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 21
   assemblies:
   - AnkiIO
@@ -177,8 +197,12 @@ items:
   fullName: AnkiIO.AnkiField.Font
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Font
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 22
   assemblies:
   - AnkiIO
@@ -204,8 +228,12 @@ items:
   fullName: AnkiIO.AnkiField.FontSize
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: FontSize
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 23
   assemblies:
   - AnkiIO

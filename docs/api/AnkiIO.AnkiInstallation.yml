@@ -23,8 +23,12 @@ items:
   fullName: AnkiIO.AnkiInstallation
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiInstallation
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 5
   assemblies:
   - AnkiIO
@@ -57,8 +61,12 @@ items:
   fullName: AnkiIO.AnkiInstallation.AnkiInstallation(string, string, System.Version, string, string?, bool, bool, bool, bool)
   type: Constructor
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: .ctor
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 5
   assemblies:
   - AnkiIO
@@ -103,8 +111,12 @@ items:
   fullName: AnkiIO.AnkiInstallation.ExecutablePath
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: ExecutablePath
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 6
   assemblies:
   - AnkiIO
@@ -128,8 +140,12 @@ items:
   fullName: AnkiIO.AnkiInstallation.InstallationDirectory
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: InstallationDirectory
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 7
   assemblies:
   - AnkiIO
@@ -153,8 +169,12 @@ items:
   fullName: AnkiIO.AnkiInstallation.Version
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Version
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 8
   assemblies:
   - AnkiIO
@@ -178,8 +198,12 @@ items:
   fullName: AnkiIO.AnkiInstallation.VersionText
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: VersionText
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 9
   assemblies:
   - AnkiIO
@@ -203,8 +227,12 @@ items:
   fullName: AnkiIO.AnkiInstallation.DataDirectory
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: DataDirectory
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 10
   assemblies:
   - AnkiIO
@@ -228,8 +256,12 @@ items:
   fullName: AnkiIO.AnkiInstallation.ProfilesPresent
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: ProfilesPresent
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 11
   assemblies:
   - AnkiIO
@@ -253,8 +285,12 @@ items:
   fullName: AnkiIO.AnkiInstallation.CollectionsPresent
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: CollectionsPresent
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 12
   assemblies:
   - AnkiIO
@@ -278,8 +314,12 @@ items:
   fullName: AnkiIO.AnkiInstallation.MediaDirectoriesPresent
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: MediaDirectoriesPresent
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 13
   assemblies:
   - AnkiIO
@@ -303,8 +343,12 @@ items:
   fullName: AnkiIO.AnkiInstallation.AddonsDirectoryPresent
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AddonsDirectoryPresent
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 14
   assemblies:
   - AnkiIO

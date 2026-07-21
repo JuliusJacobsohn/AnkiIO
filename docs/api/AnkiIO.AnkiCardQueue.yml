@@ -21,8 +21,12 @@ items:
   fullName: AnkiIO.AnkiCardQueue
   type: Enum
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiCardQueue
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 16
   assemblies:
   - AnkiIO
@@ -44,8 +48,12 @@ items:
   fullName: AnkiIO.AnkiCardQueue.Suspended
   type: Field
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Suspended
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 19
   assemblies:
   - AnkiIO
@@ -68,8 +76,12 @@ items:
   fullName: AnkiIO.AnkiCardQueue.SiblingBuried
   type: Field
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: SiblingBuried
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 21
   assemblies:
   - AnkiIO
@@ -92,8 +104,12 @@ items:
   fullName: AnkiIO.AnkiCardQueue.SchedulerBuried
   type: Field
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: SchedulerBuried
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 23
   assemblies:
   - AnkiIO
@@ -116,8 +132,12 @@ items:
   fullName: AnkiIO.AnkiCardQueue.New
   type: Field
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: New
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 25
   assemblies:
   - AnkiIO
@@ -140,8 +160,12 @@ items:
   fullName: AnkiIO.AnkiCardQueue.Learning
   type: Field
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Learning
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 27
   assemblies:
   - AnkiIO
@@ -164,8 +188,12 @@ items:
   fullName: AnkiIO.AnkiCardQueue.Review
   type: Field
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Review
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 29
   assemblies:
   - AnkiIO
@@ -188,8 +216,12 @@ items:
   fullName: AnkiIO.AnkiCardQueue.DayLearning
   type: Field
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: DayLearning
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 31
   assemblies:
   - AnkiIO
@@ -212,8 +244,12 @@ items:
   fullName: AnkiIO.AnkiCardQueue.Preview
   type: Field
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Preview
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 33
   assemblies:
   - AnkiIO

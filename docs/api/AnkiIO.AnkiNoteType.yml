@@ -22,8 +22,12 @@ items:
   fullName: AnkiIO.AnkiNoteType
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiNoteType
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 40
   assemblies:
   - AnkiIO
@@ -55,8 +59,12 @@ items:
   fullName: AnkiIO.AnkiNoteType.AnkiNoteType(string, AnkiIO.AnkiNoteTypeKind, long?)
   type: Constructor
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: .ctor
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 49
   assemblies:
   - AnkiIO
@@ -92,8 +100,12 @@ items:
   fullName: AnkiIO.AnkiNoteType.Id
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Id
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 58
   assemblies:
   - AnkiIO
@@ -119,8 +131,12 @@ items:
   fullName: AnkiIO.AnkiNoteType.Name
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Name
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 61
   assemblies:
   - AnkiIO
@@ -146,8 +162,12 @@ items:
   fullName: AnkiIO.AnkiNoteType.Kind
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Kind
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 64
   assemblies:
   - AnkiIO
@@ -173,8 +193,12 @@ items:
   fullName: AnkiIO.AnkiNoteType.Css
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Css
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 67
   assemblies:
   - AnkiIO
@@ -200,8 +224,12 @@ items:
   fullName: AnkiIO.AnkiNoteType.Fields
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Fields
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 70
   assemblies:
   - AnkiIO
@@ -227,8 +255,12 @@ items:
   fullName: AnkiIO.AnkiNoteType.Templates
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Templates
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 73
   assemblies:
   - AnkiIO
@@ -254,8 +286,12 @@ items:
   fullName: AnkiIO.AnkiNoteType.AddField(string)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AddField
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 79
   assemblies:
   - AnkiIO
@@ -292,8 +328,12 @@ items:
   fullName: AnkiIO.AnkiNoteType.AddTemplate(string, string, string)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/NoteTypes.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AddTemplate
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\NoteTypes.cs
+    path: ../src/AnkiIO/NoteTypes.cs
     startLine: 96
   assemblies:
   - AnkiIO

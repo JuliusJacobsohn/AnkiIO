@@ -16,8 +16,12 @@ items:
   fullName: AnkiIO.AnkiDiagnosticSeverity
   type: Enum
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiDiagnosticSeverity
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 5
   assemblies:
   - AnkiIO
@@ -39,8 +43,12 @@ items:
   fullName: AnkiIO.AnkiDiagnosticSeverity.Information
   type: Field
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Information
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 8
   assemblies:
   - AnkiIO
@@ -63,8 +71,12 @@ items:
   fullName: AnkiIO.AnkiDiagnosticSeverity.Warning
   type: Field
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Warning
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 10
   assemblies:
   - AnkiIO
@@ -87,8 +99,12 @@ items:
   fullName: AnkiIO.AnkiDiagnosticSeverity.Error
   type: Field
   source:
+    remote:
+      path: src/AnkiIO/Diagnostics.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Error
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Diagnostics.cs
+    path: ../src/AnkiIO/Diagnostics.cs
     startLine: 12
   assemblies:
   - AnkiIO

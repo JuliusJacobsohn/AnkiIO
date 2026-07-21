@@ -22,8 +22,12 @@ items:
   fullName: AnkiIO.AnkiReviewLog
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiReviewLog
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 78
   assemblies:
   - AnkiIO
@@ -56,8 +60,12 @@ items:
   fullName: AnkiIO.AnkiReviewLog.AnkiReviewLog(long, System.DateTimeOffset, int, int, int, int, System.TimeSpan, int)
   type: Constructor
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: .ctor
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 78
   assemblies:
   - AnkiIO
@@ -100,8 +108,12 @@ items:
   fullName: AnkiIO.AnkiReviewLog.Id
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Id
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 79
   assemblies:
   - AnkiIO
@@ -125,8 +137,12 @@ items:
   fullName: AnkiIO.AnkiReviewLog.ReviewedAt
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: ReviewedAt
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 80
   assemblies:
   - AnkiIO
@@ -150,8 +166,12 @@ items:
   fullName: AnkiIO.AnkiReviewLog.Ease
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Ease
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 81
   assemblies:
   - AnkiIO
@@ -175,8 +195,12 @@ items:
   fullName: AnkiIO.AnkiReviewLog.Interval
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Interval
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 82
   assemblies:
   - AnkiIO
@@ -200,8 +224,12 @@ items:
   fullName: AnkiIO.AnkiReviewLog.PreviousInterval
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: PreviousInterval
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 83
   assemblies:
   - AnkiIO
@@ -225,8 +253,12 @@ items:
   fullName: AnkiIO.AnkiReviewLog.EaseFactor
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: EaseFactor
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 84
   assemblies:
   - AnkiIO
@@ -250,8 +282,12 @@ items:
   fullName: AnkiIO.AnkiReviewLog.AnswerTime
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnswerTime
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 85
   assemblies:
   - AnkiIO
@@ -275,8 +311,12 @@ items:
   fullName: AnkiIO.AnkiReviewLog.ReviewType
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Scheduling.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: ReviewType
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Scheduling.cs
+    path: ../src/AnkiIO/Scheduling.cs
     startLine: 86
   assemblies:
   - AnkiIO

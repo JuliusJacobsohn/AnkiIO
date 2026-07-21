@@ -4,6 +4,7 @@ items:
   commentId: N:AnkiIO
   id: AnkiIO
   children:
+  - AnkiIO.Anki2605VersionAdapter
   - AnkiIO.AnkiCard
   - AnkiIO.AnkiCardQueue
   - AnkiIO.AnkiCardTemplate
@@ -73,6 +74,12 @@ references:
   name: AnkiCompatibilityRegistry
   nameWithType: AnkiCompatibilityRegistry
   fullName: AnkiIO.AnkiCompatibilityRegistry
+- uid: AnkiIO.Anki2605VersionAdapter
+  commentId: T:AnkiIO.Anki2605VersionAdapter
+  href: AnkiIO.Anki2605VersionAdapter.html
+  name: Anki2605VersionAdapter
+  nameWithType: Anki2605VersionAdapter
+  fullName: AnkiIO.Anki2605VersionAdapter
 - uid: AnkiIO.AnkiDiagnosticSeverity
   commentId: T:AnkiIO.AnkiDiagnosticSeverity
   parent: AnkiIO

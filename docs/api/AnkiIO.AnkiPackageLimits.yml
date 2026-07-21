@@ -19,8 +19,12 @@ items:
   fullName: AnkiIO.AnkiPackageLimits
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Packages/AnkiPackage.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiPackageLimits
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Packages\AnkiPackage.cs
+    path: ../src/AnkiIO/Packages/AnkiPackage.cs
     startLine: 29
   assemblies:
   - AnkiIO
@@ -53,8 +57,12 @@ items:
   fullName: AnkiIO.AnkiPackageLimits.Default
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Packages/AnkiPackage.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Default
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Packages\AnkiPackage.cs
+    path: ../src/AnkiIO/Packages/AnkiPackage.cs
     startLine: 32
   assemblies:
   - AnkiIO
@@ -80,8 +88,12 @@ items:
   fullName: AnkiIO.AnkiPackageLimits.MaximumEntries
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Packages/AnkiPackage.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: MaximumEntries
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Packages\AnkiPackage.cs
+    path: ../src/AnkiIO/Packages/AnkiPackage.cs
     startLine: 35
   assemblies:
   - AnkiIO
@@ -107,8 +119,12 @@ items:
   fullName: AnkiIO.AnkiPackageLimits.MaximumEntryBytes
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Packages/AnkiPackage.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: MaximumEntryBytes
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Packages\AnkiPackage.cs
+    path: ../src/AnkiIO/Packages/AnkiPackage.cs
     startLine: 38
   assemblies:
   - AnkiIO
@@ -134,8 +150,12 @@ items:
   fullName: AnkiIO.AnkiPackageLimits.MaximumTotalBytes
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Packages/AnkiPackage.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: MaximumTotalBytes
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Packages\AnkiPackage.cs
+    path: ../src/AnkiIO/Packages/AnkiPackage.cs
     startLine: 41
   assemblies:
   - AnkiIO
@@ -161,8 +181,12 @@ items:
   fullName: AnkiIO.AnkiPackageLimits.MaximumCompressionRatio
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Packages/AnkiPackage.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: MaximumCompressionRatio
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Packages\AnkiPackage.cs
+    path: ../src/AnkiIO/Packages/AnkiPackage.cs
     startLine: 44
   assemblies:
   - AnkiIO
@@ -188,8 +212,12 @@ items:
   fullName: AnkiIO.AnkiPackageLimits.MaximumCollectionBytes
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Packages/AnkiPackage.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: MaximumCollectionBytes
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Packages\AnkiPackage.cs
+    path: ../src/AnkiIO/Packages/AnkiPackage.cs
     startLine: 47
   assemblies:
   - AnkiIO

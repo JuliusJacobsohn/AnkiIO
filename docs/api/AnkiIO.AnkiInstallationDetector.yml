@@ -14,8 +14,12 @@ items:
   fullName: AnkiIO.AnkiInstallationDetector
   type: Class
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AnkiInstallationDetector
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 17
   assemblies:
   - AnkiIO
@@ -47,8 +51,12 @@ items:
   fullName: AnkiIO.AnkiInstallationDetector.Detect()
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Compatibility/AnkiCompatibility.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Detect
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Compatibility\AnkiCompatibility.cs
+    path: ../src/AnkiIO/Compatibility/AnkiCompatibility.cs
     startLine: 21
   assemblies:
   - AnkiIO

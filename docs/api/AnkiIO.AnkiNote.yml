@@ -55,8 +55,12 @@ items:
   fullName: AnkiIO.AnkiNote.AnkiNote(AnkiIO.AnkiNoteType, System.Collections.Generic.IReadOnlyDictionary<string, string>, System.Collections.Generic.IEnumerable<string>?, long?, string?)
   type: Constructor
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: .ctor
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 115
   assemblies:
   - AnkiIO
@@ -93,8 +97,12 @@ items:
   fullName: AnkiIO.AnkiNote.Id
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Id
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 137
   assemblies:
   - AnkiIO
@@ -120,8 +128,12 @@ items:
   fullName: AnkiIO.AnkiNote.Guid
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Guid
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 140
   assemblies:
   - AnkiIO
@@ -147,8 +159,12 @@ items:
   fullName: AnkiIO.AnkiNote.NoteType
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: NoteType
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 143
   assemblies:
   - AnkiIO
@@ -174,8 +190,12 @@ items:
   fullName: AnkiIO.AnkiNote.Fields
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Fields
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 146
   assemblies:
   - AnkiIO
@@ -201,8 +221,12 @@ items:
   fullName: AnkiIO.AnkiNote.Tags
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Tags
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 149
   assemblies:
   - AnkiIO
@@ -228,8 +252,12 @@ items:
   fullName: AnkiIO.AnkiNote.Cards
   type: Property
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: Cards
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 152
   assemblies:
   - AnkiIO
@@ -255,8 +283,12 @@ items:
   fullName: AnkiIO.AnkiNote.SetField(string, string)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: SetField
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 155
   assemblies:
   - AnkiIO
@@ -287,8 +319,12 @@ items:
   fullName: AnkiIO.AnkiNote.AddTag(string)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: AddTag
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 167
   assemblies:
   - AnkiIO
@@ -317,8 +353,12 @@ items:
   fullName: AnkiIO.AnkiNote.RemoveTag(string)
   type: Method
   source:
+    remote:
+      path: src/AnkiIO/Domain.cs
+      branch: main
+      repo: https://github.com/JuliusJacobsohn/AnkiIO.git
     id: RemoveTag
-    path: C:\Users\Julius\source\repos\AnkiIO\src\AnkiIO\Domain.cs
+    path: ../src/AnkiIO/Domain.cs
     startLine: 174
   assemblies:
   - AnkiIO
