@@ -15,3 +15,11 @@ csharp_style_namespace_declarations = file_scoped:warning
 # Anki's public format vocabulary intentionally uses Collection, Queue, and GUID.
 dotnet_diagnostic.CA1711.severity = none
 dotnet_diagnostic.CA1720.severity = none
+
+[src/AnkiIO/Packages/AnkiPackageReader.cs]
+# The path and stream entry points intentionally share optional limits and cancellation arguments.
+dotnet_diagnostic.RS0026.severity = none
+
+[src/AnkiIO/Packages/AnkiPackageWriter.cs]
+# The deck/package and path/stream entry points intentionally share an optional cancellation argument.
+dotnet_diagnostic.RS0026.severity = none

@@ -1,0 +1,341 @@
+#nullable enable
+AnkiIO.Anki2605VersionAdapter
+AnkiIO.Anki2605VersionAdapter.Anki2605VersionAdapter() -> void
+AnkiIO.Anki2605VersionAdapter.CollectionSchemas.get -> System.Collections.Generic.IReadOnlySet<int>!
+AnkiIO.Anki2605VersionAdapter.Name.get -> string!
+AnkiIO.Anki2605VersionAdapter.PackageEntries.get -> System.Collections.Generic.IReadOnlySet<string!>!
+AnkiIO.Anki2605VersionAdapter.SchedulerVersion.get -> int
+AnkiIO.Anki2605VersionAdapter.Supports(System.Version! version) -> bool
+AnkiIO.AnkiCard
+AnkiIO.AnkiCard.AnkiCard(long id, long noteId, long deckId, int templateOrdinal, AnkiIO.AnkiScheduling! scheduling) -> void
+AnkiIO.AnkiCard.DeckId.get -> long
+AnkiIO.AnkiCard.DeckId.set -> void
+AnkiIO.AnkiCard.Flag.get -> int
+AnkiIO.AnkiCard.Flag.set -> void
+AnkiIO.AnkiCard.Id.get -> long
+AnkiIO.AnkiCard.NoteId.get -> long
+AnkiIO.AnkiCard.ReviewHistory.get -> System.Collections.Generic.IList<AnkiIO.AnkiReviewLog!>!
+AnkiIO.AnkiCard.Scheduling.get -> AnkiIO.AnkiScheduling!
+AnkiIO.AnkiCard.Scheduling.set -> void
+AnkiIO.AnkiCard.TemplateOrdinal.get -> int
+AnkiIO.AnkiCardQueue
+AnkiIO.AnkiCardQueue.DayLearning = 3 -> AnkiIO.AnkiCardQueue
+AnkiIO.AnkiCardQueue.Learning = 1 -> AnkiIO.AnkiCardQueue
+AnkiIO.AnkiCardQueue.New = 0 -> AnkiIO.AnkiCardQueue
+AnkiIO.AnkiCardQueue.Preview = 4 -> AnkiIO.AnkiCardQueue
+AnkiIO.AnkiCardQueue.Review = 2 -> AnkiIO.AnkiCardQueue
+AnkiIO.AnkiCardQueue.SchedulerBuried = -3 -> AnkiIO.AnkiCardQueue
+AnkiIO.AnkiCardQueue.SiblingBuried = -2 -> AnkiIO.AnkiCardQueue
+AnkiIO.AnkiCardQueue.Suspended = -1 -> AnkiIO.AnkiCardQueue
+AnkiIO.AnkiCardTemplate
+AnkiIO.AnkiCardTemplate.<Clone>$() -> AnkiIO.AnkiCardTemplate!
+AnkiIO.AnkiCardTemplate.AnkiCardTemplate(string! Name, string! QuestionFormat, string! AnswerFormat, string? BrowserQuestionFormat = null, string? BrowserAnswerFormat = null) -> void
+AnkiIO.AnkiCardTemplate.AnswerFormat.get -> string!
+AnkiIO.AnkiCardTemplate.AnswerFormat.init -> void
+AnkiIO.AnkiCardTemplate.BrowserAnswerFormat.get -> string?
+AnkiIO.AnkiCardTemplate.BrowserAnswerFormat.init -> void
+AnkiIO.AnkiCardTemplate.BrowserQuestionFormat.get -> string?
+AnkiIO.AnkiCardTemplate.BrowserQuestionFormat.init -> void
+AnkiIO.AnkiCardTemplate.Deconstruct(out string! Name, out string! QuestionFormat, out string! AnswerFormat, out string? BrowserQuestionFormat, out string? BrowserAnswerFormat) -> void
+AnkiIO.AnkiCardTemplate.Equals(AnkiIO.AnkiCardTemplate? other) -> bool
+AnkiIO.AnkiCardTemplate.Name.get -> string!
+AnkiIO.AnkiCardTemplate.Name.init -> void
+AnkiIO.AnkiCardTemplate.QuestionFormat.get -> string!
+AnkiIO.AnkiCardTemplate.QuestionFormat.init -> void
+AnkiIO.AnkiCardType
+AnkiIO.AnkiCardType.Learning = 1 -> AnkiIO.AnkiCardType
+AnkiIO.AnkiCardType.New = 0 -> AnkiIO.AnkiCardType
+AnkiIO.AnkiCardType.Relearning = 3 -> AnkiIO.AnkiCardType
+AnkiIO.AnkiCardType.Review = 2 -> AnkiIO.AnkiCardType
+AnkiIO.AnkiCloze
+AnkiIO.AnkiCompatibilityRegistry
+AnkiIO.AnkiCompatibilityRegistry.Add(AnkiIO.IAnkiVersionAdapter! adapter) -> AnkiIO.AnkiCompatibilityRegistry!
+AnkiIO.AnkiCompatibilityRegistry.AnkiCompatibilityRegistry() -> void
+AnkiIO.AnkiCompatibilityRegistry.Resolve(System.Version! version) -> AnkiIO.IAnkiVersionAdapter!
+AnkiIO.AnkiDeck
+AnkiIO.AnkiDeck.AddBasicAndReversedNote(string! front, string! back, System.Collections.Generic.IEnumerable<string!>? tags = null, string? guid = null, long? id = null) -> AnkiIO.AnkiNote!
+AnkiIO.AnkiDeck.AddBasicNote(string! front, string! back, System.Collections.Generic.IEnumerable<string!>? tags = null, string? guid = null, long? id = null) -> AnkiIO.AnkiNote!
+AnkiIO.AnkiDeck.AddClozeNote(string! text, string! extra = "", System.Collections.Generic.IEnumerable<string!>? tags = null, string? guid = null, long? id = null) -> AnkiIO.AnkiNote!
+AnkiIO.AnkiDeck.AddNote(AnkiIO.AnkiNoteType! noteType, System.Collections.Generic.IReadOnlyDictionary<string!, string!>! fields, System.Collections.Generic.IEnumerable<string!>? tags = null, string? guid = null, long? id = null) -> AnkiIO.AnkiNote!
+AnkiIO.AnkiDeck.AddSubdeck(string! name, long? id = null) -> AnkiIO.AnkiDeck!
+AnkiIO.AnkiDeck.AnkiDeck(string! name, long? id = null) -> void
+AnkiIO.AnkiDeck.Description.get -> string!
+AnkiIO.AnkiDeck.Description.set -> void
+AnkiIO.AnkiDeck.Id.get -> long
+AnkiIO.AnkiDeck.Media.get -> AnkiIO.AnkiMediaCollection!
+AnkiIO.AnkiDeck.Metadata.get -> System.Collections.Generic.IDictionary<string!, string!>!
+AnkiIO.AnkiDeck.Name.get -> string!
+AnkiIO.AnkiDeck.Notes.get -> System.Collections.Generic.IReadOnlyList<AnkiIO.AnkiNote!>!
+AnkiIO.AnkiDeck.RemoveNote(AnkiIO.AnkiNote! note) -> bool
+AnkiIO.AnkiDeck.Subdecks.get -> System.Collections.Generic.IReadOnlyList<AnkiIO.AnkiDeck!>!
+AnkiIO.AnkiDeck.Traverse() -> System.Collections.Generic.IEnumerable<AnkiIO.AnkiDeck!>!
+AnkiIO.AnkiDeck.UnknownData.get -> System.Collections.Generic.IDictionary<string!, System.Text.Json.JsonElement>!
+AnkiIO.AnkiDiagnostic
+AnkiIO.AnkiDiagnostic.<Clone>$() -> AnkiIO.AnkiDiagnostic!
+AnkiIO.AnkiDiagnostic.AnkiDiagnostic(AnkiIO.AnkiDiagnosticSeverity Severity, string! Code, string! Message, string? Location = null, long? DeckId = null, long? NoteId = null, long? CardId = null, string? FieldName = null, string? MediaFileName = null, string? SuggestedRemediation = null) -> void
+AnkiIO.AnkiDiagnostic.CardId.get -> long?
+AnkiIO.AnkiDiagnostic.CardId.init -> void
+AnkiIO.AnkiDiagnostic.Code.get -> string!
+AnkiIO.AnkiDiagnostic.Code.init -> void
+AnkiIO.AnkiDiagnostic.DeckId.get -> long?
+AnkiIO.AnkiDiagnostic.DeckId.init -> void
+AnkiIO.AnkiDiagnostic.Deconstruct(out AnkiIO.AnkiDiagnosticSeverity Severity, out string! Code, out string! Message, out string? Location, out long? DeckId, out long? NoteId, out long? CardId, out string? FieldName, out string? MediaFileName, out string? SuggestedRemediation) -> void
+AnkiIO.AnkiDiagnostic.Equals(AnkiIO.AnkiDiagnostic? other) -> bool
+AnkiIO.AnkiDiagnostic.FieldName.get -> string?
+AnkiIO.AnkiDiagnostic.FieldName.init -> void
+AnkiIO.AnkiDiagnostic.Location.get -> string?
+AnkiIO.AnkiDiagnostic.Location.init -> void
+AnkiIO.AnkiDiagnostic.MediaFileName.get -> string?
+AnkiIO.AnkiDiagnostic.MediaFileName.init -> void
+AnkiIO.AnkiDiagnostic.Message.get -> string!
+AnkiIO.AnkiDiagnostic.Message.init -> void
+AnkiIO.AnkiDiagnostic.NoteId.get -> long?
+AnkiIO.AnkiDiagnostic.NoteId.init -> void
+AnkiIO.AnkiDiagnostic.Severity.get -> AnkiIO.AnkiDiagnosticSeverity
+AnkiIO.AnkiDiagnostic.Severity.init -> void
+AnkiIO.AnkiDiagnostic.SuggestedRemediation.get -> string?
+AnkiIO.AnkiDiagnostic.SuggestedRemediation.init -> void
+AnkiIO.AnkiDiagnosticSeverity
+AnkiIO.AnkiDiagnosticSeverity.Error = 2 -> AnkiIO.AnkiDiagnosticSeverity
+AnkiIO.AnkiDiagnosticSeverity.Information = 0 -> AnkiIO.AnkiDiagnosticSeverity
+AnkiIO.AnkiDiagnosticSeverity.Warning = 1 -> AnkiIO.AnkiDiagnosticSeverity
+AnkiIO.AnkiField
+AnkiIO.AnkiField.<Clone>$() -> AnkiIO.AnkiField!
+AnkiIO.AnkiField.AnkiField(string! Name, bool IsRightToLeft = false, bool IsSticky = false, string! Font = "Arial", int FontSize = 20) -> void
+AnkiIO.AnkiField.Deconstruct(out string! Name, out bool IsRightToLeft, out bool IsSticky, out string! Font, out int FontSize) -> void
+AnkiIO.AnkiField.Equals(AnkiIO.AnkiField? other) -> bool
+AnkiIO.AnkiField.Font.get -> string!
+AnkiIO.AnkiField.Font.init -> void
+AnkiIO.AnkiField.FontSize.get -> int
+AnkiIO.AnkiField.FontSize.init -> void
+AnkiIO.AnkiField.IsRightToLeft.get -> bool
+AnkiIO.AnkiField.IsRightToLeft.init -> void
+AnkiIO.AnkiField.IsSticky.get -> bool
+AnkiIO.AnkiField.IsSticky.init -> void
+AnkiIO.AnkiField.Name.get -> string!
+AnkiIO.AnkiField.Name.init -> void
+AnkiIO.AnkiId
+AnkiIO.AnkiInstallation
+AnkiIO.AnkiInstallation.<Clone>$() -> AnkiIO.AnkiInstallation!
+AnkiIO.AnkiInstallation.AddonsDirectoryPresent.get -> bool
+AnkiIO.AnkiInstallation.AddonsDirectoryPresent.init -> void
+AnkiIO.AnkiInstallation.AnkiInstallation(string! ExecutablePath, string! InstallationDirectory, System.Version! Version, string! VersionText, string? DataDirectory, bool ProfilesPresent, bool CollectionsPresent, bool MediaDirectoriesPresent, bool AddonsDirectoryPresent) -> void
+AnkiIO.AnkiInstallation.CollectionsPresent.get -> bool
+AnkiIO.AnkiInstallation.CollectionsPresent.init -> void
+AnkiIO.AnkiInstallation.DataDirectory.get -> string?
+AnkiIO.AnkiInstallation.DataDirectory.init -> void
+AnkiIO.AnkiInstallation.Deconstruct(out string! ExecutablePath, out string! InstallationDirectory, out System.Version! Version, out string! VersionText, out string? DataDirectory, out bool ProfilesPresent, out bool CollectionsPresent, out bool MediaDirectoriesPresent, out bool AddonsDirectoryPresent) -> void
+AnkiIO.AnkiInstallation.Equals(AnkiIO.AnkiInstallation? other) -> bool
+AnkiIO.AnkiInstallation.ExecutablePath.get -> string!
+AnkiIO.AnkiInstallation.ExecutablePath.init -> void
+AnkiIO.AnkiInstallation.InstallationDirectory.get -> string!
+AnkiIO.AnkiInstallation.InstallationDirectory.init -> void
+AnkiIO.AnkiInstallation.MediaDirectoriesPresent.get -> bool
+AnkiIO.AnkiInstallation.MediaDirectoriesPresent.init -> void
+AnkiIO.AnkiInstallation.ProfilesPresent.get -> bool
+AnkiIO.AnkiInstallation.ProfilesPresent.init -> void
+AnkiIO.AnkiInstallation.Version.get -> System.Version!
+AnkiIO.AnkiInstallation.Version.init -> void
+AnkiIO.AnkiInstallation.VersionText.get -> string!
+AnkiIO.AnkiInstallation.VersionText.init -> void
+AnkiIO.AnkiInstallationDetector
+AnkiIO.AnkiJsonSerializer
+AnkiIO.AnkiMediaCollection
+AnkiIO.AnkiMediaCollection.AddBytes(string! fileName, System.ReadOnlySpan<byte> content) -> AnkiIO.AnkiMediaFile!
+AnkiIO.AnkiMediaCollection.AddFileAsync(string! path, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<AnkiIO.AnkiMediaFile!>!
+AnkiIO.AnkiMediaCollection.AnkiMediaCollection() -> void
+AnkiIO.AnkiMediaCollection.Files.get -> System.Collections.Generic.IReadOnlyCollection<AnkiIO.AnkiMediaFile!>!
+AnkiIO.AnkiMediaCollection.Remove(string! fileName) -> bool
+AnkiIO.AnkiMediaFile
+AnkiIO.AnkiMediaFile.FileName.get -> string!
+AnkiIO.AnkiMediaFile.Length.get -> long
+AnkiIO.AnkiMediaFile.OpenReadAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<System.IO.Stream!>
+AnkiIO.AnkiMediaFile.Sha256.get -> string!
+AnkiIO.AnkiNote
+AnkiIO.AnkiNote.AddTag(string! tag) -> void
+AnkiIO.AnkiNote.AnkiNote(AnkiIO.AnkiNoteType! noteType, System.Collections.Generic.IReadOnlyDictionary<string!, string!>! fields, System.Collections.Generic.IEnumerable<string!>? tags = null, long? id = null, string? guid = null) -> void
+AnkiIO.AnkiNote.Cards.get -> System.Collections.Generic.IReadOnlyList<AnkiIO.AnkiCard!>!
+AnkiIO.AnkiNote.Fields.get -> System.Collections.Generic.IReadOnlyDictionary<string!, string!>!
+AnkiIO.AnkiNote.Guid.get -> string!
+AnkiIO.AnkiNote.Id.get -> long
+AnkiIO.AnkiNote.NoteType.get -> AnkiIO.AnkiNoteType!
+AnkiIO.AnkiNote.RemoveTag(string! tag) -> bool
+AnkiIO.AnkiNote.SetField(string! name, string! value) -> void
+AnkiIO.AnkiNote.Tags.get -> System.Collections.Generic.IReadOnlyCollection<string!>!
+AnkiIO.AnkiNoteType
+AnkiIO.AnkiNoteType.AddConfiguredField(AnkiIO.AnkiField! field) -> AnkiIO.AnkiNoteType!
+AnkiIO.AnkiNoteType.AddConfiguredTemplate(AnkiIO.AnkiCardTemplate! template) -> AnkiIO.AnkiNoteType!
+AnkiIO.AnkiNoteType.AddField(string! name) -> AnkiIO.AnkiNoteType!
+AnkiIO.AnkiNoteType.AddTemplate(string! name, string! questionFormat, string! answerFormat) -> AnkiIO.AnkiNoteType!
+AnkiIO.AnkiNoteType.AnkiNoteType(string! name, AnkiIO.AnkiNoteTypeKind kind = AnkiIO.AnkiNoteTypeKind.Standard, long? id = null) -> void
+AnkiIO.AnkiNoteType.Css.get -> string!
+AnkiIO.AnkiNoteType.Css.set -> void
+AnkiIO.AnkiNoteType.Fields.get -> System.Collections.Generic.IReadOnlyList<AnkiIO.AnkiField!>!
+AnkiIO.AnkiNoteType.Id.get -> long
+AnkiIO.AnkiNoteType.IsFrozen.get -> bool
+AnkiIO.AnkiNoteType.Kind.get -> AnkiIO.AnkiNoteTypeKind
+AnkiIO.AnkiNoteType.Name.get -> string!
+AnkiIO.AnkiNoteType.Templates.get -> System.Collections.Generic.IReadOnlyList<AnkiIO.AnkiCardTemplate!>!
+AnkiIO.AnkiNoteTypeKind
+AnkiIO.AnkiNoteTypeKind.Cloze = 1 -> AnkiIO.AnkiNoteTypeKind
+AnkiIO.AnkiNoteTypeKind.Standard = 0 -> AnkiIO.AnkiNoteTypeKind
+AnkiIO.AnkiNoteTypes
+AnkiIO.AnkiPackage
+AnkiIO.AnkiPackage.Cards.get -> System.Collections.Generic.IEnumerable<AnkiIO.AnkiCard!>!
+AnkiIO.AnkiPackage.Decks.get -> System.Collections.Generic.IReadOnlyList<AnkiIO.AnkiDeck!>!
+AnkiIO.AnkiPackage.Diagnostics.get -> System.Collections.Generic.IReadOnlyList<AnkiIO.AnkiDiagnostic!>!
+AnkiIO.AnkiPackage.Media.get -> AnkiIO.AnkiMediaCollection!
+AnkiIO.AnkiPackage.Notes.get -> System.Collections.Generic.IEnumerable<AnkiIO.AnkiNote!>!
+AnkiIO.AnkiPackageLimits
+AnkiIO.AnkiPackageLimits.<Clone>$() -> AnkiIO.AnkiPackageLimits!
+AnkiIO.AnkiPackageLimits.AnkiPackageLimits() -> void
+AnkiIO.AnkiPackageLimits.Equals(AnkiIO.AnkiPackageLimits? other) -> bool
+AnkiIO.AnkiPackageLimits.MaximumCollectionBytes.get -> long
+AnkiIO.AnkiPackageLimits.MaximumCollectionBytes.init -> void
+AnkiIO.AnkiPackageLimits.MaximumCompressionRatio.get -> double
+AnkiIO.AnkiPackageLimits.MaximumCompressionRatio.init -> void
+AnkiIO.AnkiPackageLimits.MaximumEntries.get -> int
+AnkiIO.AnkiPackageLimits.MaximumEntries.init -> void
+AnkiIO.AnkiPackageLimits.MaximumEntryBytes.get -> long
+AnkiIO.AnkiPackageLimits.MaximumEntryBytes.init -> void
+AnkiIO.AnkiPackageLimits.MaximumTotalBytes.get -> long
+AnkiIO.AnkiPackageLimits.MaximumTotalBytes.init -> void
+AnkiIO.AnkiPackageReader
+AnkiIO.AnkiPackageSecurityException
+AnkiIO.AnkiPackageSecurityException.AnkiPackageSecurityException(string! message) -> void
+AnkiIO.AnkiPackageWriter
+AnkiIO.AnkiReviewLog
+AnkiIO.AnkiReviewLog.<Clone>$() -> AnkiIO.AnkiReviewLog!
+AnkiIO.AnkiReviewLog.AnkiReviewLog(long Id, System.DateTimeOffset ReviewedAt, int Ease, int Interval, int PreviousInterval, int EaseFactor, System.TimeSpan AnswerTime, int ReviewType) -> void
+AnkiIO.AnkiReviewLog.AnswerTime.get -> System.TimeSpan
+AnkiIO.AnkiReviewLog.AnswerTime.init -> void
+AnkiIO.AnkiReviewLog.Deconstruct(out long Id, out System.DateTimeOffset ReviewedAt, out int Ease, out int Interval, out int PreviousInterval, out int EaseFactor, out System.TimeSpan AnswerTime, out int ReviewType) -> void
+AnkiIO.AnkiReviewLog.Ease.get -> int
+AnkiIO.AnkiReviewLog.Ease.init -> void
+AnkiIO.AnkiReviewLog.EaseFactor.get -> int
+AnkiIO.AnkiReviewLog.EaseFactor.init -> void
+AnkiIO.AnkiReviewLog.Equals(AnkiIO.AnkiReviewLog? other) -> bool
+AnkiIO.AnkiReviewLog.Id.get -> long
+AnkiIO.AnkiReviewLog.Id.init -> void
+AnkiIO.AnkiReviewLog.Interval.get -> int
+AnkiIO.AnkiReviewLog.Interval.init -> void
+AnkiIO.AnkiReviewLog.PreviousInterval.get -> int
+AnkiIO.AnkiReviewLog.PreviousInterval.init -> void
+AnkiIO.AnkiReviewLog.ReviewedAt.get -> System.DateTimeOffset
+AnkiIO.AnkiReviewLog.ReviewedAt.init -> void
+AnkiIO.AnkiReviewLog.ReviewType.get -> int
+AnkiIO.AnkiReviewLog.ReviewType.init -> void
+AnkiIO.AnkiScheduling
+AnkiIO.AnkiScheduling.<Clone>$() -> AnkiIO.AnkiScheduling!
+AnkiIO.AnkiScheduling.AnkiScheduling() -> void
+AnkiIO.AnkiScheduling.CustomData.get -> string!
+AnkiIO.AnkiScheduling.CustomData.init -> void
+AnkiIO.AnkiScheduling.Due.get -> long
+AnkiIO.AnkiScheduling.Due.init -> void
+AnkiIO.AnkiScheduling.EaseFactor.get -> int
+AnkiIO.AnkiScheduling.EaseFactor.init -> void
+AnkiIO.AnkiScheduling.Equals(AnkiIO.AnkiScheduling? other) -> bool
+AnkiIO.AnkiScheduling.Interval.get -> int
+AnkiIO.AnkiScheduling.Interval.init -> void
+AnkiIO.AnkiScheduling.Lapses.get -> int
+AnkiIO.AnkiScheduling.Lapses.init -> void
+AnkiIO.AnkiScheduling.OriginalDeckId.get -> long
+AnkiIO.AnkiScheduling.OriginalDeckId.init -> void
+AnkiIO.AnkiScheduling.OriginalDue.get -> long
+AnkiIO.AnkiScheduling.OriginalDue.init -> void
+AnkiIO.AnkiScheduling.Queue.get -> AnkiIO.AnkiCardQueue
+AnkiIO.AnkiScheduling.Queue.init -> void
+AnkiIO.AnkiScheduling.RemainingSteps.get -> int
+AnkiIO.AnkiScheduling.RemainingSteps.init -> void
+AnkiIO.AnkiScheduling.Repetitions.get -> int
+AnkiIO.AnkiScheduling.Repetitions.init -> void
+AnkiIO.AnkiScheduling.Type.get -> AnkiIO.AnkiCardType
+AnkiIO.AnkiScheduling.Type.init -> void
+AnkiIO.AnkiValidationException
+AnkiIO.AnkiValidationException.AnkiValidationException(AnkiIO.AnkiValidationResult! validationResult) -> void
+AnkiIO.AnkiValidationException.ValidationResult.get -> AnkiIO.AnkiValidationResult!
+AnkiIO.AnkiValidationResult
+AnkiIO.AnkiValidationResult.Diagnostics.get -> System.Collections.Generic.IReadOnlyList<AnkiIO.AnkiDiagnostic!>!
+AnkiIO.AnkiValidationResult.IsValid.get -> bool
+AnkiIO.AnkiValidator
+AnkiIO.CrowdAnkiImportResult
+AnkiIO.CrowdAnkiImportResult.<Clone>$() -> AnkiIO.CrowdAnkiImportResult!
+AnkiIO.CrowdAnkiImportResult.CrowdAnkiImportResult(AnkiIO.AnkiDeck! Deck, System.Collections.Generic.IReadOnlyList<AnkiIO.AnkiDiagnostic!>! Diagnostics) -> void
+AnkiIO.CrowdAnkiImportResult.Deck.get -> AnkiIO.AnkiDeck!
+AnkiIO.CrowdAnkiImportResult.Deck.init -> void
+AnkiIO.CrowdAnkiImportResult.Deconstruct(out AnkiIO.AnkiDeck! Deck, out System.Collections.Generic.IReadOnlyList<AnkiIO.AnkiDiagnostic!>! Diagnostics) -> void
+AnkiIO.CrowdAnkiImportResult.Diagnostics.get -> System.Collections.Generic.IReadOnlyList<AnkiIO.AnkiDiagnostic!>!
+AnkiIO.CrowdAnkiImportResult.Diagnostics.init -> void
+AnkiIO.CrowdAnkiImportResult.Equals(AnkiIO.CrowdAnkiImportResult? other) -> bool
+AnkiIO.CrowdAnkiJson
+AnkiIO.IAnkiVersionAdapter
+AnkiIO.IAnkiVersionAdapter.CollectionSchemas.get -> System.Collections.Generic.IReadOnlySet<int>!
+AnkiIO.IAnkiVersionAdapter.Name.get -> string!
+AnkiIO.IAnkiVersionAdapter.PackageEntries.get -> System.Collections.Generic.IReadOnlySet<string!>!
+AnkiIO.IAnkiVersionAdapter.SchedulerVersion.get -> int
+AnkiIO.IAnkiVersionAdapter.Supports(System.Version! version) -> bool
+const AnkiIO.AnkiJsonSerializer.CurrentFormatVersion = 1 -> int
+override AnkiIO.AnkiCardTemplate.Equals(object? obj) -> bool
+override AnkiIO.AnkiCardTemplate.GetHashCode() -> int
+override AnkiIO.AnkiCardTemplate.ToString() -> string!
+override AnkiIO.AnkiDiagnostic.Equals(object? obj) -> bool
+override AnkiIO.AnkiDiagnostic.GetHashCode() -> int
+override AnkiIO.AnkiDiagnostic.ToString() -> string!
+override AnkiIO.AnkiField.Equals(object? obj) -> bool
+override AnkiIO.AnkiField.GetHashCode() -> int
+override AnkiIO.AnkiField.ToString() -> string!
+override AnkiIO.AnkiInstallation.Equals(object? obj) -> bool
+override AnkiIO.AnkiInstallation.GetHashCode() -> int
+override AnkiIO.AnkiInstallation.ToString() -> string!
+override AnkiIO.AnkiPackageLimits.Equals(object? obj) -> bool
+override AnkiIO.AnkiPackageLimits.GetHashCode() -> int
+override AnkiIO.AnkiPackageLimits.ToString() -> string!
+override AnkiIO.AnkiReviewLog.Equals(object? obj) -> bool
+override AnkiIO.AnkiReviewLog.GetHashCode() -> int
+override AnkiIO.AnkiReviewLog.ToString() -> string!
+override AnkiIO.AnkiScheduling.Equals(object? obj) -> bool
+override AnkiIO.AnkiScheduling.GetHashCode() -> int
+override AnkiIO.AnkiScheduling.ToString() -> string!
+override AnkiIO.CrowdAnkiImportResult.Equals(object? obj) -> bool
+override AnkiIO.CrowdAnkiImportResult.GetHashCode() -> int
+override AnkiIO.CrowdAnkiImportResult.ToString() -> string!
+static AnkiIO.AnkiCardTemplate.operator !=(AnkiIO.AnkiCardTemplate? left, AnkiIO.AnkiCardTemplate? right) -> bool
+static AnkiIO.AnkiCardTemplate.operator ==(AnkiIO.AnkiCardTemplate? left, AnkiIO.AnkiCardTemplate? right) -> bool
+static AnkiIO.AnkiCloze.Wrap(string! text, int index = 1, string? hint = null) -> string!
+static AnkiIO.AnkiCompatibilityRegistry.CreateDefault() -> AnkiIO.AnkiCompatibilityRegistry!
+static AnkiIO.AnkiDiagnostic.operator !=(AnkiIO.AnkiDiagnostic? left, AnkiIO.AnkiDiagnostic? right) -> bool
+static AnkiIO.AnkiDiagnostic.operator ==(AnkiIO.AnkiDiagnostic? left, AnkiIO.AnkiDiagnostic? right) -> bool
+static AnkiIO.AnkiField.operator !=(AnkiIO.AnkiField? left, AnkiIO.AnkiField? right) -> bool
+static AnkiIO.AnkiField.operator ==(AnkiIO.AnkiField? left, AnkiIO.AnkiField? right) -> bool
+static AnkiIO.AnkiId.FromStableValue(string! scope, string! value) -> long
+static AnkiIO.AnkiId.New() -> long
+static AnkiIO.AnkiInstallation.operator !=(AnkiIO.AnkiInstallation? left, AnkiIO.AnkiInstallation? right) -> bool
+static AnkiIO.AnkiInstallation.operator ==(AnkiIO.AnkiInstallation? left, AnkiIO.AnkiInstallation? right) -> bool
+static AnkiIO.AnkiInstallationDetector.Detect() -> AnkiIO.AnkiInstallation?
+static AnkiIO.AnkiJsonSerializer.Deserialize(string! json) -> AnkiIO.AnkiDeck!
+static AnkiIO.AnkiJsonSerializer.ReadAsync(System.IO.Stream! source, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<AnkiIO.AnkiDeck!>!
+static AnkiIO.AnkiJsonSerializer.Serialize(AnkiIO.AnkiDeck! deck) -> string!
+static AnkiIO.AnkiJsonSerializer.WriteAsync(AnkiIO.AnkiDeck! deck, System.IO.Stream! destination, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+static AnkiIO.AnkiNoteTypes.CreateBasic() -> AnkiIO.AnkiNoteType!
+static AnkiIO.AnkiNoteTypes.CreateBasicAndReversed() -> AnkiIO.AnkiNoteType!
+static AnkiIO.AnkiNoteTypes.CreateCloze() -> AnkiIO.AnkiNoteType!
+static AnkiIO.AnkiPackageLimits.Default.get -> AnkiIO.AnkiPackageLimits!
+static AnkiIO.AnkiPackageLimits.operator !=(AnkiIO.AnkiPackageLimits? left, AnkiIO.AnkiPackageLimits? right) -> bool
+static AnkiIO.AnkiPackageLimits.operator ==(AnkiIO.AnkiPackageLimits? left, AnkiIO.AnkiPackageLimits? right) -> bool
+static AnkiIO.AnkiPackageReader.ReadAsync(string! path, AnkiIO.AnkiPackageLimits? limits = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<AnkiIO.AnkiPackage!>!
+static AnkiIO.AnkiPackageReader.ReadAsync(System.IO.Stream! source, AnkiIO.AnkiPackageLimits? limits = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<AnkiIO.AnkiPackage!>!
+static AnkiIO.AnkiPackageWriter.WriteAsync(AnkiIO.AnkiDeck! deck, string! path, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+static AnkiIO.AnkiPackageWriter.WriteAsync(AnkiIO.AnkiDeck! deck, System.IO.Stream! destination, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+static AnkiIO.AnkiPackageWriter.WriteAsync(AnkiIO.AnkiPackage! package, string! path, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+static AnkiIO.AnkiPackageWriter.WriteAsync(AnkiIO.AnkiPackage! package, System.IO.Stream! destination, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+static AnkiIO.AnkiReviewLog.operator !=(AnkiIO.AnkiReviewLog? left, AnkiIO.AnkiReviewLog? right) -> bool
+static AnkiIO.AnkiReviewLog.operator ==(AnkiIO.AnkiReviewLog? left, AnkiIO.AnkiReviewLog? right) -> bool
+static AnkiIO.AnkiScheduling.New.get -> AnkiIO.AnkiScheduling!
+static AnkiIO.AnkiScheduling.operator !=(AnkiIO.AnkiScheduling? left, AnkiIO.AnkiScheduling? right) -> bool
+static AnkiIO.AnkiScheduling.operator ==(AnkiIO.AnkiScheduling? left, AnkiIO.AnkiScheduling? right) -> bool
+static AnkiIO.AnkiValidator.Validate(AnkiIO.AnkiDeck! root) -> AnkiIO.AnkiValidationResult!
+static AnkiIO.AnkiValidator.Validate(System.Collections.Generic.IEnumerable<AnkiIO.AnkiDeck!>! roots) -> AnkiIO.AnkiValidationResult!
+static AnkiIO.CrowdAnkiImportResult.operator !=(AnkiIO.CrowdAnkiImportResult? left, AnkiIO.CrowdAnkiImportResult? right) -> bool
+static AnkiIO.CrowdAnkiImportResult.operator ==(AnkiIO.CrowdAnkiImportResult? left, AnkiIO.CrowdAnkiImportResult? right) -> bool
+static AnkiIO.CrowdAnkiJson.Export(AnkiIO.AnkiDeck! root) -> string!
+static AnkiIO.CrowdAnkiJson.Import(string! json) -> AnkiIO.CrowdAnkiImportResult!

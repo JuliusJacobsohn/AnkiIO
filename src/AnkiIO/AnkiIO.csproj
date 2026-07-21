@@ -3,20 +3,21 @@
     <AssemblyName>AnkiIO</AssemblyName>
     <RootNamespace>AnkiIO</RootNamespace>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <WarningsAsErrors>$(WarningsAsErrors);CS1591</WarningsAsErrors>
+    <WarningsAsErrors>$(WarningsAsErrors);CS1591;RS0016;RS0017</WarningsAsErrors>
     <PackageId>AnkiIO</PackageId>
     <Title>AnkiIO</Title>
-    <Version>0.1.0-alpha.1</Version>
-    <Authors>AnkiIO contributors</Authors>
-    <Description>Format-independent Anki deck models, validation, JSON, media, and guarded package I/O.</Description>
-    <PackageTags>anki;flashcards;spaced-repetition;apkg</PackageTags>
+    <Version>1.0.0</Version>
+    <Authors>Julius Jacobsohn;AnkiIO contributors</Authors>
+    <Description>Create, validate, import, edit, and export Anki deck data from .NET with documented JSON, media, scheduling, and guarded legacy APKG support.</Description>
+    <PackageTags>anki;flashcards;spaced-repetition;apkg;deck;dotnet;csharp</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>Initial AI-assisted prerelease targeting Anki 26.05. See CHANGELOG.md and the project API documentation.</PackageReleaseNotes>
+    <PackageReleaseNotes>First stable release for the documented Anki 26.05 and legacy APKG scope. See the changelog and API documentation for compatibility and safety details.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/JuliusJacobsohn/AnkiIO</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/JuliusJacobsohn/AnkiIO</PackageProjectUrl>
+    <PackageProjectUrl>https://juliusjacobsohn.github.io/AnkiIO/</PackageProjectUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -24,10 +25,13 @@
     <EnablePackageValidation>true</EnablePackageValidation>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Data.Sqlite" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" />
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
     <None Include="..\..\assets\icon.png" Pack="true" PackagePath="\" />
     <None Include="..\..\LICENSE" Link="LICENSE.txt" Pack="true" PackagePath="\" />
+    <None Include="..\..\THIRD_PARTY_NOTICES.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 </Project>
