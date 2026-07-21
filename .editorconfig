@@ -12,3 +12,6 @@ indent_size = 4
 dotnet_sort_system_directives_first = true
 csharp_style_namespace_declarations = file_scoped:warning
 
+# Anki's public format vocabulary intentionally uses Collection, Queue, and GUID.
+dotnet_diagnostic.CA1711.severity = none
+dotnet_diagnostic.CA1720.severity = none
