@@ -14,6 +14,15 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with: { dotnet-version: 8.0.x }
+      - name: Resolve package version
+        shell: pwsh
+        run: |
+          $versionOutput = & dotnet msbuild src/AnkiIO/AnkiIO.csproj -nologo -getProperty:PackageVersion
+          if ($LASTEXITCODE -ne 0) { throw "Package version resolution failed." }
+          $version = ($versionOutput | Select-Object -Last 1).Trim()
+          if ([string]::IsNullOrWhiteSpace($version)) { throw "Package version resolution returned an empty value." }
+          "PACKAGE_VERSION=$version" >> $env:GITHUB_ENV
+          "PACKAGE_PATH=artifacts/packages/AnkiIO.$version.nupkg" >> $env:GITHUB_ENV
       - run: dotnet restore AnkiIO.sln --locked-mode
       - run: dotnet format AnkiIO.sln --verify-no-changes --no-restore
       - run: dotnet build AnkiIO.sln -c Release --no-restore
@@ -26,20 +35,23 @@ jobs:
         run: ./build/verify-coverage.ps1 artifacts/coverage/Cobertura.xml 80 60
       - run: dotnet pack src/AnkiIO/AnkiIO.csproj -c Release --no-build -o artifacts/packages
       - shell: pwsh
-        run: ./build/validate-package.ps1 artifacts/packages/AnkiIO.0.1.0-alpha.1.nupkg
+        run: ./build/validate-package.ps1 $env:PACKAGE_PATH
       - shell: pwsh
-        run: ./build/test-package-consumer.ps1 artifacts/packages 0.1.0-alpha.1
+        run: ./build/test-package-consumer.ps1 artifacts/packages $env:PACKAGE_VERSION
       - uses: actions/upload-artifact@v4
         if: always()
-        with: { name: artifacts-${{ matrix.os }}, path: artifacts }
+        with: { name: "artifacts-${{ matrix.os }}", path: artifacts }
   docs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
-        with: { dotnet-version: 8.0.x }
-      - run: dotnet tool restore
-      - run: dotnet restore
-      - run: dotnet docfx docs/docfx.json --warningsAsErrors
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.301
+      - shell: pwsh
+        run: ./build/build-docs.ps1
       - uses: actions/upload-artifact@v4
+        if: always()
         with: { name: documentation, path: artifacts/docs }
