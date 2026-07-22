@@ -21,6 +21,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   release:
@@ -38,8 +39,6 @@ jobs:
         env:
           WORKFLOW_REF: ${{ github.ref }}
           REQUESTED_TAG: ${{ inputs.tag }}
-          PUBLISH_REQUESTED: ${{ inputs.publish }}
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
           if ($env:WORKFLOW_REF -ne 'refs/heads/main') { throw "Releases must be dispatched from the main branch, not '$env:WORKFLOW_REF'." }
           $versionOutput = & dotnet msbuild src/AnkiIO/AnkiIO.csproj -nologo -getProperty:PackageVersion
@@ -48,7 +47,6 @@ jobs:
           if ([string]::IsNullOrWhiteSpace($version)) { throw "Package version resolution returned an empty value." }
           $expectedTag = "v$version"
           if ($env:REQUESTED_TAG -ne $expectedTag) { throw "Requested tag '$env:REQUESTED_TAG' must equal package tag '$expectedTag'." }
-          if ($env:PUBLISH_REQUESTED -eq 'true' -and [string]::IsNullOrWhiteSpace($env:NUGET_API_KEY)) { throw "NuGet publication was requested, but NUGET_API_KEY is not configured." }
           git fetch --force --tags
           if ($LASTEXITCODE -ne 0) { throw "Fetching release tags failed." }
           $tagCommit = & git rev-parse --verify "refs/tags/$expectedTag^{commit}" 2>$null
@@ -90,10 +88,16 @@ jobs:
             git push origin "refs/tags/$env:RELEASE_TAG"
             if ($LASTEXITCODE -ne 0) { throw "Publishing release tag failed." }
           }
+      - name: Authenticate with NuGet.org
+        if: inputs.publish
+        id: nuget-login
+        uses: NuGet/login@v1
+        with:
+          user: JuliusJacobsohn
       - name: Publish NuGet packages
         if: inputs.publish
         env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
         run: dotnet nuget push "artifacts/release/AnkiIO.${PACKAGE_VERSION}.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json
       - name: Create stable GitHub release
         if: inputs.create_release
