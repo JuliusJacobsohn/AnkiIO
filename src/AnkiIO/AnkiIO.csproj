@@ -13,7 +13,7 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>First stable release for the documented Anki 26.05 and legacy APKG scope. See the changelog and API documentation for compatibility and safety details.</PackageReleaseNotes>
+    <PackageReleaseNotes>See the changelog and API documentation for release details, compatibility, and safety guidance.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/JuliusJacobsohn/AnkiIO</RepositoryUrl>
     <PackageProjectUrl>https://juliusjacobsohn.github.io/AnkiIO/</PackageProjectUrl>

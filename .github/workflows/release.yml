@@ -1,31 +1,29 @@
 name: Release
 
 on:
+  push:
+    branches: [main]
+    paths: [Version.props]
   workflow_dispatch:
     inputs:
-      tag:
-        description: SemVer tag matching the package version
-        required: true
-        default: v1.0.0
-        type: string
-      create_release:
-        description: Create a stable GitHub release
-        required: true
-        default: false
-        type: boolean
-      publish:
-        description: Publish packages to NuGet
+      release:
+        description: Publish to NuGet and create the stable GitHub release
         required: true
         default: false
         type: boolean
 
+concurrency:
+  group: release-${{ github.repository }}
+  cancel-in-progress: false
+
 permissions:
+  actions: read
   contents: write
   id-token: write
 
 jobs:
   release:
-    name: Verify and prepare ${{ inputs.tag }}
+    name: Verify and prepare package release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -35,25 +33,30 @@ jobs:
         with:
           dotnet-version: 10.0.x
       - name: Resolve and validate release identity
+        id: release_identity
         shell: pwsh
         env:
           WORKFLOW_REF: ${{ github.ref }}
-          REQUESTED_TAG: ${{ inputs.tag }}
         run: |
-          if ($env:WORKFLOW_REF -ne 'refs/heads/main') { throw "Releases must be dispatched from the main branch, not '$env:WORKFLOW_REF'." }
+          if ($env:WORKFLOW_REF -ne 'refs/heads/main') { throw "Releases must run from the main branch, not '$env:WORKFLOW_REF'." }
           $versionOutput = & dotnet msbuild src/AnkiIO/AnkiIO.csproj -nologo -getProperty:PackageVersion
           if ($LASTEXITCODE -ne 0) { throw "Package version resolution failed." }
           $version = ($versionOutput | Select-Object -Last 1).Trim()
           if ([string]::IsNullOrWhiteSpace($version)) { throw "Package version resolution returned an empty value." }
+          if ($version -notmatch '^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$') {
+            throw "Package version '$version' must be a normalized stable SemVer version such as 1.2.3."
+          }
           $expectedTag = "v$version"
-          if ($env:REQUESTED_TAG -ne $expectedTag) { throw "Requested tag '$env:REQUESTED_TAG' must equal package tag '$expectedTag'." }
           git fetch --force --tags
           if ($LASTEXITCODE -ne 0) { throw "Fetching release tags failed." }
           $tagCommit = & git rev-parse --verify "refs/tags/$expectedTag^{commit}" 2>$null
-          if ($LASTEXITCODE -eq 0 -and $tagCommit.Trim() -ne $env:GITHUB_SHA) { throw "Existing tag '$expectedTag' does not point to the workflow commit $env:GITHUB_SHA." }
+          $tagExisted = $LASTEXITCODE -eq 0
+          if ($tagExisted -and $tagCommit.Trim() -ne $env:GITHUB_SHA) { throw "Existing tag '$expectedTag' does not point to the workflow commit $env:GITHUB_SHA." }
           "PACKAGE_VERSION=$version" >> $env:GITHUB_ENV
           "PACKAGE_PATH=artifacts/release/AnkiIO.$version.nupkg" >> $env:GITHUB_ENV
           "RELEASE_TAG=$expectedTag" >> $env:GITHUB_ENV
+          "version=$version" >> $env:GITHUB_OUTPUT
+          "tag_existed=$($tagExisted.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
       - name: Run complete release gate
         shell: pwsh
         run: ./build/build.ps1
@@ -72,8 +75,51 @@ jobs:
             Sort-Object Name |
             ForEach-Object { "{0}  {1}" -f (Get-FileHash -Algorithm SHA256 -LiteralPath $_.FullName).Hash.ToLowerInvariant(), $_.Name }
           [System.IO.File]::WriteAllLines((Join-Path $PWD "artifacts/release/SHA256SUMS"), $lines, [System.Text.UTF8Encoding]::new($false))
+      - name: Require successful cross-platform CI
+        if: github.event_name == 'push' || inputs.release == true
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $deadline = (Get-Date).AddMinutes(20)
+          do {
+            $json = & gh run list --repo $env:GITHUB_REPOSITORY --workflow ci.yml --commit $env:GITHUB_SHA --event push --limit 1 --json databaseId,status,conclusion
+            if ($LASTEXITCODE -ne 0) { throw "Querying the matching CI run failed." }
+            $runs = @($json | ConvertFrom-Json)
+            if ($runs.Count -gt 0) {
+              $ciRun = $runs[0]
+              if ($ciRun.status -eq 'completed') {
+                if ($ciRun.conclusion -ne 'success') { throw "Cross-platform CI concluded '$($ciRun.conclusion)'." }
+                Write-Host "Cross-platform CI run $($ciRun.databaseId) succeeded."
+                break
+              }
+              Write-Host "Waiting for cross-platform CI run $($ciRun.databaseId)..."
+            }
+            else {
+              Write-Host "Waiting for the matching cross-platform CI run to appear..."
+            }
+            if ((Get-Date) -ge $deadline) { throw "Timed out waiting for successful cross-platform CI." }
+            Start-Sleep -Seconds 10
+          } while ($true)
+      - name: Guard NuGet release identity
+        if: github.event_name == 'push' || inputs.release == true
+        shell: pwsh
+        env:
+          TAG_EXISTED_AT_START: ${{ steps.release_identity.outputs.tag_existed }}
+        run: |
+          $published = $false
+          try {
+            $index = Invoke-RestMethod -Uri "https://api.nuget.org/v3-flatcontainer/ankiio/index.json"
+            $published = @($index.versions) -contains $env:PACKAGE_VERSION
+          }
+          catch {
+            if ($null -eq $_.Exception.Response -or [int]$_.Exception.Response.StatusCode -ne 404) { throw }
+          }
+          if ($published -and $env:TAG_EXISTED_AT_START -ne 'true') {
+            throw "AnkiIO $env:PACKAGE_VERSION already exists on NuGet, but its release tag did not exist when this run started."
+          }
       - name: Bind release tag to verified commit
-        if: inputs.publish || inputs.create_release
+        if: github.event_name == 'push' || inputs.release == true
         shell: pwsh
         run: |
           $tagCommit = & git rev-parse --verify "refs/tags/$env:RELEASE_TAG^{commit}" 2>$null
@@ -89,25 +135,30 @@ jobs:
             if ($LASTEXITCODE -ne 0) { throw "Publishing release tag failed." }
           }
       - name: Authenticate with NuGet.org
-        if: inputs.publish
+        if: github.event_name == 'push' || inputs.release == true
         id: nuget-login
         uses: NuGet/login@v1
         with:
           user: JuliusJacobsohn
       - name: Publish NuGet packages
-        if: inputs.publish
+        if: github.event_name == 'push' || inputs.release == true
         env:
           NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
-        run: dotnet nuget push "artifacts/release/AnkiIO.${PACKAGE_VERSION}.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json
+        run: dotnet nuget push "artifacts/release/AnkiIO.${PACKAGE_VERSION}.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json --skip-duplicate
       - name: Create stable GitHub release
-        if: inputs.create_release
+        if: github.event_name == 'push' || inputs.release == true
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$RELEASE_TAG" artifacts/release/* --title "AnkiIO $PACKAGE_VERSION" --generate-notes --verify-tag
+        run: |
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release upload "$RELEASE_TAG" artifacts/release/* --clobber
+          else
+            gh release create "$RELEASE_TAG" artifacts/release/* --title "AnkiIO $PACKAGE_VERSION" --generate-notes --verify-tag
+          fi
       - uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: release-${{ inputs.tag }}
+          name: release-${{ steps.release_identity.outputs.version }}-${{ github.run_number }}-${{ github.run_attempt }}
           path: artifacts/release
           if-no-files-found: warn
           retention-days: 14
