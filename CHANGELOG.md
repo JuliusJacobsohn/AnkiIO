@@ -2,7 +2,7 @@
 
 All notable changes to AnkiIO are documented here. The project follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] - Unreleased
+## [1.0.1] - 2026-07-23
 
 This is the first stable release. Its compatibility promise covers the documented Anki 26.05 and legacy APKG scope; it does not imply support for every Anki storage format or add-on extension.
 
@@ -40,4 +40,4 @@ This is the first stable release. Its compatibility promise covers the documente
 - Updated the SQLite provider and explicitly selected the maintained SQLitePCLRaw 3.x native bundle to remove the vulnerable legacy native dependency.
 - Direct writes to live Anki profiles remain unsupported.
 
-[1.0.0]: https://github.com/JuliusJacobsohn/AnkiIO/releases/tag/v1.0.0
+[1.0.1]: https://github.com/JuliusJacobsohn/AnkiIO/releases/tag/v1.0.1
