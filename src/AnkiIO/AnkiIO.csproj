@@ -6,7 +6,6 @@
     <WarningsAsErrors>$(WarningsAsErrors);CS1591;RS0016;RS0017</WarningsAsErrors>
     <PackageId>AnkiIO</PackageId>
     <Title>AnkiIO</Title>
-    <Version>1.0.0</Version>
     <Authors>Julius Jacobsohn;AnkiIO contributors</Authors>
     <Description>Create, validate, import, edit, and export Anki deck data from .NET with documented JSON, media, scheduling, and guarded legacy APKG support.</Description>
     <PackageTags>anki;flashcards;spaced-repetition;apkg;deck;dotnet;csharp</PackageTags>
