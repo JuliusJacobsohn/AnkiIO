@@ -49,9 +49,16 @@ jobs:
           $expectedTag = "v$version"
           git fetch --force --tags
           if ($LASTEXITCODE -ne 0) { throw "Fetching release tags failed." }
-          $tagCommit = & git rev-parse --verify "refs/tags/$expectedTag^{commit}" 2>$null
-          $tagExisted = $LASTEXITCODE -eq 0
-          if ($tagExisted -and $tagCommit.Trim() -ne $env:GITHUB_SHA) { throw "Existing tag '$expectedTag' does not point to the workflow commit $env:GITHUB_SHA." }
+          git show-ref --verify --quiet "refs/tags/$expectedTag"
+          $tagLookupExitCode = $LASTEXITCODE
+          if ($tagLookupExitCode -ne 0 -and $tagLookupExitCode -ne 1) { throw "Looking up release tag '$expectedTag' failed with exit code $tagLookupExitCode." }
+          $tagExisted = $tagLookupExitCode -eq 0
+          $global:LASTEXITCODE = 0
+          if ($tagExisted) {
+            $tagCommit = & git rev-parse --verify "refs/tags/$expectedTag^{commit}"
+            if ($LASTEXITCODE -ne 0) { throw "Resolving existing tag '$expectedTag' failed." }
+            if ($tagCommit.Trim() -ne $env:GITHUB_SHA) { throw "Existing tag '$expectedTag' does not point to the workflow commit $env:GITHUB_SHA." }
+          }
           "PACKAGE_VERSION=$version" >> $env:GITHUB_ENV
           "PACKAGE_PATH=artifacts/release/AnkiIO.$version.nupkg" >> $env:GITHUB_ENV
           "RELEASE_TAG=$expectedTag" >> $env:GITHUB_ENV

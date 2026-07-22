@@ -1,4 +1,5 @@
 <Project>
+  <!-- Changing this value on main triggers the verified NuGet and GitHub release workflow. -->
   <PropertyGroup>
     <Version>1.0.1</Version>
   </PropertyGroup>
