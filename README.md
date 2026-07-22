@@ -3,6 +3,13 @@
 > [!WARNING]
 > Generated with help from **GPT-5.6-Sol Ultra**. Tested and working for my use cases. This project does not reflect my abilities as a developer—for better or worse.
 
+[![CI](https://github.com/JuliusJacobsohn/AnkiIO/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/JuliusJacobsohn/AnkiIO/actions/workflows/ci.yml)
+[![Documentation](https://github.com/JuliusJacobsohn/AnkiIO/actions/workflows/docs.yml/badge.svg?branch=main)](https://juliusjacobsohn.github.io/AnkiIO/)
+[![Security](https://github.com/JuliusJacobsohn/AnkiIO/actions/workflows/security.yml/badge.svg?branch=main)](https://github.com/JuliusJacobsohn/AnkiIO/actions/workflows/security.yml)
+[![Coverage gate](https://img.shields.io/badge/coverage-95%25_lines_%7C_85%25_branches-brightgreen)](build/verify-coverage.ps1)
+[![.NET 10](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 **[Browse the API documentation →](https://juliusjacobsohn.github.io/AnkiIO/)**
 
 [Sample projects](samples/README.md) · [Formats and safety](https://juliusjacobsohn.github.io/AnkiIO/formats_and_safety.html) · [MIT license](LICENSE)
