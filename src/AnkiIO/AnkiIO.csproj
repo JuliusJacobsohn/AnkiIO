@@ -16,7 +16,7 @@
     <PackageReleaseNotes>See the changelog and API documentation for release details, compatibility, and safety guidance.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/JuliusJacobsohn/AnkiIO</RepositoryUrl>
-    <PackageProjectUrl>https://juliusjacobsohn.github.io/AnkiIO/</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/JuliusJacobsohn/AnkiIO</PackageProjectUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>

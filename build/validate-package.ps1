@@ -95,7 +95,7 @@ try {
         throw "Package version '$($metadata.Version)' does not match expected version '$ExpectedVersion'."
     }
     if ($metadata.Readme -ne "README.md" -or $metadata.Icon -ne "icon.png") { throw "Package readme or icon metadata is inconsistent with packed files." }
-    if ($metadata.ProjectUrl -ne "https://juliusjacobsohn.github.io/AnkiIO/") { throw "Package project URL must point to the API documentation." }
+    if ($metadata.ProjectUrl -ne "https://github.com/JuliusJacobsohn/AnkiIO") { throw "Package project URL must point to the source repository." }
 
     $license = Get-MetadataNode $nuspec "license"
     if ($null -eq $license -or $license.GetAttribute("type") -ne "expression" -or $license.InnerText -ne "MIT") {
