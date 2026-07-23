@@ -43,3 +43,5 @@ This performs locked restore, formatting verification, Release builds, portable 
 Never contribute a real Anki collection, profile name, note content, media file, user identifier, credential, or local absolute path. Compatibility fixtures must be synthetic and state their provenance. Format changes require a design rationale, adversarial-input coverage, round-trip tests, and updated compatibility and security documentation.
 
 Report suspected vulnerabilities privately as described in [SECURITY.md](SECURITY.md).
+
+Maintainers should follow [RELEASING.md](RELEASING.md) for the automated release process.

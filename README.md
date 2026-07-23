@@ -1,7 +1,7 @@
 # AnkiIO
 
 > [!WARNING]
-> Generated with help from **GPT-5.6-Sol Ultra**. Tested and working for my use cases. This project does not reflect my abilities as a developer—for better or worse.
+> Created with substantial help from **GPT-5.6-Sol Ultra** and tested against my own use cases. Please do not treat this project as a measure of my abilities as a developer, for better or worse.
 
 [![CI](https://github.com/JuliusJacobsohn/AnkiIO/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/JuliusJacobsohn/AnkiIO/actions/workflows/ci.yml)
 [![Documentation](https://github.com/JuliusJacobsohn/AnkiIO/actions/workflows/docs.yml/badge.svg?branch=main)](https://juliusjacobsohn.github.io/AnkiIO/)
@@ -10,40 +10,19 @@
 [![.NET 10](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**[Browse the API documentation →](https://juliusjacobsohn.github.io/AnkiIO/)**
+**[Get AnkiIO on NuGet](https://www.nuget.org/packages/AnkiIO)** · **[Browse the API documentation →](https://juliusjacobsohn.github.io/AnkiIO/)**
 
 [Sample projects](samples/README.md) · [Formats and safety](https://juliusjacobsohn.github.io/AnkiIO/formats_and_safety.html) · [MIT license](LICENSE)
 
-AnkiIO is a stable, open-source .NET 10 library for creating, validating, importing, editing, and exporting Anki deck data. Its 1.0 API covers a format-independent deck model, practical helpers for common note types, deterministic JSON, a CrowdAnki-inspired interchange format, media, scheduling state, diagnostics, and guarded legacy APKG I/O.
+AnkiIO is a stable, open-source .NET 10 library for creating, validating, importing, editing, and exporting Anki deck data. It provides a format-independent deck model, practical helpers for common note types, deterministic JSON, a CrowdAnki-inspired interchange format, media, scheduling state, diagnostics, and guarded legacy APKG I/O.
 
-AnkiIO is maintained by Julius Jacobsohn.
+## Quick start
 
-AnkiIO is not affiliated with, endorsed by, or sponsored by Ankitects, Anki, AnkiDroid, or CrowdAnki. “Anki” is a trademark of Ankitects Pty Ltd.
-
-## Compatibility and scope
-
-The 1.0 compatibility target is deliberately narrow: **Anki 26.05** (build `e64c6b1a`), collection schema 18, and the v3 scheduler. The library targets `net10.0`, so consumers require the .NET 10 runtime or a compatible later runtime. Repository builds use the .NET 10 SDK pinned by `global.json`.
-
-APKG export writes the legacy `collection.anki2` representation, which is accepted by the isolated Anki 26.05 compatibility test. Native JSON and CrowdAnki-inspired JSON support documented subsets rather than every field used by every Anki add-on. Unknown native-JSON properties are retained where the API documents preservation.
-
-AnkiIO does not write a live Anki profile. Modern `collection.anki21b` generation, filtered decks, arbitrary schema-18 database mutation, and complete review-log or deck-configuration preservation are outside the 1.0 support boundary. Read [formats, compatibility, and safety](https://juliusjacobsohn.github.io/AnkiIO/formats_and_safety.html) before processing untrusted packages or important data.
-
-## Install
-
-The package version is defined once in [`Version.props`](Version.props). After the package is published:
+Install the package from [NuGet](https://www.nuget.org/packages/AnkiIO):
 
 ```shell
 dotnet add package AnkiIO
 ```
-
-To consume a local package from this checkout:
-
-```shell
-dotnet pack src/AnkiIO/AnkiIO.csproj --configuration Release --output artifacts/packages
-dotnet add package AnkiIO --source artifacts/packages
-```
-
-## Quick start
 
 ```csharp
 using AnkiIO;
@@ -70,26 +49,14 @@ A note stores information; a card is a study prompt generated from a note templa
 
 See the [samples](samples/README.md) for focused programs and the [German–English showcase](samples/AnkiIO.GermanEnglishShowcase/README.md) for a complete custom deck with note types, media, tags, and verification.
 
-## Build and verify
+## Compatibility and scope
 
-Install the SDK selected by `global.json`, then run the complete local gate:
+AnkiIO targets `net10.0`, collection schema 18, and v3 scheduler semantics. APKG export writes the legacy `collection.anki2` representation. Native JSON and CrowdAnki-inspired JSON support documented subsets, with unknown native-JSON properties retained where the API promises preservation.
 
-```shell
-./build/build.ps1
-```
+AnkiIO does not write to a live Anki profile or generate modern `collection.anki21b` databases. Filtered decks, arbitrary database mutation, and complete review-log or deck-configuration preservation are outside its scope. Read [formats, compatibility, and safety](https://juliusjacobsohn.github.io/AnkiIO/formats_and_safety.html) before processing untrusted packages or important data.
 
-That script performs locked restore, formatting verification, a Release build, sample and benchmark builds, portable tests, coverage enforcement, package creation and validation, a clean package-consumer round trip, and a strict Doxygen build. The same checks run in CI on Linux, Windows, and macOS.
+Contributions use focused pull requests and must preserve the documented compatibility contract; see [CONTRIBUTING.md](CONTRIBUTING.md). Security reports follow [SECURITY.md](SECURITY.md). Licensed under [MIT](LICENSE).
 
-The local-Anki compatibility suite is intentionally opt-in because it requires an installed Anki instance:
+AnkiIO is maintained by Julius Jacobsohn.
 
-```shell
-dotnet test tests/AnkiIO.CompatibilityTests --configuration Release --filter Category=LocalAnkiCompatibility
-```
-
-Local-Anki tests use unique temporary workspaces and never modify the normal profile. API documentation is generated by Doxygen from source comments and source-resident guides; do not edit generated HTML.
-
-## Releasing
-
-Versioning follows Semantic Versioning. To release, update the changelog and change `<Version>` in [`Version.props`](Version.props). Merging or pushing that version change to `main` runs the complete release gate, waits for the same commit's Linux, Windows, and macOS CI jobs, creates the matching `vX.Y.Z` tag and GitHub release, and publishes the package through NuGet Trusted Publishing. The workflow can still be dispatched manually with its release switch disabled to produce and validate artifacts without publishing them.
-
-Contributions use focused pull requests and must preserve the documented 1.x compatibility contract; see [CONTRIBUTING.md](CONTRIBUTING.md). Security reports follow [SECURITY.md](SECURITY.md). Licensed under [MIT](LICENSE).
+AnkiIO is not affiliated with, endorsed by, or sponsored by Ankitects, Anki, AnkiDroid, or CrowdAnki. “Anki” is a trademark of Ankitects Pty Ltd.
