@@ -7,12 +7,9 @@ public sealed class LocalAnkiTests
 {
     [Fact]
     [Trait("Category", "LocalAnkiCompatibility")]
-    public void DetectsAnkiOnlyWhenExplicitlyEnabled()
+    public void DetectsExplicitlyEnabledAnkiInstallation()
     {
-        if (!string.Equals(Environment.GetEnvironmentVariable("ANKI_LOCAL_COMPATIBILITY"), "1", StringComparison.Ordinal))
-        {
-            return;
-        }
+        AssertLocalCompatibilityPrerequisites();
 
         var installation = AnkiInstallationDetector.Detect();
         Assert.NotNull(installation);
@@ -24,8 +21,7 @@ public sealed class LocalAnkiTests
     [Trait("Category", "LocalAnkiCompatibility")]
     public async Task InstalledBackendAcceptsSyntheticPackageInIsolatedCollection()
     {
-        if (!string.Equals(Environment.GetEnvironmentVariable("ANKI_LOCAL_COMPATIBILITY"), "1", StringComparison.Ordinal)) return;
-        if (!OperatingSystem.IsWindows()) return;
+        AssertLocalCompatibilityPrerequisites();
 
         var installation = AnkiInstallationDetector.Detect() ?? throw new InvalidOperationException("Anki was not detected.");
         var packages = Path.Combine(installation.InstallationDirectory, "app_packages");
@@ -84,5 +80,11 @@ public sealed class LocalAnkiTests
         {
             Directory.Delete(workspace, recursive: true);
         }
+    }
+
+    private static void AssertLocalCompatibilityPrerequisites()
+    {
+        Assert.Equal("1", Environment.GetEnvironmentVariable("ANKI_LOCAL_COMPATIBILITY"));
+        Assert.True(OperatingSystem.IsWindows(), "Local Anki compatibility tests require the Windows self-hosted runner.");
     }
 }

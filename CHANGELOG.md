@@ -2,6 +2,18 @@
 
 All notable changes to AnkiIO are documented here. The project follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- Portable test execution now runs only the unit and integration projects and fails if either project discovers or executes no tests.
+- Restored macOS to the portable CI matrix and added a 500-line C# source-file maintainability gate.
+- Opt-in installed-Anki acceptance tests now fail when their required environment is absent instead of returning a false-positive pass.
+
+### Fixed
+
+- Validation now rejects cards whose owning note, target deck, or template/Cloze ordinal is inconsistent with the exported graph.
+
 ## [1.0.2] - 2026-07-23
 
 ### Changed

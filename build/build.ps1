@@ -41,6 +41,8 @@ try {
 
     dotnet format AnkiIO.sln --verify-no-changes --no-restore
     Assert-NativeSuccess "Formatting verification"
+    ./build/verify-source-size.ps1
+    if (-not $?) { throw "Source-size verification failed." }
     dotnet build AnkiIO.sln --configuration $Configuration --no-restore
     Assert-NativeSuccess "Solution build"
     dotnet build samples/AnkiIO.Samples/AnkiIO.Samples.csproj --configuration $Configuration --no-restore
@@ -54,8 +56,8 @@ try {
 
     Reset-GeneratedDirectory $testResults
     Reset-GeneratedDirectory $coverageOutput
-    dotnet test AnkiIO.sln --configuration $Configuration --no-build --no-restore --filter "Category!=LocalAnkiCompatibility" --collect:"XPlat Code Coverage" --settings coverlet.runsettings --results-directory $testResults
-    Assert-NativeSuccess "Portable test run"
+    ./build/test-portable.ps1 -Configuration $Configuration -ResultsDirectory $testResults
+    if (-not $?) { throw "Portable test run failed." }
     dotnet tool restore
     Assert-NativeSuccess "Local tool restore"
     dotnet tool run reportgenerator "-reports:$testResults/**/coverage.cobertura.xml" "-targetdir:$coverageOutput" "-reporttypes:Cobertura;Html"
