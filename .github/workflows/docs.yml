@@ -33,6 +33,7 @@ jobs:
           DOCUMENTATION_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
           base_url="${DOCUMENTATION_URL%/}"
-          curl --fail --silent --show-error --retry 5 --retry-all-errors --retry-delay 3 "$base_url/index.html" > /dev/null
-          curl --fail --silent --show-error --retry 5 --retry-all-errors --retry-delay 3 "$base_url/annotated.html" > /dev/null
-          curl --fail --silent --show-error --retry 5 --retry-all-errors --retry-delay 3 "$base_url/ankiio-doxygen.css" | grep --quiet 'max-height: 48px'
+          cache_buster="verify=${GITHUB_SHA}-${GITHUB_RUN_ATTEMPT}"
+          curl --fail --silent --show-error --retry 5 --retry-all-errors --retry-delay 3 "$base_url/index.html?$cache_buster" > /dev/null
+          curl --fail --silent --show-error --retry 5 --retry-all-errors --retry-delay 3 "$base_url/annotated.html?$cache_buster" > /dev/null
+          curl --fail --silent --show-error --retry 5 --retry-all-errors --retry-delay 3 "$base_url/ankiio-doxygen.css?$cache_buster" | grep --quiet 'max-height: 48px'
