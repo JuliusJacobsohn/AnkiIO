@@ -5,6 +5,20 @@ param(
 
 $ErrorActionPreference = "Stop"
 Add-Type -AssemblyName System.IO.Compression.FileSystem
+$repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
+[xml]$centralPackages = Get-Content -Raw -LiteralPath (Join-Path $repositoryRoot "Directory.Packages.props")
+
+function Get-CentralPackageVersion([string]$packageId) {
+    $matches = @($centralPackages.Project.ItemGroup.PackageVersion | Where-Object { $_.Include -eq $packageId })
+    if ($matches.Count -ne 1 -or [string]::IsNullOrWhiteSpace($matches[0].Version)) {
+        throw "Central package version for '$packageId' is missing or ambiguous."
+    }
+
+    return [string]$matches[0].Version
+}
+
+$expectedSqliteVersion = Get-CentralPackageVersion "Microsoft.Data.Sqlite"
+$expectedSqliteBundleVersion = Get-CentralPackageVersion "SQLitePCLRaw.bundle_e_sqlite3"
 
 function Assert-SafeArchiveEntries([System.IO.Compression.ZipArchive]$archive, [string]$archiveName) {
     $seen = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
@@ -111,8 +125,12 @@ try {
     $dependencyNodes = $nuspec.SelectNodes("/n:package/n:metadata/n:dependencies/n:group[@targetFramework='net10.0']/n:dependency", $namespace)
     $dependencies = @{}
     foreach ($dependency in $dependencyNodes) { $dependencies[$dependency.GetAttribute("id")] = $dependency.GetAttribute("version") }
-    if ($dependencies["Microsoft.Data.Sqlite"] -ne "10.0.10") { throw "Package must depend on Microsoft.Data.Sqlite 10.0.10." }
-    if ($dependencies["SQLitePCLRaw.bundle_e_sqlite3"] -ne "3.0.4") { throw "Package must explicitly select the maintained SQLitePCLRaw 3.0.4 bundle." }
+    if ($dependencies["Microsoft.Data.Sqlite"] -ne $expectedSqliteVersion) {
+        throw "Package must depend on Microsoft.Data.Sqlite $expectedSqliteVersion."
+    }
+    if ($dependencies["SQLitePCLRaw.bundle_e_sqlite3"] -ne $expectedSqliteBundleVersion) {
+        throw "Package must explicitly select the maintained SQLitePCLRaw $expectedSqliteBundleVersion bundle."
+    }
 }
 finally {
     $archive.Dispose()
