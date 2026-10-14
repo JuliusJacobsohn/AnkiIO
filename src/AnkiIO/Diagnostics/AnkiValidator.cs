@@ -5,8 +5,9 @@ namespace AnkiIO;
 /// <summary>Checks a complete deck hierarchy before native JSON, CrowdAnki-style JSON, or APKG output.</summary>
 /// <remarks>
 /// Validation is read-only and returns every detected content error instead of failing at the first one. Checks cover
-/// duplicate object IDs, conflicting note-type definitions, missing fields or templates, template field references,
-/// scheduler type/queue combinations, non-negative review counters, new-card counters, and the three-bit card flag.
+/// duplicate object IDs, conflicting note-type definitions, missing fields or templates, template field references, card
+/// ownership/deck references, stale template or Cloze ordinals, scheduler type/queue combinations, non-negative review
+/// counters, new-card counters, and the three-bit card flag.
 /// <para>
 /// Active scheduling pairs are New/New, Learning/Learning, Learning/DayLearning, Review/Review,
 /// Relearning/Learning, and Relearning/DayLearning. Suspended, sibling-buried, scheduler-buried, and preview queues retain
@@ -89,11 +90,13 @@ public static partial class AnkiValidator
     private static AnkiValidationResult ValidateCore(IReadOnlyList<AnkiDeck> roots)
     {
         var diagnostics = new List<AnkiDiagnostic>();
+        var decks = roots.SelectMany(root => root.Traverse()).ToArray();
+        var deckIds = decks.Select(deck => deck.Id).ToHashSet();
         var ids = new HashSet<long>();
         var noteTypesById = new Dictionary<long, AnkiNoteType>();
         var reportedNoteTypeConflicts = new HashSet<long>();
 
-        foreach (var deck in roots.SelectMany(root => root.Traverse()))
+        foreach (var deck in decks)
         {
             AddDuplicate(ids, deck.Id, "ANKI001", "Duplicate deck ID.", diagnostics, deck.Id);
             foreach (var note in deck.Notes)
@@ -123,15 +126,80 @@ public static partial class AnkiValidator
                 }
 
                 ValidateTemplates(note, deck.Id, diagnostics);
+                var clozeOrdinals = note.NoteType.Kind == AnkiNoteTypeKind.Cloze ? GetClozeOrdinals(note) : null;
                 foreach (var card in note.Cards)
                 {
                     AddDuplicate(ids, card.Id, "ANKI003", "Duplicate card ID.", diagnostics, deck.Id, note.Id, card.Id);
+                    ValidateCardRelationships(note, card, deckIds, clozeOrdinals, diagnostics);
                     ValidateScheduling(card, diagnostics);
                 }
             }
         }
 
         return new AnkiValidationResult(diagnostics);
+    }
+
+    private static void ValidateCardRelationships(
+        AnkiNote note,
+        AnkiCard card,
+        HashSet<long> deckIds,
+        HashSet<int>? clozeOrdinals,
+        List<AnkiDiagnostic> diagnostics)
+    {
+        if (card.NoteId != note.Id)
+        {
+            diagnostics.Add(new(
+                AnkiDiagnosticSeverity.Error,
+                "ANKI005",
+                $"Card {card.Id} references note {card.NoteId}, but it is owned by note {note.Id}.",
+                NoteId: note.Id,
+                CardId: card.Id,
+                SuggestedRemediation: "Reconstruct the card with the ID of its owning note."));
+        }
+
+        if (!deckIds.Contains(card.DeckId))
+        {
+            diagnostics.Add(new(
+                AnkiDiagnosticSeverity.Error,
+                "ANKI006",
+                $"Card {card.Id} references missing deck {card.DeckId}.",
+                NoteId: note.Id,
+                CardId: card.Id,
+                SuggestedRemediation: "Assign the card to a deck in the exported graph."));
+        }
+
+        var ordinalIsValid = clozeOrdinals is not null
+            ? clozeOrdinals.Contains(card.TemplateOrdinal)
+            : card.TemplateOrdinal < note.NoteType.Templates.Count;
+        if (!ordinalIsValid)
+        {
+            diagnostics.Add(new(
+                AnkiDiagnosticSeverity.Error,
+                "ANKI007",
+                $"Card {card.Id} has stale template ordinal {card.TemplateOrdinal} for note type '{note.NoteType.Name}'.",
+                NoteId: note.Id,
+                CardId: card.Id,
+                SuggestedRemediation: "Regenerate the note's cards from its current templates or Cloze markers."));
+        }
+    }
+
+    private static HashSet<int> GetClozeOrdinals(AnkiNote note)
+    {
+        if (!note.Fields.TryGetValue("Text", out var text))
+        {
+            return [];
+        }
+
+        return ClozeOrdinalPattern().Matches(text)
+            .Select(match => int.TryParse(
+                match.Groups[1].Value,
+                System.Globalization.NumberStyles.None,
+                System.Globalization.CultureInfo.InvariantCulture,
+                out var index)
+                ? index - 1
+                : -1)
+            .Where(ordinal => ordinal >= 0)
+            .ToHashSet();
     }
 
     private static void ValidateTemplates(AnkiNote note, long deckId, List<AnkiDiagnostic> diagnostics)
@@ -198,4 +266,7 @@ public static partial class AnkiValidator
 
     [GeneratedRegex(@"\{\{[#/^]?([^{}]+)\}\}", RegexOptions.CultureInvariant)]
     private static partial Regex TemplateFieldPattern();
+
+    [GeneratedRegex(@"\{\{c(\d+)::", RegexOptions.CultureInvariant)]
+    private static partial Regex ClozeOrdinalPattern();
 }

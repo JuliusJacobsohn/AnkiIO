@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7
@@ -43,6 +43,9 @@ jobs:
         run: ./build/verify-dependencies.ps1 @('AnkiIO.sln', 'samples/AnkiIO.Samples/AnkiIO.Samples.csproj', 'samples/AnkiIO.GermanEnglishShowcase/AnkiIO.GermanEnglishShowcase.csproj', 'benchmarks/AnkiIO.Benchmarks/AnkiIO.Benchmarks.csproj')
       - name: Verify formatting
         run: dotnet format AnkiIO.sln --verify-no-changes --no-restore
+      - name: Enforce source-size limit
+        shell: pwsh
+        run: ./build/verify-source-size.ps1
       - name: Build solution
         run: dotnet build AnkiIO.sln --configuration Release --no-restore
       - name: Build samples and benchmarks
@@ -53,7 +56,8 @@ jobs:
       - name: Generate and verify showcase deck
         run: dotnet run --project samples/AnkiIO.GermanEnglishShowcase/AnkiIO.GermanEnglishShowcase.csproj --configuration Release --no-build -- artifacts/samples/AnkiIO-German-English-Showcase.apkg
       - name: Run portable tests with coverage
-        run: dotnet test AnkiIO.sln --configuration Release --no-build --no-restore --filter "Category!=LocalAnkiCompatibility" --collect:"XPlat Code Coverage" --settings coverlet.runsettings --results-directory artifacts/test-results
+        shell: pwsh
+        run: ./build/test-portable.ps1
       - name: Build merged coverage report
         run: |
           dotnet tool restore

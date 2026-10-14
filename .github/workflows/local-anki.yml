@@ -11,11 +11,14 @@ jobs:
       - uses: actions/setup-dotnet@v6
         with: { dotnet-version: 10.0.x }
       - run: dotnet restore tests/AnkiIO.CompatibilityTests --locked-mode
-      - run: dotnet test tests/AnkiIO.CompatibilityTests -c Release --no-restore --filter Category=LocalAnkiCompatibility --logger "trx;LogFileName=local-anki.trx"
+      - run: dotnet test tests/AnkiIO.CompatibilityTests -c Release --no-restore --filter Category=LocalAnkiCompatibility --results-directory artifacts/local-anki --logger "trx;LogFileName=local-anki.trx"
+      - name: Verify acceptance-test discovery
+        shell: pwsh
+        run: ./build/verify-test-result.ps1 artifacts/local-anki/local-anki.trx "installed-Anki acceptance"
       - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: local-anki-compatibility
-          path: "**/local-anki.trx"
+          path: artifacts/local-anki/local-anki.trx
           if-no-files-found: warn
           retention-days: 14

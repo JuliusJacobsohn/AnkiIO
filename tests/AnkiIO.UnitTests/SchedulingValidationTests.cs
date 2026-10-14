@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Text.Json.Nodes;
 using Xunit;
 
@@ -160,6 +161,83 @@ public sealed class SchedulingValidationTests
     }
 
     [Fact]
+    public void ValidatorRejectsCardsAssignedOutsideTheExportedGraph()
+    {
+        var deck = CreateDeckWithOneCard();
+        var card = deck.Notes[0].Cards[0];
+        card.DeckId = long.MaxValue;
+
+        var result = AnkiValidator.Validate(deck);
+        var diagnostic = Assert.Single(result.Diagnostics, value => value.Code == "ANKI006");
+
+        Assert.Equal(card.Id, diagnostic.CardId);
+        Assert.Equal(deck.Notes[0].Id, diagnostic.NoteId);
+        Assert.False(result.IsValid);
+    }
+
+    [Fact]
+    public void ValidatorAllowsSiblingCardsToReferenceAnotherExportedDeck()
+    {
+        var root = new AnkiDeck("Root");
+        var sibling = root.AddSubdeck("Sibling");
+        var card = root.AddBasicNote("front", "back").Cards[0];
+        card.DeckId = sibling.Id;
+
+        var result = AnkiValidator.Validate(root);
+
+        Assert.DoesNotContain(result.Diagnostics, value => value.Code == "ANKI006");
+    }
+
+    [Fact]
+    public void ValidatorRejectsStaleStandardAndClozeCardOrdinals()
+    {
+        var standardType = AnkiNoteTypes.CreateBasic();
+        var standardNote = new AnkiNote(
+            standardType,
+            new Dictionary<string, string> { ["Front"] = "front", ["Back"] = "back" },
+            id: 1201,
+            guid: "standard-guid");
+        RestoreCards(standardNote, new AnkiCard(1202, standardNote.Id, 1200, 1, AnkiScheduling.New));
+        var standardDeck = new AnkiDeck("Standard", 1200);
+        AddExistingNote(standardDeck, standardNote);
+
+        var clozeType = AnkiNoteTypes.CreateCloze();
+        var clozeNote = new AnkiNote(
+            clozeType,
+            new Dictionary<string, string> { ["Text"] = "{{c1::answer}}", ["Extra"] = string.Empty },
+            id: 1211,
+            guid: "cloze-guid");
+        RestoreCards(clozeNote, new AnkiCard(1212, clozeNote.Id, 1210, 1, AnkiScheduling.New));
+        var clozeDeck = new AnkiDeck("Cloze", 1210);
+        AddExistingNote(clozeDeck, clozeNote);
+
+        var result = AnkiValidator.Validate([standardDeck, clozeDeck]);
+
+        Assert.Equal(2, result.Diagnostics.Count(value => value.Code == "ANKI007"));
+        Assert.False(result.IsValid);
+    }
+
+    [Fact]
+    public void ValidatorRejectsCardWhoseFixedNoteIdDisagreesWithItsOwner()
+    {
+        var type = AnkiNoteTypes.CreateBasic();
+        var note = new AnkiNote(
+            type,
+            new Dictionary<string, string> { ["Front"] = "front", ["Back"] = "back" },
+            id: 1301,
+            guid: "note-guid");
+        RestoreCards(note, new AnkiCard(1302, 9999, 1300, 0, AnkiScheduling.New));
+        var deck = new AnkiDeck("Relationships", 1300);
+        AddExistingNote(deck, note);
+
+        var result = AnkiValidator.Validate(deck);
+        var diagnostic = Assert.Single(result.Diagnostics, value => value.Code == "ANKI005");
+
+        Assert.Equal(note.Id, diagnostic.NoteId);
+        Assert.Equal(1302, diagnostic.CardId);
+    }
+
+    [Fact]
     public void ValidatorSharesIdentityAndNoteTypeChecksAcrossRootHierarchies()
     {
         var firstType = new AnkiNoteType("First type", id: 750)
@@ -266,4 +344,14 @@ public sealed class SchedulingValidationTests
         deck.AddBasicNote("front", "back");
         return deck;
     }
+
+    private static void RestoreCards(AnkiNote note, params AnkiCard[] cards) =>
+        typeof(AnkiNote)
+            .GetMethod("RestoreCards", BindingFlags.Instance | BindingFlags.NonPublic)!
+            .Invoke(note, [cards]);
+
+    private static void AddExistingNote(AnkiDeck deck, AnkiNote note) =>
+        typeof(AnkiDeck)
+            .GetMethod("AddExistingNote", BindingFlags.Instance | BindingFlags.NonPublic)!
+            .Invoke(deck, [note]);
 }
