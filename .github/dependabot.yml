@@ -3,6 +3,11 @@ updates:
   - package-ecosystem: nuget
     directory: /
     schedule: { interval: monthly }
+    ignore:
+      # Coverlet 10 reports branch coverage differently and currently breaks the
+      # repository's established coverage baseline. Keep receiving 6.x updates.
+      - dependency-name: coverlet.collector
+        update-types: ["version-update:semver-major"]
     groups:
       dotnet-dependencies: { patterns: ["*"] }
   - package-ecosystem: github-actions
