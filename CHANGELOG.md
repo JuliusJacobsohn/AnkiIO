@@ -4,11 +4,14 @@ All notable changes to AnkiIO are documented here. The project follows [Keep a C
 
 ## [Unreleased]
 
+## [1.0.3] - 2026-10-14
+
 ### Changed
 
 - Portable test execution now runs only the unit and integration projects and fails if either project discovers or executes no tests.
 - Restored macOS to the portable CI matrix and added a 500-line C# source-file maintainability gate.
 - Opt-in installed-Anki acceptance tests now fail when their required environment is absent instead of returning a false-positive pass.
+- Updated the SQLite provider and native bundle to their current patch releases.
 
 ### Fixed
 
@@ -60,5 +63,7 @@ This is the first stable release. Its compatibility promise covers the documente
 - Updated the SQLite provider and explicitly selected the maintained SQLitePCLRaw 3.x native bundle to remove the vulnerable legacy native dependency.
 - Direct writes to live Anki profiles remain unsupported.
 
+[Unreleased]: https://github.com/JuliusJacobsohn/AnkiIO/compare/v1.0.3...HEAD
+[1.0.3]: https://github.com/JuliusJacobsohn/AnkiIO/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/JuliusJacobsohn/AnkiIO/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/JuliusJacobsohn/AnkiIO/releases/tag/v1.0.1
